@@ -324,7 +324,9 @@ const BADGES = [
   {id:'chrono', ico:'⏱', name:'Sprinteur', desc:'15 bonnes réponses en Contre-la-montre'},
   {id:'days3', ico:'3j', name:'Assidu', desc:'Jouer 3 jours d\'affilée'},
   {id:'all', ico:'∞', name:'Encyclopédie', desc:'Réussir chaque question au moins une fois'},
-  {id:'lvl5', ico:'★', name:'Ingénieur', desc:'Atteindre le niveau 5'}
+  {id:'lvl5', ico:'★', name:'Ingénieur', desc:'Atteindre le niveau 5'},
+  {id:'mathas', ico:'🤡', name:'Ce neuille de Mathas', desc:'Finir une partie avec 0 bonne réponse (5 questions minimum)'},
+  {id:'marcia', ico:'🐐', name:'Marcia goat', desc:'Sans faute sur au moins 20 questions dans une même partie'}
 ];
 
 /* ---------- Profil (navigateur + stockage partagé si disponible) ---------- */
@@ -510,6 +512,8 @@ function endGame(){
   if(P.days>=3) give('days3');
   if(QS.length && QS.every(q=>P.seen[q.id] && P.seen[q.id].ok>0)) give('all');
   if(lvlOf(P.xp)>=5) give('lvl5');
+  if(G.answered>=5 && G.correct===0) give('mathas');
+  if(G.answered>=20 && G.correct===G.answered) give('marcia');
   G.result = {xpGain, record, prevBest, levelUp: lvlOf(P.xp)>before};
   save();
   view='end'; renderEnd();
