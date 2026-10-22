@@ -1,0 +1,2826 @@
+{
+  "titre": "Advanced Web Programming — Mid-Term Revision",
+  "matiere": "CX010-2.5-3-AWP · Mid-term 23 Oct 2026",
+  "questions": [
+    {
+      "id": "awp-001",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Given `<p id=\"intro\" class=\"text\">Hi</p>` and the rules `p { color: green; }`, `.text { color: blue; }`, `#intro { color: red; }`, what colour is the text?",
+      "choix": [
+        "Red",
+        "Blue",
+        "Green",
+        "Black"
+      ],
+      "reponse": 0,
+      "explication": "Specificity decides between matching rules: ID selector (#intro) beats class (.text), which beats type (p). So red wins.",
+      "piege": "Source order (\"last rule wins\") only matters when the competing rules have the SAME specificity."
+    },
+    {
+      "id": "awp-002",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "According to the course, what is the CSS specificity order from highest to lowest?",
+      "choix": [
+        "ID > Inline > Class > Type",
+        "Type > Class > ID > Inline",
+        "Class > ID > Inline > Type",
+        "Inline > ID > Class > Type"
+      ],
+      "reponse": 3,
+      "explication": "Inline styles are the most specific, then ID selectors, then class selectors, then type (tag) selectors."
+    },
+    {
+      "id": "awp-003",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "What is a callback function in JavaScript?",
+      "choix": [
+        "A function that keeps calling itself until a condition is met",
+        "A function declared as a method inside an object",
+        "A function that runs automatically on page load",
+        "A function passed as an argument to another function"
+      ],
+      "reponse": 3,
+      "explication": "A callback is passed as an argument (e.g. `sayHello(\"Alice\", farewell)`) and called later by the receiving function."
+    },
+    {
+      "id": "awp-004",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "What does this code print?\n`function sayHello(name, cb) { console.log(\"Hello, \" + name); cb(); }`\n`function farewell() { console.log(\"Goodbye!\"); }`\n`sayHello(\"Alice\", farewell);`",
+      "choix": [
+        "A TypeError: cb is not defined",
+        "Only Hello, Alice",
+        "Goodbye! then Hello, Alice",
+        "Hello, Alice then Goodbye!"
+      ],
+      "reponse": 3,
+      "explication": "sayHello first logs the greeting, then calls the callback `cb()`, which is `farewell`.",
+      "piege": "Passing `farewell` (no parentheses) passes the function itself; `farewell()` would call it immediately."
+    },
+    {
+      "id": "awp-005",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "In the CSS box model, what is the order of layers from the inside out?",
+      "choix": [
+        "content, border, padding, margin",
+        "content, padding, border, margin",
+        "content, margin, border, padding",
+        "padding, content, border, margin"
+      ],
+      "reponse": 1,
+      "explication": "Content sits in the middle, padding surrounds it, then the border, and margin is the outer space.",
+      "piege": "Padding is INSIDE the border, margin is OUTSIDE it."
+    },
+    {
+      "id": "awp-006",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which line correctly links an external stylesheet?",
+      "choix": [
+        "`<script href=\"styles.css\"></script>`",
+        "`<link rel=\"stylesheet\" href=\"styles.css\">`",
+        "`<css link=\"styles.css\"></css>`",
+        "`<style src=\"styles.css\" type=\"text/css\"></style>`"
+      ],
+      "reponse": 1,
+      "explication": "External CSS uses `<link rel=\"stylesheet\" href=\"...\">`. External JS uses `<script src=\"...\">`."
+    },
+    {
+      "id": "awp-007",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "This handler never runs. Why?\n`document.getElementById(\"myBtn\").addEventListener(\"onclick\", function() { alert(\"Hi\"); });`",
+      "choix": [
+        "addEventListener only works on links, not buttons",
+        "getElementById needs a \"#\" before the id value",
+        "The callback must be a named function, not anonymous",
+        "The event name must be \"click\", not \"onclick\""
+      ],
+      "reponse": 3,
+      "explication": "addEventListener takes the event name without the \"on\" prefix: \"click\", \"mouseover\", \"keydown\", \"submit\". The \"on\" prefix is for HTML attributes like `onclick=\"...\"`.",
+      "piege": "`getElementById(\"myBtn\")` takes the bare id. The \"#\" is only used in CSS selectors / querySelector."
+    },
+    {
+      "id": "awp-008",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which of these is an element PROPERTY (rather than an HTML attribute) according to the course?",
+      "choix": [
+        "src",
+        "href",
+        "innerHTML",
+        "className"
+      ],
+      "reponse": 2,
+      "explication": "Attributes (class, id, src, href) are written in the markup. Properties such as innerHTML and value are characteristics accessed through JavaScript."
+    },
+    {
+      "id": "awp-009",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "What is printed?\n`console.log('First');`\n`setTimeout(() => console.log('Second'), 2000);`\n`console.log('Third');`",
+      "choix": [
+        "Second, First, Third",
+        "First, Second, Third",
+        "Third, First, Second",
+        "First, Third, Second"
+      ],
+      "reponse": 3,
+      "explication": "setTimeout is asynchronous: it schedules 'Second' and lets the next line run right away, so 'Third' prints before 'Second'.",
+      "piege": "Even `setTimeout(..., 0)` would still print 'Third' before 'Second'."
+    },
+    {
+      "id": "awp-010",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "What is a Single-Page Application (SPA)?",
+      "choix": [
+        "An app that loads one HTML page and updates content dynamically",
+        "An app where every link reloads a brand-new HTML page from the server",
+        "An app made of a single component with no routing at all",
+        "An app whose pages are all generated by Pug on the server"
+      ],
+      "reponse": 0,
+      "explication": "An SPA loads a single HTML page once, then JavaScript swaps views without full page reloads."
+    },
+    {
+      "id": "awp-011",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "In an SPA built with Vue.js, who handles routing when the user clicks a link?",
+      "choix": [
+        "JavaScript in the browser (Vue Router)",
+        "The database, which picks the matching view",
+        "The DNS server, which resolves the new path",
+        "The web server, which sends a new HTML file"
+      ],
+      "reponse": 0,
+      "explication": "In SPAs routing is client-side: Vue Router reads the new URL and displays the matching component without reloading the page.",
+      "piege": "Full page reloads per URL are typical of traditional multi-page applications (MPA)."
+    },
+    {
+      "id": "awp-012",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "What does React use to render efficiently and avoid re-rendering the entire UI?",
+      "choix": [
+        "Pug templates",
+        "Two-way data binding",
+        "Dependency injection",
+        "A Virtual DOM"
+      ],
+      "reponse": 3,
+      "explication": "React compares a Virtual DOM with the previous one and only updates what changed. Two-way binding and dependency injection are Angular features."
+    },
+    {
+      "id": "awp-013",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "Which example illustrates DECLARATIVE programming, as described in the course?",
+      "choix": [
+        "`el.style.color = \"red\";` after a click",
+        "`count = count + 1;` inside a loop",
+        "`for (let i = 0; i < 5; i++) { ... }`",
+        "`SELECT * FROM users WHERE age > 18;`"
+      ],
+      "reponse": 3,
+      "explication": "Declarative code describes WHAT you want (SQL query, HTML structure), not HOW to do it step by step. Components also follow this style."
+    },
+    {
+      "id": "awp-014",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "In the MVC example with Vue.js, which part is the `updateMessage` method that changes `message` when a button is clicked?",
+      "choix": [
+        "Controller",
+        "Router",
+        "Model",
+        "View"
+      ],
+      "reponse": 0,
+      "explication": "Model = the `message` data, View = `<h1>{{ message }}</h1>`, Controller = the method that reacts to user input and modifies the model."
+    },
+    {
+      "id": "awp-015",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "What is the main difference between HTTP and HTTPS?",
+      "choix": [
+        "HTTPS skips the DNS lookup entirely",
+        "HTTPS sends pages without any headers",
+        "HTTPS encrypts requests and responses",
+        "HTTPS only works with the POST request method"
+      ],
+      "reponse": 2,
+      "explication": "HTTPS is HTTP with authentication and encryption (SSL/TLS certificate). HTTP sends data unencrypted."
+    },
+    {
+      "id": "awp-016",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "Which statement about the POST method is TRUE?",
+      "choix": [
+        "The request can be bookmarked",
+        "The request is cached by the browser",
+        "Data is sent in the request body",
+        "Data appears in the URL query string"
+      ],
+      "reponse": 2,
+      "explication": "POST puts data in the body, is not cached, does not appear in history, cannot be bookmarked and has no length limit. The other three options describe GET.",
+      "piege": "Use GET to retrieve data; use POST to create/update data or to send sensitive data."
+    },
+    {
+      "id": "awp-017",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "In a Vue instance, what is the role of the `el` option?",
+      "choix": [
+        "It mounts Vue to a DOM element",
+        "It defines derived reactive state",
+        "It stores the reactive data",
+        "It declares the event handlers"
+      ],
+      "reponse": 0,
+      "explication": "el = mounting point (e.g. '#app'); data = reactive data; computed = derived state; methods = functions/behaviour."
+    },
+    {
+      "id": "awp-018",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "Which option should hold a value derived from other data, e.g. a reversed message?",
+      "choix": [
+        "el",
+        "watchers",
+        "methods",
+        "computed"
+      ],
+      "reponse": 3,
+      "explication": "computed defines reactive, derived state: `reversedMessage()` is recalculated automatically when `message` changes."
+    },
+    {
+      "id": "awp-019",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "With `message: 'Hello, Vue!'`, what does `{{ reversedMessage }}` display, given `reversedMessage() { return this.message.split('').reverse().join(''); }`?",
+      "choix": [
+        "!euV ,olleH",
+        "Vue! Hello,",
+        "!euV olleH,",
+        "Hello, Vue!"
+      ],
+      "reponse": 0,
+      "explication": "split('') makes an array of characters, reverse() reverses it, join('') rebuilds the string: every character, including the comma and space, is reversed."
+    },
+    {
+      "id": "awp-020",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "In Vue 2, how do you make a property added dynamically after creation reactive?",
+      "choix": [
+        "Assign it with `this.newProp =`",
+        "Call `app.mount()` again",
+        "Wrap it in `reactive()`",
+        "Use `Vue.set()`"
+      ],
+      "reponse": 3,
+      "explication": "Vue 2 (Object.defineProperty) cannot detect new properties, so `Vue.set(this.$data, 'prop', value)` is needed. In Vue 3, `reactive()` (Proxy) handles new properties automatically.",
+      "piege": "`reactive()` is the Vue 3 answer, not Vue 2."
+    },
+    {
+      "id": "awp-021",
+      "theme": "Vue instance & reactivity",
+      "niveau": 3,
+      "question": "Which mechanism does Vue 3 use behind the scenes to track data changes?",
+      "choix": [
+        "The browser's Virtual DOM API",
+        "A setInterval polling loop",
+        "JavaScript Proxy",
+        "Object.defineProperty"
+      ],
+      "reponse": 2,
+      "explication": "Vue 2 uses getters/setters via Object.defineProperty; Vue 3 uses Proxy, which also detects added properties."
+    },
+    {
+      "id": "awp-022",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "Which code correctly creates and mounts a Vue 3 application?",
+      "choix": [
+        "`Vue.mount({ ... }, '#app')`",
+        "`createApp({ ... }).mount('#app')`",
+        "`createApp('#app', { ... })`",
+        "`new createApp({ ... }).$el('#app')`"
+      ],
+      "reponse": 1,
+      "explication": "Vue 3: `const { createApp } = Vue; createApp({...}).mount('#app')`. Vue 2 used `new Vue({ el: '#app', ... })` or `.$mount('#app')`."
+    },
+    {
+      "id": "awp-023",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "With `html: '<strong>Hi</strong>'`, what does `<p v-text=\"html\"></p>` display?",
+      "choix": [
+        "An error in the console",
+        "The literal text <strong>Hi</strong>",
+        "The word Hi rendered in bold type",
+        "Nothing, because v-text strips HTML tags"
+      ],
+      "reponse": 1,
+      "explication": "v-text renders plain text, so tags are shown as text. To interpret the HTML you need v-html.",
+      "piege": "v-html renders raw HTML; v-text and {{ }} do not."
+    },
+    {
+      "id": "awp-024",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "Which directive gives two-way data binding on a form input?",
+      "choix": [
+        "v-bind",
+        "v-model",
+        "v-once",
+        "v-on"
+      ],
+      "reponse": 1,
+      "explication": "`<input v-model=\"message\">` updates `message` as the user types and updates the input when `message` changes. v-bind is one-way only."
+    },
+    {
+      "id": "awp-025",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "What is the shorthand for `v-on:click=\"handleClick\"`?",
+      "choix": [
+        "`:click=\"handleClick\"`",
+        "`v-click=\"handleClick\"`",
+        "`#click=\"handleClick\"`",
+        "`@click=\"handleClick\"`"
+      ],
+      "reponse": 3,
+      "explication": "`@` is the shorthand for v-on (events); `:` is the shorthand for v-bind (attributes)."
+    },
+    {
+      "id": "awp-026",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "What is the shorthand for `v-bind:src=\"imageSource\"`?",
+      "choix": [
+        "`@src=\"imageSource\"`",
+        "`v-src=\"imageSource\"`",
+        "`:src=\"imageSource\"`",
+        "`#src=\"imageSource\"`"
+      ],
+      "reponse": 2,
+      "explication": "`:attr` = v-bind:attr. It binds an attribute dynamically to a data property."
+    },
+    {
+      "id": "awp-027",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "Given `isVisible: false` and `isLoading: true`, what does this render?\n`<div v-if=\"isVisible\">Visible content</div>`\n`<div v-else-if=\"isLoading\">Loading...</div>`\n`<div v-else>No data available</div>`",
+      "choix": [
+        "Loading...",
+        "All three divs",
+        "No data available",
+        "Visible content"
+      ],
+      "reponse": 0,
+      "explication": "v-if is false, so Vue tests v-else-if, which is true: only \"Loading...\" is rendered."
+    },
+    {
+      "id": "awp-028",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "Why do we add `:key=\"item.id\"` in `<li v-for=\"item in items\" :key=\"item.id\">`?",
+      "choix": [
+        "To give each item a unique identity for updates",
+        "To sort the list in ascending order using the id",
+        "To display the id next to the item name",
+        "To make the items array editable with v-model"
+      ],
+      "reponse": 0,
+      "explication": "The key lets Vue track each element and update the list efficiently when items are added, removed or reordered."
+    },
+    {
+      "id": "awp-029",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "What are Vue.js directives?",
+      "choix": [
+        "Special tokens in markup telling Vue to act on the DOM",
+        "CSS classes that Vue applies automatically",
+        "Global variables shared by every component in the app",
+        "Functions declared in the methods option"
+      ],
+      "reponse": 0,
+      "explication": "Directives (v-if, v-for, v-on, v-bind, v-model...) are special attributes in the template that tell Vue to do something to a DOM element."
+    },
+    {
+      "id": "awp-030",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "What are props used for in Vue components?",
+      "choix": [
+        "Sending events from child to parent",
+        "Passing data from parent to child",
+        "Registering a component globally",
+        "Loading a component lazily"
+      ],
+      "reponse": 1,
+      "explication": "`<my-component :message=\"parentMessage\">` passes data down; the child declares `props: ['message']`.",
+      "piege": "Child → parent communication uses events (`$emit`), not props."
+    },
+    {
+      "id": "awp-031",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "How does a child component send data back to its parent?",
+      "choix": [
+        "`this.$parent.data = newMessage`",
+        "`this.$route.push(newMessage)`",
+        "`this.$props.updateMessage = this.newMessage`",
+        "`this.$emit('updateMessage', newMessage)`"
+      ],
+      "reponse": 3,
+      "explication": "The child emits a custom event with a payload; the parent listens with `@updateMessage=\"updateMessage\"`."
+    },
+    {
+      "id": "awp-032",
+      "theme": "Vue components",
+      "niveau": 3,
+      "question": "In Vue 3, to support `v-model` on a custom component, the component must...",
+      "choix": [
+        "declare `v-model` as an entry inside its own `props` array",
+        "use `v-bind` on its root element with `sync`",
+        "accept the `modelValue` prop and emit `update:modelValue`",
+        "accept the `value` prop and emit the `input` event"
+      ],
+      "reponse": 2,
+      "explication": "Vue 3 default: prop `modelValue` + event `update:modelValue`, e.g. `this.$emit('update:modelValue', event.target.value)`.",
+      "piege": "`value` + `input` is the Vue 2 convention."
+    },
+    {
+      "id": "awp-033",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "In a child component template, what does `<slot></slot>` do?",
+      "choix": [
+        "Reserves space for an async component",
+        "Declares a prop received from the parent",
+        "Creates a new route for the component",
+        "Shows content passed by the parent"
+      ],
+      "reponse": 3,
+      "explication": "Slots distribute content: whatever the parent places between `<my-component>...</my-component>` is rendered where `<slot>` is."
+    },
+    {
+      "id": "awp-034",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "How do you register a component globally in Vue 3?",
+      "choix": [
+        "`Vue.use('my-component', MyComponent)`",
+        "`app.mount('my-component', MyComponent)`",
+        "`app.component('my-component', MyComponent)`",
+        "`app.registerComponent('my-component', MyComponent)`"
+      ],
+      "reponse": 2,
+      "explication": "In Vue 3 you call `app.component()` on the app returned by createApp. Vue 2 used `Vue.component()`."
+    },
+    {
+      "id": "awp-035",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "What is the purpose of `const AsyncComponent = () => import('./AsyncComponent.vue');`?",
+      "choix": [
+        "Render the component on the server side",
+        "Load the component only when needed",
+        "Run the component in a separate thread",
+        "Fetch the component's data from an API"
+      ],
+      "reponse": 1,
+      "explication": "Async components are lazy-loaded: the code is split and only downloaded when the component is needed, improving performance."
+    },
+    {
+      "id": "awp-036",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "In a Single File Component, what does `<style scoped>` do?",
+      "choix": [
+        "Converts the styles into inline style attributes",
+        "Loads the styles only after the page loads",
+        "Applies the styles to the whole application",
+        "Applies the styles to this component only"
+      ],
+      "reponse": 3,
+      "explication": "An SFC (.vue) has three blocks: template, script, style. `scoped` limits the CSS to the current component."
+    },
+    {
+      "id": "awp-037",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<div v-if=\"ok\">A</div><p>Note</p><div v-else>B</div>` gives a warning and \"B\" never behaves as expected. What is the bug?",
+      "choix": [
+        "v-else must directly follow the v-if element",
+        "The p element must also have v-if",
+        "v-if cannot be used on a div element",
+        "v-else needs its own condition, like v-else=\"!ok\""
+      ],
+      "reponse": 0,
+      "explication": "v-else (and v-else-if) must immediately follow an element with v-if or v-else-if. The `<p>` in between breaks the chain."
+    },
+    {
+      "id": "awp-038",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "A Vue 3 component is written as `{ data: { count: 0 }, template: '<p>{{ count }}</p>' }` and fails. Why?",
+      "choix": [
+        "The template must use v-text, not {{ }}",
+        "`count` must be declared inside `props`",
+        "`count` must be declared inside the `computed` option",
+        "`data` must be a function returning an object"
+      ],
+      "reponse": 3,
+      "explication": "In components (and in Vue 3 apps) `data` must be a function: `data() { return { count: 0 }; }`, so each instance gets its own state."
+    },
+    {
+      "id": "awp-039",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "Clicking the button does nothing: `methods: { increment() { count += 1; } }`. What is the fix?",
+      "choix": [
+        "Use `v-model` on the button",
+        "Move `increment` into `data`",
+        "Write `this.count += 1`",
+        "Rename the method to `count`"
+      ],
+      "reponse": 2,
+      "explication": "Inside methods, data properties are accessed through `this`. `count` alone is an undefined variable (ReferenceError)."
+    },
+    {
+      "id": "awp-040",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<my-component message=\"parentMessage\"></my-component>` displays the word \"parentMessage\" instead of its value. Why?",
+      "choix": [
+        "`parentMessage` must be declared in `computed`",
+        "The `:` (v-bind) is missing before `message`",
+        "The prop name must be written in capitals",
+        "The child must use `$emit` to read the value"
+      ],
+      "reponse": 1,
+      "explication": "Without `:`, the attribute is passed as a literal string. `:message=\"parentMessage\"` evaluates the expression and passes the data value."
+    },
+    {
+      "id": "awp-041",
+      "theme": "Vue debugging",
+      "niveau": 3,
+      "question": "The child template uses `{{ message }}` and the parent passes `:message=\"msg\"`, but nothing is shown. The child is `{ template: '<div>{{ message }}</div>' }`. What is missing?",
+      "choix": [
+        "`props: ['message']` in the child",
+        "`data() { return { msg } }` in the child",
+        "`v-model=\"message\"` on the child tag",
+        "`this.$emit('message')` in the parent"
+      ],
+      "reponse": 0,
+      "explication": "The child must declare the props it receives (`props: ['message']`); otherwise `message` is not available in its template."
+    },
+    {
+      "id": "awp-042",
+      "theme": "Vue Router",
+      "niveau": 1,
+      "question": "What is the role of `<router-view>` in App.vue?",
+      "choix": [
+        "It creates a clickable link that navigates to another page",
+        "It displays the component matching the current URL",
+        "It lists every route defined in the router",
+        "It reloads the page when the URL changes"
+      ],
+      "reponse": 1,
+      "explication": "`<router-view>` is the placeholder where Vue Router renders the component of the matched route.",
+      "piege": "Links are created with `<router-link>`, not `<router-view>`."
+    },
+    {
+      "id": "awp-043",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "With the route `{ path: '/profile/:id', component: UserProfile }`, how does UserProfile read the id?",
+      "choix": [
+        "`this.$route.query.id`",
+        "`this.$router.params.id`",
+        "`this.$route.params.id`",
+        "`req.params.id`"
+      ],
+      "reponse": 2,
+      "explication": "`$route` is the current route (params, query...); `$router` is the router object used to navigate.",
+      "piege": "`req.params.id` is the Express.js (server) equivalent, not Vue."
+    },
+    {
+      "id": "awp-044",
+      "theme": "Vue Router",
+      "niveau": 1,
+      "question": "How do you navigate to `/profile/123` from code in a Vue component?",
+      "choix": [
+        "`res.redirect('/profile/123')`",
+        "`window.location.reload('/profile/123')`",
+        "`this.$route.push('/profile/123')`",
+        "`this.$router.push('/profile/123')`"
+      ],
+      "reponse": 3,
+      "explication": "`this.$router.push()` changes the route without reloading the page."
+    },
+    {
+      "id": "awp-045",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "Which statement describes Node.js?",
+      "choix": [
+        "A JavaScript runtime outside the browser, built on V8",
+        "A database server for storing JSON data",
+        "A template engine that uses indentation",
+        "A front-end framework for building reusable UI components"
+      ],
+      "reponse": 0,
+      "explication": "Node.js is an open-source, cross-platform runtime built on Chrome's V8 engine. It is single-threaded, event-driven and non-blocking."
+    },
+    {
+      "id": "awp-046",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "What does `app.use(express.static('public'));` do?",
+      "choix": [
+        "Makes every route in the app public (no auth)",
+        "Starts the server on the 'public' port",
+        "Sets 'public' as the folder where Pug views are stored",
+        "Serves files like CSS and images from 'public'"
+      ],
+      "reponse": 3,
+      "explication": "express.static is a middleware that serves static assets (images, CSS, JS) from the given folder.",
+      "piege": "The views folder is set with `app.set('views', './views')`."
+    },
+    {
+      "id": "awp-047",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "Every request hangs after this middleware runs. What is wrong?\n`app.use((req, res, next) => { console.log('Request at ' + Date.now()); });`",
+      "choix": [
+        "`app.use` needs a route path",
+        "`console.log` blocks the server",
+        "`req` and `res` are swapped",
+        "`next()` is never called"
+      ],
+      "reponse": 3,
+      "explication": "A middleware must either send a response or call `next()` to pass control on. Without it, the request-response cycle stops."
+    },
+    {
+      "id": "awp-048",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "In `app.post('/submit', (req, res) => res.send(req.body.username));`, `req.body` is undefined. What is the likely fix?",
+      "choix": [
+        "Set Pug as the view engine for the app",
+        "Replace `app.post` with `app.get`",
+        "Read the value from `req.params.username`",
+        "Add body-parsing middleware (urlencoded)"
+      ],
+      "reponse": 3,
+      "explication": "Form data is only available in req.body after a body parser: `app.use(bodyParser.urlencoded({ extended: true }))` (or `express.urlencoded`)."
+    },
+    {
+      "id": "awp-049",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "For the route `app.get('/user/:id', ...)`, how do you read the id in Express?",
+      "choix": [
+        "`req.params.id`",
+        "`res.params.id`",
+        "`req.body.id`",
+        "`this.$route.params.id`"
+      ],
+      "reponse": 0,
+      "explication": "Route parameters are in `req.params`. Form data from POST is in `req.body`."
+    },
+    {
+      "id": "awp-050",
+      "theme": "Express & Node.js",
+      "niveau": 3,
+      "question": "How does Express recognise an error-handling middleware?",
+      "choix": [
+        "It takes four arguments: (err, req, res, next)",
+        "It is always declared before every other route in the app",
+        "It must call `res.render('error')`",
+        "It is registered with `app.error()`"
+      ],
+      "reponse": 0,
+      "explication": "Express treats a middleware with 4 parameters `(err, req, res, next)` as an error handler, e.g. `res.status(500).send('Something went wrong!')`."
+    },
+    {
+      "id": "awp-051",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "With `- var name = \"John\"`, how do you display \"Hello, John\" in a paragraph?",
+      "choix": [
+        "`p Hello, #{name}`",
+        "`p Hello, <%= name %>`",
+        "`p Hello, {{ name }}`",
+        "`p Hello, ${name}`"
+      ],
+      "reponse": 0,
+      "explication": "Pug interpolates with `#{...}`. `{{ }}` is Vue syntax, `${}` is JS template literals, `<%= %>` is EJS.",
+      "piege": "`h1= message` (with =) outputs the whole value of a variable; `#{}` inserts it inside text."
+    },
+    {
+      "id": "awp-052",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "Which Pug code renders one `li` for each element of `items`?",
+      "choix": [
+        "`ul` then indented `v-for item in items` / `li {{ item }}`",
+        "`ul` then indented `each item in items` / `li= item`",
+        "`ul(each=items)` then indented `li= items`",
+        "`ul` then indented `for item of items` / `li #item`"
+      ],
+      "reponse": 1,
+      "explication": "Pug loops with `each item in items`, and the indentation defines nesting. `li= item` outputs the value."
+    },
+    {
+      "id": "awp-053",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "`index.pug` starts with `extends layout`. What must it then define to fill the layout?",
+      "choix": [
+        "A `- var layout = true` statement",
+        "A `block content` matching the layout",
+        "An `include content` at the end",
+        "A `mixin layout()` with exactly the same name"
+      ],
+      "reponse": 1,
+      "explication": "Template inheritance: layout.pug declares `block content`; index.pug uses `extends layout` and redefines `block content`."
+    },
+    {
+      "id": "awp-054",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "Given `mixin greeting(name)` / `p Hello #{name}`, how do you call the mixin?",
+      "choix": [
+        "`include greeting('John')`",
+        "`+greeting('John')`",
+        "`greeting('John')`",
+        "`@greeting('John')`"
+      ],
+      "reponse": 1,
+      "explication": "Mixins are reusable blocks of markup (DRY). They are called with the `+` prefix."
+    },
+    {
+      "id": "awp-055",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which HTML element is meant to hold a block of navigation links?",
+      "choix": [
+        "`<section>`",
+        "`<nav>`",
+        "`<header>`",
+        "`<aside>`"
+      ],
+      "reponse": 1,
+      "explication": "`<nav>` is the semantic element for a group of navigation links (menu, table of contents)."
+    },
+    {
+      "id": "awp-056",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which pair of elements shows an image together with its caption?",
+      "choix": [
+        "`<picture>` with `<caption>`",
+        "`<img>` with `<summary>`",
+        "`<figure>` with `<figcaption>`",
+        "`<div>` with `<label>`"
+      ],
+      "reponse": 2,
+      "explication": "`<figure>` wraps the image and `<figcaption>` gives its caption.",
+      "piege": "`<caption>` is the title of a `<table>`, not of an image."
+    },
+    {
+      "id": "awp-057",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "Which elements create a collapsible block whose title always stays visible?",
+      "choix": [
+        "`<section>` with `<header>`",
+        "`<dialog>` with `<legend>`",
+        "`<aside>` with `<article>`",
+        "`<details>` with `<summary>`"
+      ],
+      "reponse": 3,
+      "explication": "`<details>` is a disclosure widget: its `<summary>` is always shown, and clicking it opens or closes the rest of the content."
+    },
+    {
+      "id": "awp-058",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which element is meant for content only indirectly related to the main content, like a sidebar?",
+      "choix": [
+        "`<article>`",
+        "`<aside>`",
+        "`<footer>`",
+        "`<main>`"
+      ],
+      "reponse": 1,
+      "explication": "`<aside>` holds content only indirectly related to the main content: a sidebar, related links, extra info."
+    },
+    {
+      "id": "awp-059",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which element represents a self-contained piece of content, such as a blog post or a product sheet?",
+      "choix": [
+        "`<summary>`",
+        "`<article>`",
+        "`<nav>`",
+        "`<aside>`"
+      ],
+      "reponse": 1,
+      "explication": "`<article>` is an independent unit of content (a post, a product sheet, a news item)."
+    },
+    {
+      "id": "awp-060",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Why does the course recommend semantic HTML (header, nav, main, article…)?",
+      "choix": [
+        "It describes the role of each part of the page",
+        "It is required for JavaScript events to fire",
+        "It replaces the need for the <head> element",
+        "It makes the page load without any CSS file"
+      ],
+      "reponse": 0,
+      "explication": "Semantic elements say what each part IS, which helps readability, accessibility and search engines. Using them is one of the best practices listed in the course."
+    },
+    {
+      "id": "awp-061",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which attribute gives the alternative text of an image?",
+      "choix": [
+        "`title`",
+        "`src`",
+        "`href`",
+        "`alt`"
+      ],
+      "reponse": 3,
+      "explication": "`alt` describes the image when it cannot be seen (screen readers, broken link). `src` gives the image file."
+    },
+    {
+      "id": "awp-062",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "Which CSS declaration hides an element AND removes it from the page layout?",
+      "choix": [
+        "`.content { visibility: auto; }`",
+        "`.content { display: flex; }`",
+        "`.content { display: none; }`",
+        "`.content { opacity: hidden; }`"
+      ],
+      "reponse": 2,
+      "explication": "`display: none` hides the element and frees its space. Setting `display: block` (or flex…) shows it again; this is the classic way to build tabs or toggles."
+    },
+    {
+      "id": "awp-063",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "Which line makes a hidden element with id `c2` visible again?",
+      "choix": [
+        "`document.getElementById('#c2').style.display = 'block';`",
+        "`document.getElementById('c2').style.display = 'block';`",
+        "`document.getElementById('c2').display = 'show';`",
+        "`document.getElementById('c2').style = 'visible';`"
+      ],
+      "reponse": 1,
+      "explication": "JavaScript changes the inline style through `element.style.display`: 'block' shows the element, 'none' hides it.",
+      "piege": "No `#` inside getElementById."
+    },
+    {
+      "id": "awp-064",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "What does `display: flex;` on a container do?",
+      "choix": [
+        "Hides every child except the first one",
+        "Turns each child into a clickable button",
+        "Makes the container ignore its padding and its margins entirely",
+        "Lets its children resize and line up to fill the space"
+      ],
+      "reponse": 3,
+      "explication": "A flex container arranges its items in a row (by default) and can change their width, height and order to fill the available space."
+    },
+    {
+      "id": "awp-065",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which CSS property shows a hand cursor when the mouse is over a tab?",
+      "choix": [
+        "`pointer: cursor;`",
+        "`mouse: hand;`",
+        "`cursor: pointer;`",
+        "`hover: pointer;`"
+      ],
+      "reponse": 2,
+      "explication": "`cursor: pointer` is the usual signal that an element is clickable."
+    },
+    {
+      "id": "awp-066",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "`<div onclick=\"tab(1)\">Tab 1</div>` calls `function tab(t) {...}`. What is `t` when the div is clicked?",
+      "choix": [
+        "The clicked div element",
+        "The string \"Tab 1\"",
+        "The number 1",
+        "The click event object"
+      ],
+      "reponse": 2,
+      "explication": "The argument written in the call is passed as is: `tab(1)` gives `t = 1`. One function can then serve several elements."
+    },
+    {
+      "id": "awp-067",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "What is the difference between `let` and `const`?",
+      "choix": [
+        "A `const` variable cannot be reassigned",
+        "`let` creates a variable shared by all pages",
+        "`let` can only hold numbers and strings",
+        "`const` is only allowed inside functions"
+      ],
+      "reponse": 0,
+      "explication": "Both declare block-scoped variables; a `const` cannot be given a new value, a `let` can.",
+      "piege": "A `const` object can still have its properties changed; only the variable itself cannot be reassigned."
+    },
+    {
+      "id": "awp-068",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "What does this print? `for (let i = 0; i < 3; i++) { console.log(i); }`",
+      "choix": [
+        "1, 2, 3",
+        "0, 1, 2, 3",
+        "Only 3",
+        "0, 1, 2"
+      ],
+      "reponse": 3,
+      "explication": "i starts at 0 and the loop runs while i < 3, so it logs 0, 1 and 2."
+    },
+    {
+      "id": "awp-069",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "With `let person = { name: 'John', age: 30 };`, how do you read the age?",
+      "choix": [
+        "`person->age`",
+        "`person(age)`",
+        "`person.age`",
+        "`person::age`"
+      ],
+      "reponse": 2,
+      "explication": "Object properties are read with dot notation (`person.age`) or brackets (`person['age']`)."
+    },
+    {
+      "id": "awp-070",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "Two stylesheets set `p { color: blue; }` then `p { color: green; }` (same selector). Which colour applies?",
+      "choix": [
+        "Blue, the first rule wins",
+        "Black, the rules cancel out",
+        "Green, the last rule wins",
+        "A mix of both colours"
+      ],
+      "reponse": 2,
+      "explication": "Same specificity → the cascade applies: the rule read last wins."
+    },
+    {
+      "id": "awp-071",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Where should `<link rel=\"stylesheet\" href=\"styles.css\">` normally go?",
+      "choix": [
+        "Inside `<title>`",
+        "Inside `<footer>`",
+        "Inside `<head>`",
+        "After `</html>`"
+      ],
+      "reponse": 2,
+      "explication": "Stylesheet links belong in the `<head>`, so styles are known before the body is displayed."
+    },
+    {
+      "id": "awp-072",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which tool does the course suggest to debug JavaScript?",
+      "choix": [
+        "An HTML validator and the CSS cascade",
+        "`console.log()` and the browser developer tools",
+        "`alert()` inside every CSS rule",
+        "Reloading the page each time with the browser cache cleared"
+      ],
+      "reponse": 1,
+      "explication": "Log values with `console.log()` and read them, with errors, in the Console tab of the developer tools."
+    },
+    {
+      "id": "awp-073",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "With `div { margin: 20px; padding: 10px; border: 1px solid black; }`, which space is INSIDE the border?",
+      "choix": [
+        "The 10px padding",
+        "Neither, both are outside",
+        "Both margin and padding",
+        "The 20px margin"
+      ],
+      "reponse": 0,
+      "explication": "Padding sits between the content and the border; margin is outside the border."
+    },
+    {
+      "id": "awp-074",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which JavaScript event fires when a form is sent?",
+      "choix": [
+        "`submit`",
+        "`send`",
+        "`post`",
+        "`change`"
+      ],
+      "reponse": 0,
+      "explication": "Common events from the course: click, mouseover, keydown, submit."
+    },
+    {
+      "id": "awp-075",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "What does front-end development focus on?",
+      "choix": [
+        "The operating system of the web server",
+        "The UI, the UX and performance in the browser",
+        "The database schema and server security",
+        "The network routers and the DNS configuration of the site"
+      ],
+      "reponse": 1,
+      "explication": "Front-end = everything the user experiences directly in the browser: user interface, user experience and performance."
+    },
+    {
+      "id": "awp-076",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "Which description fits Angular?",
+      "choix": [
+        "A small library for adding animations",
+        "A state manager designed specifically for React apps",
+        "A TypeScript framework for large applications",
+        "A template engine based on indentation"
+      ],
+      "reponse": 2,
+      "explication": "Angular is a complete, opinionated TypeScript framework, with MVVM, dependency injection and two-way binding."
+    },
+    {
+      "id": "awp-077",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "Why is Vue called a \"progressive\" framework?",
+      "choix": [
+        "It can be adopted step by step in a project",
+        "It loads pages progressively from the top",
+        "It updates itself to the newest version",
+        "It only works with the latest browsers"
+      ],
+      "reponse": 0,
+      "explication": "Vue emphasises incremental adoption: you can add it to part of an existing page (via a CDN) and grow from there."
+    },
+    {
+      "id": "awp-078",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "In React, which line creates a state variable `count` starting at 0?",
+      "choix": [
+        "`const count = new State(0);`",
+        "`const [count, setCount] = useState(0);`",
+        "`data() { return { count: 0 }; }`",
+        "`this.state.count = useState(0, setCount);`"
+      ],
+      "reponse": 1,
+      "explication": "`useState` returns the value and the function that updates it. `data()` is the Vue equivalent."
+    },
+    {
+      "id": "awp-079",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "In Vuex, where do you define the functions allowed to change the shared state?",
+      "choix": [
+        "`computed`",
+        "`reducers`",
+        "`methods`",
+        "`mutations`"
+      ],
+      "reponse": 3,
+      "explication": "A Vuex store has a `state` and `mutations` such as `increment(state) { state.count++ }`.",
+      "piege": "Reducers belong to Redux (React)."
+    },
+    {
+      "id": "awp-080",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "When do you need a global state manager like Vuex or Redux?",
+      "choix": [
+        "When the app has no routes at all",
+        "When a component has only one data property",
+        "When several components share the same data",
+        "When the page uses only HTML and CSS"
+      ],
+      "reponse": 2,
+      "explication": "Local state lives in one component; global state is for data that several components must read and update."
+    },
+    {
+      "id": "awp-081",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "In Angular's MVVM workflow, what does the ViewModel do?",
+      "choix": [
+        "Sends HTTP requests to the DNS server",
+        "Replaces the database in small apps",
+        "Stores the HTML template and the CSS of each component",
+        "Exposes Model data to the View and handles its actions"
+      ],
+      "reponse": 3,
+      "explication": "The View binds to the ViewModel; the ViewModel reads or changes the Model and presents data for the View."
+    },
+    {
+      "id": "awp-082",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "What is an advantage of an SPA over a traditional multi-page site?",
+      "choix": [
+        "No JavaScript is needed at all",
+        "Each URL downloads a new HTML file",
+        "Every page is rebuilt by the server",
+        "Navigation without full page reloads"
+      ],
+      "reponse": 3,
+      "explication": "SPAs load only what is needed and swap views without refreshing the page: faster and smoother."
+    },
+    {
+      "id": "awp-083",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "In hash-based routing, which part of the URL changes when you navigate?",
+      "choix": [
+        "The protocol (http/https)",
+        "The part after the `#`",
+        "The port number",
+        "The domain name"
+      ],
+      "reponse": 1,
+      "explication": "With hash routing, only the fragment after `#` changes, so the browser does not request a new page from the server."
+    },
+    {
+      "id": "awp-084",
+      "theme": "Front-end concepts",
+      "niveau": 1,
+      "question": "Which statement about components is TRUE?",
+      "choix": [
+        "They can only be used once per application",
+        "They must be written in TypeScript",
+        "They replace the need for a router",
+        "They encapsulate structure, logic and style"
+      ],
+      "reponse": 3,
+      "explication": "Components group HTML, JS and CSS into reusable, maintainable pieces."
+    },
+    {
+      "id": "awp-085",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "What is the minimum software a web server needs?",
+      "choix": [
+        "An HTTP server",
+        "A Pug template engine",
+        "A Vue.js application",
+        "A database server"
+      ],
+      "reponse": 0,
+      "explication": "The software side of a web server comprises at least an HTTP server, which understands URLs and HTTP."
+    },
+    {
+      "id": "awp-086",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "A dynamic web server is a static web server plus…",
+      "choix": [
+        "a CSS preprocessor and a CDN",
+        "a DNS server and a mail server",
+        "an application server and a database",
+        "a second HTTP server that keeps backups"
+      ],
+      "reponse": 2,
+      "explication": "Dynamic = static + application server + database, so pages can be generated from data."
+    },
+    {
+      "id": "awp-087",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "In the client-server sequence, what does the DNS server return?",
+      "choix": [
+        "The HTML files of the website",
+        "The cookies of the user",
+        "The IP address of the web server",
+        "The CSS of the requested page"
+      ],
+      "reponse": 2,
+      "explication": "The browser asks DNS to translate the domain name into the web server's IP address, then sends its HTTP request to that IP."
+    },
+    {
+      "id": "awp-088",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "Which is listed as a DISADVANTAGE of the client-server model?",
+      "choix": [
+        "Data is spread across every client",
+        "Data recovery is impossible",
+        "Servers are exposed to Denial of Service attacks",
+        "Client and server capacity can never be changed separately"
+      ],
+      "reponse": 2,
+      "explication": "Disadvantages: viruses spread from the server, DoS attacks on servers, packets spoofed or modified in transit. Centralised data and possible recovery are advantages."
+    },
+    {
+      "id": "awp-089",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "What does HTTPS need to encrypt traffic?",
+      "choix": [
+        "A Vue Router instance",
+        "A MySQL database",
+        "An SSL/TLS certificate",
+        "A Pug template"
+      ],
+      "reponse": 2,
+      "explication": "HTTPS uses cryptographic keys, usually through an SSL or TLS certificate."
+    },
+    {
+      "id": "awp-090",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "Which data should NOT be sent with GET?",
+      "choix": [
+        "A page number",
+        "A search keyword",
+        "A product id",
+        "A password"
+      ],
+      "reponse": 3,
+      "explication": "GET data appears in the URL, history and bookmarks, so it is unsuitable for sensitive data. Use POST."
+    },
+    {
+      "id": "awp-091",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "Which pages are best served by a dynamic web server?",
+      "choix": [
+        "Login, forms and shopping carts",
+        "A CSS file shared by all pages",
+        "A PDF of last year's timetable",
+        "A fixed company logo image"
+      ],
+      "reponse": 0,
+      "explication": "Dynamic servers fit frequently changing, personalised content: logins, forms, inquiries, shopping carts."
+    },
+    {
+      "id": "awp-092",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "In MVC, which part interacts with the database?",
+      "choix": [
+        "Model",
+        "Controller",
+        "View",
+        "Router"
+      ],
+      "reponse": 0,
+      "explication": "The Model stores data objects and business rules and talks to the database."
+    },
+    {
+      "id": "awp-093",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "In the course's MVC view of a web app, which technology plays the Controller?",
+      "choix": [
+        "Vue.js",
+        "MySQL",
+        "CSS",
+        "Node.js"
+      ],
+      "reponse": 3,
+      "explication": "User interacts with the View (Vue.js), the Controller (Node.js) processes input and modifies data in the database (MySQL)."
+    },
+    {
+      "id": "awp-094",
+      "theme": "Web servers & HTTP",
+      "niveau": 2,
+      "question": "Which ways does JavaScript offer to write asynchronous code?",
+      "choix": [
+        "Callbacks, promises and async/await",
+        "Classes, IDs, types and inline styles",
+        "Loops, objects and arrays",
+        "let, const and var"
+      ],
+      "reponse": 0,
+      "explication": "The course lists callbacks, promises and async/await."
+    },
+    {
+      "id": "awp-095",
+      "theme": "Web servers & HTTP",
+      "niveau": 3,
+      "question": "Why is asynchronous code vital in JavaScript?",
+      "choix": [
+        "JS is single-threaded, so waiting would block everything",
+        "Async code always runs faster than the same synchronous code",
+        "Browsers forbid synchronous code",
+        "JS cannot run two lines of code in a row"
+      ],
+      "reponse": 0,
+      "explication": "With one thread, a blocking wait (network, timer) would freeze the page; async lets other code run meanwhile."
+    },
+    {
+      "id": "awp-096",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "Which statement describes Vue's reactive data?",
+      "choix": [
+        "Vue copies the data into localStorage",
+        "Vue tracks data changes and updates the DOM",
+        "Data can only change when the page reloads",
+        "You must call render() after each change"
+      ],
+      "reponse": 1,
+      "explication": "Reactivity = Vue automatically tracks changes in data and re-renders the parts of the DOM that depend on them."
+    },
+    {
+      "id": "awp-097",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "`methods: { updateAge(n) { this.user.age = n; } }` is called. What happens to `{{ user.age }}`?",
+      "choix": [
+        "It updates after a page reload",
+        "It stays the same until mount() is called",
+        "It updates automatically",
+        "It throws an error, user is read-only"
+      ],
+      "reponse": 2,
+      "explication": "`user` is returned by data(), so it is reactive: changing `user.age` updates the template."
+    },
+    {
+      "id": "awp-098",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "In the MVVM view of Vue, what is the ViewModel?",
+      "choix": [
+        "The HTML template of the page",
+        "The Vue instance linking View and Model",
+        "The CSS applied to the components",
+        "The database that stores the application data"
+      ],
+      "reponse": 1,
+      "explication": "View = UI, Model = data, ViewModel = the Vue instance that binds them reactively."
+    },
+    {
+      "id": "awp-099",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "In Vue 3, what does `ref('Hello')` return in `<script setup>`?",
+      "choix": [
+        "A route reference for Vue Router",
+        "A reactive reference to the value",
+        "A plain string that cannot change",
+        "A link to a DOM element by id"
+      ],
+      "reponse": 1,
+      "explication": "`ref()` creates a reactive value usable in the template, e.g. `const message = ref('Hello from Vue 3!')`."
+    },
+    {
+      "id": "awp-100",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "How do you load Vue 3 in a simple HTML page, as in the course examples?",
+      "choix": [
+        "With a `<link>` tag in the head",
+        "With `npm install` inside the browser",
+        "With `import Vue` in the HTML body",
+        "With a `<script>` tag pointing to a CDN"
+      ],
+      "reponse": 3,
+      "explication": "The course uses `<script src=\"https://unpkg.com/vue@3\"></script>` (or jsdelivr), then `const { createApp } = Vue;`."
+    },
+    {
+      "id": "awp-101",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "Why is `computed` better than a method for `reversedMessage`?",
+      "choix": [
+        "It is reactive derived state, recalculated when message changes",
+        "It runs only once when the app starts",
+        "It is the only option allowed to read data",
+        "It can be called with arguments directly from the template"
+      ],
+      "reponse": 0,
+      "explication": "Computed properties are derived state that Vue keeps in sync with their dependencies."
+    },
+    {
+      "id": "awp-102",
+      "theme": "Vue instance & reactivity",
+      "niveau": 3,
+      "question": "In Vue 2, `this.newProp = 'x'` works on a property declared in data(). What fails to be reactive?",
+      "choix": [
+        "A property that did not exist in data() at creation",
+        "A property declared with an empty string",
+        "Any property changed from inside a method of the instance",
+        "Any property displayed with {{ }}"
+      ],
+      "reponse": 0,
+      "explication": "Vue 2 makes reactive only the properties present when the instance is created; new ones need `Vue.set()`."
+    },
+    {
+      "id": "awp-103",
+      "theme": "Vue instance & reactivity",
+      "niveau": 1,
+      "question": "In a Vue method, how do you read the `message` data property?",
+      "choix": [
+        "`this.message`",
+        "`data.message`",
+        "`Vue.message`",
+        "`$message`"
+      ],
+      "reponse": 0,
+      "explication": "Inside the options (methods, computed), data properties are available on `this`."
+    },
+    {
+      "id": "awp-104",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "What does `.mount('#app')` do in Vue 3?",
+      "choix": [
+        "Loads the file app.vue from the server before rendering",
+        "Attaches the app to the element with id app",
+        "Registers a component named app",
+        "Creates a new element with id app"
+      ],
+      "reponse": 1,
+      "explication": "mount() connects the app to an existing DOM element, the equivalent of `el: '#app'` in Vue 2."
+    },
+    {
+      "id": "awp-105",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`<button v-on:click=\"count++\">` — what happens on click?",
+      "choix": [
+        "count is reset to 0",
+        "Nothing, v-on needs a method name",
+        "count increases by 1",
+        "An error: ++ is not allowed"
+      ],
+      "reponse": 2,
+      "explication": "v-on accepts a method name or a short inline expression like `count++`."
+    },
+    {
+      "id": "awp-106",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "Which directive should you use to show a block only when `isLoggedIn` is true?",
+      "choix": [
+        "`v-if=\"isLoggedIn\"`",
+        "`v-model=\"isLoggedIn\"`",
+        "`v-for=\"isLoggedIn\"`",
+        "`v-bind=\"isLoggedIn\"`"
+      ],
+      "reponse": 0,
+      "explication": "v-if renders the element only when its condition is truthy."
+    },
+    {
+      "id": "awp-107",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`items: ['a','b','c']` and `<li v-for=\"item in items\">{{ item }}</li>`. How many `<li>` are rendered?",
+      "choix": [
+        "0",
+        "4",
+        "3",
+        "1"
+      ],
+      "reponse": 2,
+      "explication": "v-for creates one element per array entry."
+    },
+    {
+      "id": "awp-108",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "After `this.items.push({ id: 4, name: 'Item 4' })` in the course's v-for example, what happens?",
+      "choix": [
+        "Nothing until the page is refreshed",
+        "The list is replaced by Item 4 only",
+        "An error: push is not reactive",
+        "A fourth li appears automatically"
+      ],
+      "reponse": 3,
+      "explication": "Array methods like push are tracked by Vue: the list re-renders with the new item."
+    },
+    {
+      "id": "awp-109",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "Which directive binds the `href` of a link to the data property `url`?",
+      "choix": [
+        "`@href=\"url\"`",
+        "`:href=\"url\"`",
+        "`v-model:href=\"url\"`",
+        "`href=\"{{ url }}\"`"
+      ],
+      "reponse": 1,
+      "explication": "Attributes are bound with v-bind (`:`)."
+    },
+    {
+      "id": "awp-110",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "What is wrong with `<img src=\"{{ imageSource }}\">` in Vue?",
+      "choix": [
+        "Nothing, it works like v-bind",
+        "imageSource must be declared in methods, not in data",
+        "The img tag cannot be used inside #app",
+        "Mustaches do not work inside attributes; use `:src`"
+      ],
+      "reponse": 3,
+      "explication": "`{{ }}` only works in text content. For attributes, use `v-bind:src` or `:src`.",
+      "piege": "This is a classic debugging question."
+    },
+    {
+      "id": "awp-111",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "What does `v-model` keep in sync?",
+      "choix": [
+        "The CSS and the HTML of an element",
+        "A component and its parent route",
+        "Two different Vue applications",
+        "A form input and a data property"
+      ],
+      "reponse": 3,
+      "explication": "v-model creates two-way binding between a form input and data."
+    },
+    {
+      "id": "awp-112",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`<p v-html=\"htmlContent\">` with `htmlContent: '<h2>Updated</h2>'`. What appears?",
+      "choix": [
+        "A level-2 heading reading Updated",
+        "The text <h2>Updated</h2>",
+        "An empty paragraph",
+        "Nothing, v-html needs a method"
+      ],
+      "reponse": 0,
+      "explication": "v-html inserts the string as real HTML."
+    },
+    {
+      "id": "awp-113",
+      "theme": "Vue directives",
+      "niveau": 1,
+      "question": "Which directive repeats an element for each element of a list?",
+      "choix": [
+        "v-if",
+        "v-for",
+        "v-text",
+        "v-on"
+      ],
+      "reponse": 1,
+      "explication": "v-for iterates over an array or object."
+    },
+    {
+      "id": "awp-114",
+      "theme": "Vue directives",
+      "niveau": 3,
+      "question": "What does `:key` need to be in a v-for list?",
+      "choix": [
+        "The same for every item",
+        "The index of the parent component",
+        "A string starting with 'key-'",
+        "Unique for each item"
+      ],
+      "reponse": 3,
+      "explication": "Each key must be unique so Vue can identify and track each element."
+    },
+    {
+      "id": "awp-115",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`isVisible: false`, `isLoading: false`. What does the course's v-if / v-else-if / v-else block show?",
+      "choix": [
+        "Visible content",
+        "Loading...",
+        "No data available",
+        "Nothing at all"
+      ],
+      "reponse": 2,
+      "explication": "Both conditions are false, so the v-else block is rendered."
+    },
+    {
+      "id": "awp-116",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`<p v-text=\"message\">Hello</p>` with `message: 'Hi'`. What is displayed?",
+      "choix": [
+        "HelloHi",
+        "Hello Hi",
+        "Hi",
+        "Hello"
+      ],
+      "reponse": 2,
+      "explication": "v-text replaces the whole text content of the element with the value of the expression."
+    },
+    {
+      "id": "awp-117",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "What does `<input v-model=\"name\">` + `<p>{{ name }}</p>` do when the user types \"Ana\"?",
+      "choix": [
+        "The paragraph shows Ana after a reload",
+        "The paragraph stays empty",
+        "The paragraph shows Ana while typing",
+        "The input is cleared after each key"
+      ],
+      "reponse": 2,
+      "explication": "v-model updates `name` on each input event, and the paragraph is reactive."
+    },
+    {
+      "id": "awp-118",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "What is a Vue component, according to the course?",
+      "choix": [
+        "A reusable Vue instance with a name",
+        "A database table used by Vue",
+        "A route defined in the Express server",
+        "A CSS file attached to a page"
+      ],
+      "reponse": 0,
+      "explication": "Components are reusable Vue instances with a name, e.g. `my-component`."
+    },
+    {
+      "id": "awp-119",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "In Vue 2, how is a global component registered?",
+      "choix": [
+        "`Vue.component('my-component', {...})`",
+        "`Vue.use('my-component', {...})`",
+        "`new Component('my-component', {...})`",
+        "`app.component('my-component', {...})`"
+      ],
+      "reponse": 0,
+      "explication": "Vue 2: `Vue.component()`. Vue 3: `app.component()` on the app created by createApp."
+    },
+    {
+      "id": "awp-120",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "In the child, which line declares a prop named `title`?",
+      "choix": [
+        "`data: ['title']`",
+        "`emits: ['title']`",
+        "`slots: ['title']`",
+        "`props: ['title']`"
+      ],
+      "reponse": 3,
+      "explication": "Props are declared with the `props` option (array of names in the course)."
+    },
+    {
+      "id": "awp-121",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "In the parent, which listener receives `this.$emit('updateMessage', msg)` from the child?",
+      "choix": [
+        "`v-model=\"updateMessage\"`",
+        "`#updateMessage=\"updateMessage\"`",
+        "`:updateMessage=\"updateMessage\"`",
+        "`@updateMessage=\"updateMessage\"`"
+      ],
+      "reponse": 3,
+      "explication": "Custom events are listened to like native ones, with `@` (v-on)."
+    },
+    {
+      "id": "awp-122",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "What is the second argument of `this.$emit('updateMessage', newMessage)`?",
+      "choix": [
+        "The payload sent to the parent",
+        "The prop that will be overwritten",
+        "The delay before the event fires",
+        "The name of the parent component"
+      ],
+      "reponse": 0,
+      "explication": "The extra arguments are the data passed to the parent's handler, here `updateMessage(newMessage)`."
+    },
+    {
+      "id": "awp-123",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "Which three blocks can a `.vue` Single File Component contain?",
+      "choix": [
+        "head, body, footer",
+        "view, model, controller",
+        "html, css, js",
+        "template, script, style"
+      ],
+      "reponse": 3,
+      "explication": "An SFC groups `<template>`, `<script>` and `<style>` in one .vue file."
+    },
+    {
+      "id": "awp-124",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "In an SFC, what does `export default { ... }` in `<script>` contain?",
+      "choix": [
+        "The CSS rules of the component",
+        "The component's options (data, methods…)",
+        "The list of routes of the app",
+        "The HTML template and the CSS of the component"
+      ],
+      "reponse": 1,
+      "explication": "The script block exports the component options object."
+    },
+    {
+      "id": "awp-125",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "`<my-component><p>Hi</p></my-component>`, but the child template has no `<slot>`. What is shown?",
+      "choix": [
+        "Hi, placed at the bottom of the child's template",
+        "An error, slots are mandatory",
+        "Hi, placed at the top of the child",
+        "Only the child's own template; Hi is dropped"
+      ],
+      "reponse": 3,
+      "explication": "Content passed by the parent is rendered only where the child puts `<slot>`."
+    },
+    {
+      "id": "awp-126",
+      "theme": "Vue components",
+      "niveau": 3,
+      "question": "In the course's custom-input, why use `:value` + `@input` instead of `v-model` on the inner input?",
+      "choix": [
+        "v-model cannot be used inside templates",
+        ":value is faster than v-model when the input holds numbers",
+        "Props must not be modified directly by the child",
+        "@input is required by HTML5 forms"
+      ],
+      "reponse": 2,
+      "explication": "The child receives `modelValue` as a prop; it shows it with `:value` and asks the parent to change it by emitting `update:modelValue`."
+    },
+    {
+      "id": "awp-127",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "Which Vue 3 file block sets up reactive state with less boilerplate?",
+      "choix": [
+        "`<script setup>`",
+        "`<template v-slot>`",
+        "`<style scoped>`",
+        "`<script module>`"
+      ],
+      "reponse": 0,
+      "explication": "`<script setup>` lets you declare `const message = ref(...)` directly."
+    },
+    {
+      "id": "awp-128",
+      "theme": "Vue components",
+      "niveau": 1,
+      "question": "Which benefit do async components bring?",
+      "choix": [
+        "Two-way binding on every prop",
+        "Smaller initial load (code splitting)",
+        "Styles scoped to the component",
+        "Automatic HTTPS for the component and its children"
+      ],
+      "reponse": 1,
+      "explication": "They are downloaded only when needed, improving performance."
+    },
+    {
+      "id": "awp-129",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "Where is `my-component` registered in `createApp({ components: { 'async-component': AsyncComponent } })`?",
+      "choix": [
+        "In Vue Router, as a route",
+        "Globally, for every Vue app on the page",
+        "Locally, for this app's root component",
+        "In the server, by Express"
+      ],
+      "reponse": 2,
+      "explication": "The `components` option registers components locally; `app.component()` registers them globally."
+    },
+    {
+      "id": "awp-130",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "The page shows `{{ message }}` literally instead of its value. What is the most likely cause?",
+      "choix": [
+        "The Vue app is not mounted on that element",
+        "The paragraph uses single quotes",
+        "message is declared in computed",
+        "message is longer than 20 characters, so Vue skips it"
+      ],
+      "reponse": 0,
+      "explication": "If Vue is not loaded or `mount('#app')`/`el` does not match the element, the template is never compiled and the mustaches stay as text."
+    },
+    {
+      "id": "awp-131",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`createApp({...}).mount('app')` — nothing renders. Why?",
+      "choix": [
+        "createApp must be written new createApp",
+        "The selector needs `#`: `mount('#app')`",
+        "The data function must be async",
+        "mount() must be called before createApp"
+      ],
+      "reponse": 1,
+      "explication": "mount takes a CSS selector; an id is written `#app`."
+    },
+    {
+      "id": "awp-132",
+      "theme": "Vue debugging",
+      "niveau": 3,
+      "question": "`<button @click=\"increment()\">` and `methods: { increment: () => { this.count++; } }`. Nothing changes. Why?",
+      "choix": [
+        "The parentheses in @click=\"increment()\" are forbidden",
+        "An arrow function does not get the Vue `this`",
+        "count must be declared in methods",
+        "increment must return a value"
+      ],
+      "reponse": 1,
+      "explication": "Arrow functions do not have their own `this`, so `this.count` is not the component's data. Use `increment() { this.count++; }`."
+    },
+    {
+      "id": "awp-133",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<li v-for=\"item in itmes\" :key=\"item.id\">` shows an empty list although `items` has 3 entries. The bug?",
+      "choix": [
+        "A typo: itmes instead of items",
+        "The key must be item.name",
+        "items must be declared in computed",
+        "v-for must be on the ul"
+      ],
+      "reponse": 0,
+      "explication": "Names in the template must match data exactly; `itmes` is undefined."
+    },
+    {
+      "id": "awp-134",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "The parent writes `<child @update-message=\"onUpdate\">` and the child emits `this.$emit('updateMsg')`. The parent never reacts. Why?",
+      "choix": [
+        "The event names do not match",
+        "onUpdate must be a computed property",
+        "$emit only works in Vue 2",
+        "The child must declare props first"
+      ],
+      "reponse": 0,
+      "explication": "The name emitted and the name listened to must be the same event."
+    },
+    {
+      "id": "awp-135",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<input :value=\"name\">` and `<p>{{ name }}</p>`: typing does not update the paragraph. Fix?",
+      "choix": [
+        "Use `@value=\"name\"`",
+        "Use `v-text=\"name\"`",
+        "Use `v-html=\"name\"`",
+        "Use `v-model=\"name\"`"
+      ],
+      "reponse": 3,
+      "explication": "v-bind is one-way (data → input). v-model is two-way."
+    },
+    {
+      "id": "awp-136",
+      "theme": "Vue debugging",
+      "niveau": 3,
+      "question": "Vue 2: `addProperty() { this.$data.extra = 'x'; }`, `{{ extra }}` never updates. Fix?",
+      "choix": [
+        "Wrap the template in v-html",
+        "Move addProperty into computed so it is cached",
+        "Use `Vue.set(this.$data, 'extra', 'x')`",
+        "Use `this.extra == 'x'` instead"
+      ],
+      "reponse": 2,
+      "explication": "Vue 2 cannot detect added properties; Vue.set makes them reactive (or declare `extra` in data from the start)."
+    },
+    {
+      "id": "awp-137",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<div v-if=\"a\">A</div><div v-else-if>B</div>` gives a warning. What is wrong?",
+      "choix": [
+        "v-else-if must come before v-if",
+        "v-else-if needs a condition",
+        "The second div needs a key",
+        "v-if cannot use a single letter"
+      ],
+      "reponse": 1,
+      "explication": "v-else-if takes an expression (e.g. `v-else-if=\"b\"`); only v-else has none."
+    },
+    {
+      "id": "awp-138",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<my-component :message=\"parentMessage\">` but the parent's data is `{ parentMsg: 'Hi' }`. What does the child show?",
+      "choix": [
+        "An infinite loop of re-rendering",
+        "Hi",
+        "Nothing (undefined prop value)",
+        "The text parentMessage"
+      ],
+      "reponse": 2,
+      "explication": "parentMessage does not exist in the parent, so the prop receives undefined. Names must match."
+    },
+    {
+      "id": "awp-139",
+      "theme": "Vue debugging",
+      "niveau": 3,
+      "question": "A Vue 3 custom input emits `this.$emit('input', e.target.value)` and is used with `v-model`. Typing does nothing. Fix?",
+      "choix": [
+        "Register it with Vue.component instead of app.component",
+        "Rename the prop to value",
+        "Emit `update:modelValue` instead of `input`",
+        "Add :key to the input"
+      ],
+      "reponse": 2,
+      "explication": "In Vue 3, v-model on a component listens to `update:modelValue`; `input` is the Vue 2 convention."
+    },
+    {
+      "id": "awp-140",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`<button v-on:click=\"changeMessage\">` but the method is defined in `data()` instead of `methods`. What happens?",
+      "choix": [
+        "The button is hidden by Vue",
+        "It works exactly the same way",
+        "The click handler is not found as a method",
+        "The method runs once on page load, then never again"
+      ],
+      "reponse": 2,
+      "explication": "Functions meant as handlers belong in the `methods` option."
+    },
+    {
+      "id": "awp-141",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "Clicking adds items with `this.items.push({ id: 1, name: 'New' })` each time, and Vue warns about duplicate keys. Why?",
+      "choix": [
+        "push is not reactive in Vue 3",
+        "v-for cannot display objects",
+        "Every new item has the same id used as :key",
+        "name must be unique instead of id for every pushed item"
+      ],
+      "reponse": 2,
+      "explication": "Keys must be unique; the course builds the id from `this.items.length + 1`."
+    },
+    {
+      "id": "awp-142",
+      "theme": "Vue debugging",
+      "niveau": 1,
+      "question": "In a template, `{{ this.message }}` vs `{{ message }}`: which is the usual way?",
+      "choix": [
+        "`{{ this.message }}`",
+        "`{{ message }}`",
+        "`{{ $message }}`",
+        "`{{ data.message }}`"
+      ],
+      "reponse": 1,
+      "explication": "In templates, data properties are used directly by name; `this` is used inside script options."
+    },
+    {
+      "id": "awp-143",
+      "theme": "Vue debugging",
+      "niveau": 3,
+      "question": "A route `/profile/:id` works, but `userId: this.$route.params.Id` is always undefined. Why?",
+      "choix": [
+        "Param names are case-sensitive: use `id`",
+        "The route must be /profile/id",
+        "$route is only available in main.js, not in components",
+        "Params must be read with $router"
+      ],
+      "reponse": 0,
+      "explication": "The parameter is named exactly as in the path: `:id` → `params.id`."
+    },
+    {
+      "id": "awp-144",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "The SFC has `<style scoped>div { color: blue; }</style>`; a div in ANOTHER component is not blue. Is this a bug?",
+      "choix": [
+        "Yes, the selector must be #div",
+        "No, scoped styles apply only to this component",
+        "Yes, scoped must be removed when using Vue 3 components",
+        "No, divs can never be styled in Vue"
+      ],
+      "reponse": 1,
+      "explication": "That is the purpose of `scoped`."
+    },
+    {
+      "id": "awp-145",
+      "theme": "Vue Router",
+      "niveau": 1,
+      "question": "What does Vue Router enable?",
+      "choix": [
+        "Creating an HTTPS certificate",
+        "Compiling Pug templates to HTML",
+        "Sending SQL queries directly from the browser",
+        "Navigation between views without reloading"
+      ],
+      "reponse": 3,
+      "explication": "Vue Router maps URLs to components for client-side navigation."
+    },
+    {
+      "id": "awp-146",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "Which line installs the router plugin in a Vue 2 app?",
+      "choix": [
+        "`app.get(VueRouter);`",
+        "`Vue.use(VueRouter);`",
+        "`Vue.mount(VueRouter);`",
+        "`new Vue(VueRouter);`"
+      ],
+      "reponse": 1,
+      "explication": "`Vue.use(VueRouter)` registers the plugin before creating `new VueRouter({ routes })`."
+    },
+    {
+      "id": "awp-147",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "In `{ path: '/user/:id', component: User }`, what is `:id`?",
+      "choix": [
+        "A required query string",
+        "A prop declared in User",
+        "A dynamic URL parameter",
+        "A CSS id selector"
+      ],
+      "reponse": 2,
+      "explication": "`:id` matches any value in that position, e.g. /user/42 → params.id = '42'."
+    },
+    {
+      "id": "awp-148",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "How is the router given to the root instance in the course's main.js?",
+      "choix": [
+        "`App.use(router).listen(3000)`",
+        "`router.mount(App, '#app')`",
+        "`new Vue({ el: '#app', routes: VueRouter })`",
+        "`new Vue({ render: h => h(App), router })`"
+      ],
+      "reponse": 3,
+      "explication": "The router object is passed as an option of the root instance, which is then mounted with `.$mount('#app')`."
+    },
+    {
+      "id": "awp-149",
+      "theme": "Vue Router",
+      "niveau": 1,
+      "question": "Which element creates a navigation link handled by Vue Router?",
+      "choix": [
+        "`<router-link>`",
+        "`<nav-link>`",
+        "`<router-view>`",
+        "`<route-a>`"
+      ],
+      "reponse": 0,
+      "explication": "`<router-link>` navigates; `<router-view>` displays the matched component."
+    },
+    {
+      "id": "awp-150",
+      "theme": "Vue Router",
+      "niveau": 3,
+      "question": "Where is `<router-view>` usually placed?",
+      "choix": [
+        "In every route component of the app",
+        "In index.html only",
+        "In App.vue, the root component",
+        "In router.js"
+      ],
+      "reponse": 2,
+      "explication": "App.vue contains `<router-view>`, the slot where routed components appear."
+    },
+    {
+      "id": "awp-151",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "What does `this.$router.push('/about')` do?",
+      "choix": [
+        "Sends a POST request to the /about page",
+        "Navigates to /about without reloading",
+        "Reads the about parameter",
+        "Adds a new route named about"
+      ],
+      "reponse": 1,
+      "explication": "push changes the current route programmatically."
+    },
+    {
+      "id": "awp-152",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "Which command creates a package.json with default values?",
+      "choix": [
+        "`node init`",
+        "`npm start -y`",
+        "`npm init -y`",
+        "`npm create json`"
+      ],
+      "reponse": 2,
+      "explication": "`npm init -y` initialises a project and accepts all defaults."
+    },
+    {
+      "id": "awp-153",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "What does `res.send('Hello World')` do?",
+      "choix": [
+        "Renders a Pug view named Hello World",
+        "Redirects to the Hello World page",
+        "Sends that text as the HTTP response",
+        "Logs the text in the server console"
+      ],
+      "reponse": 2,
+      "explication": "res.send sends a response body to the client."
+    },
+    {
+      "id": "awp-154",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "In an Express route handler `(req, res) => {...}`, what is `req`?",
+      "choix": [
+        "An object used to build and send the response",
+        "The port the server listens on",
+        "A function that renders a template",
+        "An object with the incoming request's data"
+      ],
+      "reponse": 3,
+      "explication": "req = request: headers, URL parameters, query string, body… res = response: used to set the status and send HTML or JSON back."
+    },
+    {
+      "id": "awp-155",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "What does `res.render('about')` do?",
+      "choix": [
+        "Sends the text about",
+        "Reads the about field from the submitted form",
+        "Redirects the browser to /about",
+        "Renders views/about.pug and sends the HTML"
+      ],
+      "reponse": 3,
+      "explication": "res.render uses the view engine to generate HTML from a template and sends it to the client."
+    },
+    {
+      "id": "awp-156",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "Why do you call `parseFloat(req.body.price)` before doing arithmetic?",
+      "choix": [
+        "Form values arrive as strings",
+        "parseFloat rounds the price to an integer",
+        "It checks the field is required",
+        "It converts the price into another currency"
+      ],
+      "reponse": 0,
+      "explication": "Everything a form sends arrives as a string; `'10' + 5` gives `'105'`. parseFloat turns the text into a number first."
+    },
+    {
+      "id": "awp-158",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "In `const { name, email } = req.body;`, what is this syntax?",
+      "choix": [
+        "An arrow function",
+        "A callback function",
+        "Destructuring assignment",
+        "A template literal with backticks"
+      ],
+      "reponse": 2,
+      "explication": "Destructuring extracts properties of an object into variables with the same names."
+    },
+    {
+      "id": "awp-159",
+      "theme": "Express & Node.js",
+      "niveau": 3,
+      "question": "A middleware must store a value that every rendered Pug view can read. Where does it put it?",
+      "choix": [
+        "In `req.params`",
+        "In `localStorage`",
+        "In `res.locals`",
+        "In `this.$route`"
+      ],
+      "reponse": 2,
+      "explication": "Properties set on `res.locals` (e.g. `res.locals.user = 'Ana'`) are available in any view rendered for that request — a common middleware pattern."
+    },
+    {
+      "id": "awp-161",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "Which route handles `<form action=\"/register\" method=\"post\">`?",
+      "choix": [
+        "`app.use('/register/post', ...)`",
+        "`app.get('/register', ...)`",
+        "`app.post('/register', ...)`",
+        "`app.put('/register', ...)`"
+      ],
+      "reponse": 2,
+      "explication": "The Express method must match the form's method (POST) and its action path."
+    },
+    {
+      "id": "awp-163",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "What does `res.redirect('/list')` do at the end of a POST route?",
+      "choix": [
+        "Renders list.pug with no data",
+        "Deletes the form data from req.body",
+        "Restarts the Express server",
+        "Tells the browser to go to /list"
+      ],
+      "reponse": 3,
+      "explication": "Redirect tells the browser to request another URL (here a GET on /list), which then shows the updated data. This avoids re-submitting the form on refresh."
+    },
+    {
+      "id": "awp-164",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "Which Node feature lets one thread handle many connections?",
+      "choix": [
+        "The DNS cache",
+        "The view engine",
+        "The Virtual DOM",
+        "The event loop"
+      ],
+      "reponse": 3,
+      "explication": "Node is single-threaded and uses an event loop with non-blocking I/O."
+    },
+    {
+      "id": "awp-165",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "Which is NOT a feature of Express listed in the course?",
+      "choix": [
+        "Template engines",
+        "Middleware support",
+        "Routing",
+        "Two-way data binding"
+      ],
+      "reponse": 3,
+      "explication": "Two-way data binding is a front-end feature (Vue, Angular)."
+    },
+    {
+      "id": "awp-166",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "Without `app.use(express.static('public'))`, a request to `/style.css` returns 404. Why?",
+      "choix": [
+        "Express serves no files unless told to",
+        "CSS files must be in views",
+        "Pug cannot link to CSS files",
+        "The browser blocks CSS on localhost"
+      ],
+      "reponse": 0,
+      "explication": "Static files are only served by the static middleware, from the folder you name."
+    },
+    {
+      "id": "awp-167",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "How does Pug show that an element is nested inside another?",
+      "choix": [
+        "By indentation",
+        "By curly braces",
+        "By closing tags",
+        "By semicolons"
+      ],
+      "reponse": 0,
+      "explication": "Pug has no closing tags; nesting comes from indentation."
+    },
+    {
+      "id": "awp-168",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "Which Pug line produces `<div class=\"box\">`?",
+      "choix": [
+        "`<.box>`",
+        "`div{box}`",
+        "`#box`",
+        "`.box`"
+      ],
+      "reponse": 3,
+      "explication": "`.className` creates a div with that class (`div.box` also works). `#id` creates a div with an id."
+    },
+    {
+      "id": "awp-169",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "Which Pug line produces `<div id=\"main\">`?",
+      "choix": [
+        "`.main`",
+        "`#main`",
+        "`main#`",
+        "`div=main`"
+      ],
+      "reponse": 1,
+      "explication": "`#IDname` gives an id."
+    },
+    {
+      "id": "awp-170",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "How are attributes written in Pug?",
+      "choix": [
+        "In parentheses: `a(href='/about') About`",
+        "In brackets: `a[href='/about'] About`",
+        "With braces: `a{href='/about'} About`",
+        "With a colon: `a:href='/about' About`"
+      ],
+      "reponse": 0,
+      "explication": "Attributes go in parentheses, separated by commas: `input(type=\"number\", name=\"age\", required)`."
+    },
+    {
+      "id": "awp-171",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "What does the Pug line `li: a(href='/about') About` produce?",
+      "choix": [
+        "`<li>a(href='/about') About</li>`",
+        "`<li><a href=\"/about\">About</a></li>`",
+        "`<a href=\"/about\"><li>About</li></a>`",
+        "`<li href=\"/about\">About</li>`"
+      ],
+      "reponse": 1,
+      "explication": "The colon is block expansion: it nests the next tag inside on the same line."
+    },
+    {
+      "id": "awp-172",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "Which Pug line writes the HTML5 doctype?",
+      "choix": [
+        "`!doctype`",
+        "`doctype html`",
+        "`html5`",
+        "`<!DOCTYPE>`"
+      ],
+      "reponse": 1,
+      "explication": "`doctype html` outputs `<!DOCTYPE html>`."
+    },
+    {
+      "id": "awp-173",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "In a Pug view, what does `if result` followed by an indented `p Result: #{result}` do?",
+      "choix": [
+        "Shows the paragraph only once a result exists",
+        "Creates an input called result",
+        "Always shows Result: undefined, even before submitting",
+        "Sends the result to the server"
+      ],
+      "reponse": 0,
+      "explication": "The paragraph is rendered only when `result` was passed and is truthy, e.g. after the form was processed."
+    },
+    {
+      "id": "awp-174",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "In Pug, what does `a(href='mailto:' + user.email) #{user.email}` produce?",
+      "choix": [
+        "A link to a page named mailto on the same site",
+        "An email link showing the user's email",
+        "A form that sends an email",
+        "The text mailto:user.email"
+      ],
+      "reponse": 1,
+      "explication": "Attribute values are JavaScript expressions, so they can be concatenated; `#{}` prints the address as link text."
+    },
+    {
+      "id": "awp-175",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "The route calls `res.render('list', { users: rows })`. In list.pug, what does `each user in users` loop over?",
+      "choix": [
+        "The rows written inside the list.pug file",
+        "The cookies of the browser",
+        "The `users` array passed by `res.render`",
+        "Every route defined in app.js"
+      ],
+      "reponse": 2,
+      "explication": "Variables passed in the object of res.render are available in the template; `each` iterates over the array."
+    },
+    {
+      "id": "awp-176",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "A Pug page that reuses a shared layout starts with…",
+      "choix": [
+        "`include about`",
+        "`import layout`",
+        "`extends layout`",
+        "`mixin layout`"
+      ],
+      "reponse": 2,
+      "explication": "`extends layout` reuses layout.pug; the page then fills the layout's `block content`."
+    },
+    {
+      "id": "awp-177",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "In the layout, what is `block content`?",
+      "choix": [
+        "A comment ignored by Pug when it compiles the page",
+        "A loop over all the pages",
+        "A div with the class content",
+        "A placeholder that child templates fill"
+      ],
+      "reponse": 3,
+      "explication": "Blocks are named slots in a layout, redefined by templates that extend it."
+    },
+    {
+      "id": "awp-178",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "What is the difference between `h1= message` and `h1 message`?",
+      "choix": [
+        "The second is invalid Pug syntax",
+        "The first prints the variable, the second the word",
+        "Both print the value of the variable",
+        "The first is a comment, the second a tag holding the value"
+      ],
+      "reponse": 1,
+      "explication": "`=` evaluates the expression; without it, the text after the tag is plain text."
+    },
+    {
+      "id": "awp-179",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "Which feature does Pug provide for security?",
+      "choix": [
+        "It encrypts every page",
+        "It escapes HTML automatically",
+        "It hides the source code from the browser",
+        "It blocks HTTP requests"
+      ],
+      "reponse": 1,
+      "explication": "Values printed with `=` or `#{}` are HTML-escaped by default."
+    },
+    {
+      "id": "awp-180",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "Pug was originally called…",
+      "choix": [
+        "Jade",
+        "Jekyll",
+        "Jinja",
+        "Jasmine"
+      ],
+      "reponse": 0,
+      "explication": "Pug was renamed from Jade because of a trademark."
+    },
+    {
+      "id": "awp-181",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "What does the `-g` flag mean in `npm install -g <package>`?",
+      "choix": [
+        "Install globally, system-wide",
+        "Install as a dev dependency",
+        "Install the latest beta version",
+        "Install only for this project"
+      ],
+      "reponse": 0,
+      "explication": "`-g` installs the package for the whole system, not just the current app."
+    },
+    {
+      "id": "awp-185",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "How do you run a script named `dev` declared in the `scripts` of package.json?",
+      "choix": [
+        "`npm run dev`",
+        "`npm dev --run`",
+        "`run npm dev`",
+        "`node dev`"
+      ],
+      "reponse": 0,
+      "explication": "Custom scripts run with `npm run <scriptname>` (`npm start` is a shortcut for start)."
+    },
+    {
+      "id": "awp-193",
+      "theme": "Front-end concepts",
+      "niveau": 3,
+      "question": "Why keep the front-end (client) and the back-end (server) in separate folders or projects?",
+      "choix": [
+        "Vue cannot read files outside its folder",
+        "Separation of concerns between front-end and back-end",
+        "Express forbids JavaScript files in the root of a project",
+        "Each folder needs its own database"
+      ],
+      "reponse": 1,
+      "explication": "Separation of concerns: each part has one job, can be developed and scaled independently, and the front-end build can be served by the back-end."
+    },
+    {
+      "id": "awp-201",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "What is the DOM?",
+      "choix": [
+        "A JavaScript library used to animate pages",
+        "A server program that stores the HTML files",
+        "A CSS file that lists the style of every element",
+        "A tree of the page's nodes that JavaScript can change"
+      ],
+      "reponse": 3,
+      "explication": "The Document Object Model represents the page as a tree of nodes (elements, attributes, text). JS — and Vue — update the page by changing this tree."
+    },
+    {
+      "id": "awp-202",
+      "theme": "HTML/CSS/JS",
+      "niveau": 2,
+      "question": "What is an advantage of `addEventListener` over the `onclick` HTML attribute?",
+      "choix": [
+        "It fires before the page has loaded",
+        "It automatically prevents double clicks",
+        "Several listeners can be attached to one element",
+        "It works without any JavaScript file"
+      ],
+      "reponse": 2,
+      "explication": "addEventListener keeps JS out of the HTML and lets you add several handlers for the same event."
+    },
+    {
+      "id": "awp-203",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "Which selector targets `<p class=\"note\">` by its class?",
+      "choix": [
+        "`p#note`",
+        "`note`",
+        "`.note`",
+        "`#note`"
+      ],
+      "reponse": 2,
+      "explication": "`.` = class, `#` = id, bare name = tag type."
+    },
+    {
+      "id": "awp-204",
+      "theme": "HTML/CSS/JS",
+      "niveau": 1,
+      "question": "What does `document.getElementById('header').innerHTML = 'New';` do?",
+      "choix": [
+        "Creates a new element with the id header",
+        "Adds the class New to the header element",
+        "Changes the colour of the header to New",
+        "Replaces the content of the element with id header"
+      ],
+      "reponse": 3,
+      "explication": "innerHTML is a property: setting it replaces the element's content."
+    },
+    {
+      "id": "awp-205",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "What does \"declarative rendering\" mean in Vue?",
+      "choix": [
+        "You declare every route in the Express server",
+        "You describe the UI from the data and Vue updates the DOM",
+        "You must declare all CSS rules inside the template",
+        "You write each DOM change by hand after every update"
+      ],
+      "reponse": 1,
+      "explication": "You write `{{ message }}`; Vue takes care of keeping the DOM in sync when `message` changes."
+    },
+    {
+      "id": "awp-206",
+      "theme": "Vue debugging",
+      "niveau": 2,
+      "question": "`data() { message: 'Hi' }` — `{{ message }}` shows nothing. Why?",
+      "choix": [
+        "data must be declared after methods",
+        "The function returns nothing: `return { message: 'Hi' }`",
+        "Strings cannot be stored in data()",
+        "message must be written in double quotes"
+      ],
+      "reponse": 1,
+      "explication": "data() must RETURN the object. Without `return`, the braces are just a block and data is undefined."
+    },
+    {
+      "id": "awp-207",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "`items: []` and `<p v-if=\"items.length\">You have items</p>`. Is the paragraph rendered?",
+      "choix": [
+        "Yes, the array exists",
+        "No, v-if cannot read arrays",
+        "Yes, v-if ignores numbers",
+        "No, 0 is falsy"
+      ],
+      "reponse": 3,
+      "explication": "items.length is 0, which is falsy, so v-if does not render the element."
+    },
+    {
+      "id": "awp-208",
+      "theme": "Vue directives",
+      "niveau": 2,
+      "question": "What does `<button @click=\"show = !show\">Toggle</button>` with `<p v-if=\"show\">Hi</p>` do?",
+      "choix": [
+        "The button disappears after one click",
+        "Each click hides or shows the paragraph",
+        "Nothing, @click needs a method name",
+        "The paragraph is shown only once"
+      ],
+      "reponse": 1,
+      "explication": "The inline expression flips the boolean; v-if reacts to each change."
+    },
+    {
+      "id": "awp-209",
+      "theme": "Vue components",
+      "niveau": 2,
+      "question": "Two `<counter>` components each have `data() { return { count: 0 }; }`. Clicking the first one…",
+      "choix": [
+        "Changes both counters together",
+        "Changes neither, data is shared",
+        "Changes only the first counter",
+        "Resets the second counter to 0"
+      ],
+      "reponse": 2,
+      "explication": "Because data is a function, each instance gets its own copy of the state."
+    },
+    {
+      "id": "awp-210",
+      "theme": "Vue components",
+      "niveau": 3,
+      "question": "A child wants to change a value it received as a prop. What is the right approach?",
+      "choix": [
+        "Emit an event so the parent updates its data",
+        "Declare the prop a second time in data()",
+        "Assign the new value to the prop directly",
+        "Use v-html to overwrite the prop"
+      ],
+      "reponse": 0,
+      "explication": "Data flows down through props and changes flow up through events: the parent owns the data and updates it."
+    },
+    {
+      "id": "awp-211",
+      "theme": "Vue Router",
+      "niveau": 2,
+      "question": "How does `<router-link to=\"/about\">` differ from `<a href=\"/about\">` in an SPA?",
+      "choix": [
+        "It sends a POST request to the server",
+        "It changes the view without reloading the page",
+        "It only works for external websites",
+        "It opens the page in a new browser tab"
+      ],
+      "reponse": 1,
+      "explication": "router-link lets Vue Router swap the component client-side; a normal link reloads the whole page from the server."
+    },
+    {
+      "id": "awp-212",
+      "theme": "Express & Node.js",
+      "niveau": 3,
+      "question": "A route sends `res.send('OK')` and does not call next(). A logging middleware is declared AFTER it with `app.use`. Does it run for that request?",
+      "choix": [
+        "No, app.use only runs on errors",
+        "No, the response was already sent",
+        "Yes, middleware always runs last",
+        "Yes, but only for POST requests"
+      ],
+      "reponse": 1,
+      "explication": "Express runs handlers in the order they are declared; once a route answers without calling next(), the chain stops. Order matters."
+    },
+    {
+      "id": "awp-213",
+      "theme": "Express & Node.js",
+      "niveau": 2,
+      "question": "For the URL `/search?q=vue`, where does Express put `q`?",
+      "choix": [
+        "`req.body.q`",
+        "`req.params.q`",
+        "`req.query.q`",
+        "`res.locals.q`"
+      ],
+      "reponse": 2,
+      "explication": "Query string → req.query; path parameters (:id) → req.params; POST form data → req.body."
+    },
+    {
+      "id": "awp-214",
+      "theme": "Express & Node.js",
+      "niveau": 1,
+      "question": "What does `res.status(404).send('Not found')` tell the browser?",
+      "choix": [
+        "The user must log in first",
+        "The requested resource does not exist",
+        "The server crashed while answering",
+        "The request succeeded with no data"
+      ],
+      "reponse": 1,
+      "explication": "404 = Not Found. 500 = server error (used in the error-handling middleware), 200 = OK."
+    },
+    {
+      "id": "awp-215",
+      "theme": "Web servers & HTTP",
+      "niveau": 1,
+      "question": "Which HTTP method is meant to remove a resource?",
+      "choix": [
+        "POST",
+        "GET",
+        "DELETE",
+        "PUT"
+      ],
+      "reponse": 2,
+      "explication": "Express maps them to app.get, app.post, app.put, app.delete. PUT updates, DELETE removes."
+    },
+    {
+      "id": "awp-216",
+      "theme": "Web servers & HTTP",
+      "niveau": 3,
+      "question": "In `async function load() { const r = await fetch(url); }`, what does `await` do?",
+      "choix": [
+        "Pauses load() until the result arrives, without blocking the page",
+        "Blocks the whole browser until the server answers",
+        "Turns fetch into a synchronous function forever",
+        "Sends the request again if it failed"
+      ],
+      "reponse": 0,
+      "explication": "await suspends only the async function; the rest of the page keeps running. This is the async/await style of asynchronous code."
+    },
+    {
+      "id": "awp-217",
+      "theme": "Pug",
+      "niveau": 1,
+      "question": "What does the Pug line `p.intro Hello` produce?",
+      "choix": [
+        "`<p class=\"intro\">Hello</p>`",
+        "`<p id=\"intro\">Hello</p>`",
+        "`<intro>Hello</intro>`",
+        "`<p>intro Hello</p>`"
+      ],
+      "reponse": 0,
+      "explication": "A tag followed by `.name` gets that class; `#name` would give an id."
+    },
+    {
+      "id": "awp-218",
+      "theme": "Pug",
+      "niveau": 2,
+      "question": "What does `input(type='text', name='q', required)` produce?",
+      "choix": [
+        "`<input>text q required</input>`",
+        "`<input type=\"text\">q required`",
+        "`<input type=\"text\" name=\"q\" required>`",
+        "`<text name=\"q\" required>`"
+      ],
+      "reponse": 2,
+      "explication": "Attributes go in parentheses, separated by commas; a boolean attribute is written alone."
+    },
+    {
+      "id": "awp-219",
+      "theme": "Front-end concepts",
+      "niveau": 2,
+      "question": "In an app built with Vue and Express, which part renders the interface in the browser?",
+      "choix": [
+        "Express, on the server",
+        "Vue, on the client",
+        "Pug, inside Vue components",
+        "MySQL, in the database"
+      ],
+      "reponse": 1,
+      "explication": "Vue is the client-side View; Express handles requests and data on the server (the Controller role in the course's MVC picture)."
+    },
+    {
+      "id": "awp-220",
+      "theme": "Vue instance & reactivity",
+      "niveau": 2,
+      "question": "Which option should hold a function called when a button is clicked?",
+      "choix": [
+        "data",
+        "methods",
+        "el",
+        "computed"
+      ],
+      "reponse": 1,
+      "explication": "Event handlers are methods. computed is for derived values, data for state, el for mounting."
+    }
+  ]
+}
