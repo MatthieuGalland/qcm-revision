@@ -257,6 +257,7 @@ async function listModules(){
       files=[...doc.querySelectorAll('a[href]')].map(a=>{ try{ return decodeURIComponent(a.getAttribute('href').split(/[?#]/)[0].split('/').pop()); }catch(e){ return ''; } }).filter(f=>/\.json$/i.test(f));
     }
   }catch(e){}
+  if(!files.length) files=await githubListing();
   if(!files.length){
     try{ const r=await fetch(MOD_DIR+'index.json',{cache:'no-store'}); if(r.ok){ const j=await r.json(); if(Array.isArray(j)) files=j; } }catch(e){}
   }
@@ -270,6 +271,23 @@ async function listModules(){
       return {file, bank, n:qs.length, themes:new Set(qs.map(q=>q.theme)).size};
     }catch(e){ return {file, error:e.message||String(e)}; }
   }));
+}
+/* GitHub Pages n'affiche pas le contenu des dossiers : on demande la liste à l'API GitHub
+   (<compte>.github.io/<dépôt>/… → dépôt <compte>/<dépôt>, branche par défaut). */
+async function githubListing(){
+  const m=location.hostname.match(/^([\w-]+)\.github\.io$/i); if(!m) return [];
+  const parts=location.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+  if(parts.length && /\.[a-z0-9]+$/i.test(parts[parts.length-1])) parts.pop();
+  const tries = parts.length ? [[parts[0], parts.slice(1)], [m[1]+'.github.io', parts]] : [[m[1]+'.github.io', []]];
+  for(const [repo, dir] of tries){
+    try{
+      const r=await fetch('https://api.github.com/repos/'+m[1]+'/'+encodeURIComponent(repo)+'/contents/'+[...dir,'modules'].map(encodeURIComponent).join('/'));
+      if(!r.ok) continue;
+      const j=await r.json();
+      if(Array.isArray(j)) return j.filter(x=>x.type==='file').map(x=>x.name);
+    }catch(e){}
+  }
+  return [];
 }
 function loadBank(file, bank){
   MOD=file; BANK=bank;
