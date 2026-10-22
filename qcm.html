@@ -306,7 +306,7 @@ function loadBank(file, bank){
 const MODES = {
   classique:{name:'Classique', n:15, qTime:20, desc:'15 questions, 20 secondes chacune. Va vite pour gagner le bonus de vitesse.'},
   survie:{name:'Survie', lives:3, qTime:20, desc:'Trois vies. Chaque erreur en coûte une. Tiens le plus longtemps possible.'},
-  libre:{name:'Sans chrono', desc:'Toutes les questions des thèmes choisis, sans limite de temps. Prends le temps de réfléchir, tu peux terminer quand tu veux.'},
+  libre:{name:'Sans chrono', n:50, desc:'50 questions tirées au hasard, sans limite de temps. Prends le temps de réfléchir, tu peux terminer quand tu veux.'},
   chrono:{name:'Contre-la-montre', total:90, desc:'90 secondes au total. +3 s par bonne réponse, −5 s par erreur.'}
 };
 const LEVELS = ['Bizuth','Curieux','Apprenti','Algorithmicien','Ingénieur junior','Ingénieur','Major de promo','Légende de Villejuif'];
@@ -407,7 +407,7 @@ function newGame(mode, onlyIds){
        lives:MODES[mode].lives||0, timeLeft:MODES[mode].total||0, joker:true, log:[], cur:null, locked:false,
        qStart:0, qPaused:0, times:[], newBadges:[], onlyIds:onlyIds||null, flash:false};
   if(mode==='classique') G.total = Math.min(MODES.classique.n, deck.length);
-  if(mode==='libre') G.total = deck.length;
+  if(mode==='libre') G.total = Math.min(MODES.libre.n, deck.length);
   view='game'; nextQuestion();
 }
 function drawQ(){
