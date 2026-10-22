@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Banque de questions QCM — EFREI Révision",
+  "type": "object",
+  "required": ["titre", "questions"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "titre": {"type": "string", "description": "Nom du chapitre ou de la banque, affiché dans l'en-tête."},
+    "matiere": {"type": "string", "description": "Matière et niveau, ex. « Algorithmique avancée · L3 »."},
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["theme", "question", "choix", "reponse", "explication"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "description": "Facultatif. Identifiant stable : garde la progression même si tu reformules la question."},
+          "theme": {"type": "string", "description": "Sert aux filtres de l'accueil. Écris-le toujours de la même façon."},
+          "niveau": {"type": "integer", "enum": [1, 2, 3], "default": 1, "description": "1 facile, 2 moyen, 3 difficile. Rapporte 100, 120 ou 140 points de base."},
+          "question": {"type": "string", "description": "Le texte entre `accents graves` s'affiche en code."},
+          "choix": {"type": "array", "minItems": 2, "maxItems": 6, "items": {"type": "string"}, "description": "Les propositions. Leur ordre est mélangé à chaque partie."},
+          "reponse": {
+            "oneOf": [
+              {"type": "integer", "minimum": 0, "description": "Position de la bonne réponse dans « choix », en comptant à partir de 0."},
+              {"type": "string", "description": "Ou le texte exact de la bonne réponse."}
+            ]
+          },
+          "explication": {"type": "string", "description": "Affichée après chaque réponse, juste ou fausse."},
+          "piege": {"type": "string", "description": "Facultatif. Erreur fréquente, affichée dans l'encadré orange « Piège d'examen »."}
+        }
+      }
+    }
+  }
+}
