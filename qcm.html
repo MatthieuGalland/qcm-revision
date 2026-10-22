@@ -306,6 +306,7 @@ function loadBank(file, bank){
 const MODES = {
   classique:{name:'Classique', n:15, qTime:20, desc:'15 questions, 20 secondes chacune. Va vite pour gagner le bonus de vitesse.'},
   survie:{name:'Survie', lives:3, qTime:20, desc:'Trois vies. Chaque erreur en coûte une. Tiens le plus longtemps possible.'},
+  libre:{name:'Sans chrono', desc:'Toutes les questions des thèmes choisis, sans limite de temps. Prends le temps de réfléchir, tu peux terminer quand tu veux.'},
   chrono:{name:'Contre-la-montre', total:90, desc:'90 secondes au total. +3 s par bonne réponse, −5 s par erreur.'}
 };
 const LEVELS = ['Bizuth','Curieux','Apprenti','Algorithmicien','Ingénieur junior','Ingénieur','Major de promo','Légende de Villejuif'];
@@ -378,6 +379,7 @@ function toast(msg){ const t=document.createElement('div'); t.className='toast';
 const ICONS = {
   classique:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
   survie:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+  libre:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/></svg>',
   chrono:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>',
   module:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/></svg>',
   erreurs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>'
@@ -403,6 +405,7 @@ function newGame(mode, onlyIds){
        lives:MODES[mode].lives||0, timeLeft:MODES[mode].total||0, joker:true, log:[], cur:null, locked:false,
        qStart:0, qPaused:0, times:[], newBadges:[], onlyIds:onlyIds||null, flash:false};
   if(mode==='classique') G.total = Math.min(MODES.classique.n, deck.length);
+  if(mode==='libre') G.total = deck.length;
   view='game'; nextQuestion();
 }
 function drawQ(){
@@ -419,7 +422,7 @@ function nextQuestion(){
   startTimer();
 }
 function isOver(){
-  if(G.mode==='classique') return G.answered>=G.total;
+  if(G.mode==='classique'||G.mode==='libre') return G.answered>=G.total;
   if(G.mode==='survie') return G.lives<=0;
   if(G.mode==='chrono') return G.timeLeft<=0;
 }
@@ -427,6 +430,7 @@ function mult(){ return 1 + 0.5*Math.min(4, Math.floor(G.streak/3)); }
 
 function startTimer(){
   cancelAnimationFrame(timerRaf);
+  if(G.mode==='libre') return;
   const bar = $('.timer>i'), wrap=$('.timer');
   if(G.mode==='chrono'){
     let last=performance.now();
@@ -455,7 +459,7 @@ function answer(choicePos){
     const base = 80 + 20*c.src.lvl;
     let speed;
     if(G.mode==='chrono'){ speed = Math.round(50*Math.max(0,1-secs/8)); G.timeLeft += 3; }
-    else speed = Math.round(50*Math.max(0, 1 - secs/G.cfg.qTime));
+    else speed = G.cfg.qTime ? Math.round(50*Math.max(0, 1 - secs/G.cfg.qTime)) : 0;
     gained = Math.round((base+speed)*mult());
     G.score += gained;
     if(secs<3) G.flash=true;
@@ -598,7 +602,7 @@ function renderHome(){
 
   <div class="sec"><span class="sec__num">01</span><h2 class="sec__title">Mini-jeux</h2></div>
   <div class="modes">
-    ${['classique','survie','chrono'].map(m=>`
+    ${['classique','libre','survie','chrono'].map(m=>`
       <button class="mode" data-mode="${m}">
         <span class="mode__icon">${ICONS[m]}</span>
         <h3>${MODES[m].name}</h3>
@@ -676,10 +680,10 @@ async function renderBoard(){
 /* ---------- Rendu : jeu ---------- */
 function hudHtml(){
   let mid='';
-  if(G.mode==='classique') mid=`<span class="pill">Question ${Math.min(G.idx,G.total)}/${G.total}</span>`;
+  if(G.mode==='classique'||G.mode==='libre') mid=`<span class="pill">Question ${Math.min(G.idx,G.total)}/${G.total}</span>`;
   if(G.mode==='survie') mid=`<span class="pill"><span class="hearts" aria-label="${G.lives} vies">${'♥'.repeat(G.lives)}${'♡'.repeat(Math.max(0,MODES.survie.lives-G.lives))}</span></span><span class="pill">${G.correct} réussies</span>`;
   if(G.mode==='chrono') mid=`<span class="pill" id="chronoLeft">${Math.ceil(G.timeLeft)} s</span>`;
-  return `<button class="quit" id="quit">✕ Quitter</button>
+  return `<button class="quit" id="quit">✕ ${G.mode==='libre'&&G.answered?'Terminer':'Quitter'}</button>
     <div class="hud__mid">${mid}<span class="pill" id="score">${G.score} pts</span></div>
     <span class="pill pill--streak ${G.streak?'':'cold'}" id="streak" title="Série de bonnes réponses">● ${G.streak} · ×${mult()}</span>`;
 }
@@ -689,6 +693,11 @@ function updateHud(){
     const bar=$('.timer>i'); if(bar) bar.style.width=Math.min(100, G.timeLeft/MODES.chrono.total*100)+'%';
     const w=$('.timer'); if(w) w.classList.toggle('low', G.timeLeft<15); }
 }
+function quitGame(){
+  cancelAnimationFrame(timerRaf);
+  if(G && G.mode==='libre' && G.answered) return endGame();
+  view='home'; G=null; render();
+}
 function renderGame(){
   const c=G.cur, q=c.src;
   const keys='ABCDEF';
@@ -697,21 +706,21 @@ function renderGame(){
   <section class="game">
     <div class="hud">${hudHtml()}</div>
     ${prog}
-    <div class="timer" aria-hidden="true"><i style="width:${G.mode==='chrono'?Math.min(100,G.timeLeft/MODES.chrono.total*100):100}%"></i></div>
+    <div class="timer" aria-hidden="true"${G.mode==='libre'?' hidden':''}><i style="width:${G.mode==='chrono'?Math.min(100,G.timeLeft/MODES.chrono.total*100):100}%"></i></div>
     <article class="card" id="qcard">
-      <div class="q__head"><span class="eyebrow">${esc(q.theme)} · ${'★'.repeat(q.lvl)}${'☆'.repeat(3-q.lvl)}</span>${G.mode!=='chrono'?'<span class="eyebrow" id="qsec" style="color:var(--muted)">'+G.cfg.qTime+' s</span>':''}</div>
+      <div class="q__head"><span class="eyebrow">${esc(q.theme)} · ${'★'.repeat(q.lvl)}${'☆'.repeat(3-q.lvl)}</span>${G.cfg.qTime?'<span class="eyebrow" id="qsec" style="color:var(--muted)">'+G.cfg.qTime+' s</span>':''}</div>
       <h2 class="q__text" id="qtext">${fmt(q.q)}</h2>
       <div class="choices" role="group" aria-labelledby="qtext">
         ${c.order.map((oi,i)=>`<button class="ch" data-i="${i}"><span class="ch__k">${keys[i]}</span><span class="ch__t">${fmt(q.choix[oi])}</span><span class="ch__m" aria-hidden="true"></span></button>`).join('')}
       </div>
       <div class="tools">
         <button class="joker" id="joker" ${G.joker?'':'disabled'}>50/50 ${G.joker?'(1 joker)':'utilisé'}</button>
-        <span>Bonne réponse rapide = bonus · série de 3 = ×1,5</span>
+        <span>${G.mode==='libre'?'Pas de chrono : prends ton temps · série de 3 = ×1,5':'Bonne réponse rapide = bonus · série de 3 = ×1,5'}</span>
       </div>
     </article>
     <div id="fb"></div>
   </section>`;
-  $('#quit').onclick=()=>{ cancelAnimationFrame(timerRaf); view='home'; G=null; render(); };
+  $('#quit').onclick=quitGame;
   $('#joker').onclick=useJoker;
   app.querySelectorAll('.ch').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
   const first=app.querySelector('.ch'); if(first && window.matchMedia('(pointer:fine)').matches) first.focus({preventScroll:true});
@@ -725,7 +734,7 @@ function renderFeedback(pos, ok, gained, secs){
     else b.classList.add('dim');
   });
   const j=$('#joker'); if(j) j.disabled=true;
-  $('.hud').innerHTML=hudHtml(); $('#quit').onclick=()=>{ view='home'; G=null; render(); };
+  $('.hud').innerHTML=hudHtml(); $('#quit').onclick=quitGame;
   const st=$('#streak'); if(ok&&st){ st.classList.add('bump'); setTimeout(()=>st.classList.remove('bump'),220); }
   const card=$('#qcard');
   if(ok){ const p=document.createElement('span'); p.className='pop'; p.textContent='+'+gained+(mult()>1?'  ×'+mult():''); card.appendChild(p); }
@@ -740,7 +749,7 @@ function renderFeedback(pos, ok, gained, secs){
       ${q.trap?`<div class="box box--trap"><span class="box__l">Piège d'examen</span>${fmt(q.trap)}</div>`:''}
       <button class="next" id="next">${last?'Voir le résultat':'Question suivante'} <kbd>Entrée</kbd></button>
     </div>`;
-  $('#next').onclick=()=>{ if(G.mode==='chrono'||G.mode==='classique'||G.mode==='survie') nextQuestion(); };
+  $('#next').onclick=()=>nextQuestion();
   $('#next').focus({preventScroll:true});
   $('#fb').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth', block:'nearest'});
 }
@@ -752,13 +761,13 @@ function renderEnd(){
   const L=lvlOf(P.xp), lo=lvlFloor(L), hi=lvlFloor(L+1), pct=Math.round(100*(P.xp-lo)/(hi-lo));
   const wrong=G.log.filter(l=>!l.ok);
   let rank='';
-  if(db && board.length){ const others=board.filter(b=>b.id!==me).map(b=>b[G.mode]||0); const pos=1+others.filter(s=>s>P.best[G.mode]).length; rank=`Ton record te place <b>${pos}<sup>${pos===1?'er':'e'}</sup></b> sur ${others.length+1} au classement ${esc(MODES[G.mode].name)}.`; }
+  if(db && board.length && G.mode!=='libre'){ const others=board.filter(b=>b.id!==me).map(b=>b[G.mode]||0); const pos=1+others.filter(s=>s>P.best[G.mode]).length; rank=`Ton record te place <b>${pos}<sup>${pos===1?'er':'e'}</sup></b> sur ${others.length+1} au classement ${esc(MODES[G.mode].name)}.`; }
   app.innerHTML = `
   <section class="end">
     <div class="card end__score">
       <span class="eyebrow">${esc(MODES[G.mode].name)}${G.onlyIds?' · Mes erreurs':''} · partie terminée</span>
       <span class="big">${G.score}</span><span>points</span>
-      ${r.record?`<span class="record">Nouveau record ! Ancien : ${r.prevBest}</span>`:`<span style="color:var(--muted);font-size:14px">Record : ${P.best[G.mode]}</span>`}
+      ${r.record?`<span class="record">Nouveau record ! Ancien : ${r.prevBest}</span>`:`<span style="color:var(--muted);font-size:14px">Record : ${P.best[G.mode]||0}</span>`}
       ${rank?`<p style="font-size:14px">${rank}</p>`:''}
     </div>
     <div class="stats">
