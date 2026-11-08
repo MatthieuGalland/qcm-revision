@@ -1,0 +1,2774 @@
+{
+  "titre": "CX015-2.5-3 · Computer Architecture and Operating Systems",
+  "matiere": "Ch3 System Architecture · Ch4 Memory, Storage & Endianness · Ch5 Intro to OS · Ch6 Memory Management",
+  "questions": [
+    {
+      "id": "caos-ch3-004",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "What can the electrical conductors of a bus physically be?",
+      "choix": [
+        "Registers placed inside the processor chip itself",
+        "Wires or conductors on a printed circuit",
+        "Only optical fibres between the chips",
+        "Wireless radio links between all the components"
+      ],
+      "reponse": 1,
+      "explication": "The course defines bus conductors as wires or conductors on a printed circuit board."
+    },
+    {
+      "id": "caos-ch3-007",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "Which bus lines provide synchronisation and control of the bus operation?",
+      "choix": [
+        "Address lines",
+        "Data lines",
+        "Control lines",
+        "Power lines"
+      ],
+      "reponse": 2,
+      "explication": "Control lines coordinate the operation of the bus and of the modules connected to it."
+    },
+    {
+      "id": "caos-ch3-008",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "What is the role of the power lines of a bus?",
+      "choix": [
+        "Supplying power to the components connected to the bus",
+        "Selecting which memory location will receive the data",
+        "Transporting the data words between memory and the CPU",
+        "Carrying the clock signal that synchronises every module"
+      ],
+      "reponse": 0,
+      "explication": "Power lines provide power to the various components attached to the bus."
+    },
+    {
+      "id": "caos-ch3-009",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 2,
+      "question": "Why is the data bus described as bi-directional?",
+      "choix": [
+        "It transfers data on both the rising and falling clock edges",
+        "It carries data on one half and addresses on the other half",
+        "Data goes out of the CPU on a write and into the CPU on a read",
+        "The CPU and the memory can both place addresses on the bus"
+      ],
+      "reponse": 2,
+      "explication": "Data flows out of the CPU for a write and into the CPU for a read, so the data bus works in both directions.",
+      "piege": "Transferring on both clock edges is DDR double pumping, not what bi-directional means."
+    },
+    {
+      "id": "caos-ch3-010",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 2,
+      "question": "Why is the address bus unidirectional?",
+      "choix": [
+        "The address is always supplied by the CPU",
+        "Addresses travel only from the I/O to memory",
+        "The memory always returns the address back",
+        "It only carries read requests, never writes"
+      ],
+      "reponse": 0,
+      "explication": "The CPU always provides the address, so it flows one way: from the CPU to memory or I/O."
+    },
+    {
+      "id": "caos-ch3-011",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 2,
+      "question": "According to the course, what is a typical data bus width for a 64-bit CPU?",
+      "choix": [
+        "128 or 256 bits",
+        "64 or 128 bits",
+        "8 or 16 bits",
+        "16 or 24 bits"
+      ],
+      "reponse": 1,
+      "explication": "The data bus is typically the same as, or a multiple of, the CPU word size."
+    },
+    {
+      "id": "caos-ch3-013",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 2,
+      "question": "What typical size does the course give for the control bus?",
+      "choix": [
+        "10 to 20 lines",
+        "64 to 128 lines",
+        "16 to 24 lines",
+        "2 to 4 lines"
+      ],
+      "reponse": 0,
+      "explication": "The control bus typically has 10 to 20 lines, each with a unique purpose."
+    },
+    {
+      "id": "caos-ch3-015",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "Signals named A0, A1, A2, A3… belong to which bus?",
+      "choix": [
+        "The data bus",
+        "The control bus",
+        "The ISA bus",
+        "The address bus"
+      ],
+      "reponse": 3,
+      "explication": "A-prefixed signals are address lines."
+    },
+    {
+      "id": "caos-ch3-016",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "Signals such as /RD, /WR, CLK and /IRQ belong to which bus?",
+      "choix": [
+        "The power bus",
+        "The data bus",
+        "The address bus",
+        "The control bus"
+      ],
+      "reponse": 3,
+      "explication": "/RD (read), /WR (write), CLK (clock) and /IRQ (interrupt request) are typical control signals."
+    },
+    {
+      "id": "caos-ch3-017",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 1,
+      "question": "What does the control signal /IRQ stand for?",
+      "choix": [
+        "Interrupt request",
+        "Internal register",
+        "I/O ready query",
+        "Input read queue"
+      ],
+      "reponse": 0,
+      "explication": "/IRQ is the interrupt request line of the control bus."
+    },
+    {
+      "id": "caos-ch3-018",
+      "theme": "Ch3 · Buses and bus lines",
+      "niveau": 2,
+      "question": "In terms of direction, what are the control bus signals?",
+      "choix": [
+        "Always bi-directional, exactly like every data bus signal",
+        "Always input, because devices request actions from the CPU",
+        "Output, input or bi-directional depending on the signal",
+        "Always output, because only the CPU drives control lines"
+      ],
+      "reponse": 2,
+      "explication": "Each control signal has its own purpose, so some are outputs, some inputs and some bi-directional."
+    },
+    {
+      "id": "caos-ch3-019",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 2,
+      "question": "A processor has a k-bit address bus. How many locations can it address?",
+      "choix": [
+        "k^2",
+        "2 × k",
+        "2^k",
+        "k × n"
+      ],
+      "reponse": 2,
+      "explication": "Each extra address bit doubles the number of combinations, so k bits give 2^k addressable locations."
+    },
+    {
+      "id": "caos-ch3-020",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 1,
+      "question": "When the processor is connected to memory, which register is connected to the address bus?",
+      "choix": [
+        "MAR",
+        "MDR",
+        "PC",
+        "IR"
+      ],
+      "reponse": 0,
+      "explication": "The Memory Address Register (MAR) drives the address bus; the MDR is connected to the data bus."
+    },
+    {
+      "id": "caos-ch3-021",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 1,
+      "question": "When the processor is connected to memory, which register is connected to the data bus?",
+      "choix": [
+        "SP",
+        "MAR",
+        "MDR",
+        "ALU"
+      ],
+      "reponse": 2,
+      "explication": "The Memory Data Register (MDR) holds the data read from or written to memory via the data bus."
+    },
+    {
+      "id": "caos-ch3-022",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 2,
+      "question": "With an n-bit data bus between processor and memory, what is the word length?",
+      "choix": [
+        "n bytes",
+        "2^n bits",
+        "n bits",
+        "2n bits"
+      ],
+      "reponse": 2,
+      "explication": "The size of the MDR / data bus gives the size of each memory location, i.e. the word length."
+    },
+    {
+      "id": "caos-ch3-025",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 3,
+      "question": "A system has an 18-bit MAR and a 16-bit MDR. What is the addressable memory in bits?",
+      "choix": [
+        "8,388,608 bits",
+        "524,288 bits",
+        "2,097,152 bits",
+        "4,194,304 bits"
+      ],
+      "reponse": 3,
+      "explication": "262,144 locations × 16 bits = 4,194,304 bits (= 524,288 bytes)."
+    },
+    {
+      "id": "caos-ch3-026",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 2,
+      "question": "How many memory locations can a microprocessor using 24-bit addressing address?",
+      "choix": [
+        "8,388,608",
+        "1,048,576",
+        "16,777,216",
+        "33,554,432"
+      ],
+      "reponse": 2,
+      "explication": "2^24 = 16,777,216 locations (16 M)."
+    },
+    {
+      "id": "caos-ch3-027",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 3,
+      "question": "A system has a 20-bit address bus and an 8-bit data bus. What is its addressable memory?",
+      "choix": [
+        "2 MB",
+        "160 KB",
+        "1 MB",
+        "512 KB"
+      ],
+      "reponse": 2,
+      "explication": "2^20 = 1,048,576 locations × 1 byte = 1 MB."
+    },
+    {
+      "id": "caos-ch3-028",
+      "theme": "Ch3 · Memory addressing calculations",
+      "niveau": 3,
+      "question": "A system has a 16-bit address bus and 32-bit memory words. What is its addressable memory?",
+      "choix": [
+        "128 KB",
+        "256 KB",
+        "512 KB",
+        "64 KB"
+      ],
+      "reponse": 1,
+      "explication": "2^16 = 65,536 locations × 4 bytes = 262,144 bytes = 256 KB."
+    },
+    {
+      "id": "caos-ch3-031",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 1,
+      "question": "What characterises a point-to-point bus?",
+      "choix": [
+        "It carries signals from a specific source to a specific destination",
+        "It connects buses of different bandwidths so they can communicate",
+        "It carries signals to several destinations sharing the same lines",
+        "It links the CPU to memory cards inside the same physical package"
+      ],
+      "reponse": 0,
+      "explication": "A point-to-point bus links one specific source to one specific destination."
+    },
+    {
+      "id": "caos-ch3-033",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 1,
+      "question": "In bus terminology, what is a port?",
+      "choix": [
+        "An interface unit that connects two buses with different bandwidths",
+        "A point-to-point bus for a plug-in device such as a printer",
+        "A multipoint bus that broadcasts signals to all devices on the network",
+        "A single conductor of a bus that carries one named electrical signal"
+      ],
+      "reponse": 1,
+      "explication": "A port is a point-to-point bus intended to connect to a plug-in device, e.g. a printer."
+    },
+    {
+      "id": "caos-ch3-034",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "What usually distinguishes a multipoint (multidrop / broadcast) bus?",
+      "choix": [
+        "It needs addressing signals to identify the destination",
+        "It connects a single source to a single fixed destination",
+        "It is only used to connect a plug-in device like a printer",
+        "It can never carry data in both directions at the same time"
+      ],
+      "reponse": 0,
+      "explication": "Because signals go to several destinations, addressing signals identify the addressed one."
+    },
+    {
+      "id": "caos-ch3-036",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "What is a backplane (system/external) bus?",
+      "choix": [
+        "A bus connecting the CPU with memory and I/O cards in the same package",
+        "A bus connecting two computers placed in separate physical buildings",
+        "A bus located inside the CPU that links the ALU and its registers",
+        "A wireless link between the motherboard and external peripherals"
+      ],
+      "reponse": 0,
+      "explication": "The backplane bus connects the CPU with memory and/or I/O module cards in the same physical package."
+    },
+    {
+      "id": "caos-ch3-038",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "How can buses with different capacities (bandwidths) be connected together?",
+      "choix": [
+        "Through a port",
+        "Through the MDR",
+        "Through a bridge",
+        "Through a riser card"
+      ],
+      "reponse": 2,
+      "explication": "Modern computers have several buses; buses of different bandwidths are joined by bridges."
+    },
+    {
+      "id": "caos-ch3-039",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "Why do modern computers have more than one bus?",
+      "choix": [
+        "To avoid the use of control signals for synchronisation",
+        "To provide different levels of functionality and bandwidth",
+        "Because each device must have its own dedicated private bus",
+        "Because a single bus cannot carry any address information"
+      ],
+      "reponse": 1,
+      "explication": "A bus hierarchy separates fast and slow devices, each level offering a different functionality/bandwidth."
+    },
+    {
+      "id": "caos-ch3-040",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "In the bus hierarchy diagram, which component connects the frontside bus to main memory and the PCI bus?",
+      "choix": [
+        "The north bridge",
+        "The I/O controller",
+        "The south bridge",
+        "The ISA device"
+      ],
+      "reponse": 0,
+      "explication": "The north bridge sits on the frontside bus and links the CPU to main memory and the PCI bus."
+    },
+    {
+      "id": "caos-ch3-042",
+      "theme": "Ch3 · Bus topologies and hierarchy",
+      "niveau": 2,
+      "question": "In the bus hierarchy diagram, which bus links the CPU directly to the north bridge?",
+      "choix": [
+        "The ISA bus",
+        "The PCI bus",
+        "The expansion bus",
+        "The frontside bus"
+      ],
+      "reponse": 3,
+      "explication": "The CPU's control, address and data lines form the frontside bus going to the north bridge."
+    },
+    {
+      "id": "caos-ch3-043",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 1,
+      "question": "Which three backplane buses are listed in the course?",
+      "choix": [
+        "PCI, USB and SATA",
+        "ISA, ATX and BTX",
+        "PCI, AGP and ISA",
+        "AGP, DDR and ISA"
+      ],
+      "reponse": 2,
+      "explication": "The backplane buses studied are PCI, AGP and ISA.",
+      "piege": "ATX and BTX are motherboard form factors, not buses."
+    },
+    {
+      "id": "caos-ch3-044",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 1,
+      "question": "What does PCI stand for?",
+      "choix": [
+        "Parallel Controller Interface",
+        "Peripheral Controller Interconnection",
+        "Peripheral Component Interconnect",
+        "Peripheral Control Integration"
+      ],
+      "reponse": 2,
+      "explication": "PCI = Peripheral Component Interconnect."
+    },
+    {
+      "id": "caos-ch3-047",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 2,
+      "question": "What is a bus protocol?",
+      "choix": [
+        "A bridge that converts signals between two different bus speeds",
+        "A physical slot standard defining the size of expansion cards",
+        "A list of the devices currently connected to the system bus",
+        "A specification of the meaning of each bus line and its signals"
+      ],
+      "reponse": 3,
+      "explication": "A bus protocol delineates the meaning of each line and signal; it is an agreement on how components communicate."
+    },
+    {
+      "id": "caos-ch3-048",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 2,
+      "question": "Between how many components is a bus protocol an agreement?",
+      "choix": [
+        "Only the CPU and RAM",
+        "Two or more components",
+        "Only bridges and ports",
+        "Exactly one component"
+      ],
+      "reponse": 1,
+      "explication": "A bus protocol is an agreement between 2+ components on how they will communicate via the bus."
+    },
+    {
+      "id": "caos-ch3-049",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 2,
+      "question": "On the PCI-X timeline shown in the course, which version is the most recent (around 2005)?",
+      "choix": [
+        "PCI-X 533",
+        "PCI-X 266",
+        "PCI-X 133",
+        "PCI-X 1066"
+      ],
+      "reponse": 3,
+      "explication": "The timeline goes PCI-X 66/133 (≈1998-99), 266 and 533 (≈2002-03), then 1066 (≈2005)."
+    },
+    {
+      "id": "caos-ch3-051",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 2,
+      "question": "What do the key (notch) positions on PCI slots and adapters indicate?",
+      "choix": [
+        "The bus type, PCI or ISA or AGP",
+        "The card type, graphics or network",
+        "The clock speed, 33 MHz or 66 MHz",
+        "The supported voltage, 5 V or 3.3 V"
+      ],
+      "reponse": 3,
+      "explication": "The key position differs between 5 V and 3.3 V slots so that an adapter cannot be inserted in the wrong voltage slot."
+    },
+    {
+      "id": "caos-ch3-054",
+      "theme": "Ch3 · Backplane buses (PCI, AGP, ISA)",
+      "niveau": 3,
+      "question": "Which AGP-Pro card versions are shown in the course?",
+      "choix": [
+        "32-bit, 64-bit and 128-bit",
+        "Universal, 3.3 V and 1.5 V",
+        "1x, 2x, 4x and 8x",
+        "Universal, 5 V and 3.3 V"
+      ],
+      "reponse": 1,
+      "explication": "The AGP-Pro slide shows the AGP-Pro universal, 3.3 V and 1.5 V versions."
+    },
+    {
+      "id": "caos-ch3-057",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "Which form factor is a smaller ATX variant for compact desktops, compatible with many ATX components?",
+      "choix": [
+        "Mini-ITX",
+        "MicroATX",
+        "EATX",
+        "NLX"
+      ],
+      "reponse": 1,
+      "explication": "MicroATX is a smaller ATX variant with fewer expansion slots but enough for most users."
+    },
+    {
+      "id": "caos-ch3-059",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "What characterises the EATX form factor?",
+      "choix": [
+        "Designed by VIA for very low power small form factor systems",
+        "Built for slimline cases using riser cards for its expansion",
+        "Larger than ATX, with more features, slots and better cooling",
+        "Smaller than ATX, with fewer slots for compact desktop PCs"
+      ],
+      "reponse": 2,
+      "explication": "EATX (Extended ATX) is a larger version of ATX with extra expansion slots and more space."
+    },
+    {
+      "id": "caos-ch3-060",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "Which Intel form factor was optimised for airflow and cooling but never widely adopted?",
+      "choix": [
+        "Mini-ITX",
+        "EATX",
+        "ATX",
+        "BTX"
+      ],
+      "reponse": 3,
+      "explication": "BTX (Balanced Technology eXtended) was a potential ATX successor focused on airflow, but it didn't catch on."
+    },
+    {
+      "id": "caos-ch3-061",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "Which older form factors were used in slimline desktops with riser cards for expansion?",
+      "choix": [
+        "ATX and EATX",
+        "LPX and NLX",
+        "AT and BTX",
+        "SSI CEB and EEB"
+      ],
+      "reponse": 1,
+      "explication": "LPX and NLX were low-profile form factors using riser cards; they were replaced by MicroATX and Mini-ITX."
+    },
+    {
+      "id": "caos-ch3-062",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "Which are examples of server motherboard form factors?",
+      "choix": [
+        "AT and ATX",
+        "MicroATX and Mini-ITX",
+        "LPX and NLX slimline boards",
+        "SSI CEB and SSI EEB"
+      ],
+      "reponse": 3,
+      "explication": "SSI CEB and SSI EEB are server boards: larger, multiple CPUs, extensive RAM, enterprise reliability."
+    },
+    {
+      "id": "caos-ch3-063",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 2,
+      "question": "What distinguishes server motherboards from desktop ones?",
+      "choix": [
+        "Riser cards for expansion, designed for slimline low-profile cases",
+        "Support for multiple CPUs and extensive RAM, with higher reliability",
+        "Only a single CPU socket, but with integrated graphics and audio",
+        "A smaller size and fewer slots, to fit inside compact low-power cases"
+      ],
+      "reponse": 1,
+      "explication": "Server boards are larger, support multiple CPUs and lots of RAM, and offer enterprise-level reliability and manageability."
+    },
+    {
+      "id": "caos-ch3-065",
+      "theme": "Ch3 · Motherboard form factors",
+      "niveau": 1,
+      "question": "According to the course, how do the motherboard components communicate?",
+      "choix": [
+        "Via the system bus",
+        "Via the overlay area",
+        "Via the input queue",
+        "Via the page table"
+      ],
+      "reponse": 0,
+      "explication": "Components on the motherboard communicate through the system bus."
+    },
+    {
+      "id": "caos-ch3-067",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 1,
+      "question": "What is a multiprocessor system?",
+      "choix": [
+        "A processor that can only execute one task at a time",
+        "A single processor that runs one program after another",
+        "A system with several buses linked through bridges",
+        "A system with two or more processors working together"
+      ],
+      "reponse": 3,
+      "explication": "Multiprocessors are systems with two or more processors working together."
+    },
+    {
+      "id": "caos-ch3-071",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 2,
+      "question": "In Asymmetric Multiprocessing (AMP), how do the processors relate to each other?",
+      "choix": [
+        "Peer-to-peer: every processor has fully equal access to memory",
+        "Independent: each processor runs its own separate system",
+        "Master-slave: the master controls the system, slaves do tasks",
+        "Time-shared: each processor gets the shared bus for a fixed slice"
+      ],
+      "reponse": 2,
+      "explication": "AMP assigns specific tasks to processors in a master-slave relationship."
+    },
+    {
+      "id": "caos-ch3-072",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 2,
+      "question": "Which use cases are given for Asymmetric Multiprocessing (AMP)?",
+      "choix": [
+        "Desktop office work and home multimedia use",
+        "Cloud data centres and large-scale web servers",
+        "Embedded systems and real-time processing",
+        "Batch payroll and bank statement runs"
+      ],
+      "reponse": 2,
+      "explication": "AMP is used in embedded systems and real-time processing."
+    },
+    {
+      "id": "caos-ch3-073",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 3,
+      "question": "What are the disadvantages of AMP according to the course?",
+      "choix": [
+        "Unequal memory speeds and constant bus contention",
+        "Complex synchronisation and high hardware cost",
+        "Large internal fragmentation and slow booting",
+        "Limited scalability and a single point of failure"
+      ],
+      "reponse": 3,
+      "explication": "If the master fails, the system fails (single point of failure), and AMP scales poorly."
+    },
+    {
+      "id": "caos-ch3-074",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 2,
+      "question": "What is data parallelism?",
+      "choix": [
+        "Processing the data across multiple processors at the same time",
+        "Storing the same data in several caches to speed up access",
+        "Sending the data in both directions on the bus at the same time",
+        "Executing different tasks in parallel on multiple processors"
+      ],
+      "reponse": 0,
+      "explication": "Data parallelism splits the data across processors; task parallelism runs different tasks in parallel."
+    },
+    {
+      "id": "caos-ch3-076",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 1,
+      "question": "What does SIMD stand for?",
+      "choix": [
+        "Single Instruction, Multiple Data",
+        "Single Input, Multiple Devices",
+        "Serial Instruction, Memory Data",
+        "Shared Interface, Multiple Drives"
+      ],
+      "reponse": 0,
+      "explication": "SIMD: the same instruction is applied to multiple data points."
+    },
+    {
+      "id": "caos-ch3-077",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 2,
+      "question": "Which model executes different instructions on different data points?",
+      "choix": [
+        "SIMD",
+        "MIMD",
+        "SMP",
+        "SISD"
+      ],
+      "reponse": 1,
+      "explication": "MIMD = Multiple Instruction, Multiple Data."
+    },
+    {
+      "id": "caos-ch3-078",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 2,
+      "question": "Which challenges of parallel architectures are given in the course?",
+      "choix": [
+        "Higher fragmentation of the main memory partitions",
+        "Lower performance and reduced efficiency overall",
+        "Complexity in synchronisation and in data management",
+        "Inability to run more than one task at the same time"
+      ],
+      "reponse": 2,
+      "explication": "Benefits: performance and efficiency. Challenges: synchronisation complexity and data management."
+    },
+    {
+      "id": "caos-ch3-081",
+      "theme": "Ch3 · Multiprocessors and parallelism",
+      "niveau": 1,
+      "question": "In which fields are modern multiprocessor systems mainly applied?",
+      "choix": [
+        "Embedded sensors and basic TV remote controls",
+        "Data centres, cloud computing and HPC",
+        "Pocket calculators and simple electronic toys",
+        "Printers, scanners and keyboards"
+      ],
+      "reponse": 1,
+      "explication": "Applications: data centres, cloud computing and high-performance computing (HPC)."
+    },
+    {
+      "id": "caos-ch4-001",
+      "theme": "Ch4 · Memory types",
+      "niveau": 1,
+      "question": "According to the course, what is the length of each memory cell?",
+      "choix": [
+        "1 bit",
+        "16 bits",
+        "8 bits",
+        "4 bits"
+      ],
+      "reponse": 2,
+      "explication": "Memory is a combination of cells, and each cell is 8 bits long."
+    },
+    {
+      "id": "caos-ch4-004",
+      "theme": "Ch4 · Memory types",
+      "niveau": 2,
+      "question": "Which memories are classified as 'hybrid' in the course?",
+      "choix": [
+        "SRAM, DRAM and cache memory",
+        "HDD, SSD and magnetic tape",
+        "PROM, EPROM and virtual memory",
+        "EEPROM, NVRAM and flash memory"
+      ],
+      "reponse": 3,
+      "explication": "The hybrid category groups EEPROM, NVRAM and flash memory."
+    },
+    {
+      "id": "caos-ch4-005",
+      "theme": "Ch4 · Memory types",
+      "niveau": 1,
+      "question": "What are the two types of RAM?",
+      "choix": [
+        "SRAM and DRAM",
+        "HDD and SSD",
+        "PROM and EPROM",
+        "DDR and NVRAM"
+      ],
+      "reponse": 0,
+      "explication": "RAM is divided into static RAM (SRAM) and dynamic RAM (DRAM)."
+    },
+    {
+      "id": "caos-ch4-006",
+      "theme": "Ch4 · Memory types",
+      "niveau": 1,
+      "question": "Which two types are listed under ROM in the memory type list?",
+      "choix": [
+        "Cache and virtual",
+        "SRAM and DRAM",
+        "PROM and EPROM",
+        "NVRAM and flash"
+      ],
+      "reponse": 2,
+      "explication": "ROM: PROM and EPROM. EEPROM is listed as hybrid."
+    },
+    {
+      "id": "caos-ch4-013",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 2,
+      "question": "What access time does the course pyramid give for registers?",
+      "choix": [
+        "25 to 50 ns",
+        "1 to 2 ns",
+        "3 to 10 ns",
+        "5 to 20 ms"
+      ],
+      "reponse": 1,
+      "explication": "Registers ≈ 1-2 ns, L1 cache ≈ 3-10 ns, L2 cache ≈ 25-50 ns."
+    },
+    {
+      "id": "caos-ch4-014",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 2,
+      "question": "What access time does the course pyramid give for the L1 cache?",
+      "choix": [
+        "1 to 2 ns",
+        "3 to 10 ns",
+        "25 to 50 ns",
+        "60 to 90 ns"
+      ],
+      "reponse": 1,
+      "explication": "L1 cache ≈ 3-10 ns."
+    },
+    {
+      "id": "caos-ch4-015",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 3,
+      "question": "In the storage pyramid, how is magnetic tape in robotic libraries classified?",
+      "choix": [
+        "Online",
+        "System",
+        "Offline",
+        "Near line"
+      ],
+      "reponse": 2,
+      "explication": "Registers to main memory = system; fixed disk = online; optical jukeboxes = near line; tape libraries = offline."
+    },
+    {
+      "id": "caos-ch4-016",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 3,
+      "question": "In the storage pyramid, how is the fixed rigid disk classified?",
+      "choix": [
+        "Near line",
+        "Offline",
+        "Online",
+        "System"
+      ],
+      "reponse": 2,
+      "explication": "The fixed (hard) disk is online storage."
+    },
+    {
+      "id": "caos-ch4-017",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 3,
+      "question": "In the storage pyramid, how are optical disks in jukeboxes classified?",
+      "choix": [
+        "Offline",
+        "Near line",
+        "Online",
+        "System"
+      ],
+      "reponse": 1,
+      "explication": "Optical jukeboxes are near-line storage."
+    },
+    {
+      "id": "caos-ch4-019",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 1,
+      "question": "What are the two types of registers mentioned?",
+      "choix": [
+        "Read purpose and write purpose",
+        "Primary purpose and secondary purpose",
+        "Static purpose and dynamic purpose",
+        "General purpose and special purpose"
+      ],
+      "reponse": 3,
+      "explication": "Registers are either general purpose or special purpose."
+    },
+    {
+      "id": "caos-ch4-020",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 1,
+      "question": "Where does the cache memory reside?",
+      "choix": [
+        "Between the CPU and main memory",
+        "Inside the hard disk controller",
+        "Between main memory and the disk",
+        "Between the bridge and ISA bus"
+      ],
+      "reponse": 0,
+      "explication": "Cache sits between the CPU and main memory and stores frequently used data."
+    },
+    {
+      "id": "caos-ch4-022",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 1,
+      "question": "Which cache levels are supported by modern computer systems?",
+      "choix": [
+        "L1 to L6",
+        "Only L4",
+        "L0 and L1 only",
+        "L1, L2 and L3"
+      ],
+      "reponse": 3,
+      "explication": "Modern systems support L1, L2 and L3 caches."
+    },
+    {
+      "id": "caos-ch4-023",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 2,
+      "question": "According to the course, which memory is the only one directly accessible to the CPU, which continuously reads instructions from it?",
+      "choix": [
+        "Tertiary storage",
+        "Removable off-line storage",
+        "Primary (main) memory",
+        "Secondary (external) storage"
+      ],
+      "reponse": 2,
+      "explication": "Primary storage is the only one directly accessible: the CPU continuously reads and executes instructions stored there."
+    },
+    {
+      "id": "caos-ch4-025",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 2,
+      "question": "In what order does the CPU access main memory?",
+      "choix": [
+        "It reads the data from the cache, then sends the address to the disk",
+        "It sends the data on the data bus, then the address on the address bus",
+        "It sends the address on the address bus, then reads/writes on the data bus",
+        "It sends both the address and the data together on the control bus"
+      ],
+      "reponse": 2,
+      "explication": "First the memory address goes on the address bus, then data is read or written on the data bus."
+    },
+    {
+      "id": "caos-ch4-026",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 1,
+      "question": "What happens to data in secondary storage when the device is powered down?",
+      "choix": [
+        "It is lost, because secondary storage is volatile",
+        "It is kept only if a DRAM controller refreshes it",
+        "It is moved to the cache until the power comes back on",
+        "It is kept, because secondary storage is non-volatile"
+      ],
+      "reponse": 3,
+      "explication": "Secondary storage is non-volatile: data is not lost when powered down."
+    },
+    {
+      "id": "caos-ch4-027",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "How does the computer usually access secondary storage?",
+      "choix": [
+        "Through the cache only, without using any input/output channel at all",
+        "Through I/O channels, using an intermediate area in primary storage",
+        "Through the ROM chip, which copies the data straight into the CPU registers",
+        "Directly from the registers, without going through main memory"
+      ],
+      "reponse": 1,
+      "explication": "Secondary storage is reached via I/O channels and data transits through primary storage."
+    },
+    {
+      "id": "caos-ch4-030",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 1,
+      "question": "Which list matches the course's description of secondary storage?",
+      "choix": [
+        "Large, costly, volatile and slow",
+        "Small, costly, volatile and fast",
+        "Large, cheap, non-volatile and slow",
+        "Small, cheap, non-volatile and fast"
+      ],
+      "reponse": 2,
+      "explication": "Secondary storage is large, cheap, non-volatile and slow."
+    },
+    {
+      "id": "caos-ch4-032",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "In the secondary storage chain, how does each level relate to the level below?",
+      "choix": [
+        "It acts as a cache of data from the level below",
+        "It stores exactly the same amount of data as it",
+        "It has no link at all with the level below it",
+        "It acts as a backup of data from the level above"
+      ],
+      "reponse": 0,
+      "explication": "Each level acts as a cache for the level below (registers/L1 → L2 → primary → disk → tape)."
+    },
+    {
+      "id": "caos-ch4-033",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "Which type of access is associated with tape or optical (tertiary) storage?",
+      "choix": [
+        "Random access",
+        "Sequential access",
+        "Indexed access",
+        "Direct access"
+      ],
+      "reponse": 1,
+      "explication": "Disk storage is random access; tape/optical tertiary storage is sequential access."
+    },
+    {
+      "id": "caos-ch4-034",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "Which file allocation method is fast and simplifies directory access but causes fragmentation?",
+      "choix": [
+        "Contiguous allocation",
+        "Indexed structure",
+        "Hashed block structure",
+        "Linked structure"
+      ],
+      "reponse": 0,
+      "explication": "Contiguous allocation: fast, simple directory access, but inflexible, causes fragmentation and needs compaction."
+    },
+    {
+      "id": "caos-ch4-035",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "In which file allocation method does each block point to the next, with the directory pointing to the first?",
+      "choix": [
+        "Indexed structure",
+        "Hashed structure",
+        "Linked structure",
+        "Contiguous allocation"
+      ],
+      "reponse": 2,
+      "explication": "Linked structure: each block points to the next; good for sequential access, bad otherwise."
+    },
+    {
+      "id": "caos-ch4-036",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 2,
+      "question": "Which file allocation method uses a block containing pointers to many other blocks?",
+      "choix": [
+        "Linked structure",
+        "Indexed structure",
+        "Contiguous allocation",
+        "Overlay structure"
+      ],
+      "reponse": 1,
+      "explication": "Indexed structure: an index block holds pointers to many blocks, better for random access."
+    },
+    {
+      "id": "caos-ch4-037",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 3,
+      "question": "What is the main weakness of the linked file allocation structure?",
+      "choix": [
+        "It is poor for anything other than sequential access",
+        "It needs a full index block for each file stored on disk",
+        "It requires a full compaction after every file is deleted",
+        "It cannot store files larger than a single block"
+      ],
+      "reponse": 0,
+      "explication": "Linked allocation is good for sequential access but bad for random access."
+    },
+    {
+      "id": "caos-ch4-041",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 3,
+      "question": "Which storage characteristic distinguishes location-, file- and content-addressable storage?",
+      "choix": [
+        "Accessibility",
+        "Differentiation",
+        "Addressability",
+        "Mutability"
+      ],
+      "reponse": 2,
+      "explication": "Addressability = location-addressable, file-addressable or content-addressable."
+    },
+    {
+      "id": "caos-ch4-043",
+      "theme": "Ch4 · Secondary storage",
+      "niveau": 3,
+      "question": "Which storage characteristic indicates whether the memory is dynamic or static?",
+      "choix": [
+        "Addressability",
+        "Mutability",
+        "Differentiation",
+        "Volatility"
+      ],
+      "reponse": 2,
+      "explication": "Differentiation = dynamic random access memory or static memory."
+    },
+    {
+      "id": "caos-ch4-045",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 1,
+      "question": "What happens to SRAM contents if power is turned off?",
+      "choix": [
+        "They go to ROM",
+        "They are lost",
+        "They are kept",
+        "They are refreshed"
+      ],
+      "reponse": 1,
+      "explication": "SRAM keeps its contents only while powered; if power is lost, the contents are lost forever."
+    },
+    {
+      "id": "caos-ch4-047",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 2,
+      "question": "How is DRAM content kept alive as long as needed?",
+      "choix": [
+        "A DRAM controller refreshes the data before it expires",
+        "The data is copied to SRAM every few milliseconds",
+        "The bootstrap loader rewrites it regularly from the ROM chip",
+        "A UV light window on the chip recharges the cells periodically"
+      ],
+      "reponse": 0,
+      "explication": "The DRAM controller refreshes the data before it expires."
+    },
+    {
+      "id": "caos-ch4-048",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 2,
+      "question": "What is the primary difference between SRAM and DRAM according to the course?",
+      "choix": [
+        "The type of bus they are connected to",
+        "The lifetime of the data they store",
+        "The supply voltage they need to run on",
+        "The byte order they use"
+      ],
+      "reponse": 1,
+      "explication": "The key difference is data lifetime: SRAM keeps data while powered, DRAM loses it in ~4 ms unless refreshed."
+    },
+    {
+      "id": "caos-ch4-051",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 2,
+      "question": "How many transfers per clock can DDR2 SDRAM perform?",
+      "choix": [
+        "One",
+        "Eight",
+        "Four",
+        "Two"
+      ],
+      "reponse": 2,
+      "explication": "DDR performs two transfers per clock; DDR2 performs four.",
+      "piege": "DDR (DDR1) = 2 transfers per clock, DDR2 = 4."
+    },
+    {
+      "id": "caos-ch4-052",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 3,
+      "question": "How does DDR2 double the bandwidth compared with DDR?",
+      "choix": [
+        "Transferring data only on the rising edge of the clock",
+        "Multiplexing: I/O buffers run at a higher frequency than the cells",
+        "Using new memory cells that never need to be refreshed",
+        "Doubling the internal clock frequency of the memory cells themselves"
+      ],
+      "reponse": 1,
+      "explication": "DDR2 keeps the same cell frequency but its I/O buffers run faster and multiplex a twice-wider internal bus."
+    },
+    {
+      "id": "caos-ch4-053",
+      "theme": "Ch4 · RAM (SRAM, DRAM, DDR)",
+      "niveau": 3,
+      "question": "In DDR2, how does the bus between memory cells and I/O buffers compare to DDR?",
+      "choix": [
+        "It is twice as wide",
+        "It is half as wide",
+        "It is four times narrower",
+        "It is the same width"
+      ],
+      "reponse": 0,
+      "explication": "The internal bus from cells to buffers is twice wider than in DDR, and the buffers multiplex it."
+    },
+    {
+      "id": "caos-ch4-057",
+      "theme": "Ch4 · ROM family",
+      "niveau": 2,
+      "question": "What access time does the course give for ROM?",
+      "choix": [
+        "45 to 200 ns",
+        "45 to 90 ns",
+        "10 to 50 ns",
+        "1 to 2 ns"
+      ],
+      "reponse": 2,
+      "explication": "ROM: 10-50 ns. EPROM: 45-90 ns. EEPROM: 45-200 ns."
+    },
+    {
+      "id": "caos-ch4-059",
+      "theme": "Ch4 · ROM family",
+      "niveau": 3,
+      "question": "According to the course, what is a program for a ROM or PROM equivalent to?",
+      "choix": [
+        "A page table of logical addresses",
+        "A linked list of blocks",
+        "A single-output combinational logic gate",
+        "A multiple-output truth table"
+      ],
+      "reponse": 3,
+      "explication": "A ROM/PROM program is simply a multiple-output truth table."
+    },
+    {
+      "id": "caos-ch4-060",
+      "theme": "Ch4 · ROM family",
+      "niveau": 2,
+      "question": "What characterises a PROM?",
+      "choix": [
+        "Erased by shining ultraviolet light through a small window on top",
+        "Empty when manufactured, it can be permanently programmed by the user",
+        "Its contents are fixed when the chip is made and cannot change",
+        "Reprogrammed electrically while it is still inside the computer"
+      ],
+      "reponse": 1,
+      "explication": "PROM is blank from the factory and can be programmed once, permanently, by the user."
+    },
+    {
+      "id": "caos-ch4-061",
+      "theme": "Ch4 · ROM family",
+      "niveau": 2,
+      "question": "How is an EPROM erased?",
+      "choix": [
+        "By shining ultraviolet light through a window on the chip",
+        "By applying an electrical signal while it is in the computer",
+        "It cannot be erased once it has been programmed by the user",
+        "By removing power so the contents fade after four milliseconds"
+      ],
+      "reponse": 0,
+      "explication": "EPROM has a small window; UV light erases it. The window is then covered."
+    },
+    {
+      "id": "caos-ch4-062",
+      "theme": "Ch4 · ROM family",
+      "niveau": 2,
+      "question": "Why is the EPROM window covered after reprogramming?",
+      "choix": [
+        "To prevent the new contents from being erased",
+        "To protect the chip from electrical surges",
+        "To make the chip readable by the processor",
+        "To let the chip cool down after programming"
+      ],
+      "reponse": 0,
+      "explication": "Covering the window prevents ambient UV light from erasing the new contents."
+    },
+    {
+      "id": "caos-ch4-063",
+      "theme": "Ch4 · ROM family",
+      "niveau": 2,
+      "question": "What access time does the course give for EPROM?",
+      "choix": [
+        "45 to 200 ns",
+        "3 to 10 ns",
+        "10 to 50 ns",
+        "45 to 90 ns"
+      ],
+      "reponse": 3,
+      "explication": "EPROM access time is about 45-90 ns."
+    },
+    {
+      "id": "caos-ch4-065",
+      "theme": "Ch4 · ROM family",
+      "niveau": 3,
+      "question": "What access time does the course give for EEPROM?",
+      "choix": [
+        "45 to 200 ns",
+        "25 to 50 ns",
+        "10 to 50 ns",
+        "45 to 90 ns"
+      ],
+      "reponse": 0,
+      "explication": "EEPROM: 45-200 ns."
+    },
+    {
+      "id": "caos-ch4-068",
+      "theme": "Ch4 · Memory capacity units",
+      "niveau": 1,
+      "question": "How many bits are in a nibble?",
+      "choix": [
+        "8",
+        "2",
+        "4",
+        "16"
+      ],
+      "reponse": 2,
+      "explication": "A nibble = 4 bits (half a byte)."
+    },
+    {
+      "id": "caos-ch4-070",
+      "theme": "Ch4 · Memory capacity units",
+      "niveau": 2,
+      "question": "How many megabytes are in 2 GB?",
+      "choix": [
+        "2000",
+        "4096",
+        "1024",
+        "2048"
+      ],
+      "reponse": 3,
+      "explication": "1 GB = 1024 MB, so 2 GB = 2048 MB."
+    },
+    {
+      "id": "caos-ch4-072",
+      "theme": "Ch4 · Memory capacity units",
+      "niveau": 2,
+      "question": "How many bits are in 3 nibbles?",
+      "choix": [
+        "24",
+        "12",
+        "6",
+        "32"
+      ],
+      "reponse": 1,
+      "explication": "3 × 4 bits = 12 bits."
+    },
+    {
+      "id": "caos-ch4-073",
+      "theme": "Ch4 · Memory capacity units",
+      "niveau": 1,
+      "question": "Which unit equals 1024 terabytes?",
+      "choix": [
+        "1 exabyte",
+        "1 megabyte",
+        "1 gigabyte",
+        "1 petabyte"
+      ],
+      "reponse": 3,
+      "explication": "1 PB = 1024 TB."
+    },
+    {
+      "id": "caos-ch4-074",
+      "theme": "Ch4 · Memory capacity units",
+      "niveau": 2,
+      "question": "How many bits are in 2 KB?",
+      "choix": [
+        "8,192",
+        "16,384",
+        "16,000",
+        "2,048"
+      ],
+      "reponse": 1,
+      "explication": "2 KB = 2048 bytes × 8 = 16,384 bits."
+    },
+    {
+      "id": "caos-ch4-075",
+      "theme": "Ch4 · Endianness",
+      "niveau": 1,
+      "question": "What is endianness?",
+      "choix": [
+        "The order in which bits are sent on the serial control bus",
+        "The order in which bytes are arranged within a word in memory",
+        "The order in which cache levels are searched by the CPU",
+        "The order in which processes are loaded into partitions"
+      ],
+      "reponse": 1,
+      "explication": "Endianness is the byte order of a multi-byte value (e.g. 16- or 32-bit integer) in memory."
+    },
+    {
+      "id": "caos-ch4-077",
+      "theme": "Ch4 · Endianness",
+      "niveau": 1,
+      "question": "In little endian, which byte is stored at the smallest memory address?",
+      "choix": [
+        "The checksum byte",
+        "The least significant byte",
+        "The most significant byte",
+        "The sign byte of the whole word"
+      ],
+      "reponse": 1,
+      "explication": "Little endian: LSB at the lowest address."
+    },
+    {
+      "id": "caos-ch4-082",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "The value 0xA1B2C3D4 is stored in little endian from address 0x100. What is at 0x101?",
+      "choix": [
+        "0xB2",
+        "0xA1",
+        "0xC3",
+        "0xD4"
+      ],
+      "reponse": 2,
+      "explication": "Little endian: 0x100:D4, 0x101:C3, 0x102:B2, 0x103:A1."
+    },
+    {
+      "id": "caos-ch4-083",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "The value 0xA1B2C3D4 is stored in big endian from address 0x100. What is at 0x102?",
+      "choix": [
+        "0xB2",
+        "0x3C",
+        "0xD4",
+        "0xC3"
+      ],
+      "reponse": 3,
+      "explication": "Big endian: 0x100:A1, 0x101:B2, 0x102:C3, 0x103:D4."
+    },
+    {
+      "id": "caos-ch4-084",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "The 16-bit value 0xABCD is stored in little endian at addresses 0 and 1. What is at address 0?",
+      "choix": [
+        "0xBA",
+        "0xCD",
+        "0xDC",
+        "0xAB"
+      ],
+      "reponse": 1,
+      "explication": "Little endian stores the least significant byte (0xCD) at the lower address."
+    },
+    {
+      "id": "caos-ch4-085",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "Memory holds 0x29 at address 0, 0xA4 at 1, 0x73 at 2 and 0x65 at 3 (little endian). Which 32-bit value is stored?",
+      "choix": [
+        "0x5637A492",
+        "0x92A43756",
+        "0x29A47365",
+        "0x6573A429"
+      ],
+      "reponse": 3,
+      "explication": "In little endian the byte at the highest address is the most significant: 65 73 A4 29."
+    },
+    {
+      "id": "caos-ch4-086",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "Memory holds 0x95 at address 4, 0x6D at 5, 0xAF at 6 and 0x42 at 7 (big endian). Which 32-bit value is stored?",
+      "choix": [
+        "0x956DAF42",
+        "0x59D6FA24",
+        "0x24FAD659",
+        "0x42AF6D95"
+      ],
+      "reponse": 0,
+      "explication": "In big endian the byte at the lowest address (0x95) is the most significant."
+    },
+    {
+      "id": "caos-ch4-089",
+      "theme": "Ch4 · Endianness",
+      "niveau": 2,
+      "question": "Which systems are listed as big endian in the course?",
+      "choix": [
+        "Intel systems, RS-232 and AMD",
+        "AMD, Motorola and Intel",
+        "Motorola, IBM systems and TCP/IP",
+        "Intel systems, IBM and RS-232 links"
+      ],
+      "reponse": 2,
+      "explication": "Big endian: Motorola, IBM, TCP/IP. Little endian: Intel, RS-232, AMD."
+    },
+    {
+      "id": "caos-ch4-090",
+      "theme": "Ch4 · Endianness",
+      "niveau": 2,
+      "question": "Which systems are listed as little endian in the course?",
+      "choix": [
+        "Motorola, IBM systems and TCP/IP",
+        "Intel systems, RS-232 and AMD",
+        "IBM, TCP/IP and AMD",
+        "Motorola, Intel and IBM"
+      ],
+      "reponse": 1,
+      "explication": "Little endian: Intel, RS-232, AMD."
+    },
+    {
+      "id": "caos-ch4-091",
+      "theme": "Ch4 · Endianness",
+      "niveau": 3,
+      "question": "Which examples of systems supporting both endiannesses are given?",
+      "choix": [
+        "Intel x86 and AMD Epyc processors",
+        "IBM systems and TCP/IP networks",
+        "Motorola PowerPC and SGI MIPS",
+        "VxWorks and FreeRTOS systems"
+      ],
+      "reponse": 2,
+      "explication": "Some systems are bi-endian, e.g. Motorola PowerPC and SGI MIPS."
+    },
+    {
+      "id": "caos-ch4-092",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 2,
+      "question": "Which statement is one of the fundamental properties summarised in the course?",
+      "choix": [
+        "Well-written programs tend to avoid any locality of reference",
+        "Fast storage technologies cost more per byte and have less capacity",
+        "Slow storage technologies cost more per byte and have more capacity",
+        "The gap between CPU and main memory speed is closing every year"
+      ],
+      "reponse": 1,
+      "explication": "Fast storage costs more per byte with less capacity; the CPU-memory gap is widening; good programs exhibit locality."
+    },
+    {
+      "id": "caos-ch4-093",
+      "theme": "Ch4 · Memory hierarchy",
+      "niveau": 3,
+      "question": "What does the course say about the gap between CPU speed and main memory speed?",
+      "choix": [
+        "It is closing",
+        "It is widening",
+        "It has vanished",
+        "It is constant"
+      ],
+      "reponse": 1,
+      "explication": "The CPU-memory speed gap is widening, which motivates the memory hierarchy."
+    },
+    {
+      "id": "caos-ch5-002",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 1,
+      "question": "Besides being an interface, what is the OS responsible for?",
+      "choix": [
+        "Manufacturing the hardware components of the computer system",
+        "Writing the application programs used by the end users",
+        "Managing and coordinating activities and sharing the resources",
+        "Storing the bootstrap loader permanently in the ROM chip"
+      ],
+      "reponse": 2,
+      "explication": "The OS manages and coordinates activities and the sharing of the computer's resources."
+    },
+    {
+      "id": "caos-ch5-004",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 1,
+      "question": "In the user/application/OS/hardware diagram, which layer sits directly above the hardware?",
+      "choix": [
+        "The command interpreter",
+        "The application",
+        "The operating system",
+        "The end user"
+      ],
+      "reponse": 2,
+      "explication": "Order from top: user → application → operating system → hardware."
+    },
+    {
+      "id": "caos-ch5-005",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 2,
+      "question": "In the layers of a computer system, who works directly on the operating-system layer?",
+      "choix": [
+        "The end user",
+        "The operating-system designer",
+        "The application software programmer",
+        "The computer hardware manufacturer"
+      ],
+      "reponse": 1,
+      "explication": "End users use applications, programmers write applications/utilities, OS designers design the OS."
+    },
+    {
+      "id": "caos-ch5-006",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 2,
+      "question": "In the components of a computer system, where do compilers, editors and command interpreters belong?",
+      "choix": [
+        "System programs",
+        "Microprogramming",
+        "Application programs",
+        "Physical devices"
+      ],
+      "reponse": 0,
+      "explication": "Compilers, editors and command interpreters are system programs, which sit above the OS."
+    },
+    {
+      "id": "caos-ch5-007",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 2,
+      "question": "In the components of a computer system, which items are application programs?",
+      "choix": [
+        "Games, Microsoft Word and an accounting application",
+        "Compilers, editors and command interpreters",
+        "Process management, memory management and file systems",
+        "Machine language, microprogramming and physical devices"
+      ],
+      "reponse": 0,
+      "explication": "Games, Word and accounting software are application programs."
+    },
+    {
+      "id": "caos-ch5-008",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 3,
+      "question": "Which layers make up the hardware part in the components of a computer system?",
+      "choix": [
+        "Machine language, microprogramming and physical devices",
+        "Compilers, text editors and the shell command interpreters",
+        "Application programs and the operating system",
+        "Games, Microsoft Word and the USB accounting application"
+      ],
+      "reponse": 0,
+      "explication": "Hardware = machine language, microprogramming and physical devices."
+    },
+    {
+      "id": "caos-ch5-009",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 1,
+      "question": "What is a single-user system?",
+      "choix": [
+        "A system used by one company at the most",
+        "A system that has only one hardware device",
+        "A system that runs one process per second",
+        "A system that supports one user at a time"
+      ],
+      "reponse": 3,
+      "explication": "A single-user system supports one user at a time."
+    },
+    {
+      "id": "caos-ch5-010",
+      "theme": "Ch5 · OS definition and layers",
+      "niveau": 1,
+      "question": "What are system programs?",
+      "choix": [
+        "Games and office applications sold to the public",
+        "Programs written by end users for their own daily work",
+        "Programs that run only inside the hardware chips themselves",
+        "Programs that manage the operations of a computer"
+      ],
+      "reponse": 3,
+      "explication": "System programs manage the operations of the computer."
+    },
+    {
+      "id": "caos-ch5-011",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 1,
+      "question": "Which OS function handles creation, scheduling, termination and synchronisation of processes?",
+      "choix": [
+        "File system management",
+        "Device management",
+        "Memory management",
+        "Process management"
+      ],
+      "reponse": 3,
+      "explication": "Process management also handles deadlocks and inter-process communication."
+    },
+    {
+      "id": "caos-ch5-012",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 2,
+      "question": "Which OS function deals with deadlock management?",
+      "choix": [
+        "Memory management",
+        "Security management",
+        "Process management",
+        "User interface management"
+      ],
+      "reponse": 2,
+      "explication": "Deadlock handling and process communication are part of process management."
+    },
+    {
+      "id": "caos-ch5-015",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 1,
+      "question": "Which OS function lets applications create, read, update and delete files?",
+      "choix": [
+        "Process management",
+        "Memory management",
+        "Device driver management",
+        "File system management"
+      ],
+      "reponse": 3,
+      "explication": "File system management provides CRUD operations on files."
+    },
+    {
+      "id": "caos-ch5-016",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 1,
+      "question": "Through what does the OS manage communication with devices?",
+      "choix": [
+        "Their respective drivers",
+        "The bootstrap loader program",
+        "The overlay area",
+        "The base relocation register"
+      ],
+      "reponse": 0,
+      "explication": "Device management works through device drivers."
+    },
+    {
+      "id": "caos-ch5-017",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 2,
+      "question": "Which OS function translates user input into appropriate commands for devices?",
+      "choix": [
+        "File system management",
+        "Device management",
+        "Process management",
+        "Memory management"
+      ],
+      "reponse": 1,
+      "explication": "Device management translates input into device commands and manages data sent to/from devices."
+    },
+    {
+      "id": "caos-ch5-018",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 1,
+      "question": "Which OS function prevents unauthorised access to system resources and data?",
+      "choix": [
+        "Memory and swap space management",
+        "Device management",
+        "Security and access control",
+        "Program execution and termination"
+      ],
+      "reponse": 2,
+      "explication": "Security and access control controls who can do what with the system."
+    },
+    {
+      "id": "caos-ch5-019",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 1,
+      "question": "What two forms can the OS user interface take?",
+      "choix": [
+        "Batch-based or real-time-based",
+        "Primary storage or secondary storage",
+        "Static or dynamic",
+        "Command-line or graphical"
+      ],
+      "reponse": 3,
+      "explication": "The OS provides a command-line based or graphical user interface."
+    },
+    {
+      "id": "caos-ch5-020",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 2,
+      "question": "Which OS service loads a program into memory, runs it and terminates it normally or abnormally?",
+      "choix": [
+        "Communication",
+        "Error detection",
+        "Input-output operations",
+        "Program execution"
+      ],
+      "reponse": 3,
+      "explication": "Program execution: load, run, terminate (normally or abnormally)."
+    },
+    {
+      "id": "caos-ch5-021",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 2,
+      "question": "Which OS service manages shared memory or message passing between processes?",
+      "choix": [
+        "Communication",
+        "Program execution",
+        "Error detection",
+        "File manipulation"
+      ],
+      "reponse": 0,
+      "explication": "Communication exchanges information between processes via shared memory or message passing."
+    },
+    {
+      "id": "caos-ch5-022",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 2,
+      "question": "Which OS service takes measures to correct errors to ensure a consistent state?",
+      "choix": [
+        "Error detection",
+        "I/O operations",
+        "Communication",
+        "Program execution"
+      ],
+      "reponse": 0,
+      "explication": "Error detection detects and corrects errors to keep the system consistent."
+    },
+    {
+      "id": "caos-ch5-024",
+      "theme": "Ch5 · OS core functions and services",
+      "niveau": 3,
+      "question": "Which is NOT one of the five OS services listed in the course?",
+      "choix": [
+        "Memory compaction",
+        "Communication",
+        "Error detection",
+        "Program execution"
+      ],
+      "reponse": 0,
+      "explication": "The five services: program execution, I/O operations, file system manipulation, communication, error detection."
+    },
+    {
+      "id": "caos-ch5-026",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 1,
+      "question": "What did first-generation computers (1940s-1950s) use?",
+      "choix": [
+        "Vacuum tubes and plugboards",
+        "Transistors and batch systems",
+        "Integrated circuits",
+        "Microprocessors and PCs"
+      ],
+      "reponse": 0,
+      "explication": "First generation: vacuum tubes and plugboards, with no operating system."
+    },
+    {
+      "id": "caos-ch5-027",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "How was a first-generation computer used, given that it had no OS?",
+      "choix": [
+        "Many users shared it at the same time through terminals",
+        "Jobs were grouped in batches and run from input queues",
+        "Several programs were kept in its memory simultaneously",
+        "Each user had sole use of the machine for a set period"
+      ],
+      "reponse": 3,
+      "explication": "With no OS, each user had sole use of the machine for a set period of time."
+    },
+    {
+      "id": "caos-ch5-028",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 1,
+      "question": "Which technology characterised the second generation (late 1950s-1960s)?",
+      "choix": [
+        "Microprocessors and personal computers",
+        "Transistors and batch systems",
+        "Integrated circuits only",
+        "Vacuum tubes and wired plugboards"
+      ],
+      "reponse": 1,
+      "explication": "Transistors replaced vacuum tubes; OSs were introduced, mostly batch systems."
+    },
+    {
+      "id": "caos-ch5-030",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "Which technology defined the third generation (1965-1980)?",
+      "choix": [
+        "Transistors and batch systems",
+        "Vacuum tubes and plugboards",
+        "Integrated circuits and multiprogramming",
+        "Microprocessors and the personal computers"
+      ],
+      "reponse": 2,
+      "explication": "Third generation: integrated circuits and multiprogramming (MULTICS, Unix, OS/360)."
+    },
+    {
+      "id": "caos-ch5-032",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "Which operating systems belong to the second generation in the course table?",
+      "choix": [
+        "Batch Monitor, FMS and IBSYS",
+        "MS-DOS, MVS and VMS",
+        "Linux, macOS and Android",
+        "MULTICS, Unix and IBM's OS/360"
+      ],
+      "reponse": 0,
+      "explication": "Second generation (1955-1965): IBM's Batch Monitor, FMS (Fortran Monitor System), IBSYS."
+    },
+    {
+      "id": "caos-ch5-033",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "What does FMS stand for in the second-generation OS list?",
+      "choix": [
+        "Fortran Monitor System",
+        "Fast Multitask Supervisor",
+        "File Management System",
+        "Fixed Memory Scheduler"
+      ],
+      "reponse": 0,
+      "explication": "FMS = Fortran Monitor System."
+    },
+    {
+      "id": "caos-ch5-035",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "Which operating systems are associated with the fourth generation?",
+      "choix": [
+        "MS-DOS, UNIX, MVS, VMS and Mac OS",
+        "FMS, IBM's Batch Monitor and IBSYS",
+        "Windows, Linux, macOS, Android and iOS",
+        "MULTICS, OS/360 and IBSYS"
+      ],
+      "reponse": 0,
+      "explication": "Fourth generation OS examples: UNIX, MS-DOS, IBM MVS, VMS, Mac OS."
+    },
+    {
+      "id": "caos-ch5-036",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "What mainly influenced fifth-generation (1990s-present) operating systems?",
+      "choix": [
+        "The replacement of transistors by relays",
+        "The invention of the vacuum tube and plugboard",
+        "The introduction of punched-card batch jobs",
+        "The rise of the internet and network computing"
+      ],
+      "reponse": 3,
+      "explication": "The internet and network computing shaped Windows, Linux, macOS, etc."
+    },
+    {
+      "id": "caos-ch5-038",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "Which language is the only one listed for the first generation (1945-1955)?",
+      "choix": [
+        "Fortran",
+        "Assembly",
+        "COBOL",
+        "C"
+      ],
+      "reponse": 1,
+      "explication": "First generation: assembly only, and no OS."
+    },
+    {
+      "id": "caos-ch5-039",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 2,
+      "question": "Which languages are listed for the fifth generation?",
+      "choix": [
+        "C, C++, Java, Python, Ruby, Go",
+        "C, Pascal, Ada and Assembly language",
+        "Fortran, ALGOL and Pascal",
+        "Assembly language, Fortran and COBOL"
+      ],
+      "reponse": 0,
+      "explication": "Fifth generation languages: C, C++, Java, Python, Ruby, Go."
+    },
+    {
+      "id": "caos-ch5-040",
+      "theme": "Ch5 · History of operating systems",
+      "niveau": 3,
+      "question": "Which languages are listed for the second generation (1955-1965)?",
+      "choix": [
+        "C, Pascal and Ada",
+        "C, C++, Java, Python and Ruby",
+        "Assembly, Fortran and COBOL",
+        "Assembly only"
+      ],
+      "reponse": 2,
+      "explication": "Second generation: assembly, Fortran, COBOL."
+    },
+    {
+      "id": "caos-ch5-041",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 1,
+      "question": "Which OS type allows simultaneous execution of multiple programs on a single processor?",
+      "choix": [
+        "Multitasking OS",
+        "Multiprocessing OS",
+        "Single-user OS",
+        "Batch OS"
+      ],
+      "reponse": 0,
+      "explication": "A multitasking OS gives each process a share of processor time on a single processor.",
+      "piege": "Multiprocessing means more than one processing unit."
+    },
+    {
+      "id": "caos-ch5-042",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "How does a multitasking OS run several programs on one processor?",
+      "choix": [
+        "It assigns each process to a different physical processor",
+        "It loads only one program into memory at any given time",
+        "It gives each process a certain amount of processor time",
+        "It runs each job to the end before starting the next one"
+      ],
+      "reponse": 2,
+      "explication": "Each process gets a slice of processor time, with priorities and an order of execution."
+    },
+    {
+      "id": "caos-ch5-043",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "Which examples of multitasking OS are given?",
+      "choix": [
+        "VxWorks, FreeRTOS, QNX and Embedded Linux",
+        "MULTICS, FMS and IBSYS",
+        "macOS X, Windows 2000, OS/390 and Linux",
+        "Payroll systems and monthly bank statements"
+      ],
+      "reponse": 2,
+      "explication": "Multitasking examples: macOS X, Microsoft Windows 2000, IBM OS/390, Linux."
+    },
+    {
+      "id": "caos-ch5-044",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 1,
+      "question": "Which OS type enables multiple simultaneous users and executes programs bit by bit?",
+      "choix": [
+        "Real-time OS",
+        "Batch OS",
+        "Time-sharing OS",
+        "Single-user OS"
+      ],
+      "reponse": 2,
+      "explication": "Time-sharing OS: multiple simultaneous users, shared resources, programs executed bit by bit."
+    },
+    {
+      "id": "caos-ch5-045",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "Which examples of time-sharing OS are given?",
+      "choix": [
+        "MS-DOS and CP/M",
+        "Payroll and billing",
+        "Multics and Unix",
+        "VxWorks and QNX"
+      ],
+      "reponse": 2,
+      "explication": "Time-sharing examples: Multics, Unix."
+    },
+    {
+      "id": "caos-ch5-046",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 1,
+      "question": "Which OS type is designed to respond within a certain period of time?",
+      "choix": [
+        "Batch OS",
+        "Real-time OS",
+        "Multi-user OS",
+        "Time-sharing OS"
+      ],
+      "reponse": 1,
+      "explication": "A real-time OS must respond within a given time limit."
+    },
+    {
+      "id": "caos-ch5-047",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "Which application is an example of a real-time OS use in the course?",
+      "choix": [
+        "Monthly payroll batch processing",
+        "Office word processing",
+        "Monthly bank statement printing runs",
+        "Air traffic control systems"
+      ],
+      "reponse": 3,
+      "explication": "Real-time examples: scientific experiments, medical imaging, industrial control, weapons, robots, air traffic control."
+    },
+    {
+      "id": "caos-ch5-048",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "Which OS type allows more than one active user program to be stored in main memory simultaneously?",
+      "choix": [
+        "Multiprogramming OS",
+        "Batch OS",
+        "Real-time OS",
+        "Single-user desktop OS"
+      ],
+      "reponse": 0,
+      "explication": "Multiprogramming keeps several active programs in main memory at once (e.g. Windows, UNIX)."
+    },
+    {
+      "id": "caos-ch5-050",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "Which examples of multiprocessing OS are given?",
+      "choix": [
+        "Payroll systems and bank statements",
+        "VxWorks, FreeRTOS and Embedded Linux",
+        "Multics and the early batch monitors",
+        "Windows NT, 2000, XP and Unix"
+      ],
+      "reponse": 3,
+      "explication": "Multiprocessing examples: Windows NT, 2000, XP, Unix."
+    },
+    {
+      "id": "caos-ch5-052",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "For which kind of work is a batch OS good?",
+      "choix": [
+        "Running in small embedded consumer devices",
+        "Processing large numbers of repetitive jobs",
+        "Serving many interactive users at the same time",
+        "Responding to events within strict deadlines"
+      ],
+      "reponse": 1,
+      "explication": "Batch systems suit large numbers of repetitive jobs, e.g. payroll, bank statements."
+    },
+    {
+      "id": "caos-ch5-054",
+      "theme": "Ch5 · Classifications of OS",
+      "niveau": 2,
+      "question": "In a batch OS, where are batches placed before they run?",
+      "choix": [
+        "In the L1 cache",
+        "In the ROM chip",
+        "In the overlay area",
+        "On input queues"
+      ],
+      "reponse": 3,
+      "explication": "Users submit jobs centrally; batches are placed on input queues where they run."
+    },
+    {
+      "id": "caos-ch5-056",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 1,
+      "question": "How is a real-time operating system (RTOS) defined in the course?",
+      "choix": [
+        "An OS that groups jobs into batches and runs them one after another",
+        "An OS that processes data as it comes in, typically for embedded uses",
+        "An OS that runs only on servers with several Intel Xeon processors",
+        "An OS that lets many users share one computer through terminals"
+      ],
+      "reponse": 1,
+      "explication": "An RTOS processes data as it comes in, typically for embedded applications."
+    },
+    {
+      "id": "caos-ch5-057",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 2,
+      "question": "What are the key characteristics of an RTOS?",
+      "choix": [
+        "Large memory footprint and graphical interfaces",
+        "Deterministic response times and high reliability",
+        "Many simultaneous users and bit-by-bit execution",
+        "Batch processing and no interrupts at any time"
+      ],
+      "reponse": 1,
+      "explication": "RTOS: deterministic response times and high reliability."
+    },
+    {
+      "id": "caos-ch5-058",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 1,
+      "question": "Which are examples of real-time operating systems?",
+      "choix": [
+        "MS-DOS and VMS",
+        "Multics and Unix",
+        "Embedded Linux and QNX",
+        "VxWorks and FreeRTOS"
+      ],
+      "reponse": 3,
+      "explication": "RTOS examples: VxWorks, FreeRTOS. Embedded OS examples: Embedded Linux, QNX."
+    },
+    {
+      "id": "caos-ch5-059",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 2,
+      "question": "Which use cases are given for RTOS?",
+      "choix": [
+        "Consumer electronics and home medical devices",
+        "Data centres and cloud computing",
+        "Industrial automation and automotive systems",
+        "Payroll processing and monthly bank statements"
+      ],
+      "reponse": 2,
+      "explication": "RTOS use cases: industrial automation, automotive systems."
+    },
+    {
+      "id": "caos-ch5-060",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 1,
+      "question": "Which are examples of embedded operating systems in the course?",
+      "choix": [
+        "Multics and Unix",
+        "VxWorks and FreeRTOS",
+        "Windows NT, 2000 and XP",
+        "Embedded Linux and QNX"
+      ],
+      "reponse": 3,
+      "explication": "Embedded OS examples: Embedded Linux, QNX."
+    },
+    {
+      "id": "caos-ch5-061",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 2,
+      "question": "What characterises an embedded operating system?",
+      "choix": [
+        "Designed to serve many users at once through remote terminals",
+        "Large, general-purpose and portable to any hardware",
+        "Built to process large repetitive jobs collected in batches",
+        "Compact, efficient and specialised for specific hardware"
+      ],
+      "reponse": 3,
+      "explication": "Embedded OSs are compact, efficient and specialised for specific hardware."
+    },
+    {
+      "id": "caos-ch5-064",
+      "theme": "Ch5 · Real-time and embedded OS",
+      "niveau": 1,
+      "question": "Which future trends for operating systems are given in the course?",
+      "choix": [
+        "Security, AI integration, cloud computing, IoT support",
+        "Single-user use, no networking and command lines only",
+        "Plugboards, vacuum tubes, batch jobs and punched cards",
+        "Fixed partitions, overlays, ISA buses and AGP slots"
+      ],
+      "reponse": 0,
+      "explication": "Future trends: increased focus on security, AI integration, cloud computing and IoT support."
+    },
+    {
+      "id": "caos-ch6-001",
+      "theme": "Ch6 · Memory management basics",
+      "niveau": 1,
+      "question": "Why does memory need to be shared?",
+      "choix": [
+        "So that the CPU can bypass the cache completely",
+        "So that ROM contents can be rewritten by users",
+        "So that several processes can be in memory at once",
+        "So that only one process can run at any time"
+      ],
+      "reponse": 2,
+      "explication": "For several processes to be in memory, memory needs to be shared."
+    },
+    {
+      "id": "caos-ch6-003",
+      "theme": "Ch6 · Memory management basics",
+      "niveau": 2,
+      "question": "What are the two goals of memory management?",
+      "choix": [
+        "Give each process its own CPU, and avoid using any memory partitions",
+        "Make every program run from ROM, and minimise the number of system buses",
+        "Make it simple for programs to find space, and maximise memory use",
+        "Store all data on disk, and keep the memory completely empty"
+      ],
+      "reponse": 2,
+      "explication": "Goals: make it as simple as possible for programs to find space to load/execute, and maximise memory usage to reduce waste."
+    },
+    {
+      "id": "caos-ch6-004",
+      "theme": "Ch6 · Memory management basics",
+      "niveau": 1,
+      "question": "What is the memory manager responsible for?",
+      "choix": [
+        "Translating user input into commands for the hardware devices",
+        "Deciding which bytes of a word go at the lowest address",
+        "Tracking which parts of memory are in use and which are not",
+        "Refreshing the DRAM cells before their contents expire"
+      ],
+      "reponse": 2,
+      "explication": "The memory manager keeps track of used and free parts of memory so they can be allocated and deallocated."
+    },
+    {
+      "id": "caos-ch6-005",
+      "theme": "Ch6 · Memory management basics",
+      "niveau": 1,
+      "question": "Which three memory management techniques are covered in the course?",
+      "choix": [
+        "Single tasking with overlay, fixed and variable partitioning",
+        "Paging, segmentation and demand paging with a TLB address cache",
+        "First fit, best fit and worst fit placement policies",
+        "Contiguous, linked and indexed file allocation on the disk"
+      ],
+      "reponse": 0,
+      "explication": "The three techniques: single tasking with overlay, fixed partitioning, variable partitioning.",
+      "piege": "First/best/worst fit are allocation algorithms used inside variable partitioning."
+    },
+    {
+      "id": "caos-ch6-006",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 1,
+      "question": "What is a logical address?",
+      "choix": [
+        "An address seen by the memory unit",
+        "An address permanently stored in the ROM",
+        "An address generated by the CPU",
+        "An address of a disk block"
+      ],
+      "reponse": 2,
+      "explication": "Logical address = generated by the CPU. Physical address = seen by the memory unit."
+    },
+    {
+      "id": "caos-ch6-008",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 2,
+      "question": "Into which register is the physical address loaded?",
+      "choix": [
+        "The memory address register",
+        "The current instruction register",
+        "The memory data register",
+        "The base relocation register"
+      ],
+      "reponse": 0,
+      "explication": "The physical address is loaded into the memory address register (MAR)."
+    },
+    {
+      "id": "caos-ch6-009",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 2,
+      "question": "Which hardware unit translates logical addresses into physical addresses?",
+      "choix": [
+        "The memory management unit",
+        "The north bridge chipset",
+        "The DRAM refresh controller",
+        "The arithmetic logic unit"
+      ],
+      "reponse": 0,
+      "explication": "The MMU (memory manager) maps the CPU's logical addresses to physical addresses."
+    },
+    {
+      "id": "caos-ch6-010",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 2,
+      "question": "In the MMU diagram, how is the physical address obtained?",
+      "choix": [
+        "By subtracting the logical address from the relocation register",
+        "By adding the relocation register to the logical address",
+        "By copying the logical address unchanged into the memory",
+        "By multiplying the logical address by the relocation register"
+      ],
+      "reponse": 1,
+      "explication": "Physical address = relocation register + logical address."
+    },
+    {
+      "id": "caos-ch6-011",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 2,
+      "question": "The relocation register holds 14000 and the CPU generates logical address 356. What is the physical address?",
+      "choix": [
+        "14000",
+        "13644",
+        "17560",
+        "14356"
+      ],
+      "reponse": 3,
+      "explication": "14000 + 356 = 14356."
+    },
+    {
+      "id": "caos-ch6-012",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 3,
+      "question": "The relocation register holds 12000 and the CPU generates logical address 450. What is the physical address?",
+      "choix": [
+        "12045",
+        "11550",
+        "16500",
+        "12450"
+      ],
+      "reponse": 3,
+      "explication": "12000 + 450 = 12450."
+    },
+    {
+      "id": "caos-ch6-013",
+      "theme": "Ch6 · Logical and physical addresses",
+      "niveau": 3,
+      "question": "The relocation register holds 20000 and the physical address is 20500. What was the logical address?",
+      "choix": [
+        "250",
+        "500",
+        "20500",
+        "40500"
+      ],
+      "reponse": 1,
+      "explication": "Logical = physical − relocation = 20500 − 20000 = 500."
+    },
+    {
+      "id": "caos-ch6-014",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 1,
+      "question": "What does single tasking with overlay allow?",
+      "choix": [
+        "The memory to be split into equal fixed-size partitions",
+        "Free memory spaces to be shuffled into one large block",
+        "Several processes to run on several processors at once",
+        "A process to be larger than the size of physical memory"
+      ],
+      "reponse": 3,
+      "explication": "Overlays let a process larger than physical memory run, by keeping only what is needed in memory."
+    },
+    {
+      "id": "caos-ch6-015",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 1,
+      "question": "With overlays, what is kept in memory at any given time?",
+      "choix": [
+        "Only the instructions and data needed at that time",
+        "Only the data, while instructions stay on the disk",
+        "All instructions and data of every waiting process",
+        "Only the operating system and none of the program"
+      ],
+      "reponse": 0,
+      "explication": "Only the instructions and data needed at a given time are kept in memory."
+    },
+    {
+      "id": "caos-ch6-016",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 2,
+      "question": "With overlays, where are newly needed instructions loaded?",
+      "choix": [
+        "Into the ROM chip, which is reprogrammed for each step",
+        "Into a new partition created at the end of the memory",
+        "Into the cache, which then replaces the main memory",
+        "Into the space occupied by instructions no longer needed"
+      ],
+      "reponse": 3,
+      "explication": "New instructions are loaded into the space previously occupied by instructions that are no longer needed."
+    },
+    {
+      "id": "caos-ch6-017",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 2,
+      "question": "In the overlay diagram, what must remain in memory for the whole program execution?",
+      "choix": [
+        "Overlay 1",
+        "Overlay 3",
+        "The free space area",
+        "The resident code"
+      ],
+      "reponse": 3,
+      "explication": "The resident code must stay in memory for the duration of execution; overlays are loaded into the overlay area when required."
+    },
+    {
+      "id": "caos-ch6-018",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 2,
+      "question": "In the overlay diagram, where are the overlays loaded when required by the program?",
+      "choix": [
+        "Into the processor's L2 cache",
+        "Into the overlay area",
+        "Into the job input queue",
+        "Into the OS area"
+      ],
+      "reponse": 1,
+      "explication": "Overlays are loaded into the overlay area when the program needs them."
+    },
+    {
+      "id": "caos-ch6-019",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 3,
+      "question": "What is the main disadvantage of single tasking with overlay?",
+      "choix": [
+        "A process can never be larger than the physical memory installed",
+        "A process cannot use more memory even when more becomes available",
+        "Compaction must be run after each overlay has been loaded",
+        "Several processes must share the overlay area at the same time"
+      ],
+      "reponse": 1,
+      "explication": "Overlays are designed around a given amount of memory, so extra memory cannot be exploited."
+    },
+    {
+      "id": "caos-ch6-021",
+      "theme": "Ch6 · Single tasking with overlay",
+      "niveau": 3,
+      "question": "A program has a 100-byte main program, a 50-byte data area and overlays of 100, 50 and 25 bytes. How much memory do the overlays save compared with loading everything?",
+      "choix": [
+        "175 bytes",
+        "75 bytes",
+        "25 bytes",
+        "125 bytes"
+      ],
+      "reponse": 1,
+      "explication": "Everything = 325 bytes; with overlays = 250 bytes; saving = 75 bytes."
+    },
+    {
+      "id": "caos-ch6-022",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 1,
+      "question": "According to the course, what is the simplest form of memory management?",
+      "choix": [
+        "Using virtual memory with full demand paging",
+        "Compacting the whole memory continuously after each job",
+        "Using overlays for every program",
+        "Dividing the memory space into partitions"
+      ],
+      "reponse": 3,
+      "explication": "Dividing memory into partitions is the simplest form of memory management."
+    },
+    {
+      "id": "caos-ch6-023",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 1,
+      "question": "In fixed partitioning, how many processes can a partition contain?",
+      "choix": [
+        "Exactly one",
+        "Any number",
+        "Up to two",
+        "None at all"
+      ],
+      "reponse": 0,
+      "explication": "Each partition may contain exactly one process."
+    },
+    {
+      "id": "caos-ch6-024",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 2,
+      "question": "In fixed partitioning, what bounds the degree of multiprogramming?",
+      "choix": [
+        "The number of partitions",
+        "The width of the data bus",
+        "The speed of the disk",
+        "The size of the cache"
+      ],
+      "reponse": 0,
+      "explication": "Since each partition holds one process, the number of partitions limits how many processes are in memory."
+    },
+    {
+      "id": "caos-ch6-025",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 2,
+      "question": "In fixed partitioning, what happens when a partition becomes free?",
+      "choix": [
+        "The partition is resized to fit the next waiting process exactly",
+        "The partition is merged with its neighbouring partitions by compaction",
+        "The partition stays empty until the system is rebooted",
+        "A process is selected from the input queue and loaded into it"
+      ],
+      "reponse": 3,
+      "explication": "When a partition is free, a process is selected from the input queue and loaded into it."
+    },
+    {
+      "id": "caos-ch6-026",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 2,
+      "question": "In fixed partitioning, can partitions have different sizes?",
+      "choix": [
+        "Yes, they can be of equal size or of different sizes",
+        "No, all partitions must always be exactly 8 MB each",
+        "Yes, but only if compaction is run beforehand",
+        "No, every partition must be the size of the OS area"
+      ],
+      "reponse": 0,
+      "explication": "The course shows both equal 8 MB partitions and unequal ones (4, 2, 3, 6 MB)."
+    },
+    {
+      "id": "caos-ch6-028",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 2,
+      "question": "Fixed partitions of 4, 2, 3 and 6 MB are available. Which is the largest process that can be loaded?",
+      "choix": [
+        "4 MB",
+        "9 MB",
+        "15 MB",
+        "6 MB"
+      ],
+      "reponse": 3,
+      "explication": "A process must fit in a single partition, so the largest is 6 MB.",
+      "piege": "Free partitions cannot be combined to hold one process."
+    },
+    {
+      "id": "caos-ch6-029",
+      "theme": "Ch6 · Fixed partitioning",
+      "niveau": 2,
+      "question": "What happens to the partition when a process terminates in fixed partitioning?",
+      "choix": [
+        "It becomes available for another process",
+        "It is permanently removed from the main memory",
+        "It is moved out to the secondary storage device",
+        "It is merged with the OS partition"
+      ],
+      "reponse": 0,
+      "explication": "When a process terminates, its partition becomes available for another process."
+    },
+    {
+      "id": "caos-ch6-030",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 1,
+      "question": "In variable partitioning, what is done when a process arrives and needs memory?",
+      "choix": [
+        "The process waits until all other processes finish",
+        "The process is split into overlays loaded one by one",
+        "A fixed partition is chosen from a predefined list",
+        "A large enough free space is searched for this process"
+      ],
+      "reponse": 3,
+      "explication": "The system searches for a space large enough and loads the process where space is available."
+    },
+    {
+      "id": "caos-ch6-031",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 1,
+      "question": "Which algorithms are used to place processes in variable partitioning?",
+      "choix": [
+        "First fit, best fit and worst fit",
+        "Round robin and SJF",
+        "Contiguous, linked and indexed allocation",
+        "FIFO, LRU and optimal page replacement"
+      ],
+      "reponse": 0,
+      "explication": "Processes are loaded using first fit, best fit or worst fit."
+    },
+    {
+      "id": "caos-ch6-032",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 1,
+      "question": "What does the first-fit algorithm do?",
+      "choix": [
+        "Allocates the largest available space in the whole memory",
+        "Allocates the first available space that fits the process",
+        "Allocates the smallest available space that fits the process",
+        "Allocates the last available space that fits the process"
+      ],
+      "reponse": 1,
+      "explication": "First fit: first space big enough."
+    },
+    {
+      "id": "caos-ch6-033",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 1,
+      "question": "What does the best-fit algorithm do?",
+      "choix": [
+        "Allocates the largest available space in the whole memory",
+        "Allocates the space closest to the operating system area",
+        "Allocates the smallest available space that fits the process",
+        "Allocates the first available space that fits the process"
+      ],
+      "reponse": 2,
+      "explication": "Best fit: the smallest hole that is still large enough."
+    },
+    {
+      "id": "caos-ch6-034",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 1,
+      "question": "What does the worst-fit algorithm do?",
+      "choix": [
+        "Allocates the largest available space",
+        "Allocates the smallest space that fits",
+        "Refuses to allocate any free space",
+        "Allocates the first space that fits"
+      ],
+      "reponse": 0,
+      "explication": "Worst fit: the largest available hole."
+    },
+    {
+      "id": "caos-ch6-035",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 3,
+      "question": "Free holes, in order: 100K, 500K, 200K, 300K, 600K. A 212K process arrives. Which hole does first fit choose?",
+      "choix": [
+        "600K",
+        "300K",
+        "500K",
+        "200K"
+      ],
+      "reponse": 2,
+      "explication": "The first hole ≥ 212K scanning from the start is 500K."
+    },
+    {
+      "id": "caos-ch6-036",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 3,
+      "question": "Free holes, in order: 100K, 500K, 200K, 300K, 600K. A 212K process arrives. Which hole does best fit choose?",
+      "choix": [
+        "300K",
+        "600K",
+        "500K",
+        "200K"
+      ],
+      "reponse": 0,
+      "explication": "The smallest hole ≥ 212K is 300K (200K is too small).",
+      "piege": "200K is the closest size but is too small to hold 212K."
+    },
+    {
+      "id": "caos-ch6-037",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 3,
+      "question": "Free holes, in order: 100K, 500K, 200K, 300K, 600K. A 212K process arrives. Which hole does worst fit choose?",
+      "choix": [
+        "500K",
+        "600K",
+        "300K",
+        "100K"
+      ],
+      "reponse": 1,
+      "explication": "Worst fit takes the largest hole: 600K."
+    },
+    {
+      "id": "caos-ch6-038",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 3,
+      "question": "Free holes, in order: 300K, 150K, 500K, 130K. A 120K process arrives. Which hole does best fit choose?",
+      "choix": [
+        "300K",
+        "130K",
+        "150K",
+        "500K"
+      ],
+      "reponse": 1,
+      "explication": "The smallest hole ≥ 120K is 130K."
+    },
+    {
+      "id": "caos-ch6-039",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 3,
+      "question": "Free holes, in order: 300K, 150K, 500K, 130K. A 120K process arrives. Which hole does first fit choose?",
+      "choix": [
+        "130K",
+        "300K",
+        "500K",
+        "150K"
+      ],
+      "reponse": 1,
+      "explication": "The first hole large enough is the first one, 300K."
+    },
+    {
+      "id": "caos-ch6-040",
+      "theme": "Ch6 · Variable partitioning and fit algorithms",
+      "niveau": 2,
+      "question": "In the variable partitioning diagram, P1 starts at 400K and P2 starts at 1000K. What is the size of P1?",
+      "choix": [
+        "1400K",
+        "1000K",
+        "400K",
+        "600K"
+      ],
+      "reponse": 3,
+      "explication": "P1 occupies 400K to 1000K, i.e. 600K."
+    },
+    {
+      "id": "caos-ch6-043",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 1,
+      "question": "What is fragmentation?",
+      "choix": [
+        "The division of memory into equal fixed partitions by the OS",
+        "Small pieces of memory left unused because of how spaces are used",
+        "The order in which bytes of a word are stored in the memory",
+        "The splitting of a program into overlays loaded one after another"
+      ],
+      "reponse": 1,
+      "explication": "Fragmentation is when memory is used so that small unusable pieces are left over."
+    },
+    {
+      "id": "caos-ch6-045",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 2,
+      "question": "When does fragmentation occur naturally on a disk?",
+      "choix": [
+        "When files are always stored in a single linked block",
+        "When files are frequently created, deleted and modified",
+        "When the disk is used only for reading files in order",
+        "When the disk is formatted once and never written again"
+      ],
+      "reponse": 1,
+      "explication": "Frequent creating, deleting and modifying of files naturally fragments a disk."
+    },
+    {
+      "id": "caos-ch6-046",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 1,
+      "question": "Which type of fragmentation is caused by variable partitioning?",
+      "choix": [
+        "Overlay fragmentation",
+        "Logical fragmentation",
+        "External fragmentation",
+        "Internal fragmentation"
+      ],
+      "reponse": 2,
+      "explication": "Variable partitioning leaves many small non-contiguous holes: external fragmentation."
+    },
+    {
+      "id": "caos-ch6-047",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 1,
+      "question": "Which type of fragmentation is caused by fixed partitioning?",
+      "choix": [
+        "External fragmentation",
+        "Physical fragmentation",
+        "Overlay fragmentation",
+        "Internal fragmentation"
+      ],
+      "reponse": 3,
+      "explication": "Fixed partitioning allocates extra space a process does not use: internal fragmentation."
+    },
+    {
+      "id": "caos-ch6-048",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 2,
+      "question": "What characterises external fragmentation?",
+      "choix": [
+        "The CPU-generated address differs from the one seen by memory",
+        "A process is given more space than it actually needs inside its fixed partition",
+        "A process is too large for the physical memory and therefore needs overlays",
+        "Enough total free space exists, but not contiguous, so it can't be used"
+      ],
+      "reponse": 3,
+      "explication": "External fragmentation: many small non-contiguous holes that cannot be allocated, even if their total is enough."
+    },
+    {
+      "id": "caos-ch6-049",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 2,
+      "question": "What characterises internal fragmentation?",
+      "choix": [
+        "Extra space allocated to a process that it does not use",
+        "A process that is too large to fit in physical memory",
+        "Free memory blocks shuffled together to form a big one",
+        "Small free holes scattered between the allocated processes"
+      ],
+      "reponse": 0,
+      "explication": "Internal fragmentation is the difference between the space allocated and the space actually used."
+    },
+    {
+      "id": "caos-ch6-050",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 1,
+      "question": "Which technique is used to resolve external fragmentation?",
+      "choix": [
+        "Swapping",
+        "Compaction",
+        "Best fit",
+        "Overlays"
+      ],
+      "reponse": 1,
+      "explication": "Compaction shuffles all free memory spaces together to form one large block."
+    },
+    {
+      "id": "caos-ch6-051",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 2,
+      "question": "What does compaction do?",
+      "choix": [
+        "It splits each process into overlays to reduce its memory size",
+        "It divides memory into fixed partitions of exactly equal size",
+        "It allocates the smallest free space that will fit the process",
+        "It shuffles all free memory spaces together into one large block"
+      ],
+      "reponse": 3,
+      "explication": "Compaction moves processes so all free space forms one large contiguous block."
+    },
+    {
+      "id": "caos-ch6-053",
+      "theme": "Ch6 · Fragmentation",
+      "niveau": 3,
+      "question": "A 188-byte process is placed in a 200-byte fixed partition. How much internal fragmentati
