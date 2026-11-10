@@ -460,15 +460,16 @@
       "id": "net-ch3-001",
       "theme": "Ch3 · Subnetting & classless addressing",
       "niveau": 1,
-      "question": "Which of the following is NOT a benefit of subnetting a corporate network?",
+      "question": "Which is not the benefit of subnetting a corporate network?",
       "choix": [
-        "IP address allocation",
+        "Traffic diversion",
         "Performance",
         "Security",
-        "Traffic diversion"
+        "IP address allocation"
       ],
       "reponse": 3,
-      "explication": "Subnetting improves address allocation, performance (smaller broadcast domains) and security. Traffic diversion is not a benefit listed."
+      "explication": "According to the official answer key (Revision 3, Q6), the answer is IP address allocation: subnetting brings performance (smaller broadcast domains), security and traffic separation/diversion between subnets; it does not create more IP addresses to allocate.",
+      "piege": "The official key marks IP address allocation, not traffic diversion."
     },
     {
       "id": "net-ch3-002",
@@ -2370,6 +2371,302 @@
       ],
       "reponse": 0,
       "explication": "The browser sends a GET request to the server's IP address and asks for the file."
+    },
+    {
+      "id": "net-rev1-01",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "In the modified EUI-64 process, what 16-bit hexadecimal value is inserted into the middle of a 48-bit MAC address?",
+      "choix": [
+        "`fffe`",
+        "`fe80`",
+        "`abcd`",
+        "`ffff`"
+      ],
+      "reponse": 0,
+      "explication": "EUI-64 inserts fffe between the two 24-bit halves of the MAC address (48 + 16 = 64 bits)."
+    },
+    {
+      "id": "net-rev1-02",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "During the EUI-64 calculation, what modification is made to the 7th bit of the original MAC address?",
+      "choix": [
+        "It is deleted from the original MAC.",
+        "It is copied into the 8th bit position.",
+        "It is always forced to 0 by the host.",
+        "It is inverted (0 becomes 1, 1 becomes 0)."
+      ],
+      "reponse": 3,
+      "explication": "The 7th bit (universal/local bit) of the first byte is flipped: fc (11111100) becomes fe (11111110)."
+    },
+    {
+      "id": "net-rev1-03",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "GUAs currently allocated on the IPv6 Internet begin with which range in their first hextet?",
+      "choix": [
+        "`2000` to `3FFF`",
+        "`0000` to `1FFF`",
+        "`FE80` to `FEBF`",
+        "`FF00` to `FFFF`"
+      ],
+      "reponse": 0,
+      "explication": "Only 2000::/3 is assigned: first hextet 2000 to 3fff. FE80-FEBF is link-local, FF00-FFFF is multicast."
+    },
+    {
+      "id": "net-rev1-04",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which Cisco IOS command correctly assigns a static IPv6 Global Unicast Address to an interface?",
+      "choix": [
+        "`ip address 2001:db8:acad:1::1 255.255.255.0`",
+        "`ipv6 address 2001:db8:acad:1::1/64`",
+        "`set ipv6 2001:db8:acad:1::1 prefix 64`",
+        "`ipv6 set address 2001:db8:acad:1::1`"
+      ],
+      "reponse": 1,
+      "explication": "The syntax is ipv6 address ipv6-address/prefix-length."
+    },
+    {
+      "id": "net-rev1-05",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which method lets a host take its GUA prefix from the router's RA and generate its own Interface ID, with NO DHCPv6 server?",
+      "choix": [
+        "Static IP assignment",
+        "SLAAC with stateless DHCPv6",
+        "SLAAC",
+        "Stateful DHCPv6"
+      ],
+      "reponse": 2,
+      "explication": "SLAAC (Stateless Address Autoconfiguration) needs only the RA; the other dynamic methods involve a DHCPv6 server."
+    },
+    {
+      "id": "net-rev1-06",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which ICMPv6 message does a host send on the local link to request an immediate Router Advertisement?",
+      "choix": [
+        "DHCP Discover",
+        "Neighbor Advertisement (NA)",
+        "Router Solicitation (RS)",
+        "Echo Request"
+      ],
+      "reponse": 2,
+      "explication": "Hosts send an RS to discover routers; routers reply with an RA."
+    },
+    {
+      "id": "net-rev1-07",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which IPv6 well-known multicast group is joined exclusively by all IPv6-enabled routers?",
+      "choix": [
+        "`fe80::2`",
+        "`ff02::1:ff00:0`",
+        "`ff02::1`",
+        "`ff02::2`"
+      ],
+      "reponse": 3,
+      "explication": "ff02::2 = all-routers group; ff02::1 = all-nodes group; fe80:: is link-local unicast."
+    },
+    {
+      "id": "net-rev1-08",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which primary routing metric is used by the Routing Information Protocol (RIP)?",
+      "choix": [
+        "Interface cost",
+        "Hop count",
+        "Administrative distance",
+        "Bandwidth and delay"
+      ],
+      "reponse": 1,
+      "explication": "RIP uses a single metric, hop count. Cost is OSPF; bandwidth and delay are IGRP/EIGRP defaults."
+    },
+    {
+      "id": "net-rev1-09",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "What is the maximum hop count allowed by RIP before a destination network is considered unreachable?",
+      "choix": [
+        "255 hops",
+        "Unlimited",
+        "15 hops",
+        "10 hops"
+      ],
+      "reponse": 2,
+      "explication": "RIP's maximum hop count is 15 (16 = unreachable). 255 is IGRP's limit."
+    },
+    {
+      "id": "net-rev1-10",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "How does OSPF calculate the path cost of Cisco router interfaces by default?",
+      "choix": [
+        "Delay + reliability",
+        "10^8 / bandwidth",
+        "Hop count",
+        "Load / bandwidth"
+      ],
+      "reponse": 1,
+      "explication": "Cost = 100,000,000 / bandwidth, so 100 Mbit/s gives a cost of 1."
+    },
+    {
+      "id": "net-rev1-11",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which exterior gateway protocol exchanges routing information between autonomous systems across the Internet?",
+      "choix": [
+        "EIGRP",
+        "BGP",
+        "OSPF",
+        "RIPv2"
+      ],
+      "reponse": 1,
+      "explication": "BGP (Border Gateway Protocol) is the exterior protocol of the Internet; the others are interior protocols."
+    },
+    {
+      "id": "net-rev1-12",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What is a key characteristic of static routing compared to dynamic routing protocols?",
+      "choix": [
+        "It automatically reroutes traffic during link failures.",
+        "It automatically discovers network topology changes.",
+        "It requires zero CPU and bandwidth exchange overhead.",
+        "It is designed for extremely large enterprise networks."
+      ],
+      "reponse": 2,
+      "explication": "Static routes are typed by the administrator: no routing updates are exchanged, so no CPU or bandwidth overhead, but no automatic adaptation either.",
+      "piege": "Discovering changes and rerouting around failures are what DYNAMIC protocols do."
+    },
+    {
+      "id": "net-rev1-13",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "Which feature, enabled alongside PortFast, immediately disables a port if an unauthorized switch sends a BPDU?",
+      "choix": [
+        "Trunking mode",
+        "VTP Pruning",
+        "BPDU Guard",
+        "DTP Auto"
+      ],
+      "reponse": 2,
+      "explication": "BPDU Guard shuts down a PortFast-enabled port when a BPDU from another switch is received."
+    },
+    {
+      "id": "net-rev1-14",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "Which IEEE standard defines frame tagging for carrying multiple VLANs across a single trunk link?",
+      "choix": [
+        "IEEE 802.11",
+        "IEEE 802.1D",
+        "IEEE 802.1Q",
+        "IEEE 802.3"
+      ],
+      "reponse": 2,
+      "explication": "802.1Q = VLAN tagging; 802.1D = STP; 802.3 = Ethernet; 802.11 = Wi-Fi."
+    },
+    {
+      "id": "net-rev1-15",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What is the purpose of the Cisco proprietary VLAN Trunking Protocol (VTP)?",
+      "choix": [
+        "To assign dynamic IP addresses to the VLAN interfaces of the switches.",
+        "To route packets between the different VLANs of the switched network.",
+        "To prevent Layer 2 loops from forming within a single VLAN broadcast domain.",
+        "To synchronize VLAN configuration changes across switches in a VTP domain."
+      ],
+      "reponse": 3,
+      "explication": "VTP exchanges VLAN configuration changes between switches of the same VTP domain."
+    },
+    {
+      "id": "net-rev1-16",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "What is the default update timer for RIP to broadcast its complete routing table?",
+      "choix": [
+        "180 seconds",
+        "10 seconds",
+        "30 seconds",
+        "90 seconds"
+      ],
+      "reponse": 2,
+      "explication": "RIP broadcasts its full table every 30 seconds; IGRP uses 90 seconds."
+    },
+    {
+      "id": "net-rev1-17",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which algorithm does a link-state protocol like OSPF use to calculate the shortest path to each destination?",
+      "choix": [
+        "Diffusing Update Algorithm (DUAL)",
+        "Spanning Tree algorithm",
+        "Bellman-Ford algorithm",
+        "Dijkstra's algorithm"
+      ],
+      "reponse": 3,
+      "explication": "Link-state protocols run Dijkstra's shortest path first (SPF). Bellman-Ford is distance-vector; DUAL is EIGRP's."
+    },
+    {
+      "id": "net-rev1-18",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "In the block `2001:db8:acad::/48`, how many bits are available for the Subnet ID when using /64 subnets?",
+      "choix": [
+        "8 bits",
+        "64 bits",
+        "16 bits",
+        "32 bits"
+      ],
+      "reponse": 2,
+      "explication": "64 - 48 = 16 bits of subnet ID, i.e. 65,536 /64 subnets."
+    },
+    {
+      "id": "net-rev1-19",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What mechanism does an IPv6 host use to make sure its dynamically generated address is unique on the link?",
+      "choix": [
+        "DHCP Acknowledgement",
+        "Duplicate Address Detection (DAD)",
+        "Address Resolution Protocol (ARP)",
+        "Router Solicitation"
+      ],
+      "reponse": 1,
+      "explication": "DAD works like an ARP request for its own address: no reply means the address is unique."
+    },
+    {
+      "id": "net-rev1-20",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "What term describes grouping multiple contiguous prefixes into a single routing table entry?",
+      "choix": [
+        "Encapsulation / tunneling",
+        "Supernetting / route summarization",
+        "Dynamic trunking / DTP",
+        "Subnetting / borrowing host bits"
+      ],
+      "reponse": 1,
+      "explication": "Route summarization (supernetting, aggregation, CIDR) advertises several contiguous networks as one shorter prefix."
+    },
+    {
+      "id": "net-rev3-01",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "Which of the following sentences correctly describes the characteristics of Layer 2 addresses?",
+      "choix": [
+        "Different manufacturers must give a universally unique identifier to each device made.",
+        "The manufacturer code is assigned to each vendor by the International Telecommunications Union.",
+        "All communication devices are assigned a unique identifier given by the IEEE itself.",
+        "The IEEE is responsible for assigning a unique manufacturer code to each vendor."
+      ],
+      "reponse": 3,
+      "explication": "The IEEE assigns the MFG code to each vendor; the vendor then assigns the unique identifier of each board.",
+      "piege": "Not the ITU, and the IEEE does not number each device itself."
     }
   ]
 }
