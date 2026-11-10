@@ -1,0 +1,2375 @@
+{
+  "titre": "Network and Protocol · IPv4, IPv6, Subnetting & Protocols",
+  "matiere": "Ch1 Addressing · Ch2 IPv4 · Ch3 Subnetting · Ch4 IPv6 · Ch5 Switching · Ch6 Routing · Ch7 Transport & Application",
+  "questions": [
+    {
+      "id": "net-ch1-001",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "Who assigns the manufacturer (MFG) code of a Layer 2 address to each vendor?",
+      "choix": [
+        "The IANA",
+        "The IETF",
+        "The ITU",
+        "The IEEE"
+      ],
+      "reponse": 3,
+      "explication": "Layer 2 addresses have two parts: the MFG code, assigned to each vendor by the IEEE, and a unique identifier assigned by the vendor to each board.",
+      "piege": "The ITU is a classic distractor: it does not assign MAC vendor codes."
+    },
+    {
+      "id": "net-ch1-002",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "Who assigns the unique identifier part of a MAC address?",
+      "choix": [
+        "The network administrator",
+        "The vendor that produces the board",
+        "The IEEE for every single device",
+        "The DHCP server of the LAN"
+      ],
+      "reponse": 1,
+      "explication": "The IEEE gives the vendor its code; the vendor then assigns a unique identifier to each board it produces."
+    },
+    {
+      "id": "net-ch1-003",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "How is the Layer 2 address space described in the course?",
+      "choix": [
+        "Flat, with universally unique addresses",
+        "Hierarchical, with network and host parts",
+        "Classful, with five address classes",
+        "Local, unique only inside one subnet"
+      ],
+      "reponse": 0,
+      "explication": "Layer 2 addresses assume a flat address space with universally unique addresses."
+    },
+    {
+      "id": "net-ch1-004",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "Who generally determines Layer 3 addresses?",
+      "choix": [
+        "The vendor of the switches",
+        "The NIC manufacturer itself",
+        "The IEEE standards body",
+        "The network administrator"
+      ],
+      "reponse": 3,
+      "explication": "Layer 3 addresses are determined by the network administrator, who installs a hierarchy on the network."
+    },
+    {
+      "id": "net-ch1-005",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "A user moves to another building. What happens to the end station's addresses?",
+      "choix": [
+        "New Layer 3 address, same Layer 2 address",
+        "New Layer 2 address, same Layer 3 address",
+        "Neither address is changed",
+        "Both addresses are changed"
+      ],
+      "reponse": 0,
+      "explication": "If users move to another building, their end stations obtain new Layer 3 addresses, but their Layer 2 addresses remain the same."
+    },
+    {
+      "id": "net-ch1-006",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "Which Protocol Data Unit (PDU) does a Layer 2 switch usually forward?",
+      "choix": [
+        "Segment",
+        "Packet",
+        "Frame",
+        "Datagram"
+      ],
+      "reponse": 2,
+      "explication": "Switches use Layer 2 switching to forward frames, based on MAC address information.",
+      "piege": "Packet = Layer 3 (routers), segment = Layer 4 (TCP). A Layer 2 switch forwards frames."
+    },
+    {
+      "id": "net-ch1-007",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "What information does a router use to forward a packet?",
+      "choix": [
+        "The source port number of the segment",
+        "The destination MAC address in the frame",
+        "The VLAN tag carried by the frame",
+        "The network-layer destination address"
+      ],
+      "reponse": 3,
+      "explication": "Layer 3 switching (routing) forwards packets based on their network-layer destination addresses."
+    },
+    {
+      "id": "net-ch1-008",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "What does a Layer 2 switch do with a frame whose destination MAC address is not in its table?",
+      "choix": [
+        "It forwards it to the default gateway",
+        "It sends the frame back to the source",
+        "It floods the frame out of all its ports",
+        "It drops the frame silently"
+      ],
+      "reponse": 2,
+      "explication": "If the switch does not know where to send the frame, it broadcasts it out all its ports, then learns the location from the reply."
+    },
+    {
+      "id": "net-ch1-009",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "How does a switch learn which MAC address is on which port?",
+      "choix": [
+        "By asking the DHCP server",
+        "By reading the destination address of each frame",
+        "By reading the source address of each frame",
+        "By exchanging routing tables"
+      ],
+      "reponse": 2,
+      "explication": "The switch looks at the source address of incoming frames and builds its switching table from it."
+    },
+    {
+      "id": "net-ch1-010",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 1,
+      "question": "In the course's definitions, what does a 'route' identify?",
+      "choix": [
+        "What you want",
+        "A way to get there",
+        "Who owns the resource",
+        "Where it is"
+      ],
+      "reponse": 1,
+      "explication": "A name identifies what you want, an address where it is, and a route a way to get there."
+    },
+    {
+      "id": "net-ch1-011",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "Host 129.99.0.1/16 sends to 136.178.0.1/16. What must exist between them?",
+      "choix": [
+        "A hub on the same segment",
+        "A repeater on the cable",
+        "A router connecting the networks",
+        "Nothing, they are directly connected"
+      ],
+      "reponse": 2,
+      "explication": "Devices on other networks can only be reached through a router connecting the networks."
+    },
+    {
+      "id": "net-ch1-012",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 2,
+      "question": "What does hierarchical routing mean?",
+      "choix": [
+        "Every router knows every segment",
+        "Routes are entered manually",
+        "Only one router is allowed per site",
+        "Topology knowledge is localized"
+      ],
+      "reponse": 3,
+      "explication": "In hierarchical routing, knowledge of the topology is localized: no single router needs to know how to reach every other segment."
+    },
+    {
+      "id": "net-ch1-013",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 3,
+      "question": "Packet from PC1 (192.168.10.10) to PC2 (192.168.20.10) via R1 and R2. Which addresses does it carry when it reaches R2's interface?",
+      "choix": [
+        "Source 192.168.10.10, destination 192.168.20.10",
+        "Source 192.168.10.10, destination 10.10.2.2",
+        "Source 192.168.20.10, destination 192.168.20.1",
+        "Source 10.10.1.1, destination 10.10.2.2"
+      ],
+      "reponse": 0,
+      "explication": "Without NAT, source and destination IP addresses stay the same end to end; only the MAC addresses change at each hop.",
+      "piege": "Do not replace the IPs by the router interfaces' addresses: only Layer 2 addresses are rewritten."
+    },
+    {
+      "id": "net-ch1-014",
+      "theme": "Ch1 · Addressing fundamentals",
+      "niveau": 3,
+      "question": "A LAN must be connected to the Internet through a leased line. What is the minimum device needed?",
+      "choix": [
+        "A router with two Ethernet interfaces",
+        "A router with one Ethernet and one modem interface",
+        "A switch with one Ethernet and one serial interface",
+        "A router with one Ethernet and one serial interface"
+      ],
+      "reponse": 3,
+      "explication": "Joining two networks needs a router; the leased line connects to a serial (WAN) interface and the LAN to an Ethernet interface."
+    },
+    {
+      "id": "net-ch2-001",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "How many bits does an IPv4 address have?",
+      "choix": [
+        "64 bits",
+        "48 bits",
+        "128 bits",
+        "32 bits"
+      ],
+      "reponse": 3,
+      "explication": "An IPv4 address is 32 bits long, written as four octets in dotted decimal notation."
+    },
+    {
+      "id": "net-ch2-002",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Which class does an address whose first octet is 172 belong to?",
+      "choix": [
+        "Class B",
+        "Class D",
+        "Class A",
+        "Class C"
+      ],
+      "reponse": 0,
+      "explication": "Class B covers first octets 128 to 191."
+    },
+    {
+      "id": "net-ch2-003",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Which first-octet range corresponds to class C?",
+      "choix": [
+        "1 to 126",
+        "224 to 239",
+        "192 to 223",
+        "128 to 191"
+      ],
+      "reponse": 2,
+      "explication": "Class C addresses start with bits 110, i.e. first octet 192 to 223, prefix length 24."
+    },
+    {
+      "id": "net-ch2-004",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "What are class D addresses (224 to 239) used for?",
+      "choix": [
+        "Loopback testing",
+        "Experimental use",
+        "IP multicast",
+        "Very large networks"
+      ],
+      "reponse": 2,
+      "explication": "Class D (first bits 1110) is reserved for IP multicast."
+    },
+    {
+      "id": "net-ch2-005",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "What are addresses starting with 127 reserved for?",
+      "choix": [
+        "Multicast groups",
+        "IP traffic local to a host",
+        "Experimental networks",
+        "Private enterprise networks"
+      ],
+      "reponse": 1,
+      "explication": "Addresses starting with 127 are reserved for IP traffic local to a host (loopback)."
+    },
+    {
+      "id": "net-ch2-006",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Which address type refers to a group of hosts?",
+      "choix": [
+        "Unicast",
+        "Anycast",
+        "Broadcast",
+        "Multicast"
+      ],
+      "reponse": 3,
+      "explication": "Unicast = single machine, multicast = group of hosts, broadcast = all local hosts.",
+      "piege": "Broadcast is ALL local hosts, not a group. Anycast belongs to IPv6."
+    },
+    {
+      "id": "net-ch2-007",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Which address type reaches all local hosts?",
+      "choix": [
+        "Broadcast",
+        "Anycast",
+        "Multicast",
+        "Unicast"
+      ],
+      "reponse": 0,
+      "explication": "A broadcast address reaches all local hosts."
+    },
+    {
+      "id": "net-ch2-008",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "For the IP address 130.100.50.100, what is the maximum number of usable host addresses?",
+      "choix": [
+        "65535",
+        "65536",
+        "65534",
+        "65532"
+      ],
+      "reponse": 2,
+      "explication": "130 is class B: 16 host bits, so 2^16 - 2 = 65,534 usable hosts.",
+      "piege": "65,536 forgets to remove the network and broadcast addresses."
+    },
+    {
+      "id": "net-ch2-009",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "How many usable host addresses does a class C network have?",
+      "choix": [
+        "256",
+        "254",
+        "255",
+        "252"
+      ],
+      "reponse": 1,
+      "explication": "8 host bits: 2^8 - 2 = 254."
+    },
+    {
+      "id": "net-ch2-010",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "How many usable host addresses does a class A network have?",
+      "choix": [
+        "16,777,216",
+        "16,777,215",
+        "16,777,214",
+        "65,534"
+      ],
+      "reponse": 2,
+      "explication": "24 host bits: 2^24 - 2 = 16,777,214."
+    },
+    {
+      "id": "net-ch2-011",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Why do we subtract two when counting the hosts of a network?",
+      "choix": [
+        "All zeros = network, all ones = broadcast",
+        "The first and last octets are reserved",
+        "Two addresses are kept for the routers",
+        "All zeros = gateway, all ones = DNS server"
+      ],
+      "reponse": 0,
+      "explication": "The host part all zeros names the network itself; all ones is the broadcast address."
+    },
+    {
+      "id": "net-ch2-012",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "What is the first-bit pattern of a class B address?",
+      "choix": [
+        "1110",
+        "0",
+        "110",
+        "10"
+      ],
+      "reponse": 3,
+      "explication": "Class A starts with 0, B with 10, C with 110, D with 1110, E with 1111."
+    },
+    {
+      "id": "net-ch2-013",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "What does the dotted decimal notation do?",
+      "choix": [
+        "Encrypts the address for security",
+        "Makes the binary address easier to read",
+        "Compresses the address to 16 bits",
+        "Adds the subnet mask to the address"
+      ],
+      "reponse": 1,
+      "explication": "The human mind finds binary hard to memorize; dotted decimal notation makes an IP address easier to read."
+    },
+    {
+      "id": "net-ch2-014",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Convert 10000000 00001011 00000011 00011111 to dotted decimal.",
+      "choix": [
+        "128.11.6.31",
+        "192.11.3.31",
+        "128.11.3.31",
+        "128.13.3.31"
+      ],
+      "reponse": 2,
+      "explication": "10000000 = 128, 00001011 = 11, 00000011 = 3, 00011111 = 31."
+    },
+    {
+      "id": "net-ch2-015",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "What problem do the Net ID and Host ID alone leave?",
+      "choix": [
+        "Addresses are not unique",
+        "No room for broadcast addresses",
+        "Hosts cannot reach the Internet",
+        "Only two levels of hierarchy"
+      ],
+      "reponse": 3,
+      "explication": "Classful addressing gives only two levels (network, host), which is a problem for privacy, security and huge networks; subnetting adds a level."
+    },
+    {
+      "id": "net-ch2-016",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "What does the Net ID show?",
+      "choix": [
+        "The port used by the application",
+        "The location of a node in the network",
+        "The network's location on the Internet",
+        "The manufacturer of the network card"
+      ],
+      "reponse": 2,
+      "explication": "The NetID shows the network's location on the Internet; the HostID shows the node within the network."
+    },
+    {
+      "id": "net-ch2-017",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 2,
+      "question": "What is the broadcast address of the class A network 10.0.0.0?",
+      "choix": [
+        "10.255.255.255",
+        "10.0.0.255",
+        "10.255.255.254",
+        "10.0.255.255"
+      ],
+      "reponse": 0,
+      "explication": "All 24 host bits set to 1 give 10.255.255.255. 10.255.255.254 is the last usable host.",
+      "piege": "One slide writes 10.0.0.255: that would only be right for a /24."
+    },
+    {
+      "id": "net-ch2-018",
+      "theme": "Ch2 · IPv4 addressing",
+      "niveau": 1,
+      "question": "Who created the standard subnet masks around 1983?",
+      "choix": [
+        "The ITU",
+        "The IANA",
+        "The IEEE",
+        "The ISO"
+      ],
+      "reponse": 1,
+      "explication": "Standard subnet masks were created by the central Internet Assigned Numbers Authority (IANA) around 1983."
+    },
+    {
+      "id": "net-ch3-001",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "Which of the following is NOT a benefit of subnetting a corporate network?",
+      "choix": [
+        "IP address allocation",
+        "Performance",
+        "Security",
+        "Traffic diversion"
+      ],
+      "reponse": 3,
+      "explication": "Subnetting improves address allocation, performance (smaller broadcast domains) and security. Traffic diversion is not a benefit listed."
+    },
+    {
+      "id": "net-ch3-002",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Which statement about subnetting is FALSE?",
+      "choix": [
+        "It applies a mask to extract the subnet address",
+        "It adds another level of hierarchy to a network",
+        "It creates private networks with tags and MAC addresses",
+        "It segments networks that share internetworking resources"
+      ],
+      "reponse": 2,
+      "explication": "Tagging frames with MAC addresses describes VLANs (Layer 2), not subnetting.",
+      "piege": "Do not mix up VLAN tagging (Layer 2) and subnetting (Layer 3)."
+    },
+    {
+      "id": "net-ch3-003",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "What does a subnet mask specify?",
+      "choix": [
+        "Which bits are network/subnet and which are host",
+        "Which port number the host is listening on",
+        "Which address class the IP address belongs to",
+        "Which router is used as the default gateway"
+      ],
+      "reponse": 0,
+      "explication": "The mask specifies which part of an IP address is the network/subnet field and which part is the host field."
+    },
+    {
+      "id": "net-ch3-004",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "In binary, what is the prefix portion of a subnet mask made of?",
+      "choix": [
+        "All 1s",
+        "The bits of the address",
+        "All 0s",
+        "Alternating 1s and 0s"
+      ],
+      "reponse": 0,
+      "explication": "The prefix portion of the mask is all 1s, the host portion all 0s."
+    },
+    {
+      "id": "net-ch3-005",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Which bitwise operation between an address and its mask gives the subnet address?",
+      "choix": [
+        "XOR",
+        "OR",
+        "NOT",
+        "AND"
+      ],
+      "reponse": 3,
+      "explication": "Address AND mask keeps the bits where the mask is 1: 129.99.30.4 AND 255.255.240.0 = 129.99.16.0.",
+      "piege": "A slide shows XOR: the correct operation is AND."
+    },
+    {
+      "id": "net-ch3-006",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "129.99.30.4 with mask 255.255.240.0 is on which subnet?",
+      "choix": [
+        "129.99.24.0",
+        "129.99.16.0",
+        "129.99.0.0",
+        "129.99.30.0"
+      ],
+      "reponse": 1,
+      "explication": "30 = 00011110, 240 = 11110000, AND = 00010000 = 16."
+    },
+    {
+      "id": "net-ch3-007",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "Which prefix length corresponds to 255.255.255.0?",
+      "choix": [
+        "/8",
+        "/24",
+        "/32",
+        "/16"
+      ],
+      "reponse": 1,
+      "explication": "The prefix length is the number of 1s up front: 3 x 8 = 24."
+    },
+    {
+      "id": "net-ch3-008",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Which mask corresponds to /20?",
+      "choix": [
+        "255.255.224.0",
+        "255.240.0.0",
+        "255.255.240.0",
+        "255.255.248.0"
+      ],
+      "reponse": 2,
+      "explication": "20 ones: 8 + 8 + 4, and 11110000 = 240."
+    },
+    {
+      "id": "net-ch3-009",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "For the class C mask 255.255.255.240, what does the course table give?",
+      "choix": [
+        "8 subnets and 32 hosts",
+        "16 subnets and 16 hosts",
+        "32 subnets and 8 hosts",
+        "16 subnets and 8 hosts"
+      ],
+      "reponse": 1,
+      "explication": "240 = 11110000: 4 borrowed bits give 16 subnets, 4 host bits give 16 addresses per subnet (14 usable).",
+      "piege": "The slide counts 16 'hosts' = addresses. In a calculation, usable hosts = 16 - 2 = 14."
+    },
+    {
+      "id": "net-ch3-010",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "How many usable hosts does a /30 subnet provide?",
+      "choix": [
+        "6",
+        "1",
+        "4",
+        "2"
+      ],
+      "reponse": 3,
+      "explication": "/30 leaves 2 host bits: 2^2 - 2 = 2. That is why /30 is used for router-to-router links."
+    },
+    {
+      "id": "net-ch3-011",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "An engineer must configure a /30 subnet between two routers. Which combination is valid?",
+      "choix": [
+        "10.2.1.3 255.255.255.252",
+        "192.168.1.1 255.255.255.248",
+        "172.16.1.4 255.255.255.248",
+        "209.165.201.2 255.255.255.252"
+      ],
+      "reponse": 3,
+      "explication": "In /30 blocks of 4, 209.165.201.2 is a usable host. 10.2.1.3 is a broadcast; .248 is a /29 mask.",
+      "piege": "The last address of a /30 block (.3, .7, .11...) is the broadcast, never a host."
+    },
+    {
+      "id": "net-ch3-012",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "What is the network address of 192.168.10.75/27?",
+      "choix": [
+        "192.168.10.96",
+        "192.168.10.32",
+        "192.168.10.72",
+        "192.168.10.64"
+      ],
+      "reponse": 3,
+      "explication": "/27: block size 256 - 224 = 32. Subnets .0, .32, .64, .96: 75 lies in .64 to .95."
+    },
+    {
+      "id": "net-ch3-013",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "What is the broadcast address of 192.168.10.75/27?",
+      "choix": [
+        "192.168.10.127",
+        "192.168.10.255",
+        "192.168.10.95",
+        "192.168.10.94"
+      ],
+      "reponse": 2,
+      "explication": "The subnet is .64 to .95: broadcast = next subnet (.96) minus 1 = .95."
+    },
+    {
+      "id": "net-ch3-014",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "How many usable hosts are there in a /27 subnet?",
+      "choix": [
+        "62",
+        "30",
+        "32",
+        "14"
+      ],
+      "reponse": 1,
+      "explication": "5 host bits: 2^5 - 2 = 30."
+    },
+    {
+      "id": "net-ch3-015",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Splitting 172.16.0.0/16 with a /20 mask gives how many subnets?",
+      "choix": [
+        "4096",
+        "32",
+        "16",
+        "8"
+      ],
+      "reponse": 2,
+      "explication": "20 - 16 = 4 borrowed bits: 2^4 = 16 subnets."
+    },
+    {
+      "id": "net-ch3-016",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "With 172.16.0.0 split into /20 subnets, what is the last usable address of the first subnet?",
+      "choix": [
+        "172.16.16.254",
+        "172.16.0.254",
+        "172.16.15.254",
+        "172.16.15.255"
+      ],
+      "reponse": 2,
+      "explication": "Block 16 in the third octet: first subnet 172.16.0.0 to 172.16.15.255; last host 172.16.15.254."
+    },
+    {
+      "id": "net-ch3-017",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "How many hosts does each /20 subnet of 172.16.0.0 hold?",
+      "choix": [
+        "4094",
+        "2046",
+        "254",
+        "4096"
+      ],
+      "reponse": 0,
+      "explication": "12 host bits: 2^12 - 2 = 4,094."
+    },
+    {
+      "id": "net-ch3-018",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "Which formula gives the number of subnets?",
+      "choix": [
+        "2 times the number of borrowed bits",
+        "2 to the power of host bits, minus 2",
+        "The number of host bits squared",
+        "2 to the power of the borrowed bits"
+      ],
+      "reponse": 3,
+      "explication": "Number of subnets = 2^(subnet bits); number of hosts = 2^(host bits) - 2.",
+      "piege": "A slide prints '2 X bits': read it as 2 to the power of the bits."
+    },
+    {
+      "id": "net-ch3-019",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "When several routing entries match a destination, which one does the router use?",
+      "choix": [
+        "The first entry in the table",
+        "The one whose mask has the fewest 1s",
+        "The one whose mask has the most 1s",
+        "The entry with the lowest address"
+      ],
+      "reponse": 2,
+      "explication": "The router chooses the entry with the mask with the most ones that matches the destination (longest match)."
+    },
+    {
+      "id": "net-ch3-020",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "What defines a contiguous subnet mask?",
+      "choix": [
+        "Every one of its octets is either 0 or 255",
+        "No 1 bit appears to the right of any 0 bit",
+        "No 0 bit appears anywhere in the last octet",
+        "It has exactly as many 1 bits as 0 bits"
+      ],
+      "reponse": 1,
+      "explication": "A contiguous mask has all its 1s up front: no 1 bit to the right of a 0 bit."
+    },
+    {
+      "id": "net-ch3-021",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "Why can non-contiguous subnet masks be dangerous?",
+      "choix": [
+        "They are refused by every IP stack",
+        "Routers may choose different masks and loop",
+        "They waste half of the address space",
+        "They cannot be written in dotted decimal"
+      ],
+      "reponse": 1,
+      "explication": "Two non-contiguous masks with the same number of ones can both match; IP does not say which to use, so two routers may disagree and create a routing loop."
+    },
+    {
+      "id": "net-ch3-022",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "What does a subnet address of all ones mean?",
+      "choix": [
+        "The default route",
+        "A confusing subnet",
+        "All subnets",
+        "The network itself"
+      ],
+      "reponse": 2,
+      "explication": "Node all ones = broadcast, node all zeros = network, subnet all ones = all subnets, subnet all zeros = confusing."
+    },
+    {
+      "id": "net-ch3-023",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Which Cisco IOS command permits a subnet address of all zeros?",
+      "choix": [
+        "ip subnet all-zeros",
+        "no ip zero-broadcast",
+        "ip classless",
+        "ip subnet-zero"
+      ],
+      "reponse": 3,
+      "explication": "Cisco IOS permits a subnet address of all zeros with the ip subnet-zero command."
+    },
+    {
+      "id": "net-ch3-024",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Most obvious advantage of VLSM over FLSM?",
+      "choix": [
+        "Streamlining congested LAN traffic",
+        "Optimizing available address space",
+        "Pooling private IPs for subnets",
+        "Load balancing traffic to the WAN"
+      ],
+      "reponse": 1,
+      "explication": "VLSM gives each subnet a mask that fits its size, so it is less wasteful and optimizes the address space."
+    },
+    {
+      "id": "net-ch3-025",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 1,
+      "question": "What does VLSM stand for?",
+      "choix": [
+        "Variable Length Subnet Mask",
+        "Virtual LAN Subnet Mask",
+        "Very Large Subnet Model",
+        "Variable Logical Segment Map"
+      ],
+      "reponse": 0,
+      "explication": "VLSM = Variable Length Subnet Mask: a different mask for the same network number on different subnets."
+    },
+    {
+      "id": "net-ch3-026",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "Which is NOT another name for route summarization in the course?",
+      "choix": [
+        "Aggregation",
+        "Subnetting",
+        "CIDR",
+        "Supernetting"
+      ],
+      "reponse": 1,
+      "explication": "Summarization is also called aggregation, supernetting, classless routing, CIDR or prefix routing. Subnetting is the opposite operation."
+    },
+    {
+      "id": "net-ch3-027",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "Classless routing protocols do all of the following EXCEPT:",
+      "choix": [
+        "Transmit the prefix length of an IP address",
+        "Accept any arbitrary prefix length",
+        "Group networks into one entry with a prefix",
+        "Calculate the prefix length from the first bits"
+      ],
+      "reponse": 3,
+      "explication": "Deducing the prefix from the first bits (the class) is what classful routing does.",
+      "piege": "Read 'EXCEPT' carefully: the odd one out is the classful behaviour."
+    },
+    {
+      "id": "net-ch3-028",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 2,
+      "question": "How did classful routing know the prefix length?",
+      "choix": [
+        "From the mask sent in updates",
+        "From the class in the first bits",
+        "From a DNS lookup",
+        "From the router's configuration"
+      ],
+      "reponse": 1,
+      "explication": "Classful routing did not transmit the prefix length; it was calculated from the address class given by the first few bits."
+    },
+    {
+      "id": "net-ch3-029",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "With VLSM, which mask should a LAN of 50 hosts receive?",
+      "choix": [
+        "/26",
+        "/25",
+        "/28",
+        "/27"
+      ],
+      "reponse": 0,
+      "explication": "/26 gives 2^6 - 2 = 62 hosts, the smallest block that fits 50; /27 only gives 30."
+    },
+    {
+      "id": "net-ch3-030",
+      "theme": "Ch3 · Subnetting & classless addressing",
+      "niveau": 3,
+      "question": "Which single prefix summarizes 192.168.0.0/24 and 192.168.1.0/24?",
+      "choix": [
+        "192.168.0.0/23",
+        "192.168.0.0/22",
+        "192.168.0.0/25",
+        "192.168.1.0/23"
+      ],
+      "reponse": 0,
+      "explication": "The two networks share their first 23 bits: 192.168.0.0/23 covers .0.0 to .1.255."
+    },
+    {
+      "id": "net-ch4-001",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "How long is an IPv6 address?",
+      "choix": [
+        "128 bits",
+        "32 bits",
+        "64 bits",
+        "256 bits"
+      ],
+      "reponse": 0,
+      "explication": "IPv6 addresses are 128 bits long and written in hexadecimal."
+    },
+    {
+      "id": "net-ch4-002",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "What is a hextet?",
+      "choix": [
+        "A 16-bit segment of 4 hex digits",
+        "An 8-bit segment of 2 hex digits",
+        "A 32-bit segment of 8 hex digits",
+        "A 6-bit segment of the interface ID"
+      ],
+      "reponse": 0,
+      "explication": "Hextet is the unofficial term for a 16-bit segment, i.e. four hexadecimal values."
+    },
+    {
+      "id": "net-ch4-003",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which statement about IPv6 address case is true?",
+      "choix": [
+        "They must be written in uppercase",
+        "They must be written in lowercase",
+        "Case changes the address meaning",
+        "They are not case-sensitive"
+      ],
+      "reponse": 3,
+      "explication": "IPv6 addresses are not case-sensitive and can be written in lowercase or uppercase."
+    },
+    {
+      "id": "net-ch4-004",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Applying the leading-zero rule, how is 0a00 written?",
+      "choix": [
+        "a",
+        "0a",
+        "a0",
+        "a00"
+      ],
+      "reponse": 3,
+      "explication": "Only leading zeros are removed; trailing zeros must stay, otherwise the address would be ambiguous.",
+      "piege": "Removing trailing zeros (a) is wrong."
+    },
+    {
+      "id": "net-ch4-005",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What is the compressed form of 2001:0db8:0000:1111:0000:0000:0000:0200?",
+      "choix": [
+        "2001:db8::1111::200",
+        "2001:db8:1111::200",
+        "2001:db8:0:1111::2",
+        "2001:db8:0:1111::200"
+      ],
+      "reponse": 3,
+      "explication": "Remove leading zeros, then replace the run of three zero hextets by '::'."
+    },
+    {
+      "id": "net-ch4-006",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "How many times can '::' appear in one IPv6 address?",
+      "choix": [
+        "Never in a GUA",
+        "As often as needed",
+        "Only once",
+        "Twice at most"
+      ],
+      "reponse": 2,
+      "explication": "The double colon can only be used once, otherwise several addresses would be possible."
+    },
+    {
+      "id": "net-ch4-007",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 3,
+      "question": "Which is the correct compression of 2001:0db8:0000:00a3:abcd:0000:0000:1234?",
+      "choix": [
+        "2001:db8:0:a3:abcd:1234",
+        "2001:db8::a3:abcd::1234",
+        "2001:db8:0:a3:abcd::1234",
+        "2001:db8::a3:abcd:0:0:1234"
+      ],
+      "reponse": 2,
+      "explication": "'::' replaces the longest run (two hextets); the single zero hextet stays '0'."
+    },
+    {
+      "id": "net-ch4-008",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which address type does IPv6 NOT have?",
+      "choix": [
+        "Broadcast",
+        "Multicast",
+        "Unicast",
+        "Anycast"
+      ],
+      "reponse": 0,
+      "explication": "IPv6 has no broadcast; the all-nodes multicast address gives essentially the same result."
+    },
+    {
+      "id": "net-ch4-009",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Where is a packet sent to an IPv6 anycast address delivered?",
+      "choix": [
+        "To the device with the lowest MAC address",
+        "To all of the devices on the local link",
+        "To every device sharing that same address",
+        "To the nearest device having that address"
+      ],
+      "reponse": 3,
+      "explication": "An anycast address is a unicast address assigned to several devices; packets are routed to the nearest one."
+    },
+    {
+      "id": "net-ch4-010",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "What prefix length is recommended for IPv6 LANs?",
+      "choix": [
+        "/64",
+        "/48",
+        "/56",
+        "/128"
+      ],
+      "reponse": 0,
+      "explication": "The recommended prefix length for LANs and most networks is /64, because SLAAC uses 64 bits for the interface ID."
+    },
+    {
+      "id": "net-ch4-011",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which IPv6 address is similar to a public IPv4 address?",
+      "choix": [
+        "Link-local address (LLA)",
+        "Solicited-node multicast address",
+        "Global unicast address (GUA)",
+        "All-nodes multicast address"
+      ],
+      "reponse": 2,
+      "explication": "GUAs are globally unique, internet-routable addresses, like public IPv4 addresses."
+    },
+    {
+      "id": "net-ch4-012",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which range are GUAs currently assigned from?",
+      "choix": [
+        "2000::/3",
+        "fc00::/7",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "reponse": 0,
+      "explication": "Only GUAs with first bits 001 (2000::/3) are assigned; they start with 2 or 3."
+    },
+    {
+      "id": "net-ch4-013",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which range are IPv6 link-local addresses in?",
+      "choix": [
+        "::1/128",
+        "2000::/3",
+        "fe80::/10",
+        "ff00::/8"
+      ],
+      "reponse": 2,
+      "explication": "LLAs are in the fe80::/10 range."
+    },
+    {
+      "id": "net-ch4-014",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which statement about IPv6 link-local addresses is true?",
+      "choix": [
+        "They cannot be routed off the link",
+        "They are assigned by the ISP",
+        "They are optional on an interface",
+        "They start with 2 or 3"
+      ],
+      "reponse": 0,
+      "explication": "Packets with a source or destination LLA cannot be routed. Every IPv6 interface must have one."
+    },
+    {
+      "id": "net-ch4-015",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What are the three parts of a GUA?",
+      "choix": [
+        "Vendor code, serial number and routing prefix",
+        "Area ID, router ID and the interface number",
+        "Global routing prefix, subnet ID, interface ID",
+        "Network ID, host ID and destination port number"
+      ],
+      "reponse": 2,
+      "explication": "Global routing prefix (from the ISP) + subnet ID (the organization's subnets) + interface ID (host part)."
+    },
+    {
+      "id": "net-ch4-016",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which GUA field is equivalent to the host portion of an IPv4 address?",
+      "choix": [
+        "Interface ID",
+        "Global routing prefix",
+        "Hextet zero",
+        "Subnet ID"
+      ],
+      "reponse": 0,
+      "explication": "The interface ID is equivalent to the host portion of an IPv4 address."
+    },
+    {
+      "id": "net-ch4-017",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What is the IPv6 all-zeros host address reserved for?",
+      "choix": [
+        "The loopback address of the host",
+        "The IPv6 subnet broadcast address",
+        "The Subnet-Router anycast address",
+        "The default gateway of the subnet"
+      ],
+      "reponse": 2,
+      "explication": "The all-0s address is reserved as a Subnet-Router anycast address and should be assigned only to routers."
+    },
+    {
+      "id": "net-ch4-018",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What is the best practice for a host's IPv6 default gateway?",
+      "choix": [
+        "The all-routers multicast address",
+        "The router's global unicast address",
+        "The DNS server address",
+        "The router's link-local address"
+      ],
+      "reponse": 3,
+      "explication": "The router's GUA or LLA can be used; best practice is to use the LLA."
+    },
+    {
+      "id": "net-ch4-019",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which Cisco command configures an IPv6 GUA on an interface?",
+      "choix": [
+        "ipv6 route 2001:db8:acad:1::1/64",
+        "ipv6 enable 2001:db8:acad:1::1/64",
+        "ipv6 address 2001:db8:acad:1::1/64",
+        "ip address 2001:db8:acad:1::1/64"
+      ],
+      "reponse": 2,
+      "explication": "The command is ipv6 address ipv6-address/prefix-length; IPv6 commands mostly replace ip with ipv6."
+    },
+    {
+      "id": "net-ch4-020",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which message does a host send to discover IPv6 routers?",
+      "choix": [
+        "DHCPv6 Reply",
+        "Neighbor Advertisement (NA)",
+        "Router Solicitation (RS)",
+        "Router Advertisement (RA)"
+      ],
+      "reponse": 2,
+      "explication": "Hosts send ICMPv6 RS messages; routers answer with RA messages."
+    },
+    {
+      "id": "net-ch4-021",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which protocol carries RS and RA messages?",
+      "choix": [
+        "ICMPv6",
+        "TCP",
+        "DHCPv6",
+        "ARP"
+      ],
+      "reponse": 0,
+      "explication": "Devices obtain GUAs dynamically through ICMPv6 messages (RS and RA)."
+    },
+    {
+      "id": "net-ch4-022",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "With SLAAC, where does the device get its prefix?",
+      "choix": [
+        "From its MAC address",
+        "From the router's RA message",
+        "From the DNS server",
+        "From a stateful DHCPv6 server"
+      ],
+      "reponse": 1,
+      "explication": "With SLAAC the prefix comes from the RA; the device builds its interface ID with EUI-64 or randomly."
+    },
+    {
+      "id": "net-ch4-023",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 3,
+      "question": "With 'SLAAC and stateless DHCPv6', what does the DHCPv6 server provide?",
+      "choix": [
+        "The GUA of the host and its prefix length",
+        "The interface ID that the host has to use",
+        "Other information such as DNS and domain name",
+        "The default gateway address of the subnet"
+      ],
+      "reponse": 2,
+      "explication": "The device creates its GUA with SLAAC; the stateless DHCPv6 server only gives extra information such as DNS.",
+      "piege": "Only STATEFUL DHCPv6 assigns the GUA itself."
+    },
+    {
+      "id": "net-ch4-024",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which RA method is most similar to DHCP for IPv4?",
+      "choix": [
+        "Stateful DHCPv6",
+        "SLAAC with stateless DHCPv6",
+        "SLAAC only",
+        "EUI-64"
+      ],
+      "reponse": 0,
+      "explication": "With stateful DHCPv6 the server gives the GUA, prefix length, DNS and other information, like DHCPv4."
+    },
+    {
+      "id": "net-ch4-025",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What value is inserted in the middle of the MAC address by EUI-64?",
+      "choix": [
+        "fe80",
+        "ffff",
+        "0000",
+        "fffe"
+      ],
+      "reponse": 3,
+      "explication": "EUI-64 inserts the 16-bit value fffe in the middle of the 48-bit MAC address."
+    },
+    {
+      "id": "net-ch4-026",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 3,
+      "question": "What is the EUI-64 interface ID of MAC fc:99:47:75:ce:e0?",
+      "choix": [
+        "fc99:47ff:ff75:cee0",
+        "fe99:47fe:ff75:cee0",
+        "fc99:47ff:fe75:cee0",
+        "fe99:47ff:fe75:cee0"
+      ],
+      "reponse": 3,
+      "explication": "Insert fffe in the middle, then flip the 7th bit: fc (11111100) becomes fe (11111110).",
+      "piege": "Do not forget to flip the 7th bit of the first byte."
+    },
+    {
+      "id": "net-ch4-027",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which bit of the MAC address does EUI-64 reverse?",
+      "choix": [
+        "The 7th bit",
+        "The 1st bit",
+        "The 8th bit",
+        "The 48th bit"
+      ],
+      "reponse": 0,
+      "explication": "The 7th bit of the client MAC address is reversed from 0 to 1."
+    },
+    {
+      "id": "net-ch4-028",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "What is Duplicate Address Detection (DAD) used for?",
+      "choix": [
+        "Converting a MAC into an interface ID",
+        "Finding the router on the link",
+        "Assigning a DNS server",
+        "Checking an IPv6 address is unique"
+      ],
+      "reponse": 3,
+      "explication": "DAD is similar to an ARP request for its own address: if there is no reply, the address is unique."
+    },
+    {
+      "id": "net-ch4-029",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Since Windows Vista, how does Windows create its IPv6 interface ID?",
+      "choix": [
+        "From the DHCPv6 server",
+        "With EUI-64 from the MAC",
+        "Randomly generated",
+        "From the router's RA"
+      ],
+      "reponse": 2,
+      "explication": "Beginning with Windows Vista, Windows uses a randomly generated interface ID instead of EUI-64."
+    },
+    {
+      "id": "net-ch4-030",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "What is the prefix of IPv6 multicast addresses?",
+      "choix": [
+        "fe80::/10",
+        "::/128",
+        "2000::/3",
+        "ff00::/8"
+      ],
+      "reponse": 3,
+      "explication": "IPv6 multicast addresses have the prefix ff00::/8."
+    },
+    {
+      "id": "net-ch4-031",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "Which multicast group do all IPv6 routers join?",
+      "choix": [
+        "ff02::1",
+        "ff02::2",
+        "fe80::1",
+        "ff02::5"
+      ],
+      "reponse": 1,
+      "explication": "ff02::1 = all-nodes group; ff02::2 = all-routers group."
+    },
+    {
+      "id": "net-ch4-032",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which address gives the same result as an IPv4 broadcast?",
+      "choix": [
+        "fe80::1",
+        "ff02::1",
+        "ff02::2",
+        "2000::1"
+      ],
+      "reponse": 1,
+      "explication": "The all-nodes multicast group ff02::1 is received by every IPv6 interface on the link."
+    },
+    {
+      "id": "net-ch4-033",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which statement about IPv6 multicast addresses is true?",
+      "choix": [
+        "They are always confined to the local link",
+        "They can only be destination addresses",
+        "They always start with the fe80 prefix",
+        "They can only be used as source addresses"
+      ],
+      "reponse": 1,
+      "explication": "Multicast addresses can only be destination addresses, never source addresses."
+    },
+    {
+      "id": "net-ch4-034",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 3,
+      "question": "With a /48 global routing prefix and a 16-bit subnet ID, how many /64 subnets are possible?",
+      "choix": [
+        "4,096",
+        "65,534",
+        "256",
+        "65,536"
+      ],
+      "reponse": 3,
+      "explication": "16 subnet-ID bits: 2^16 = 65,536 /64 subnets."
+    },
+    {
+      "id": "net-ch4-035",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "How do you create successive IPv6 subnets from 2001:db8:acad::/48?",
+      "choix": [
+        "Change the global routing prefix",
+        "Borrow bits from the interface ID",
+        "Change the first hextet",
+        "Increment the subnet ID hextet"
+      ],
+      "reponse": 3,
+      "explication": "Only the subnet ID hextet is incremented in hexadecimal; the global routing prefix stays the same."
+    },
+    {
+      "id": "net-ch4-036",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "Which transition technique carries an IPv6 packet inside an IPv4 packet?",
+      "choix": [
+        "NAT64",
+        "SLAAC",
+        "Tunneling",
+        "Dual stack"
+      ],
+      "reponse": 2,
+      "explication": "Tunneling encapsulates IPv6 inside IPv4. Dual stack runs both stacks; NAT64 translates."
+    },
+    {
+      "id": "net-ch4-037",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 1,
+      "question": "A device runs IPv4 and IPv6 protocol stacks at the same time. What is this called?",
+      "choix": [
+        "Translation",
+        "Dual stack",
+        "Encapsulation",
+        "Tunneling"
+      ],
+      "reponse": 1,
+      "explication": "Dual stack: devices run both IPv4 and IPv6 stacks simultaneously."
+    },
+    {
+      "id": "net-ch4-038",
+      "theme": "Ch4 · IPv6 addressing",
+      "niveau": 2,
+      "question": "When does a Cisco router automatically create an IPv6 LLA on an interface?",
+      "choix": [
+        "Only after a DHCPv6 request",
+        "When a GUA is assigned to it",
+        "When the interface is shut down",
+        "Only when typed by hand"
+      ],
+      "reponse": 1,
+      "explication": "Cisco routers automatically create an LLA (with EUI-64 by default) whenever a GUA is assigned to the interface."
+    },
+    {
+      "id": "net-ch5-001",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "Which standard documents the Spanning Tree Protocol?",
+      "choix": [
+        "IEEE 802.1Q",
+        "RFC 2328",
+        "IEEE 802.3",
+        "IEEE 802.1D"
+      ],
+      "reponse": 3,
+      "explication": "STP is documented in IEEE 802.1D. 802.1Q is VLAN tagging; RFC 2328 is OSPF."
+    },
+    {
+      "id": "net-ch5-002",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "What is the purpose of STP?",
+      "choix": [
+        "Giving an IP address to each switch of the LAN",
+        "Choosing the best Layer 3 route between networks",
+        "Pruning a switched topology into a loop-free tree",
+        "Tagging every frame with its VLAN identifier"
+      ],
+      "reponse": 2,
+      "explication": "STP dynamically prunes an arbitrary topology of Layer 2 switches into a spanning tree without loops."
+    },
+    {
+      "id": "net-ch5-003",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "How is the STP root bridge elected?",
+      "choix": [
+        "First switch powered on wins",
+        "Highest bandwidth wins",
+        "Lowest bridge ID wins",
+        "Highest bridge ID wins"
+      ],
+      "reponse": 2,
+      "explication": "In the slides' example: 'Lowest Bridge ID Wins!'."
+    },
+    {
+      "id": "net-ch5-004",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "On a non-root bridge, which port becomes the root port?",
+      "choix": [
+        "The port with the highest cost to the root",
+        "The port with the most stations",
+        "The port with the lowest cost to the root",
+        "The port with the highest number"
+      ],
+      "reponse": 2,
+      "explication": "Bridges compute their lowest-cost path to the root bridge; that port is the root port."
+    },
+    {
+      "id": "net-ch5-005",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What happens to ports that are neither root ports nor designated ports?",
+      "choix": [
+        "They become edge ports",
+        "They forward only broadcasts",
+        "They become trunk ports",
+        "They are blocked"
+      ],
+      "reponse": 3,
+      "explication": "Redundant ports are blocked; a blocked port can move to forwarding if the topology changes."
+    },
+    {
+      "id": "net-ch5-006",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What do bridges send when bridge ports change state?",
+      "choix": [
+        "Router advertisement (RA) messages",
+        "Gratuitous ARP reply messages",
+        "Link-state advertisements (LSAs)",
+        "Topology change notification BPDUs"
+      ],
+      "reponse": 3,
+      "explication": "Bridges send topology change notification BPDUs when bridge ports change state."
+    },
+    {
+      "id": "net-ch5-007",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What does PortFast do?",
+      "choix": [
+        "Moves an edge port straight to forwarding",
+        "Raises the speed of the trunk port links",
+        "Blocks any port on which a BPDU is received",
+        "Tags the frames with VLAN information"
+      ],
+      "reponse": 0,
+      "explication": "Edge ports configured with PortFast transition directly to forwarding, without lingering in discarding and learning."
+    },
+    {
+      "id": "net-ch5-008",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What does BPDU Guard do?",
+      "choix": [
+        "Encrypts the BPDUs exchanged by switches",
+        "Turns an access port into a trunk port",
+        "Shuts a PortFast port that receives a BPDU",
+        "Elects the root bridge faster than plain STP"
+      ],
+      "reponse": 2,
+      "explication": "BPDU Guard shuts down a PortFast-enabled port if a BPDU from another switch is received."
+    },
+    {
+      "id": "net-ch5-009",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "Why do designers use VLANs?",
+      "choix": [
+        "To constrain broadcast traffic",
+        "To increase the cable length",
+        "To replace the routing protocol",
+        "To give MAC addresses to hosts"
+      ],
+      "reponse": 0,
+      "explication": "Designers use VLANs to constrain broadcast traffic, so a faulty NIC cannot flood the whole domain."
+    },
+    {
+      "id": "net-ch5-010",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What is added to a frame leaving a switch on a trunk link?",
+      "choix": [
+        "A VLAN tag with a VLAN identifier",
+        "A new destination MAC address",
+        "An IP header with the VLAN subnet",
+        "A TCP header with a port number"
+      ],
+      "reponse": 0,
+      "explication": "A special header, the VLAN tag, is added; it contains the VLAN ID the frame belongs to."
+    },
+    {
+      "id": "net-ch5-011",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "Which VLAN tagging protocol is proprietary to Cisco?",
+      "choix": [
+        "IEEE 802.1D",
+        "ISL",
+        "IEEE 802.1Q",
+        "VTP"
+      ],
+      "reponse": 1,
+      "explication": "Inter-Switch Link (ISL) is proprietary and should be ignored unless old Cisco switches lack 802.1Q."
+    },
+    {
+      "id": "net-ch5-012",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 2,
+      "question": "What does Cisco's VTP do?",
+      "choix": [
+        "Exchanges VLAN configuration changes",
+        "Elects the root bridge of the tree",
+        "Negotiates 802.1Q on the trunk link",
+        "Tags each frame with its VLAN ID"
+      ],
+      "reponse": 0,
+      "explication": "VTP is a switch-to-switch and switch-to-router management protocol that exchanges VLAN configuration changes."
+    },
+    {
+      "id": "net-ch5-013",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 3,
+      "question": "Which DTP combination should be avoided?",
+      "choix": [
+        "Trunk on one side and trunk on the other side",
+        "Off on both sides of the link between switches",
+        "Desirable on both of the sides of the link",
+        "Nonegotiate on one side, auto on the other"
+      ],
+      "reponse": 3,
+      "explication": "Nonegotiate + off and nonegotiate + auto result in an 802.1Q mode mismatch."
+    },
+    {
+      "id": "net-ch5-014",
+      "theme": "Ch5 · Switching protocols (STP, VLAN)",
+      "niveau": 1,
+      "question": "What does the Cisco Dynamic Trunk Protocol (DTP) negotiate?",
+      "choix": [
+        "The STP root bridge",
+        "The VLAN names",
+        "Enabling or disabling 802.1Q",
+        "The IP address of the switch"
+      ],
+      "reponse": 2,
+      "explication": "DTP lets a switch negotiate with the remote side to enable or disable 802.1Q."
+    },
+    {
+      "id": "net-ch6-001",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Where are interior routing protocols used?",
+      "choix": [
+        "Only between ISPs",
+        "Between autonomous systems",
+        "Only on switches",
+        "Within an autonomous system"
+      ],
+      "reponse": 3,
+      "explication": "Interior protocols are used within an AS; exterior protocols between ASes."
+    },
+    {
+      "id": "net-ch6-002",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which is a definition of an autonomous system?",
+      "choix": [
+        "A switch that runs the Spanning Tree Protocol",
+        "A host configured with a static IP address",
+        "A router with its own redundant power supply",
+        "Networks under one administrative control"
+      ],
+      "reponse": 3,
+      "explication": "An AS is a network or set of networks under the administrative control of a single entity."
+    },
+    {
+      "id": "net-ch6-003",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which factor is NOT used by routing protocols to determine the best route?",
+      "choix": [
+        "Load",
+        "Delay",
+        "Hop count",
+        "Redundancy"
+      ],
+      "reponse": 3,
+      "explication": "Metrics in the course: bandwidth, delay, load, reliability, hop count, cost. Redundancy is not one."
+    },
+    {
+      "id": "net-ch6-004",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which metric measures the number of routers a packet goes through?",
+      "choix": [
+        "Load",
+        "Delay",
+        "Hop count",
+        "Bandwidth"
+      ],
+      "reponse": 2,
+      "explication": "Hop count = number of routers a packet must travel through before reaching the destination network."
+    },
+    {
+      "id": "net-ch6-005",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What can happen when routing protocols converge slowly?",
+      "choix": [
+        "Routing stability",
+        "Routing optimization",
+        "Routing surge",
+        "Routing loops"
+      ],
+      "reponse": 3,
+      "explication": "Routing algorithms that converge slowly can cause routing loops or network outages."
+    },
+    {
+      "id": "net-ch6-006",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "What is convergence?",
+      "choix": [
+        "Compressing the routing table entries",
+        "Merging two separate networks into one",
+        "All routers agreeing on optimal routes",
+        "Joining two VLANs on the same switch"
+      ],
+      "reponse": 2,
+      "explication": "Convergence is the process of agreement, by all routers, on optimal routes."
+    },
+    {
+      "id": "net-ch6-007",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "How does a distance-vector router share its routing information?",
+      "choix": [
+        "It sends LSAs only when a link changes",
+        "It floods its topology database once",
+        "It waits for neighbours to ask for it",
+        "It periodically broadcasts its whole table"
+      ],
+      "reponse": 3,
+      "explication": "A distance-vector router transmits its routing table periodically (e.g. every 30 s) via broadcast."
+    },
+    {
+      "id": "net-ch6-008",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "When do link-state routers send updates?",
+      "choix": [
+        "Every 30 seconds",
+        "Only when the router reboots",
+        "Every 90 seconds",
+        "Only when there is a change"
+      ],
+      "reponse": 3,
+      "explication": "Link-state routers send updates only when there is a change, as link-state advertisements (LSAs)."
+    },
+    {
+      "id": "net-ch6-009",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which algorithm do link-state protocols apply to find shortest paths?",
+      "choix": [
+        "Bellman-Ford algorithm",
+        "Spanning Tree algorithm",
+        "Dijkstra's algorithm",
+        "Round-robin algorithm"
+      ],
+      "reponse": 2,
+      "explication": "Link-state algorithms apply Dijkstra's shortest-path algorithm on their graph of the internetwork."
+    },
+    {
+      "id": "net-ch6-010",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "How do link-state algorithms view the internetwork?",
+      "choix": [
+        "As a single broadcast domain",
+        "As a graph",
+        "As a tree of VLANs",
+        "As a list"
+      ],
+      "reponse": 1,
+      "explication": "Distance-vector algorithms keep a list; link-state algorithms think of the internetwork as a graph."
+    },
+    {
+      "id": "net-ch6-011",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which of the following routing protocols is NOT classless?",
+      "choix": [
+        "RIPv2",
+        "RIP",
+        "BGP",
+        "EIGRP"
+      ],
+      "reponse": 1,
+      "explication": "RIP (v1) and IGRP are classful; RIPv2, EIGRP, OSPF, IS-IS and BGP are classless."
+    },
+    {
+      "id": "net-ch6-012",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What do classful routing protocols NOT include in route advertisements?",
+      "choix": [
+        "The subnet mask",
+        "The destination network",
+        "The next hop",
+        "The metric"
+      ],
+      "reponse": 0,
+      "explication": "Classful protocols do not include the subnet mask; consistency of masks is assumed."
+    },
+    {
+      "id": "net-ch6-013",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "What is RIP's metric?",
+      "choix": [
+        "Hop count",
+        "Bandwidth only",
+        "Cost",
+        "Composite metric"
+      ],
+      "reponse": 0,
+      "explication": "RIP uses a single routing metric, hop count."
+    },
+    {
+      "id": "net-ch6-014",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "What is RIP's maximum hop count?",
+      "choix": [
+        "255",
+        "100",
+        "16",
+        "15"
+      ],
+      "reponse": 3,
+      "explication": "RIP's maximum hop count is 15; IGRP raised it to 255."
+    },
+    {
+      "id": "net-ch6-015",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "How often does RIP broadcast its routing table?",
+      "choix": [
+        "Every 90 seconds",
+        "Only on change",
+        "Every 60 seconds",
+        "Every 30 seconds"
+      ],
+      "reponse": 3,
+      "explication": "RIP broadcasts its routing table every 30 seconds, 25 routes per packet."
+    },
+    {
+      "id": "net-ch6-016",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which feature does RIPv2 add to RIP?",
+      "choix": [
+        "It raises the hop limit up to 255 hops",
+        "It uses a composite bandwidth metric",
+        "It runs Dijkstra's algorithm on a graph",
+        "It includes the subnet mask in updates"
+      ],
+      "reponse": 3,
+      "explication": "RIPv2 includes the subnet mask (prefix routing, VLSM) and simple authentication."
+    },
+    {
+      "id": "net-ch6-017",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What is the most significant improvement of IGRP over RIP?",
+      "choix": [
+        "255 maximum hop count",
+        "Broadcasting every 30 seconds",
+        "30-second update timer",
+        "Single routing metric"
+      ],
+      "reponse": 0,
+      "explication": "IGRP solved RIP's 15-hop limit (255 hops), its single metric and its 30 s timer (90 s).",
+      "piege": "30 s timer, single metric and broadcasting every 30 s describe RIP itself."
+    },
+    {
+      "id": "net-ch6-018",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which values does IGRP combine into a composite metric?",
+      "choix": [
+        "Delay and the hop count",
+        "Cost and the AS path list",
+        "Hop count and path cost",
+        "Bandwidth, load and delay"
+      ],
+      "reponse": 3,
+      "explication": "IGRP combines values for bandwidth, load and delay to create a composite metric."
+    },
+    {
+      "id": "net-ch6-019",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 3,
+      "question": "Which of these is NOT an EIGRP improvement listed in the course?",
+      "choix": [
+        "Incremental updates with only the changes",
+        "Fast adjustment to changes in the internetwork",
+        "A metric representing the cost of a given path",
+        "Updates that are delivered reliably"
+      ],
+      "reponse": 2,
+      "explication": "A metric representing the cost of a path describes link-state protocols such as OSPF and IS-IS."
+    },
+    {
+      "id": "net-ch6-020",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "How many bits does the EIGRP metric use?",
+      "choix": [
+        "32 bits",
+        "16 bits",
+        "24 bits",
+        "64 bits"
+      ],
+      "reponse": 0,
+      "explication": "EIGRP uses the same metric as IGRP with more granularity: 32 bits instead of 24."
+    },
+    {
+      "id": "net-ch6-021",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 3,
+      "question": "Which protocols allow unequal-cost load balancing?",
+      "choix": [
+        "BGP and OSPF",
+        "RIP and RIPv2",
+        "IGRP and EIGRP",
+        "OSPF and IS-IS"
+      ],
+      "reponse": 2,
+      "explication": "If IGRP or Enhanced IGRP routing is used, unequal-cost load balancing is possible."
+    },
+    {
+      "id": "net-ch6-022",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "In OSPF, which cost value makes a path preferred?",
+      "choix": [
+        "Highest",
+        "Moderate",
+        "Null",
+        "Lowest"
+      ],
+      "reponse": 3,
+      "explication": "The lower the cost, the more likely the interface is used to forward traffic."
+    },
+    {
+      "id": "net-ch6-023",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What is the default OSPF cost of a 100 Mbit/s interface on a Cisco router?",
+      "choix": [
+        "19",
+        "100",
+        "10",
+        "1"
+      ],
+      "reponse": 3,
+      "explication": "Cost = 100,000,000 / bandwidth: 10^8 / 10^8 = 1."
+    },
+    {
+      "id": "net-ch6-024",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 3,
+      "question": "What is the default OSPF cost of a 10 Mbit/s Ethernet interface on a Cisco router?",
+      "choix": [
+        "10",
+        "1",
+        "1000",
+        "100"
+      ],
+      "reponse": 0,
+      "explication": "Cost = 100,000,000 / 10,000,000 = 10."
+    },
+    {
+      "id": "net-ch6-025",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which RFC defines OSPF?",
+      "choix": [
+        "RFC 2460",
+        "RFC 1878",
+        "RFC 2328",
+        "RFC 791"
+      ],
+      "reponse": 2,
+      "explication": "OSPF is an open standard defined in RFC 2328. RFC 1878 lists subnet masks."
+    },
+    {
+      "id": "net-ch6-026",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What is the name of the OSPF central backbone?",
+      "choix": [
+        "Level 2",
+        "Area 0",
+        "AS 0",
+        "Area 1"
+      ],
+      "reponse": 1,
+      "explication": "OSPF has a central backbone (Area Zero) that physically attaches all other areas through ABRs."
+    },
+    {
+      "id": "net-ch6-027",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Compared to OSPF, IS-IS is described as all of these EXCEPT:",
+      "choix": [
+        "Efficient",
+        "Scalable",
+        "Flexible",
+        "Intelligent"
+      ],
+      "reponse": 3,
+      "explication": "IS-IS is similar to OSPF but somewhat more flexible, efficient and scalable."
+    },
+    {
+      "id": "net-ch6-028",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Who designed IS-IS?",
+      "choix": [
+        "Cisco",
+        "The ISO",
+        "The IETF",
+        "The IEEE"
+      ],
+      "reponse": 1,
+      "explication": "IS-IS was designed by the ISO for the OSI protocols; Integrated IS-IS also handles IP."
+    },
+    {
+      "id": "net-ch6-029",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "In IS-IS, which routers route between areas?",
+      "choix": [
+        "Level 2 routers",
+        "Designated routers",
+        "Area Border Routers",
+        "Level 1 routers"
+      ],
+      "reponse": 0,
+      "explication": "Level 1 routers route within an area; Level 2 routers route between areas and form the backbone."
+    },
+    {
+      "id": "net-ch6-030",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 3,
+      "question": "Which statement concerning BGP is true?",
+      "choix": [
+        "It transmits an ordered list of autonomous systems",
+        "It extends its backbone by adding Level 2 routers",
+        "It combines bandwidth, load and delay into one metric",
+        "It uses hop count with a maximum value of 15 hops"
+      ],
+      "reponse": 0,
+      "explication": "BGP is a distance-vector protocol but transmits an ordered list of ASes rather than a hop count.",
+      "piege": "The other options describe IGRP, RIP and IS-IS."
+    },
+    {
+      "id": "net-ch6-031",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 1,
+      "question": "Which protocol is usually considered an exterior routing protocol?",
+      "choix": [
+        "RIP",
+        "EIGRP",
+        "OSPF",
+        "BGP"
+      ],
+      "reponse": 3,
+      "explication": "BGP is used on the Internet among large ISPs and major companies, between autonomous systems."
+    },
+    {
+      "id": "net-ch6-032",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "Which protocol keeps neighbours' routing tables to use as feasible successors?",
+      "choix": [
+        "BGP",
+        "RIP",
+        "EIGRP",
+        "OSPF"
+      ],
+      "reponse": 2,
+      "explication": "EIGRP keeps track of neighbours' routing tables and uses them as feasible successors."
+    },
+    {
+      "id": "net-ch6-033",
+      "theme": "Ch6 · Routing protocols",
+      "niveau": 2,
+      "question": "What tool helps match routing protocols to a customer's goals?",
+      "choix": [
+        "A decision table",
+        "A routing table",
+        "A switching table",
+        "A truth table"
+      ],
+      "reponse": 0,
+      "explication": "A decision table matches protocols to the customer's critical goals and other goals."
+    },
+    {
+      "id": "net-ch7-001",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "Which transport protocol supports reliability?",
+      "choix": [
+        "IP",
+        "TCP",
+        "UDP",
+        "ICMP"
+      ],
+      "reponse": 1,
+      "explication": "TCP supports reliability while UDP doesn't."
+    },
+    {
+      "id": "net-ch7-002",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "How many bytes of overhead does the TCP header add?",
+      "choix": [
+        "8 bytes",
+        "16 bytes",
+        "32 bytes",
+        "20 bytes"
+      ],
+      "reponse": 3,
+      "explication": "TCP adds 20 bytes of overhead; UDP only 8 bytes."
+    },
+    {
+      "id": "net-ch7-003",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "How many bytes of overhead does the UDP header add?",
+      "choix": [
+        "4 bytes",
+        "8 bytes",
+        "12 bytes",
+        "20 bytes"
+      ],
+      "reponse": 1,
+      "explication": "UDP adds only 8 bytes of overhead."
+    },
+    {
+      "id": "net-ch7-004",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "What are the pieces of communication in UDP called?",
+      "choix": [
+        "Datagrams",
+        "Segments",
+        "Packets",
+        "Frames"
+      ],
+      "reponse": 0,
+      "explication": "The pieces of communication in UDP are called datagrams."
+    },
+    {
+      "id": "net-ch7-005",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which is NOT one of the three TCP reliability operations?",
+      "choix": [
+        "Encrypting all the segments",
+        "Retransmitting unacknowledged data",
+        "Acknowledging received data",
+        "Numbering and tracking segments"
+      ],
+      "reponse": 0,
+      "explication": "TCP reliability relies on numbering/tracking segments, acknowledging data and retransmitting unacknowledged data."
+    },
+    {
+      "id": "net-ch7-006",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which TCP flag is used to terminate a connection?",
+      "choix": [
+        "SYN",
+        "FIN",
+        "RST",
+        "URG"
+      ],
+      "reponse": 1,
+      "explication": "When a side has no more data to send, it sends a segment with the FIN flag set."
+    },
+    {
+      "id": "net-ch7-007",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "How many steps does the TCP connection establishment take?",
+      "choix": [
+        "Two",
+        "Three",
+        "Five",
+        "Four"
+      ],
+      "reponse": 1,
+      "explication": "TCP connections are established with a three-way handshake (SYN, SYN-ACK, ACK)."
+    },
+    {
+      "id": "net-ch7-008",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "What does the TCP window size field indicate?",
+      "choix": [
+        "Total size of the TCP header in bytes",
+        "Bytes the receiver can accept at once",
+        "Number of segments that were already sent",
+        "Time to wait before a retransmission"
+      ],
+      "reponse": 1,
+      "explication": "The window size is the number of bytes the destination can accept and process at one time."
+    },
+    {
+      "id": "net-ch7-009",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 3,
+      "question": "How is the TCP initial sequence number (ISN) chosen?",
+      "choix": [
+        "Equal to the source port",
+        "Given by the server's DNS",
+        "Randomly during session setup",
+        "Always set to zero"
+      ],
+      "reponse": 2,
+      "explication": "The ISN is randomly chosen during setup, then incremented by the number of transmitted bytes."
+    },
+    {
+      "id": "net-ch7-010",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which application is better suited to UDP?",
+      "choix": [
+        "Web browsing",
+        "Databases",
+        "VoIP",
+        "Email"
+      ],
+      "reponse": 2,
+      "explication": "Live audio/video and VoIP tolerate some loss but need little delay: UDP. Email, web and databases use TCP."
+    },
+    {
+      "id": "net-ch7-011",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which pair of applications are simple request/reply applications using UDP?",
+      "choix": [
+        "SNMP and HTTPS",
+        "DNS and DHCP",
+        "HTTP and FTP",
+        "SMTP and POP"
+      ],
+      "reponse": 1,
+      "explication": "DNS and DHCP are simple request and reply applications that use UDP."
+    },
+    {
+      "id": "net-ch7-012",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "In UDP, what port does the client use as source port?",
+      "choix": [
+        "The same as the destination port",
+        "Always port 53",
+        "A dynamically selected port",
+        "The server's well-known port"
+      ],
+      "reponse": 2,
+      "explication": "The UDP client process dynamically selects a source port; the destination is the server's well-known port."
+    },
+    {
+      "id": "net-ch7-013",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "The TCP/IP application layer performs the functions of which OSI layers?",
+      "choix": [
+        "Layers 3 and 4",
+        "The upper three layers",
+        "The lower three layers",
+        "Only the application layer"
+      ],
+      "reponse": 1,
+      "explication": "The TCP/IP application layer covers OSI application, presentation and session layers."
+    },
+    {
+      "id": "net-ch7-014",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "In a peer-to-peer network, which statement is true?",
+      "choix": [
+        "A dedicated server is always required",
+        "Each peer can act as client and server",
+        "Only one device can be a server",
+        "Clients never share resources"
+      ],
+      "reponse": 1,
+      "explication": "In P2P, every peer can function as both server and client; roles are set per request."
+    },
+    {
+      "id": "net-ch7-015",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "Which port does an SMTP client connect to?",
+      "choix": [
+        "Port 21",
+        "Port 80",
+        "Port 25",
+        "Port 110"
+      ],
+      "reponse": 2,
+      "explication": "An SMTP client sends an email by connecting to an SMTP server on port 25."
+    },
+    {
+      "id": "net-ch7-016",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "Which TCP port do POP requests use?",
+      "choix": [
+        "25",
+        "110",
+        "20",
+        "143"
+      ],
+      "reponse": 1,
+      "explication": "Email clients direct their POP requests to mail servers on TCP port 110."
+    },
+    {
+      "id": "net-ch7-017",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which email protocol keeps messages on the server until the user deletes them?",
+      "choix": [
+        "FTP",
+        "POP",
+        "IMAP",
+        "SMTP"
+      ],
+      "reponse": 2,
+      "explication": "With IMAP, originals stay on the server; POP downloads messages and removes them from the server."
+    },
+    {
+      "id": "net-ch7-018",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "Which TCP port does FTP use for control traffic?",
+      "choix": [
+        "21",
+        "20",
+        "25",
+        "110"
+      ],
+      "reponse": 0,
+      "explication": "The client opens the control connection on TCP port 21 and the data connection on TCP port 20."
+    },
+    {
+      "id": "net-ch7-019",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "How many connections does FTP require between client and server?",
+      "choix": [
+        "Four",
+        "One",
+        "Three",
+        "Two"
+      ],
+      "reponse": 3,
+      "explication": "FTP needs one connection for commands and replies, and another for the actual file transfer."
+    },
+    {
+      "id": "net-ch7-020",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 2,
+      "question": "What does HTTPS add to HTTP?",
+      "choix": [
+        "Faster loading of the web pages",
+        "Compression of the page images",
+        "A second data connection for files",
+        "Authentication and encryption"
+      ],
+      "reponse": 3,
+      "explication": "HTTP is not secure; HTTPS uses authentication and encryption to secure data."
+    },
+    {
+      "id": "net-ch7-021",
+      "theme": "Ch7 · Transport & application",
+      "niveau": 1,
+      "question": "Which HTTP request does a browser send to get a web page?",
+      "choix": [
+        "GET",
+        "PUT",
+        "FETCH",
+        "POST"
+      ],
+      "reponse": 0,
+      "explication": "The browser sends a GET request to the server's IP address and asks for the file."
+    }
+  ]
+}
