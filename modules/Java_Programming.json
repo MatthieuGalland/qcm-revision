@@ -1,0 +1,1903 @@
+{
+ "titre": "Java Programming · Classes, Exceptions, Collections",
+ "matiere": "Create a class · Create an exception · Collections · Sorting · Iterator",
+ "questions": [
+  {
+   "id": "jav-cls-001",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "What is true about a constructor?",
+   "choix": [
+    "It always returns void",
+    "It must be declared static",
+    "It is mandatory in a class",
+    "It has no return type"
+   ],
+   "reponse": 3,
+   "explication": "A constructor has the name of the class and no return type at all, not even `void`. If none is written, the compiler adds a default one.",
+   "piege": "Writing `void` in front turns it into an ordinary method."
+  },
+  {
+   "id": "jav-cls-002",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "What is the visibility of a member declared without any access modifier?",
+   "choix": [
+    "Public",
+    "Package",
+    "Protected",
+    "Private"
+   ],
+   "reponse": 1,
+   "explication": "Without a modifier, a member is package-private: only the classes of the same package can access it.",
+   "piege": "The default is not `private`."
+  },
+  {
+   "id": "jav-cls-003",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What happens at line 8?",
+   "code": "public class Book {\n    private String name;\n\n    public Book(String name) { this.name = name; }\n\n    public static void main(String[] args) {\n        Book a = new Book(\"Java\");\n        Book b = new Book();\n    }\n}",
+   "choix": [
+    "name is set to \"\"",
+    "name is set to null",
+    "Compilation error",
+    "Runtime exception"
+   ],
+   "reponse": 2,
+   "explication": "As soon as one constructor is written, the compiler no longer adds the no-arg default constructor. `new Book()` has no matching constructor."
+  },
+  {
+   "id": "jav-cls-004",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "public class Main {\n    static int count = 0;\n\n    Main() { count++; }\n\n    public static void main(String[] args) {\n        Main a = new Main();\n        Main b = new Main();\n        Main c = new Main();\n        System.out.println(a.count + \" \" + c.count);\n    }\n}",
+   "choix": [
+    "3 1",
+    "1 1",
+    "3 3",
+    "1 3"
+   ],
+   "reponse": 2,
+   "explication": "`count` is static: there is one single variable shared by all the objects. Three constructors ran, so it is 3 whichever object is used to read it."
+  },
+  {
+   "id": "jav-cls-005",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Which statement about the keyword `this` is false?",
+   "choix": [
+    "It is only usable in a constructor",
+    "It can designate an attribute of a class",
+    "It refers to the current object instance",
+    "It can designate a method of a class"
+   ],
+   "reponse": 0,
+   "explication": "`this` refers to the current object and can be used in any instance method or constructor, to designate an attribute or a method."
+  },
+  {
+   "id": "jav-cls-006",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Which method is a correct mutator for `private double grade;`?",
+   "choix": [
+    "`public void setGrade(double grade) { grade = this.grade; }`",
+    "`private void setGrade(double g) { this.grade = g; }`",
+    "`public void setGrade(double grade) { this.grade = grade; }`",
+    "`public double setGrade() { return this.grade; }`"
+   ],
+   "reponse": 2,
+   "explication": "A mutator is public, returns `void`, takes the new value as a parameter and assigns it to the attribute with `this.grade = grade;`.",
+   "piege": "`grade = this.grade;` copies the attribute into the parameter: the wrong direction."
+  },
+  {
+   "id": "jav-cls-007",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "class Vehicle {\n    Vehicle() { System.out.print(\"vehicle \"); }\n}\n\nclass Car extends Vehicle {\n    Car() { System.out.print(\"car\"); }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        new Car();\n    }\n}",
+   "choix": [
+    "vehicle",
+    "vehicle car",
+    "car",
+    "car vehicle"
+   ],
+   "reponse": 1,
+   "explication": "A constructor always starts by calling the parent constructor (an implicit `super();`). The parent part is built first."
+  },
+  {
+   "id": "jav-cls-008",
+   "theme": "1 · Create a class",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "class Shape {\n    static void info() { System.out.print(\"shape \"); }\n    void name() { System.out.print(\"shape\"); }\n}\n\nclass Circle extends Shape {\n    static void info() { System.out.print(\"circle \"); }\n    void name() { System.out.print(\"circle\"); }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Shape s = new Circle();\n        s.info();\n        s.name();\n    }\n}",
+   "choix": [
+    "circle shape",
+    "circle circle",
+    "shape circle",
+    "shape shape"
+   ],
+   "reponse": 2,
+   "explication": "`info` is static, so it is chosen from the declared type of the variable (`Shape`): static methods are hidden, not overridden. `name` is an instance method: the real object (`Circle`) decides.",
+   "piege": "Check for `static` before answering an output question on inheritance."
+  },
+  {
+   "id": "jav-cls-009",
+   "theme": "1 · Create a class",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Point {\n    int x, y;\n    Point(int x, int y) { this.x = x; this.y = y; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Point> pts = new ArrayList<>();\n        pts.add(new Point(1, 2));\n        System.out.println(pts.contains(new Point(1, 2)));\n    }\n}",
+   "choix": [
+    "Compilation error",
+    "false",
+    "true",
+    "NullPointerException"
+   ],
+   "reponse": 1,
+   "explication": "`Point` does not redefine `equals`, so the version of `Object` is used: it compares references. The two points are two different objects."
+  },
+  {
+   "id": "jav-cls-010",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "This class does not compile because of line 9. Which replacement for line 4 fixes it?",
+   "code": "public class Book {\n    private String title;\n\n    public void Book(String title) {\n        this.title = title;\n    }\n\n    public static void main(String[] args) {\n        Book b = new Book(\"Java\");\n    }\n}",
+   "choix": [
+    "`public Book(String title) {`",
+    "`public new Book(String title) {`",
+    "`public static void Book(String title) {`",
+    "`public Book Book(String title) {`"
+   ],
+   "reponse": 0,
+   "ecrit": [
+    "public Book(String title) {"
+   ],
+   "correction": "public class Book {\n    private String title;\n\n    public Book(String title) {\n        this.title = title;\n    }\n\n    public static void main(String[] args) {\n        Book b = new Book(\"Java\");\n    }\n}",
+   "explication": "With a return type, even `void`, line 4 declares an ordinary method named `Book`, not a constructor. The class then has only the default no-arg constructor and `new Book(\"Java\")` matches nothing."
+  },
+  {
+   "id": "jav-cls-011",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "public class Main {\n    private String title;\n\n    public Main(String title) {\n        title = title;\n    }\n\n    public static void main(String[] args) {\n        Main m = new Main(\"Java\");\n        System.out.println(m.title);\n    }\n}",
+   "choix": [
+    "null",
+    "An empty line",
+    "Compilation error",
+    "Java"
+   ],
+   "reponse": 0,
+   "correction": "public class Main {\n    private String title;\n\n    public Main(String title) {\n        this.title = title;\n    }\n\n    public static void main(String[] args) {\n        Main m = new Main(\"Java\");\n        System.out.println(m.title);\n    }\n}",
+   "explication": "In the constructor, `title = title;` assigns the parameter to itself. The attribute is never set and keeps its default value, `null`. The fix is `this.title = title;`."
+  },
+  {
+   "id": "jav-cls-012",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Line 4 does not compile. Which replacement fixes it?",
+   "code": "public class Book {\n    private String title;\n\n    public getTitle() {\n        return title;\n    }\n}",
+   "choix": [
+    "`public title getTitle() {`",
+    "`public String getTitle() {`",
+    "`public getTitle(String title) {`",
+    "`public void getTitle() {`"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "public String getTitle() {"
+   ],
+   "correction": "public class Book {\n    private String title;\n\n    public String getTitle() {\n        return title;\n    }\n}",
+   "explication": "A method needs a return type. An accessor returns the attribute, so its return type is the type of the attribute: `String`."
+  },
+  {
+   "id": "jav-cls-013",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Which line does not compile?",
+   "code": "class Account {\n    private double balance;\n    public String owner;\n\n    public double getBalance() { return balance; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Account a = new Account();\n        a.owner = \"Lina\";\n        a.balance = 50;\n        System.out.println(a.getBalance());\n    }\n}",
+   "choix": [
+    "Line 13",
+    "Line 10",
+    "Line 12",
+    "Line 11"
+   ],
+   "reponse": 2,
+   "explication": "`balance` is private: it is accessible only inside the class `Account`. `Main` must go through the public methods."
+  },
+  {
+   "id": "jav-cls-014",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "`Shape` is abstract and `Circle extends Shape` is concrete. Which statement compiles?",
+   "choix": [
+    "`Shape s = new Shape();`",
+    "`Shape s = new Circle();`",
+    "`Circle c = new Object();`",
+    "`Circle c = new Shape();`"
+   ],
+   "reponse": 1,
+   "explication": "An abstract class cannot be instantiated, but a variable of its type can refer to an object of a concrete subclass."
+  },
+  {
+   "id": "jav-cls-015",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Which line does not compile?",
+   "code": "public class Student {\n    private final int id;\n\n    public Student(int id) {\n        this.id = id;\n    }\n\n    public void setId(int id) {\n        this.id = id;\n    }\n}",
+   "choix": [
+    "Line 5",
+    "Line 9",
+    "Line 2",
+    "Line 8"
+   ],
+   "reponse": 1,
+   "explication": "A `final` attribute receives its value once. The constructor may assign it (line 5); the mutator of line 9 tries to assign it a second time."
+  },
+  {
+   "id": "jav-cls-016",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "What is a copy constructor?",
+   "choix": [
+    "A constructor added by the compiler by default",
+    "A constructor taking an object of its own class",
+    "A constructor that takes no parameter whatsoever",
+    "A constructor declared with the word `static`"
+   ],
+   "reponse": 1,
+   "explication": "A copy constructor takes as parameter an object of the same type as its class and copies the values of its attributes."
+  },
+  {
+   "id": "jav-cls-017",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "According to the encapsulation principle, how should instance variables be declared?",
+   "choix": [
+    "`private`",
+    "`static`",
+    "`protected`",
+    "`public`"
+   ],
+   "reponse": 0,
+   "explication": "Instance variables must be systematically declared private; other classes read and modify them through accessors and mutators."
+  },
+  {
+   "id": "jav-cls-018",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "In which file must `public class Book` be saved?",
+   "choix": [
+    "Any `.java` file",
+    "`Book.class`",
+    "`Book.java`",
+    "`book.java`"
+   ],
+   "reponse": 2,
+   "explication": "A file contains at most one public class, and the file takes exactly the name of that class, capital letter included."
+  },
+  {
+   "id": "jav-cls-019",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What happens when this class is compiled?",
+   "code": "public class Main {\n    private int pages;\n\n    public static void main(String[] args) {\n        System.out.println(pages);\n    }\n}",
+   "choix": [
+    "It compiles and prints 0",
+    "Error at line 2",
+    "It compiles and prints null",
+    "Error at line 5"
+   ],
+   "reponse": 3,
+   "explication": "`main` is static: it has no current object, so it cannot read the instance variable `pages` directly. It needs an object: `new Main().pages`."
+  },
+  {
+   "id": "jav-cls-020",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "class Book {\n    private String title;\n\n    Book(String title) { this.title = title; }\n\n    @Override\n    public String toString() { return \"Book: \" + title; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Book b = new Book(\"Java\");\n        System.out.println(b);\n    }\n}",
+   "choix": [
+    "Book: Java",
+    "Java",
+    "Book@1b6d3586",
+    "Compilation error"
+   ],
+   "reponse": 0,
+   "explication": "`println(b)` calls `b.toString()` automatically. The class redefines `toString`, so its text is printed instead of the default `ClassName@hash`."
+  },
+  {
+   "id": "jav-cls-021",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "A class `B extends A`; neither declares a constructor. What does `new B()` do?",
+   "choix": [
+    "It creates B but leaves A unallocated",
+    "It creates the object with default values",
+    "It fails at runtime: no constructor exists",
+    "It does not compile: no constructor exists"
+   ],
+   "reponse": 1,
+   "explication": "Both classes receive a default constructor. The object is created; the attributes of A and B are allocated and initialised to the default values of their types."
+  },
+  {
+   "id": "jav-cls-022",
+   "theme": "1 · Create a class",
+   "niveau": 3,
+   "question": "Which line does not compile?",
+   "code": "class Animal {\n    String name;\n    Animal(String name) { this.name = name; }\n}\n\nclass Dog extends Animal {\n    Dog(String name) { }\n}",
+   "choix": [
+    "Line 7",
+    "Line 3",
+    "Line 2",
+    "Line 6"
+   ],
+   "reponse": 0,
+   "correction": "class Animal {\n    String name;\n    Animal(String name) { this.name = name; }\n}\n\nclass Dog extends Animal {\n    Dog(String name) { super(name); }\n}",
+   "explication": "`Animal` has only a constructor with a parameter. The constructor of `Dog` starts with an implicit `super();`, and no such constructor exists. Fix: `super(name);` as first statement."
+  },
+  {
+   "id": "jav-cls-w01",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Write the header (first line, opening brace included) of a public class `Book` that inherits from the class `Item`.",
+   "ecrit": [
+    "public class Book extends Item {"
+   ],
+   "explication": "`public class` + name + `extends` + parent class. `implements` is for interfaces."
+  },
+  {
+   "id": "jav-cls-w02",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Complete the constructor: write the missing statement.",
+   "code": "public class Book {\n    private String title;\n\n    public Book(String title) {\n        ____\n    }\n}",
+   "ecrit": [
+    "this.title = title;"
+   ],
+   "explication": "The parameter hides the attribute of the same name. `this.title` is the attribute, `title` alone is the parameter.",
+   "piege": "`title = title;` compiles but leaves the attribute at `null`."
+  },
+  {
+   "id": "jav-cls-w03",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Write the accessor (getter) of the attribute `private String title;`.",
+   "ecrit": [
+    "public String getTitle() {\n    return title;\n}",
+    "public String getTitle() {\n    return this.title;\n}"
+   ],
+   "explication": "Public, return type = type of the attribute, name `getTitle`, no parameter, one `return`."
+  },
+  {
+   "id": "jav-cls-w04",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Write the mutator (setter) of the attribute `private double price;`. Name the parameter `price`.",
+   "ecrit": [
+    "public void setPrice(double price) {\n    this.price = price;\n}"
+   ],
+   "explication": "Public, `void`, one parameter of the type of the attribute, and `this.price = price;`."
+  },
+  {
+   "id": "jav-cls-w05",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Declare a private class variable (shared by all instances) named `count`, of type `int`, initialised to 0.",
+   "ecrit": [
+    "private static int count = 0;",
+    "static private int count = 0;"
+   ],
+   "explication": "A class variable is declared with `static`. There is one copy for the whole class."
+  },
+  {
+   "id": "jav-cls-w06",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Write the constructor of this class. It receives `title` then `pages` (same names as the attributes) and initialises both attributes, in that order.",
+   "code": "public class Book {\n    private String title;\n    private int pages;\n\n    // constructor here\n}",
+   "ecrit": [
+    "public Book(String title, int pages) {\n    this.title = title;\n    this.pages = pages;\n}"
+   ],
+   "explication": "Same name as the class, no return type, one `this.x = x;` per attribute."
+  },
+  {
+   "id": "jav-cls-w07",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "In the class `Book` (attribute `private String title;`), redefine `toString` so that it returns the title. Include the annotation.",
+   "ecrit": [
+    "@Override\npublic String toString() {\n    return title;\n}",
+    "@Override\npublic String toString() {\n    return this.title;\n}"
+   ],
+   "explication": "`toString` is inherited from `Object`: `public String toString()`, with `@Override` so that the compiler checks the signature.",
+   "piege": "`tostring` or `ToString` would be a new method, not a redefinition."
+  },
+  {
+   "id": "jav-cls-w08",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "The class `Book` has the constructor `Book(String title, int pages)`. Create a `Book` named `b` with the title \"Java\" and 300 pages.",
+   "ecrit": [
+    "Book b = new Book(\"Java\", 300);"
+   ],
+   "explication": "`ClassName objectName = new Constructor(arguments);` with a `String` in double quotes."
+  },
+  {
+   "id": "jav-cls-w09",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Complete the constructor of `Dog` so that it passes `name` to the constructor of `Animal`.",
+   "code": "class Animal {\n    private String name;\n    Animal(String name) { this.name = name; }\n}\n\nclass Dog extends Animal {\n    Dog(String name) {\n        ____\n    }\n}",
+   "ecrit": [
+    "super(name);"
+   ],
+   "explication": "`super(...)` calls the constructor of the parent class. It must be the first statement of the constructor."
+  },
+  {
+   "id": "jav-cls-w10",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Type the exact output of this program.",
+   "code": "public class Main {\n    private static int count = 0;\n    private int id;\n\n    public Main() {\n        count++;\n        id = count * 10;\n    }\n\n    public static void main(String[] args) {\n        Main a = new Main();\n        Main b = new Main();\n        System.out.println(a.id + \" \" + b.id + \" \" + count);\n    }\n}",
+   "ecrit": [
+    "10 20 2"
+   ],
+   "explication": "`count` is shared: 1 after the first constructor, 2 after the second. `id` belongs to each object: 10 for `a`, 20 for `b`."
+  },
+  {
+   "id": "jav-cls-w11",
+   "theme": "1 · Create a class",
+   "niveau": 1,
+   "question": "Line 2 does not compile. Rewrite it correctly.",
+   "code": "public class Book {\n    private int pages\n\n    public int getPages() {\n        return pages;\n    }\n}",
+   "ecrit": [
+    "private int pages;"
+   ],
+   "explication": "Every attribute declaration ends with a semicolon. Without an IDE nothing underlines it for you."
+  },
+  {
+   "id": "jav-cls-w12",
+   "theme": "1 · Create a class",
+   "niveau": 2,
+   "question": "Line 5 does not compile. Rewrite it correctly.",
+   "code": "public class Book {\n    private String title;\n\n    public String getTitle() {\n        return Title;\n    }\n}",
+   "ecrit": [
+    "return title;",
+    "return this.title;"
+   ],
+   "explication": "Java is case-sensitive: `Title` and `title` are two different names, and only `title` is declared."
+  },
+  {
+   "id": "jav-exc-001",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "All exception classes are derived from which class?",
+   "choix": [
+    "`Exception`",
+    "`Throwable`",
+    "`RuntimeException`",
+    "`Error`"
+   ],
+   "reponse": 1,
+   "explication": "`Throwable` is the root of the hierarchy. `Error` and `Exception` both derive from it."
+  },
+  {
+   "id": "jav-exc-002",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "What is required for a checked exception?",
+   "choix": [
+    "Deriving it from the `RuntimeException` class",
+    "Catching it or declaring it with `throws`",
+    "Nothing: handling it is always fully optional",
+    "Catching it inside the `main` method only"
+   ],
+   "reponse": 1,
+   "explication": "A checked exception must be dealt with explicitly by the method (try/catch) or propagated to the caller with a `throws` clause. Otherwise the code does not compile."
+  },
+  {
+   "id": "jav-exc-003",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Which classes are the parents of the unchecked exceptions?",
+   "choix": [
+    "`Error` and `IOException`",
+    "`Error` and `RuntimeException`",
+    "`Exception` and `IOException`",
+    "`Throwable` and `Exception`"
+   ],
+   "reponse": 1,
+   "explication": "Unchecked exceptions derive from `Error` or `RuntimeException`. All the others are checked."
+  },
+  {
+   "id": "jav-exc-004",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "What is the keyword `throw` used for?",
+   "choix": [
+    "Listing exceptions in a header",
+    "Declaring a new exception type",
+    "Throwing an exception explicitly",
+    "Catching an exception object"
+   ],
+   "reponse": 2,
+   "explication": "`throw new X(...)` throws an exception object manually. `throws` (with an s) goes in the method header.",
+   "piege": "`throw` and `throws` are two different keywords."
+  },
+  {
+   "id": "jav-exc-005",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Which declaration creates a custom checked exception?",
+   "choix": [
+    "`class AgeException throws Exception { }`",
+    "`class AgeException extends Exception { }`",
+    "`class AgeException extends RuntimeException { }`",
+    "`class AgeException implements Exception { }`"
+   ],
+   "reponse": 1,
+   "explication": "A custom exception is a class that derives from `Exception` (checked) or `RuntimeException` (unchecked). `Exception` is a class, so it is `extends`."
+  },
+  {
+   "id": "jav-exc-006",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "public class Main {\n    public static void main(String[] args) {\n        try {\n            int x = 10 / 0;\n            System.out.print(\"A \");\n        } catch (ArithmeticException e) {\n            System.out.print(\"B \");\n        } finally {\n            System.out.print(\"C \");\n        }\n        System.out.print(\"D\");\n    }\n}",
+   "choix": [
+    "B D",
+    "B C D",
+    "A B C D",
+    "A C D"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "B C D"
+   ],
+   "explication": "The division throws, so the rest of the try block (A) is skipped. The catch prints B, `finally` always runs (C), then the program continues after the try statement (D)."
+  },
+  {
+   "id": "jav-exc-007",
+   "theme": "2 · Create an exception",
+   "niveau": 3,
+   "question": "What does this program print before it stops?",
+   "code": "public class Main {\n    public static void main(String[] args) {\n        try {\n            String s = null;\n            System.out.print(\"A \");\n            System.out.print(s.length());\n            System.out.print(\"B \");\n        } catch (ArithmeticException e) {\n            System.out.print(\"C \");\n        } finally {\n            System.out.print(\"D \");\n        }\n        System.out.print(\"E\");\n    }\n}",
+   "choix": [
+    "A B D E, no crash",
+    "A C D E, no crash",
+    "A D E, no crash",
+    "A D, then a crash"
+   ],
+   "reponse": 3,
+   "explication": "`s.length()` throws a `NullPointerException`. No catch matches it (`ArithmeticException` is another type), so `finally` runs (D) and the exception leaves `main`: E is never printed and the program ends with a stack trace.",
+   "piege": "`finally` runs even when the exception is not caught."
+  },
+  {
+   "id": "jav-exc-008",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "What is true about this code?",
+   "code": "try {\n    int n = Integer.parseInt(\"abc\");\n} catch (IllegalArgumentException e) {\n    System.out.println(\"general\");\n} catch (NumberFormatException e) {\n    System.out.println(\"number\");\n}",
+   "choix": [
+    "It does not compile: line 3",
+    "It prints \"general\"",
+    "It does not compile: line 5",
+    "It prints \"number\""
+   ],
+   "reponse": 2,
+   "correction": "try {\n    int n = Integer.parseInt(\"abc\");\n} catch (NumberFormatException e) {\n    System.out.println(\"number\");\n} catch (IllegalArgumentException e) {\n    System.out.println(\"general\");\n}",
+   "explication": "`NumberFormatException` is a subclass of `IllegalArgumentException`. The first catch already takes it, so the second can never run: unreachable code, compilation error. Catches go from most specific to most general."
+  },
+  {
+   "id": "jav-exc-009",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "What must follow a `try` block?",
+   "choix": [
+    "Exactly one `catch` block",
+    "A `catch` and a `finally`",
+    "A `catch` or a `finally`",
+    "Nothing: it can stand alone"
+   ],
+   "reponse": 2,
+   "explication": "A try statement needs at least one catch clause or a finally clause. try-catch, try-finally and try-catch-finally are the three legal forms."
+  },
+  {
+   "id": "jav-exc-010",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Line 3 does not compile. Which replacement fixes it?",
+   "code": "public void setAge(int age) throws AgeException {\n    if (age < 0) {\n        throw AgeException(\"Negative age\");\n    }\n    this.age = age;\n}",
+   "choix": [
+    "`new throw AgeException(\"Negative age\");`",
+    "`throw new AgeException(\"Negative age\");`",
+    "`throws new AgeException(\"Negative age\");`",
+    "`throw AgeException.new(\"Negative age\");`"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "throw new AgeException(\"Negative age\");"
+   ],
+   "correction": "public void setAge(int age) throws AgeException {\n    if (age < 0) {\n        throw new AgeException(\"Negative age\");\n    }\n    this.age = age;\n}",
+   "explication": "`throw` is followed by an exception object, and an object is created with `new`."
+  },
+  {
+   "id": "jav-exc-011",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "`AgeException extends Exception`. This method does not compile. Which header fixes it?",
+   "code": "public void setAge(int age) {\n    if (age < 0) {\n        throw new AgeException(\"Negative age\");\n    }\n    this.age = age;\n}",
+   "choix": [
+    "`public void setAge(int age) catch AgeException {`",
+    "`public void setAge(int age) throw AgeException {`",
+    "`public AgeException setAge(int age) {`",
+    "`public void setAge(int age) throws AgeException {`"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "public void setAge(int age) throws AgeException {"
+   ],
+   "explication": "`AgeException` is checked and is not caught inside the method, so the header must declare it with `throws`."
+  },
+  {
+   "id": "jav-exc-012",
+   "theme": "2 · Create an exception",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "class StockException extends Exception {\n    public StockException(String message) { }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        try {\n            throw new StockException(\"empty\");\n        } catch (StockException e) {\n            System.out.println(e.getMessage());\n        }\n    }\n}",
+   "choix": [
+    "null",
+    "Compilation error",
+    "StockException",
+    "empty"
+   ],
+   "reponse": 0,
+   "explication": "The constructor receives the message but never passes it to the parent class. Without `super(message);`, `Throwable` stores nothing and `getMessage()` returns `null`."
+  },
+  {
+   "id": "jav-exc-013",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Which exception does `Integer.parseInt(\"abc\")` throw?",
+   "choix": [
+    "`ArithmeticException`",
+    "`ClassCastException`",
+    "`NumberFormatException`",
+    "`InputFormatException`"
+   ],
+   "reponse": 2,
+   "explication": "`parseInt` throws a `NumberFormatException` when the string is not a valid integer. It is unchecked."
+  },
+  {
+   "id": "jav-exc-014",
+   "theme": "2 · Create an exception",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "class GradeException extends Exception {\n    public GradeException(String message) { super(message); }\n}\n\npublic class Main {\n    static int created = 0;\n    int grade;\n\n    Main(int grade) throws GradeException {\n        if (grade > 20) throw new GradeException(\"too high\");\n        this.grade = grade;\n        created++;\n    }\n\n    public static void main(String[] args) {\n        try {\n            new Main(12);\n            new Main(25);\n            new Main(8);\n        } catch (GradeException e) {\n            System.out.print(e.getMessage() + \" \");\n        }\n        System.out.print(created);\n    }\n}",
+   "choix": [
+    "too high 3",
+    "too high 1",
+    "too high 0",
+    "too high 2"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "too high 1"
+   ],
+   "explication": "The second constructor throws before `created++`, and the rest of the try block is skipped: `new Main(8)` never runs. Only one object was completely created."
+  },
+  {
+   "id": "jav-exc-015",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Which catch clause handles two exception types in one block?",
+   "choix": [
+    "`catch (IOException & SQLException e)`",
+    "`catch (IOException | SQLException e)`",
+    "`catch (IOException || SQLException e)`",
+    "`catch (IOException, SQLException e)`"
+   ],
+   "reponse": 1,
+   "explication": "Since Java 7, a single catch block can handle several types separated by a single vertical bar."
+  },
+  {
+   "id": "jav-exc-016",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Which interface must a resource implement to be used in a try-with-resources?",
+   "choix": [
+    "`AutoCloseable`",
+    "`Serializable`",
+    "`Iterable`",
+    "`Comparable`"
+   ],
+   "reponse": 0,
+   "explication": "Any object that implements `java.lang.AutoCloseable` (which includes `java.io.Closeable`) can be a resource; it is closed automatically at the end of the statement."
+  },
+  {
+   "id": "jav-exc-017",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Where is the `throws` clause written?",
+   "choix": [
+    "Inside the method body",
+    "Inside the catch block",
+    "In the method header",
+    "Before the class name"
+   ],
+   "reponse": 2,
+   "explication": "`throws X` belongs to the header and announces what the method may let out. `throw` is the statement used inside the body."
+  },
+  {
+   "id": "jav-exc-018",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "`StockException extends RuntimeException`. What is true about a method that throws it?",
+   "choix": [
+    "It must be declared `static`",
+    "It must contain a try/catch",
+    "A `throws` clause is mandatory",
+    "No `throws` clause is needed"
+   ],
+   "reponse": 3,
+   "explication": "Exceptions derived from `RuntimeException` are unchecked: the compiler forces neither a catch nor a `throws` clause."
+  },
+  {
+   "id": "jav-exc-019",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Which statement about `finally` is correct?",
+   "choix": [
+    "It must be placed before the catch blocks",
+    "It runs only when no exception has occurred",
+    "It runs only when a catch block has just run",
+    "It runs whether or not an exception occurs"
+   ],
+   "reponse": 3,
+   "explication": "The finally block is always executed after the try block, and after any catch block that ran. It is placed after all the catch clauses."
+  },
+  {
+   "id": "jav-exc-w01",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Write the complete class of a checked exception named `InvalidAgeException`. It has one public constructor that receives a `String` named `message` and passes it to the parent class.",
+   "ecrit": [
+    "public class InvalidAgeException extends Exception {\n    public InvalidAgeException(String message) {\n        super(message);\n    }\n}"
+   ],
+   "explication": "Checked: `extends Exception`. The constructor hands the message to `Throwable` with `super(message);` so that `getMessage()` can return it.",
+   "piege": "Forgetting `extends Exception` makes it an ordinary class that cannot be thrown."
+  },
+  {
+   "id": "jav-exc-w02",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Write the header (first line, opening brace included) of a public unchecked exception named `EmptyStockException`.",
+   "ecrit": [
+    "public class EmptyStockException extends RuntimeException {"
+   ],
+   "explication": "Unchecked exceptions derive from `RuntimeException`: no `throws` clause will be required."
+  },
+  {
+   "id": "jav-exc-w03",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Write the statement that throws an `InvalidAgeException` with the message \"Negative age\".",
+   "ecrit": [
+    "throw new InvalidAgeException(\"Negative age\");"
+   ],
+   "explication": "`throw` + `new` + constructor call + semicolon."
+  },
+  {
+   "id": "jav-exc-w04",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "`InvalidAgeException` is checked. Complete the header.",
+   "code": "public void setAge(int age) ____ {\n    if (age < 0) {\n        throw new InvalidAgeException(\"Negative age\");\n    }\n    this.age = age;\n}",
+   "ecrit": [
+    "throws InvalidAgeException"
+   ],
+   "explication": "The method throws a checked exception without catching it: the header declares it with `throws` and the class name.",
+   "piege": "`throw` without s is the statement, not the clause."
+  },
+  {
+   "id": "jav-exc-w05",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Complete line 3 so that the `InvalidAgeException` is handled. Name the variable `e`.",
+   "code": "try {\n    p.setAge(-5);\n} ____ {\n    System.out.println(e.getMessage());\n}",
+   "ecrit": [
+    "catch (InvalidAgeException e)"
+   ],
+   "explication": "`catch` + in brackets the exception type and a variable name."
+  },
+  {
+   "id": "jav-exc-w06",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Inside `catch (Exception e)`, write the statement that prints the message of the exception on the standard output.",
+   "ecrit": [
+    "System.out.println(e.getMessage());"
+   ],
+   "explication": "`getMessage()` returns the text given to the constructor of the exception."
+  },
+  {
+   "id": "jav-exc-w07",
+   "theme": "2 · Create an exception",
+   "niveau": 1,
+   "question": "Complete the constructor of this exception.",
+   "code": "public class StockException extends Exception {\n    public StockException(String message) {\n        ____\n    }\n}",
+   "ecrit": [
+    "super(message);"
+   ],
+   "explication": "`super(message);` passes the message to the constructor of `Exception`."
+  },
+  {
+   "id": "jav-exc-w08",
+   "theme": "2 · Create an exception",
+   "niveau": 2,
+   "question": "Type the exact output of this program.",
+   "code": "public class Main {\n    static void check(int n) {\n        if (n < 0) {\n            throw new IllegalArgumentException(\"neg\");\n        }\n        System.out.print(\"ok \");\n    }\n\n    public static void main(String[] args) {\n        try {\n            check(1);\n            check(-1);\n            check(2);\n        } catch (IllegalArgumentException e) {\n            System.out.print(e.getMessage() + \" \");\n        } finally {\n            System.out.print(\"end\");\n        }\n    }\n}",
+   "ecrit": [
+    "ok neg end"
+   ],
+   "explication": "`check(1)` prints ok. `check(-1)` throws: `check(2)` is skipped, the catch prints the message, then `finally` prints end."
+  },
+  {
+   "id": "jav-col-001",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "What characterises a `Set`?",
+   "choix": [
+    "It is always kept sorted",
+    "It maps keys to values",
+    "It cannot contain duplicates",
+    "It gives access by index"
+   ],
+   "reponse": 2,
+   "explication": "A Set cannot contain duplicated elements. It has no index; only `SortedSet`/`TreeSet` keeps its elements sorted."
+  },
+  {
+   "id": "jav-col-002",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Which of these is not a class that can be instantiated?",
+   "choix": [
+    "`HashSet`",
+    "`LinkedHashSet`",
+    "`SortedSet`",
+    "`TreeSet`"
+   ],
+   "reponse": 2,
+   "explication": "`SortedSet` is an interface. The classes implementing `Set` are `HashSet`, `LinkedHashSet` and `TreeSet`."
+  },
+  {
+   "id": "jav-col-003",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.HashMap;\nimport java.util.Map;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Map<String, Integer> stock = new HashMap<>();\n        stock.put(\"pear\", 2);\n        stock.put(\"apple\", 5);\n        stock.put(\"pear\", 7);\n        System.out.println(stock.size() + \" \" + stock.get(\"pear\"));\n    }\n}\n",
+   "choix": [
+    "2 7",
+    "2 2",
+    "3 7",
+    "3 2"
+   ],
+   "reponse": 0,
+   "ecrit": [
+    "2 7"
+   ],
+   "explication": "Keys are unique. The second `put(\"pear\", ...)` does not add a pair: it replaces the value 2 by 7."
+  },
+  {
+   "id": "jav-col-004",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> list = new ArrayList<>();\n        list.add(\"b\");\n        list.add(\"a\");\n        list.add(\"b\");\n        Set<String> set = new HashSet<>(list);\n        System.out.println(list.size() + \" \" + set.size());\n    }\n}\n",
+   "choix": [
+    "3 2",
+    "3 3",
+    "2 2",
+    "2 3"
+   ],
+   "reponse": 0,
+   "explication": "A list keeps duplicates: 3 elements. A set refuses them: \"b\" is kept once, 2 elements."
+  },
+  {
+   "id": "jav-col-005",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Which declaration compiles?",
+   "choix": [
+    "`List<Integer> l = new List<>();`",
+    "`ArrayList<Integer> l = new List<>();`",
+    "`List<int> l = new ArrayList<>();`",
+    "`List<Integer> l = new ArrayList<>();`"
+   ],
+   "reponse": 3,
+   "explication": "The type argument must be a class (`Integer`, not `int`), and `List` is an interface: it cannot follow `new`."
+  },
+  {
+   "id": "jav-col-006",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "What does `map.get(key)` return when the key is absent?",
+   "choix": [
+    "`null`",
+    "It throws an exception",
+    "`0`",
+    "An empty string"
+   ],
+   "reponse": 0,
+   "explication": "`get` returns `null` for a missing key. Test with `containsKey` first, or use `getOrDefault`.",
+   "piege": "Storing that `null` in an `int` throws a `NullPointerException`."
+  },
+  {
+   "id": "jav-col-007",
+   "theme": "3 · Use collections",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>();\n        nums.add(10);\n        nums.add(1);\n        nums.add(20);\n        nums.remove(1);\n        System.out.println(nums);\n    }\n}\n",
+   "choix": [
+    "[10, 1, 20]",
+    "[10, 1]",
+    "[1, 20]",
+    "[10, 20]"
+   ],
+   "reponse": 3,
+   "explication": "With an `int` argument, `remove(1)` removes the element at index 1. Here that element happens to be the value 1. To remove by value: `remove(Integer.valueOf(1))`."
+  },
+  {
+   "id": "jav-col-008",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Set<Integer> set = new TreeSet<>();\n        set.add(30);\n        set.add(10);\n        set.add(30);\n        set.add(20);\n        System.out.println(set);\n    }\n}\n",
+   "choix": [
+    "[10, 20, 30, 30]",
+    "[30, 10, 20]",
+    "[30, 10, 30, 20]",
+    "[10, 20, 30]"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "[10, 20, 30]"
+   ],
+   "explication": "A `TreeSet` refuses duplicates and keeps its elements sorted in ascending order."
+  },
+  {
+   "id": "jav-col-009",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Which interface does not extend `Collection`?",
+   "choix": [
+    "`Set`",
+    "`Queue`",
+    "`Map`",
+    "`List`"
+   ],
+   "reponse": 2,
+   "explication": "`List`, `Set` and `Queue` extend `Collection`. `Map` is a separate hierarchy: it stores key/value pairs."
+  },
+  {
+   "id": "jav-col-010",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Line 2 does not compile. Which replacement fixes it?",
+   "code": "Map<String, Integer> stock = new HashMap<>();\nstock.add(\"pear\", 7);\nSystem.out.println(stock.get(\"pear\"));",
+   "choix": [
+    "`stock.set(\"pear\", 7);`",
+    "`stock.put(\"pear\", 7);`",
+    "`stock.insert(\"pear\", 7);`",
+    "`stock.add(\"pear\" = 7);`"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "stock.put(\"pear\", 7);"
+   ],
+   "explication": "A map has no `add` method. A pair is stored with `put(key, value)`."
+  },
+  {
+   "id": "jav-col-011",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Line 3 does not compile. Which replacement fixes it?",
+   "code": "List<String> names = new ArrayList<>();\nnames.add(\"Lina\");\nint n = names.length;",
+   "choix": [
+    "`int n = names.length;`",
+    "`int n = names.count();`",
+    "`int n = names.size();`",
+    "`int n = names.length();`"
+   ],
+   "reponse": 2,
+   "ecrit": [
+    "int n = names.size();"
+   ],
+   "explication": "The number of elements of a collection is `size()`. `length` is for arrays, `length()` for strings."
+  },
+  {
+   "id": "jav-col-012",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Which class refuses duplicates and keeps the order of insertion?",
+   "choix": [
+    "`HashSet`",
+    "`TreeSet`",
+    "`LinkedHashSet`",
+    "`LinkedList`"
+   ],
+   "reponse": 2,
+   "explication": "`LinkedHashSet` = hash table + linked list: no duplicates, insertion order. `HashSet` has no order, `TreeSet` sorts, `LinkedList` accepts duplicates."
+  },
+  {
+   "id": "jav-col-013",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Which of these is not an advantage of generics?",
+   "choix": [
+    "Checking at compile time",
+    "Type safety of the elements",
+    "Faster execution at runtime",
+    "No type casting required"
+   ],
+   "reponse": 2,
+   "explication": "Generics bring type safety, remove casts and move errors to compile time. They do not make the program run faster."
+  },
+  {
+   "id": "jav-col-014",
+   "theme": "3 · Use collections",
+   "niveau": 3,
+   "question": "Which argument does `double sum(List<? extends Number> lst)` reject?",
+   "choix": [
+    "A `List<Number>`",
+    "A `List<Double>`",
+    "A `List<Integer>`",
+    "A `List<String>`"
+   ],
+   "reponse": 3,
+   "explication": "`? extends Number` accepts `Number` and its subclasses. `String` is not a subclass of `Number`: compilation error."
+  },
+  {
+   "id": "jav-col-015",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "According to PECS, which wildcard fits a collection you only read from?",
+   "choix": [
+    "`<? super T>`",
+    "`<? extends T>`",
+    "`<?>` only",
+    "`<T super ?>`"
+   ],
+   "reponse": 1,
+   "explication": "Producer extends, Consumer super: a collection you only pull items from is a producer, so `extends`."
+  },
+  {
+   "id": "jav-col-016",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "In which manner does a `Queue` typically hold its elements?",
+   "choix": [
+    "Random order",
+    "FIFO",
+    "Sorted by key",
+    "LIFO"
+   ],
+   "reponse": 1,
+   "explication": "A Queue holds elements prior to processing in FIFO manner (first in, first out). A Deque supports both FIFO and LIFO."
+  },
+  {
+   "id": "jav-col-017",
+   "theme": "3 · Use collections",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.HashSet;\nimport java.util.Set;\n\nclass Tag {\n    String label;\n    Tag(String label) { this.label = label; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Set<Tag> tags = new HashSet<>();\n        tags.add(new Tag(\"java\"));\n        tags.add(new Tag(\"java\"));\n        System.out.println(tags.size());\n    }\n}",
+   "choix": [
+    "2",
+    "Compilation error",
+    "1",
+    "0"
+   ],
+   "reponse": 0,
+   "explication": "`Tag` redefines neither `equals` nor `hashCode`, so two distinct objects are never considered equal: the `HashSet` keeps both.",
+   "piege": "For a set to see them as duplicates, redefine `equals(Object)` and `hashCode()`."
+  },
+  {
+   "id": "jav-col-018",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Which collection finds a `Student` directly from its id?",
+   "choix": [
+    "`Map<Integer, Student>`",
+    "`Set<Student>`",
+    "`Map<Student, Integer>`",
+    "`List<Student>`"
+   ],
+   "reponse": 0,
+   "explication": "A map associates a unique key (the id) with a value (the student): `get(id)` returns it in one call. The key type comes first."
+  },
+  {
+   "id": "jav-col-019",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Which line does not compile?",
+   "code": "List<String> list = new ArrayList<>();\nlist.add(\"rahul\");\nlist.add(32);\nString s = list.get(0);",
+   "choix": [
+    "Line 3",
+    "Line 2",
+    "Line 4",
+    "Line 1"
+   ],
+   "reponse": 0,
+   "explication": "The list is declared `List<String>`: adding the integer 32 is refused at compile time. This is the type safety of generics."
+  },
+  {
+   "id": "jav-col-w01",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Declare a list of `String` named `names`, created as an empty `ArrayList`.",
+   "ecrit": [
+    "List<String> names = new ArrayList<>();",
+    "List<String> names = new ArrayList<String>();",
+    "ArrayList<String> names = new ArrayList<>();",
+    "ArrayList<String> names = new ArrayList<String>();"
+   ],
+   "explication": "Interface on the left, class after `new`, element type between angle brackets, and the brackets of the constructor.",
+   "piege": "`new ArrayList<>;` without `()` does not compile."
+  },
+  {
+   "id": "jav-col-w02",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Write the import needed to use the class `ArrayList`.",
+   "ecrit": [
+    "import java.util.ArrayList;",
+    "import java.util.*;"
+   ],
+   "explication": "The collections live in the package `java.util`. Without an IDE, nobody adds the imports for you."
+  },
+  {
+   "id": "jav-col-w03",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Declare a map named `stock` whose keys are `String` and values are `Integer`, created as an empty `HashMap`.",
+   "ecrit": [
+    "Map<String, Integer> stock = new HashMap<>();",
+    "Map<String, Integer> stock = new HashMap<String, Integer>();",
+    "HashMap<String, Integer> stock = new HashMap<>();",
+    "HashMap<String, Integer> stock = new HashMap<String, Integer>();"
+   ],
+   "explication": "A map takes two type arguments: key type, then value type. Wrapper class `Integer`, never `int`."
+  },
+  {
+   "id": "jav-col-w04",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "`stock` is a `Map<String, Integer>`. Write the statement that associates the key \"pear\" with the value 7.",
+   "ecrit": [
+    "stock.put(\"pear\", 7);"
+   ],
+   "explication": "`put(key, value)`. If the key already exists, its value is replaced."
+  },
+  {
+   "id": "jav-col-w05",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "Declare a set of `Integer` named `ids`, created as an empty `HashSet`.",
+   "ecrit": [
+    "Set<Integer> ids = new HashSet<>();",
+    "Set<Integer> ids = new HashSet<Integer>();",
+    "HashSet<Integer> ids = new HashSet<>();",
+    "HashSet<Integer> ids = new HashSet<Integer>();"
+   ],
+   "explication": "Same pattern as a list: `Set<Integer> ids = new HashSet<>();`."
+  },
+  {
+   "id": "jav-col-w06",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "`names` is a `List<String>`. Complete the line with the expression that gives its number of elements.",
+   "code": "int n = ____;",
+   "ecrit": [
+    "names.size()"
+   ],
+   "explication": "`size()` for collections; `length` for arrays; `length()` for strings."
+  },
+  {
+   "id": "jav-col-w07",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "`stock` is a `Map<String, Integer>`. Complete the condition: is the key \"pear\" present?",
+   "code": "if (____) {\n    System.out.println(stock.get(\"pear\"));\n}",
+   "ecrit": [
+    "stock.containsKey(\"pear\")"
+   ],
+   "explication": "`containsKey(key)` returns a boolean. It avoids reading a `null` with `get`."
+  },
+  {
+   "id": "jav-col-w08",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Line 1 does not compile. Rewrite it correctly.",
+   "code": "List<int> nums = new ArrayList<>();\nnums.add(4);",
+   "ecrit": [
+    "List<Integer> nums = new ArrayList<>();",
+    "List<Integer> nums = new ArrayList<Integer>();"
+   ],
+   "explication": "A type argument cannot be a primitive type. Use the wrapper class `Integer`; autoboxing converts the `int` values."
+  },
+  {
+   "id": "jav-col-w09",
+   "theme": "3 · Use collections",
+   "niveau": 1,
+   "question": "`names` is a non-empty `List<String>`. Declare a `String` named `first` that receives its first element.",
+   "ecrit": [
+    "String first = names.get(0);"
+   ],
+   "explication": "Access by index with `get`; the first index is 0. No cast is needed thanks to generics."
+  },
+  {
+   "id": "jav-col-w10",
+   "theme": "3 · Use collections",
+   "niveau": 2,
+   "question": "Type the exact output of this program.",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> list = new ArrayList<>();\n        list.add(\"pear\");\n        list.add(\"apple\");\n        list.add(\"pear\");\n        Set<String> set = new TreeSet<>(list);\n        System.out.println(set + \" \" + list.size());\n    }\n}\n",
+   "ecrit": [
+    "[apple, pear] 3"
+   ],
+   "explication": "The `TreeSet` removes the duplicate and sorts alphabetically. The list is unchanged: 3 elements."
+  },
+  {
+   "id": "jav-srt-001",
+   "theme": "4 · Sort a collection",
+   "niveau": 1,
+   "question": "What does `Collections.sort(list)` return?",
+   "choix": [
+    "An iterator placed on the sorted list",
+    "A new sorted copy; the list is unchanged",
+    "Nothing: it sorts the list in place",
+    "The number of swaps that were performed"
+   ],
+   "reponse": 2,
+   "explication": "`Collections.sort` returns `void` and modifies the list it receives. Sort a copy if the original order must be kept."
+  },
+  {
+   "id": "jav-srt-002",
+   "theme": "4 · Sort a collection",
+   "niveau": 1,
+   "question": "Which method does the interface `Comparable<T>` declare?",
+   "choix": [
+    "`int compareTo(T o)`",
+    "`int compare(T a, T b)`",
+    "`boolean equals(T o)`",
+    "`boolean compareTo(T o)`"
+   ],
+   "reponse": 0,
+   "explication": "`Comparable` has one method with one parameter: the object compares itself (`this`) with another one."
+  },
+  {
+   "id": "jav-srt-003",
+   "theme": "4 · Sort a collection",
+   "niveau": 1,
+   "question": "Which method does the interface `Comparator<T>` declare?",
+   "choix": [
+    "`int compareTo(T o)`",
+    "`int compare(T a, T b)`",
+    "`void sort(T a, T b)`",
+    "`boolean compare(T a)`"
+   ],
+   "reponse": 1,
+   "explication": "A comparator is an external object: it receives the two elements to compare."
+  },
+  {
+   "id": "jav-srt-004",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "`a.compareTo(b)` returns a negative number. What does it mean?",
+   "choix": [
+    "`a` comes before `b`",
+    "`a` and `b` are equal",
+    "`a` comes after `b`",
+    "The comparison failed"
+   ],
+   "reponse": 0,
+   "explication": "Negative: `this` comes before the argument. Zero: equal in the order. Positive: after. Only the sign matters."
+  },
+  {
+   "id": "jav-srt-005",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(34, 7, 65, 23));\n        Collections.sort(nums);\n        System.out.print(nums.get(0) + \" \");\n        Collections.sort(nums, Collections.reverseOrder());\n        System.out.print(nums.get(0));\n    }\n}\n",
+   "choix": [
+    "34 23",
+    "65 7",
+    "7 23",
+    "7 65"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "7 65"
+   ],
+   "explication": "The first sort is ascending: the first element is 7. `Collections.reverseOrder()` sorts in descending order: the first element becomes 65."
+  },
+  {
+   "id": "jav-srt-006",
+   "theme": "4 · Sort a collection",
+   "niveau": 3,
+   "question": "What does this code print?",
+   "code": "List<Student> list = new ArrayList<>();\nlist.add(new Student(1, \"Amir\", 8.0));      // id, name, grade\nlist.add(new Student(2, \"Bao\", 15.5));\nlist.add(new Student(3, \"Chloe\", 12.0));\nlist.sort((a, b) -> Double.compare(b.getGrade(), a.getGrade()));\nSystem.out.println(list);                   // toString() returns the name",
+   "choix": [
+    "[Bao, Chloe, Amir]",
+    "[Amir, Bao, Chloe]",
+    "[Chloe, Bao, Amir]",
+    "[Amir, Chloe, Bao]"
+   ],
+   "reponse": 0,
+   "explication": "The lambda compares `b` to `a`: the arguments are swapped, so the order is descending by grade: 15.5, 12.0, 8.0.",
+   "piege": "Swapped arguments in `compare` mean descending order."
+  },
+  {
+   "id": "jav-srt-007",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "`Collections.sort(students);` does not compile with this class. Which replacement for line 1 fixes it?",
+   "code": "public class Student {\n    private String name;\n\n    public int compareTo(Student other) {\n        return name.compareTo(other.name);\n    }\n}",
+   "choix": [
+    "`public class Student extends Comparable<Student> {`",
+    "`public class Student implements Sortable<Student> {`",
+    "`public class Student implements Comparator<Student> {`",
+    "`public class Student implements Comparable<Student> {`"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "public class Student implements Comparable<Student> {"
+   ],
+   "explication": "Writing a method `compareTo` is not enough: the class must declare `implements Comparable<Student>`, otherwise `Collections.sort(list)` refuses the list."
+  },
+  {
+   "id": "jav-srt-008",
+   "theme": "4 · Sort a collection",
+   "niveau": 1,
+   "question": "Line 3 does not compile. Which replacement fixes it?",
+   "code": "List<String> names = new ArrayList<>();\nnames.add(\"Lina\");\nCollection.sort(names);",
+   "choix": [
+    "`names = Collection.sort();`",
+    "`List.sort(names);`",
+    "`Collection.sorted(names);`",
+    "`Collections.sort(names);`"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "Collections.sort(names);",
+    "names.sort(null);"
+   ],
+   "explication": "The utility class is `Collections`, with an s. `Collection` is the interface and has no `sort` method."
+  },
+  {
+   "id": "jav-srt-009",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Which call sorts `students` by descending id?",
+   "choix": [
+    "`students.sort((a, b) -> a.getId() + b.getId());`",
+    "`students.sort((a, b) -> a.getId() - b.getId());`",
+    "`students.sort((a, b) -> b.getId() - a.getId());`",
+    "`students.sort((a) -> a.getId() - a.getId());`"
+   ],
+   "reponse": 2,
+   "explication": "`b - a` is positive when `b` is larger, which places the larger id first: descending. `a - b` gives ascending order."
+  },
+  {
+   "id": "jav-srt-010",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "In which packages are `Comparable` and `Comparator`?",
+   "choix": [
+    "Both are in `java.util`",
+    "`java.lang` and `java.util`",
+    "Both are in `java.lang`",
+    "`java.util` and `java.lang`"
+   ],
+   "reponse": 1,
+   "explication": "`Comparable` is in `java.lang` (no import needed). `Comparator` is in `java.util` and must be imported."
+  },
+  {
+   "id": "jav-srt-011",
+   "theme": "4 · Sort a collection",
+   "niveau": 3,
+   "question": "What does this code print?",
+   "code": "Set<Student> set = new TreeSet<>(\n        (a, b) -> Double.compare(a.getGrade(), b.getGrade()));\nset.add(new Student(1, \"Amir\", 12.0));      // id, name, grade\nset.add(new Student(2, \"Bao\", 15.5));\nset.add(new Student(3, \"Chloe\", 12.0));\nSystem.out.println(set.size());",
+   "choix": [
+    "1",
+    "0",
+    "2",
+    "3"
+   ],
+   "reponse": 2,
+   "explication": "For a `TreeSet`, two elements whose comparison returns 0 are the same element. Amir and Chloe both have 12.0: the second one is not added.",
+   "piege": "To keep everybody, sort a `List` instead."
+  },
+  {
+   "id": "jav-srt-012",
+   "theme": "4 · Sort a collection",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> names = new ArrayList<>(Arrays.asList(\"bob\", \"Zoe\", \"adam\"));\n        Collections.sort(names);\n        System.out.println(names);\n    }\n}\n",
+   "choix": [
+    "[bob, Zoe, adam]",
+    "[adam, bob, Zoe]",
+    "[Zoe, bob, adam]",
+    "[Zoe, adam, bob]"
+   ],
+   "reponse": 3,
+   "explication": "The natural order of `String` compares character codes: capital letters come before lower-case letters."
+  },
+  {
+   "id": "jav-srt-013",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Which argument can be passed to `Collections.sort(...)`?",
+   "choix": [
+    "A `TreeSet<String>`",
+    "A `HashMap<String, String>`",
+    "A `HashSet<String>`",
+    "An `ArrayList<String>`"
+   ],
+   "reponse": 3,
+   "explication": "`Collections.sort` only accepts a `List`. A set is copied into a list first, or replaced by a `TreeSet`."
+  },
+  {
+   "id": "jav-srt-014",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Why would you write a `Comparator` instead of implementing `Comparable`?",
+   "choix": [
+    "To avoid importing `java.util`",
+    "To sort faster than `compareTo`",
+    "To offer several different orders",
+    "To be able to sort a `HashSet`"
+   ],
+   "reponse": 2,
+   "explication": "A class has one `compareTo`, hence one natural order. Comparators are separate objects: one per sorting rule, even for classes you cannot modify."
+  },
+  {
+   "id": "jav-srt-015",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Line 3 does not compile. Why?",
+   "code": "List<Integer> nums = new ArrayList<>(Arrays.asList(3, 1, 2));\nList<Integer> sorted;\nsorted = Collections.sort(nums);",
+   "choix": [
+    "`nums` must be an array",
+    "`Arrays.asList` is unknown",
+    "`Integer` is not comparable",
+    "`sort` returns `void`"
+   ],
+   "reponse": 3,
+   "explication": "`Collections.sort` sorts the list in place and returns nothing: there is no value to assign. Write `Collections.sort(nums);` alone."
+  },
+  {
+   "id": "jav-srt-w01",
+   "theme": "4 · Sort a collection",
+   "niveau": 1,
+   "question": "`names` is a `List<String>`. Write the statement that sorts it in its natural (alphabetical) order.",
+   "ecrit": [
+    "Collections.sort(names);",
+    "names.sort(null);"
+   ],
+   "explication": "`Collections.sort(list)` uses the natural order of the elements (`compareTo`).",
+   "piege": "`Collection.sort` (without s) does not exist."
+  },
+  {
+   "id": "jav-srt-w02",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Write the header (first line, opening brace included) of a public class `Student` whose objects have a natural order.",
+   "ecrit": [
+    "public class Student implements Comparable<Student> {"
+   ],
+   "explication": "The natural order comes from the interface `Comparable<T>`, with the class itself as type argument."
+  },
+  {
+   "id": "jav-srt-w03",
+   "theme": "4 · Sort a collection",
+   "niveau": 3,
+   "question": "`Student implements Comparable<Student>` and has an attribute `private int id;`. Write the method `compareTo` (parameter named `other`) that orders the students by ascending id. Include the annotation.",
+   "ecrit": [
+    "@Override\npublic int compareTo(Student other) {\n    return Integer.compare(id, other.id);\n}",
+    "@Override\npublic int compareTo(Student other) {\n    return Integer.compare(this.id, other.id);\n}",
+    "@Override\npublic int compareTo(Student other) {\n    return id - other.id;\n}",
+    "@Override\npublic int compareTo(Student other) {\n    return this.id - other.id;\n}"
+   ],
+   "explication": "`compareTo` is public, returns an `int` and takes one `Student`. `Integer.compare(id, other.id)` is negative when this id is the smaller one.",
+   "piege": "The parameter type is `Student`, not `Object`: the interface is generic."
+  },
+  {
+   "id": "jav-srt-w04",
+   "theme": "4 · Sort a collection",
+   "niveau": 3,
+   "question": "Complete the call with a lambda expression (parameters `a` and `b`) that sorts the students by ascending grade. `getGrade()` returns a `double`.",
+   "code": "students.sort(____);",
+   "ecrit": [
+    "(a, b) -> Double.compare(a.getGrade(), b.getGrade())",
+    "(Student a, Student b) -> Double.compare(a.getGrade(), b.getGrade())",
+    "Comparator.comparing(Student::getGrade)",
+    "Comparator.comparingDouble(Student::getGrade)"
+   ],
+   "explication": "A `Comparator` has one abstract method, `compare(a, b)`, so a lambda fits. For a `double`, use `Double.compare`; `a` first means ascending."
+  },
+  {
+   "id": "jav-srt-w05",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "`nums` is a `List<Integer>`. Write the statement that sorts it in descending order.",
+   "ecrit": [
+    "Collections.sort(nums, Collections.reverseOrder());",
+    "nums.sort(Collections.reverseOrder());",
+    "nums.sort(Comparator.reverseOrder());",
+    "Collections.sort(nums, Comparator.reverseOrder());"
+   ],
+   "explication": "`Collections.reverseOrder()` is a ready-made comparator: the reverse of the natural order."
+  },
+  {
+   "id": "jav-srt-w06",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "In a class that implements `Comparator<Student>`, write the header (opening brace included) of the method to implement. Name the parameters `a` and `b`.",
+   "ecrit": [
+    "public int compare(Student a, Student b) {"
+   ],
+   "explication": "`Comparator<T>` declares `int compare(T a, T b)`; the implementation must be public."
+  },
+  {
+   "id": "jav-srt-w07",
+   "theme": "4 · Sort a collection",
+   "niveau": 2,
+   "question": "Type the exact output of this program.",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> words = new ArrayList<>(Arrays.asList(\"kiwi\", \"fig\", \"banana\"));\n        words.sort((a, b) -> a.length() - b.length());\n        System.out.println(words);\n    }\n}\n",
+   "ecrit": [
+    "[fig, kiwi, banana]"
+   ],
+   "explication": "The comparator orders by ascending length: 3, 4, 6 characters."
+  },
+  {
+   "id": "jav-itr-001",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Which methods does the interface `Iterator` provide?",
+   "choix": [
+    "`hasNext`, `get`, `delete`",
+    "`first`, `next`, `last`",
+    "`hasNext`, `next`, `remove`",
+    "`next`, `previous`, `size`"
+   ],
+   "reponse": 2,
+   "explication": "`hasNext()` tests, `next()` returns the next element and advances, `remove()` deletes the last element returned."
+  },
+  {
+   "id": "jav-itr-002",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "What does `it.next()` do?",
+   "choix": [
+    "Returns the next element and advances",
+    "Tests whether an element remains",
+    "Returns the element without moving",
+    "Removes the next element of the list"
+   ],
+   "reponse": 0,
+   "explication": "`next()` both returns the next element and moves the cursor. Calling it twice in a turn skips an element."
+  },
+  {
+   "id": "jav-itr-003",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(4, 7, 10));\n        int sum = 0;\n        Iterator<Integer> it = nums.iterator();\n        while (it.hasNext()) {\n            sum += it.next();\n        }\n        System.out.println(sum);\n    }\n}\n",
+   "choix": [
+    "11",
+    "21",
+    "10",
+    "17"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "21"
+   ],
+   "explication": "The loop visits every element once and adds it: 4 + 7 + 10 = 21."
+  },
+  {
+   "id": "jav-itr-004",
+   "theme": "5 · Iterator",
+   "niveau": 3,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> list = new ArrayList<>(Arrays.asList(\"a\", \"b\", \"c\", \"d\"));\n        Iterator<String> it = list.iterator();\n        while (it.hasNext()) {\n            it.next();\n            System.out.print(it.next() + \" \");\n        }\n    }\n}\n",
+   "choix": [
+    "b d",
+    "a b c d",
+    "a c",
+    "b c d"
+   ],
+   "reponse": 0,
+   "ecrit": [
+    "b d"
+   ],
+   "explication": "Each turn calls `next()` twice: the first call consumes an element without printing it, the second prints the following one.",
+   "piege": "With an odd number of elements this loop ends with a `NoSuchElementException`."
+  },
+  {
+   "id": "jav-itr-005",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "What happens when this program runs?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(4, 7, 10, 13));\n        for (Integer n : nums) {\n            if (n % 2 == 0) {\n                nums.remove(n);\n            }\n        }\n        System.out.println(nums);\n    }\n}\n",
+   "choix": [
+    "`ConcurrentModificationException`",
+    "It prints [7, 13] without any error",
+    "`IndexOutOfBoundsException`",
+    "It prints [7, 10, 13] without error"
+   ],
+   "reponse": 0,
+   "explication": "The for-each loop uses a hidden iterator. Removing with `nums.remove` modifies the list behind its back: the next step throws a `ConcurrentModificationException`.",
+   "piege": "Use an explicit iterator and `it.remove()`."
+  },
+  {
+   "id": "jav-itr-006",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "How do you safely remove the current element while iterating?",
+   "choix": [
+    "`list.remove(it);`",
+    "`it.delete();`",
+    "`it.remove();`",
+    "`list.remove(0);`"
+   ],
+   "reponse": 2,
+   "explication": "`Iterator.remove()` removes the element just returned by `next()` and keeps the iterator consistent."
+  },
+  {
+   "id": "jav-itr-007",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "Line 1 does not compile. Which replacement fixes it?",
+   "code": "Iterator<String> it = new Iterator<>(names);\nwhile (it.hasNext()) {\n    System.out.println(it.next());\n}",
+   "choix": [
+    "`Iterator<String> it = names.getIterator();`",
+    "`Iterator<names> it = new Iterator();`",
+    "`Iterator<String> it = names.iterator();`",
+    "`Iterator<String> it = Iterator.of(names);`"
+   ],
+   "reponse": 2,
+   "ecrit": [
+    "Iterator<String> it = names.iterator();"
+   ],
+   "explication": "`Iterator` is an interface: it cannot be instantiated with `new`. The collection provides its iterator with the method `iterator()`."
+  },
+  {
+   "id": "jav-itr-008",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Line 2 does not compile. Which replacement fixes it?",
+   "code": "Iterator<String> it = names.iterator();\nwhile (it.next()) {\n    System.out.println(it.next());\n}",
+   "choix": [
+    "`while (it.next() != null) {`",
+    "`while (it.size() > 0) {`",
+    "`while (it.hasMore()) {`",
+    "`while (it.hasNext()) {`"
+   ],
+   "reponse": 3,
+   "ecrit": [
+    "while (it.hasNext()) {"
+   ],
+   "explication": "`while` needs a boolean. `next()` returns an element (here a `String`); the test is `hasNext()`."
+  },
+  {
+   "id": "jav-itr-009",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "What does `ListIterator` add compared with `Iterator`?",
+   "choix": [
+    "Iterating over a `HashSet` in order",
+    "Moving backwards with `previous()`",
+    "Iterating over the pairs of a `Map`",
+    "Sorting the list while iterating"
+   ],
+   "reponse": 1,
+   "explication": "`ListIterator` exists only for lists; it adds `hasPrevious()`/`previous()`, `set()` and `add()`."
+  },
+  {
+   "id": "jav-itr-010",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "`map` is a `Map<String, Integer>`. Which expression gives an iterator over its key/value pairs?",
+   "choix": [
+    "`map.iterator()`",
+    "`map.pairs().iterator()`",
+    "`map.entrySet().iterator()`",
+    "`map.values().entries()`"
+   ],
+   "reponse": 2,
+   "explication": "A map has no `iterator()` method. You iterate over one of its views: `keySet()`, `values()` or `entrySet()` (pairs of type `Map.Entry<K, V>`)."
+  },
+  {
+   "id": "jav-itr-011",
+   "theme": "5 · Iterator",
+   "niveau": 3,
+   "question": "What happens when this program runs?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> list = new ArrayList<>(Arrays.asList(\"a\", \"b\"));\n        Iterator<String> it = list.iterator();\n        it.remove();\n        System.out.println(list);\n    }\n}\n",
+   "choix": [
+    "`IllegalStateException`",
+    "It prints [a, b]",
+    "`NullPointerException`",
+    "It prints [b]"
+   ],
+   "reponse": 0,
+   "explication": "`remove()` deletes the last element returned by `next()`. No `next()` has been called yet, so there is nothing to remove."
+  },
+  {
+   "id": "jav-itr-012",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "Which interface must a class implement to be usable in a for-each loop?",
+   "choix": [
+    "`Cloneable`",
+    "`Iterator`",
+    "`Comparable`",
+    "`Iterable`"
+   ],
+   "reponse": 3,
+   "explication": "The for-each loop calls `iterator()`, the method of the interface `Iterable`. All collections implement it."
+  },
+  {
+   "id": "jav-itr-013",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(4, 7, 10, 13));\n        Iterator<Integer> it = nums.iterator();\n        while (it.hasNext()) {\n            if (it.next() % 2 == 0) {\n                it.remove();\n            }\n        }\n        System.out.println(nums);\n    }\n}\n",
+   "choix": [
+    "[4, 7, 10, 13]",
+    "[7, 13]",
+    "[4, 10]",
+    "[7, 10, 13]"
+   ],
+   "reponse": 1,
+   "ecrit": [
+    "[7, 13]"
+   ],
+   "explication": "Each turn calls `next()` once; when the element is even, `it.remove()` deletes it. The odd numbers remain."
+  },
+  {
+   "id": "jav-itr-014",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Which import does the type `Iterator` require?",
+   "choix": [
+    "`import java.io.Iterator;`",
+    "`import java.lang.Iterator;`",
+    "None: it is in `java.lang`",
+    "`import java.util.Iterator;`"
+   ],
+   "reponse": 3,
+   "explication": "`Iterator` and `ListIterator` are in `java.util`, like the collections."
+  },
+  {
+   "id": "jav-itr-015",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "What is the output of the following program?",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<String> list = new ArrayList<>(Arrays.asList(\"a\", \"b\", \"c\"));\n        ListIterator<String> li = list.listIterator(list.size());\n        while (li.hasPrevious()) {\n            System.out.print(li.previous());\n        }\n    }\n}\n",
+   "choix": [
+    "cb",
+    "ba",
+    "abc",
+    "cba"
+   ],
+   "reponse": 3,
+   "explication": "`listIterator(list.size())` places the cursor after the last element; `previous()` then walks back to the first."
+  },
+  {
+   "id": "jav-itr-016",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "Why can't a `Set` be traversed with `for (int i = 0; ...)` and `get(i)`?",
+   "choix": [
+    "A set is immutable",
+    "A set is always empty",
+    "A set has no index",
+    "A set stores pairs"
+   ],
+   "reponse": 2,
+   "explication": "A `Set` has no position and no `get(i)`. The iterator (or for-each, which uses it) is the way to visit its elements."
+  },
+  {
+   "id": "jav-itr-w01",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "`names` is a `List<String>`. Declare an iterator named `it` over this list.",
+   "ecrit": [
+    "Iterator<String> it = names.iterator();"
+   ],
+   "explication": "Type `Iterator<E>` with the element type, obtained from the collection with `iterator()`.",
+   "piege": "`new Iterator<>()` does not compile: `Iterator` is an interface."
+  },
+  {
+   "id": "jav-itr-w02",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Complete the condition of the loop.",
+   "code": "Iterator<String> it = names.iterator();\nwhile (____) {\n    System.out.println(it.next());\n}",
+   "ecrit": [
+    "it.hasNext()"
+   ],
+   "explication": "`hasNext()` returns `true` while an element remains to be visited."
+  },
+  {
+   "id": "jav-itr-w03",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Complete line 3 so that `s` receives the current element.",
+   "code": "Iterator<String> it = names.iterator();\nwhile (it.hasNext()) {\n    String s = ____;\n    System.out.println(s);\n}",
+   "ecrit": [
+    "it.next()"
+   ],
+   "explication": "`next()` returns the element and advances. Store it once and reuse the variable."
+  },
+  {
+   "id": "jav-itr-w04",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "`names` is a `List<String>`. Write the complete loop that prints every element with `System.out.println`, using an iterator named `it` (and a variable `s` for the element).",
+   "ecrit": [
+    "Iterator<String> it = names.iterator();\nwhile (it.hasNext()) {\n    String s = it.next();\n    System.out.println(s);\n}",
+    "Iterator<String> it = names.iterator();\nwhile (it.hasNext()) {\n    System.out.println(it.next());\n}"
+   ],
+   "explication": "Three steps: get the iterator, loop on `hasNext()`, call `next()` exactly once per turn."
+  },
+  {
+   "id": "jav-itr-w05",
+   "theme": "5 · Iterator",
+   "niveau": 1,
+   "question": "Inside an iterator loop (iterator `it`), write the statement that removes the element just returned by `next()`.",
+   "ecrit": [
+    "it.remove();"
+   ],
+   "explication": "`it.remove()` is the only safe way to delete during an iteration.",
+   "piege": "`list.remove(...)` in the loop throws a `ConcurrentModificationException`."
+  },
+  {
+   "id": "jav-itr-w06",
+   "theme": "5 · Iterator",
+   "niveau": 3,
+   "question": "`stock` is a `Map<String, Integer>`. Declare an iterator named `it` over its key/value pairs.",
+   "ecrit": [
+    "Iterator<Map.Entry<String, Integer>> it = stock.entrySet().iterator();"
+   ],
+   "explication": "The pairs are given by `entrySet()`, a set of `Map.Entry<String, Integer>`; each entry offers `getKey()` and `getValue()`."
+  },
+  {
+   "id": "jav-itr-w07",
+   "theme": "5 · Iterator",
+   "niveau": 3,
+   "question": "`students` is a `List<Student>`; `getGrade()` returns a `double`. Write the loop that removes every student whose grade is under 10, using an iterator named `it` (and a variable `s` for the element).",
+   "ecrit": [
+    "Iterator<Student> it = students.iterator();\nwhile (it.hasNext()) {\n    Student s = it.next();\n    if (s.getGrade() < 10) {\n        it.remove();\n    }\n}",
+    "Iterator<Student> it = students.iterator();\nwhile (it.hasNext()) {\n    if (it.next().getGrade() < 10) {\n        it.remove();\n    }\n}",
+    "Iterator<Student> it = students.iterator();\nwhile (it.hasNext()) {\n    Student s = it.next();\n    if (s.getGrade() < 10) it.remove();\n}"
+   ],
+   "explication": "Explicit iterator, one `next()` per turn stored in `s`, and `it.remove()` to delete safely.",
+   "piege": "A for-each loop with `students.remove(s)` throws a `ConcurrentModificationException`."
+  },
+  {
+   "id": "jav-itr-w08",
+   "theme": "5 · Iterator",
+   "niveau": 2,
+   "question": "Type the exact output of this program.",
+   "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(5, 12, 8, 20));\n        Iterator<Integer> it = nums.iterator();\n        while (it.hasNext()) {\n            Integer n = it.next();\n            if (n > 10) {\n                it.remove();\n            }\n        }\n        System.out.println(nums + \" \" + nums.size());\n    }\n}\n",
+   "ecrit": [
+    "[5, 8] 2"
+   ],
+   "explication": "12 and 20 are greater than 10 and are removed through the iterator. Two elements remain."
+  }
+ ]
+}

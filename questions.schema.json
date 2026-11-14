@@ -12,20 +12,27 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["theme", "question", "choix", "reponse", "explication"],
+        "required": ["theme", "question", "explication"],
+        "anyOf": [{"required": ["choix", "reponse"]}, {"required": ["ecrit"]}],
         "additionalProperties": false,
         "properties": {
           "id": {"type": "string", "description": "Facultatif. Identifiant stable : garde la progression même si tu reformules la question."},
           "theme": {"type": "string", "description": "Sert aux filtres de l'accueil. Écris-le toujours de la même façon."},
           "niveau": {"type": "integer", "enum": [1, 2, 3], "default": 1, "description": "1 facile, 2 moyen, 3 difficile. Rapporte 100, 120 ou 140 points de base."},
           "question": {"type": "string", "description": "Le texte entre `accents graves` s'affiche en code."},
-          "choix": {"type": "array", "minItems": 2, "maxItems": 6, "items": {"type": "string"}, "description": "Les propositions. Leur ordre est mélangé à chaque partie."},
+          "code": {"type": "string", "description": "Facultatif. Bloc de code affiché sous la question, numéroté et coloré comme dans un éditeur. Retours à la ligne avec \\n, indentation de 4 espaces. Un trou à compléter s'écrit ____ (il est surligné)."},
+          "choix": {"type": "array", "minItems": 2, "maxItems": 6, "items": {"type": "string"}, "description": "Les propositions du QCM. Leur ordre est mélangé à chaque partie. Facultatif si « ecrit » est fourni : la question n'apparaît alors que dans le mode Examen écrit."},
           "reponse": {
             "oneOf": [
               {"type": "integer", "minimum": 0, "description": "Position de la bonne réponse dans « choix », en comptant à partir de 0."},
               {"type": "string", "description": "Ou le texte exact de la bonne réponse."}
             ]
           },
+          "ecrit": {
+            "oneOf": [{"type": "string"}, {"type": "array", "minItems": 1, "items": {"type": "string"}}],
+            "description": "Facultatif. Réponse(s) acceptée(s) dans le mode Examen écrit, où le joueur tape le code sans choix ni autocomplétion. La première sert de corrigé. La comparaison ignore espaces, retours à la ligne, indentation et commentaires ; la casse, la ponctuation et le contenu des chaînes comptent. Liste plusieurs écritures si plusieurs sont justes."
+          },
+          "correction": {"type": "string", "description": "Facultatif. Code corrigé, affiché en bloc de code après la réponse (questions « corrige ce code »)."},
           "explication": {"type": "string", "description": "Affichée après chaque réponse, juste ou fausse."},
           "piege": {"type": "string", "description": "Facultatif. Erreur fréquente, affichée dans l'encadré orange « Piège d'examen »."}
         }

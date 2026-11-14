@@ -152,6 +152,28 @@ p{margin:0}
 .ch.ko .ch__k{background:var(--bad);color:var(--surface)}
 .ch.gone{opacity:.35;text-decoration:line-through}
 .ch.dim{opacity:.55}
+/* Bloc de code façon éditeur (questions avec « code », correction, réponse écrite) */
+.code{margin-top:14px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);background:#0f1629;color:#e6ebf5;text-align:left}
+.code__bar{display:flex;align-items:center;gap:6px;padding:7px 12px;background:#1a2340;font:600 12px var(--mono);color:#a3adc2}
+.code__bar i{width:9px;height:9px;border-radius:50%;background:#3a4668}
+.code__bar span{margin-left:6px}
+.code pre{margin:0;padding:10px 0;overflow-x:auto;font:14px/1.55 var(--mono);tab-size:4}
+.code code{display:block;min-width:max-content;font:inherit}
+.ln{display:flex}
+.ln__n{flex:none;width:38px;padding-right:10px;text-align:right;color:#5d6a8c;user-select:none}
+.ln__t{white-space:pre;padding-right:14px}
+.tk-k{color:#7fb4ea}.tk-s{color:#f0ae4a}.tk-c{color:#8591b0;font-style:italic}.tk-a{color:#c9a3f0}
+.tk-b{background:#f0ae4a;color:#0f1629;border-radius:3px;padding:0 3px;font-weight:700}
+.box .code,.review .code{margin-top:6px}
+/* Mode « Examen écrit » : zone de saisie brute, comme un champ Moodle */
+.write{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.write__ta{width:100%;min-height:64px;resize:vertical;font:15px/1.5 var(--mono);tab-size:4;white-space:pre;overflow:auto;
+  background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:var(--r-md);padding:10px 12px}
+.write__ta:focus{outline:3px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.write__ta:disabled{opacity:.75}
+.write .tools{margin-top:2px}
+.write .next{align-self:auto}
+.fb .self{align-self:flex-start;background:var(--surface);border:1.5px dashed var(--good);color:var(--good);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}
 .tools{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted)}
 .joker{background:var(--surface);border:1.5px dashed var(--amber);color:var(--amber-ink);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}
 .joker:disabled{opacity:.4;cursor:default}
@@ -242,10 +264,15 @@ let MODS=null, MOD=null, MOD_KEY='';
 let BANK={titre:'',matiere:'',questions:[]}, QS=[], THEMES=[];
 function hash(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return (h>>>0).toString(36)}
 function parseQuestions(bank){
-  return (bank.questions||[]).filter(q=>q && q.question && Array.isArray(q.choix) && q.choix.length>=2).map((q,i)=>{
-    let ans = typeof q.reponse==='number' ? q.reponse : q.choix.indexOf(q.reponse);
-    if(ans<0||ans>=q.choix.length) ans=0;
-    return {id: q.id || ('q'+i+'-'+hash(q.question)), theme:q.theme||'Général', q:q.question, choix:q.choix, ans, expl:q.explication||'', trap:q.piege||'', lvl:Math.min(3,Math.max(1,q.niveau||1))};
+  /* Une question est jouable en QCM si elle a « choix », en Examen écrit si elle a « ecrit » (une ou plusieurs réponses acceptées). */
+  const written = q => (Array.isArray(q.ecrit) ? q.ecrit : (typeof q.ecrit==='string' ? [q.ecrit] : [])).filter(s=>typeof s==='string' && s.trim());
+  const choices = q => Array.isArray(q.choix) && q.choix.length>=2 ? q.choix : [];
+  return (bank.questions||[]).filter(q=>q && q.question && (choices(q).length || written(q).length)).map((q,i)=>{
+    const choix=choices(q);
+    let ans = typeof q.reponse==='number' ? q.reponse : choix.indexOf(q.reponse);
+    if(ans<0||ans>=choix.length) ans=0;
+    return {id: q.id || ('q'+i+'-'+hash(q.question)), theme:q.theme||'Général', q:q.question, code:typeof q.code==='string'?q.code:'', fix:typeof q.correction==='string'?q.correction:'',
+      choix, ans, ecrit:written(q), expl:q.explication||'', trap:q.piege||'', lvl:Math.min(3,Math.max(1,q.niveau||1))};
   });
 }
 async function listModules(){
@@ -307,8 +334,11 @@ const MODES = {
   classique:{name:'Classique', n:15, qTime:20, desc:'15 questions, 20 secondes chacune. Va vite pour gagner le bonus de vitesse.'},
   survie:{name:'Survie', lives:3, qTime:20, desc:'Trois vies. Chaque erreur en coûte une. Tiens le plus longtemps possible.'},
   libre:{name:'Sans chrono', n:50, desc:'50 questions tirées au hasard, sans limite de temps. Prends le temps de réfléchir, tu peux terminer quand tu veux.'},
-  chrono:{name:'Contre-la-montre', total:90, desc:'90 secondes au total. +3 s par bonne réponse, −5 s par erreur.'}
+  chrono:{name:'Contre-la-montre', total:90, desc:'90 secondes au total. +3 s par bonne réponse, −5 s par erreur.'},
+  ecrit:{name:'Examen écrit', n:10, desc:'Comme sur Moodle : aucun choix, aucune autocomplétion. Tu tapes le code toi-même ; espaces, retours à la ligne et indentation sont libres.'}
 };
+const untimed = m => m==='libre' || m==='ecrit';
+const canQcm = q => q.choix.length>=2, canEcrit = q => q.ecrit.length>0;
 const LEVELS = ['Bizuth','Curieux','Apprenti','Algorithmicien','Ingénieur junior','Ingénieur','Major de promo','Légende de Villejuif'];
 const lvlOf = xp => { let L=1; while(50*(L+1)*L <= xp) L++; return L; }; // seuil du niveau L : 50·L·(L−1)
 const lvlFloor = L => 50*L*(L-1);
@@ -332,7 +362,7 @@ const BADGES = [
 /* ---------- Profil (navigateur + stockage partagé si disponible) ---------- */
 /* Progression et classement séparés pour chaque module (clé = hash du titre). */
 let LS_KEY='';
-const blank = ()=>({xp:0, games:0, best:{classique:0,survie:0,chrono:0}, badges:[], lastDay:'', days:0, seen:{}, mistakes:[]});
+const blank = ()=>({xp:0, games:0, best:{classique:0,survie:0,chrono:0,ecrit:0}, badges:[], lastDay:'', days:0, seen:{}, mistakes:[]});
 let P = blank();
 let db=null, me=null, userCap=null, board=[], boardMode='classique', unsubBoard=null;
 function saveLocal(){ if(LS_KEY) try{ localStorage.setItem(LS_KEY, JSON.stringify(P)); }catch(e){} }
@@ -375,6 +405,72 @@ const $ = (s,el=document)=>el.querySelector(s);
 const app = document.getElementById('app');
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function fmt(s){ return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>'); }
+/* Bloc de code numéroté avec coloration légère (mots-clés, chaînes, commentaires, annotations, trous ____). */
+const KW=new Set('abstract boolean break case catch char class continue default do double else enum extends final finally float for if implements import instanceof int interface long new null package private protected public return short static super switch this throw throws try void while true false var record'.split(' '));
+function hl(line){
+  const re=/(\/\/.*$|\/\*.*?\*\/)|("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|(@[A-Za-z_]\w*)|(_{3,})|([A-Za-z_$][\w$]*)/g;
+  let out='', last=0, m;
+  while((m=re.exec(line))){
+    out+=esc(line.slice(last,m.index)); const t=esc(m[0]);
+    out+= m[1]?'<span class="tk-c">'+t+'</span>' : m[2]?'<span class="tk-s">'+t+'</span>' : m[3]?'<span class="tk-a">'+t+'</span>' : m[4]?'<span class="tk-b">'+t+'</span>' : (KW.has(m[5])?'<span class="tk-k">'+t+'</span>':t);
+    last=re.lastIndex;
+  }
+  return out+esc(line.slice(last));
+}
+function codeBlock(src, label){
+  const text=String(src).replace(/\r\n?/g,'\n').replace(/\t/g,'    ').replace(/\s+$/,'');
+  const lines=text.split('\n');
+  if(!label){ const m=text.match(/\bpublic\s+(?:final\s+|abstract\s+)*(?:class|interface|enum)\s+([A-Za-z_]\w*)/); label = m ? m[1]+'.java' : 'Code'; }
+  return '<div class="code" role="group" aria-label="'+esc(label)+'"><div class="code__bar" aria-hidden="true"><i></i><i></i><i></i><span>'+esc(label)+'</span></div><pre><code>'
+    + lines.map((l,i)=>'<span class="ln"><span class="ln__n" aria-hidden="true">'+(i+1)+'</span><span class="ln__t">'+(hl(l)||' ')+'</span></span>').join('')
+    + '</code></pre></div>';
+}
+/*<norm>*/
+/* Réponses écrites : on compare le code « à la manière du compilateur ».
+   Sont ignorés : espaces, tabulations, retours à la ligne, indentation, commentaires.
+   Comptent : l'orthographe, la casse, la ponctuation ( ) { } [ ] ; , . et le contenu exact des chaînes "…" et '…'.
+   Un espace reste significatif seulement entre deux mots (« int x » ≠ « intx »). */
+function normCode(s){
+  s=String(s==null?'':s).replace(/\r\n?/g,'\n')
+    .replace(/[\u201C\u201D\u201E\u00AB\u00BB]/g,'"').replace(/[\u2018\u2019\u201A]/g,"'")
+    .replace(/[\u00A0\u2007\u202F\u200B\uFEFF]/g,' ');
+  const word=c=>/[A-Za-z0-9_$]/.test(c);
+  let out='', i=0, pend=false; const n=s.length;
+  while(i<n){
+    const c=s[i];
+    if(c==='/'&&s[i+1]==='/'){ while(i<n&&s[i]!=='\n') i++; pend=true; continue; }
+    if(c==='/'&&s[i+1]==='*'){ const e=s.indexOf('*/',i+2); i=e<0?n:e+2; pend=true; continue; }
+    if(/\s/.test(c)){ pend=true; i++; continue; }
+    if(pend && out && word(out[out.length-1]) && word(c)) out+=' ';
+    pend=false;
+    if(c==='"'||c==="'"){
+      let j=i+1; while(j<n && s[j]!==c && s[j]!=='\n'){ if(s[j]==='\\') j++; j++; }
+      out+=s.slice(i,Math.min(n,j+1)); i=j+1; continue;
+    }
+    out+=c; i++;
+  }
+  return out;
+}
+function checkWritten(text, accepted){
+  const u=normCode(text), list=accepted.map(normCode);
+  if(!u) return {ok:false, hint:''};
+  if(list.includes(u)) return {ok:true, hint:''};
+  const tests=[
+    [x=>x, 'Il manque un espace entre deux mots (ou il y en a un en trop au milieu d\'un mot).'],
+    [x=>x.toLowerCase(), 'Seule la casse diffère : Java distingue les majuscules des minuscules.'],
+    [x=>x.replace(/;/g,''), 'Vérifie les points-virgules (un de trop ou un qui manque).'],
+    [x=>x.replace(/[{}]/g,''), 'Vérifie les accolades { }.'],
+    [x=>x.replace(/[()]/g,''), 'Vérifie les parenthèses ( ).'],
+    [x=>x.replace(/[<>]/g,''), 'Vérifie les chevrons < > des types génériques.'],
+    [x=>x.replace(/["']/g,''), 'Vérifie les guillemets : "…" pour une String, \'…\' pour un char.'],
+    [x=>x.replace(/[^A-Za-z0-9_$]/g,''), 'Les mots sont bons : vérifie la ponctuation et les espaces entre les mots.'],
+    [x=>x.replace(/[^A-Za-z0-9_$]/g,'').toLowerCase(), 'Presque : vérifie la casse et la ponctuation.']
+  ];
+  const g=(f,x)=>f(x).replace(/ /g,'');
+  for(const [f,hint] of tests){ const fu=g(f,u); if(list.some(a=>g(f,a)===fu)) return {ok:false, hint}; }
+  return {ok:false, hint:''};
+}
+/*</norm>*/
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 function today(d=new Date()){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.setAttribute('role','status'); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2300); }
@@ -384,14 +480,16 @@ const ICONS = {
   libre:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/></svg>',
   chrono:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>',
   module:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 7h6"/></svg>',
+  ecrit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4M13 20h7"/></svg>',
   erreurs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>'
 };
 
 /* ---------- Sélection pondérée : les questions ratées reviennent plus souvent ---------- */
 let activeThemes = new Set();
-function pool(onlyIds){
-  let p = onlyIds ? QS.filter(q=>onlyIds.includes(q.id)) : QS.filter(q=>activeThemes.has(q.theme));
-  return p.length ? p : QS.slice();
+function pool(onlyIds, mode){
+  const can = mode==='ecrit' ? canEcrit : canQcm;
+  const p = (onlyIds ? QS.filter(q=>onlyIds.includes(q.id)) : QS.filter(q=>activeThemes.has(q.theme))).filter(can);
+  return p.length ? p : QS.filter(can);
 }
 function weight(q){ const s=P.seen[q.id]; if(!s) return 1.6; return Math.max(0.35, 1 + 1.5*s.ko - 0.4*s.ok); }
 function weightedDeck(p){
@@ -402,19 +500,22 @@ function weightedDeck(p){
 /* ---------- Partie ---------- */
 let view='modules', G=null, timerRaf=0;
 function newGame(mode, onlyIds){
-  const deck = weightedDeck(pool(onlyIds));
+  const deck = weightedDeck(pool(onlyIds, mode));
+  if(!deck.length){ toast(mode==='ecrit' ? 'Ce module n\'a pas de question à réponse écrite.' : 'Ce module n\'a pas de question à choix.'); return; }
   G = {mode, cfg:MODES[mode], deck, di:0, idx:0, score:0, streak:0, bestStreak:0, correct:0, answered:0,
        lives:MODES[mode].lives||0, timeLeft:MODES[mode].total||0, joker:true, log:[], cur:null, locked:false,
        qStart:0, qPaused:0, times:[], newBadges:[], onlyIds:onlyIds||null, flash:false};
   if(mode==='classique') G.total = Math.min(MODES.classique.n, deck.length);
   if(mode==='libre') G.total = Math.min(MODES.libre.n, deck.length);
+  if(mode==='ecrit') G.total = Math.min(MODES.ecrit.n, deck.length);
   view='game'; nextQuestion();
 }
 function drawQ(){
-  if(G.di>=G.deck.length){ G.deck = weightedDeck(pool(G.onlyIds)); G.di=0; if(G.deck.length>1 && G.cur && G.deck[0].id===G.cur.src.id) G.deck.push(G.deck.shift()); }
+  if(G.di>=G.deck.length){ G.deck = weightedDeck(pool(G.onlyIds, G.mode)); G.di=0; if(G.deck.length>1 && G.cur && G.deck[0].id===G.cur.src.id) G.deck.push(G.deck.shift()); }
   const src = G.deck[G.di++];
+  if(G.mode==='ecrit') return {src, order:[], ans:-1, removed:[], written:true};
   const order = shuffle(src.choix.map((_,i)=>i));
-  return {src, order, ans: order.indexOf(src.ans), removed:[]};
+  return {src, order, ans: order.indexOf(src.ans), removed:[], written:false};
 }
 function nextQuestion(){
   if(isOver()) return endGame();
@@ -424,15 +525,17 @@ function nextQuestion(){
   startTimer();
 }
 function isOver(){
-  if(G.mode==='classique'||G.mode==='libre') return G.answered>=G.total;
+  if(G.mode==='classique'||untimed(G.mode)) return G.answered>=G.total;
   if(G.mode==='survie') return G.lives<=0;
   if(G.mode==='chrono') return G.timeLeft<=0;
 }
+/* Une question avec un bloc de code laisse plus de temps de lecture. */
+function qTimeOf(q){ return G.cfg.qTime ? Math.round(G.cfg.qTime*(q.code?2.5:1)) : 0; }
 function mult(){ return 1 + 0.5*Math.min(4, Math.floor(G.streak/3)); }
 
 function startTimer(){
   cancelAnimationFrame(timerRaf);
-  if(G.mode==='libre') return;
+  if(untimed(G.mode)) return;
   const bar = $('.timer>i'), wrap=$('.timer');
   if(G.mode==='chrono'){
     let last=performance.now();
@@ -441,18 +544,19 @@ function startTimer(){
       updateHud(); timerRaf=requestAnimationFrame(tick); };
     timerRaf=requestAnimationFrame(tick); return;
   }
-  const lim=G.cfg.qTime*1000;
+  const qt=qTimeOf(G.cur.src), lim=qt*1000;
   const tick=(t)=>{ if(view!=='game'||G.locked) return; const el=t-G.qStart, f=Math.max(0,1-el/lim);
     if(bar) bar.style.width=(f*100)+'%'; if(wrap) wrap.classList.toggle('low', f<0.3);
-    const s=$('#qsec'); if(s) s.textContent=Math.ceil(f*G.cfg.qTime)+' s';
+    const s=$('#qsec'); if(s) s.textContent=Math.ceil(f*qt)+' s';
     if(f<=0) return answer(-1);
     timerRaf=requestAnimationFrame(tick); };
   timerRaf=requestAnimationFrame(tick);
 }
 
-function answer(choicePos){
+function answer(choicePos, typed){
   if(G.locked) return; G.locked=true; cancelAnimationFrame(timerRaf);
-  const c=G.cur, ok = choicePos===c.ans, secs=(performance.now()-G.qStart)/1000;
+  const c=G.cur, chk = c.written ? checkWritten(typed, c.src.ecrit) : null;
+  const ok = c.written ? chk.ok : choicePos===c.ans, secs=(performance.now()-G.qStart)/1000, prevStreak=G.streak;
   G.answered++; G.times.push(secs);
   const s = P.seen[c.src.id] || (P.seen[c.src.id]={ok:0,ko:0});
   let gained=0;
@@ -461,7 +565,7 @@ function answer(choicePos){
     const base = 80 + 20*c.src.lvl;
     let speed;
     if(G.mode==='chrono'){ speed = Math.round(50*Math.max(0,1-secs/8)); G.timeLeft += 3; }
-    else speed = G.cfg.qTime ? Math.round(50*Math.max(0, 1 - secs/G.cfg.qTime)) : 0;
+    else speed = G.cfg.qTime ? Math.round(50*Math.max(0, 1 - secs/qTimeOf(c.src))) : 0;
     gained = Math.round((base+speed)*mult());
     G.score += gained;
     if(secs<3) G.flash=true;
@@ -476,9 +580,20 @@ function answer(choicePos){
     if(G.mode==='chrono') G.timeLeft = Math.max(0, G.timeLeft-5);
     if(!P.mistakes.includes(c.src.id)) P.mistakes.push(c.src.id);
   }
-  G.log.push({src:c.src, ok, picked: choicePos>=0 ? c.order[choicePos] : -1, gained, secs});
+  G.log.push({src:c.src, ok, picked: choicePos>=0 ? c.order[choicePos] : -1, gained, secs, written:!!c.written, typed: c.written ? String(typed||'') : '', hint: chk ? chk.hint : '', prevStreak});
   saveLocal();
   renderFeedback(choicePos, ok, gained, secs);
+}
+/* Examen écrit : la comparaison automatique ne reconnaît pas toutes les écritures équivalentes
+   (autre nom de variable, autre ordre…). Le joueur compare avec le corrigé et peut valider lui-même. */
+function selfValidate(){
+  const l=G.log[G.log.length-1]; if(!l||!l.written||l.ok) return;
+  const s=P.seen[l.src.id]; if(s){ s.ko=Math.max(0,s.ko-1); s.ok++; }
+  l.ok=true; l.self=true; l.gained=80+20*l.src.lvl;
+  G.correct++; G.streak=(l.prevStreak||0)+1; G.bestStreak=Math.max(G.bestStreak,G.streak); G.score+=l.gained;
+  P.mistakes=P.mistakes.filter(id=>id!==l.src.id);
+  saveLocal();
+  renderFeedback(-1, true, l.gained, l.secs);
 }
 
 function useJoker(){
@@ -579,7 +694,8 @@ function renderHome(){
   cancelAnimationFrame(timerRaf);
   const L=lvlOf(P.xp), lo=lvlFloor(L), hi=lvlFloor(L+1), pct=Math.round(100*(P.xp-lo)/(hi-lo));
   const counts={}; QS.forEach(q=>counts[q.theme]=(counts[q.theme]||0)+1);
-  const mistakes = P.mistakes.filter(id=>QS.some(q=>q.id===id));
+  const mistakes = P.mistakes.filter(id=>QS.some(q=>q.id===id && canQcm(q)));
+  const nQcm=QS.filter(canQcm).length, nEcrit=QS.filter(canEcrit).length;
   app.innerHTML = `
   <section class="hero">
     <div class="hero__txt">
@@ -606,12 +722,12 @@ function renderHome(){
 
   <div class="sec"><span class="sec__num">01</span><h2 class="sec__title">Mini-jeux</h2></div>
   <div class="modes">
-    ${['classique','libre','survie','chrono'].map(m=>`
-      <button class="mode" data-mode="${m}">
+    ${['classique','libre','survie','chrono','ecrit'].map(m=>`
+      <button class="mode" data-mode="${m}"${(m==='ecrit'?nEcrit:nQcm)?'':' disabled title="Aucune question de ce type dans ce module"'}>
         <span class="mode__icon">${ICONS[m]}</span>
         <h3>${MODES[m].name}</h3>
         <p>${MODES[m].desc}</p>
-        <span class="mode__foot"><span>Record : <b>${P.best[m]||0}</b></span><span class="mode__go">Jouer →</span></span>
+        <span class="mode__foot"><span>${m==='ecrit'?'<b>'+nEcrit+'</b> question'+(nEcrit>1?'s':'')+' · record ':'Record : '}<b>${P.best[m]||0}</b></span><span class="mode__go">${m==='ecrit'?'Écrire':'Jouer'} →</span></span>
       </button>`).join('')}
     ${mistakes.length ? `
       <button class="mode mode--hot" data-mode="erreurs">
@@ -645,7 +761,7 @@ function renderHome(){
       </div>
     </div>
   </div>
-  <footer class="foot"><span>EFREI Paris · ${esc(BANK.matiere||'')}</span><span>Raccourcis en jeu : touches 1–4 ou A–D, puis Entrée</span></footer>`;
+  <footer class="foot"><span>EFREI Paris · ${esc(BANK.matiere||'')}</span><span>Raccourcis en jeu : touches 1–4 ou A–D, puis Entrée · Examen écrit : Ctrl+Entrée pour valider</span></footer>`;
 
   app.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
     const m=b.dataset.mode;
@@ -684,10 +800,10 @@ async function renderBoard(){
 /* ---------- Rendu : jeu ---------- */
 function hudHtml(){
   let mid='';
-  if(G.mode==='classique'||G.mode==='libre') mid=`<span class="pill">Question ${Math.min(G.idx,G.total)}/${G.total}</span>`;
+  if(G.mode==='classique'||untimed(G.mode)) mid=`<span class="pill">Question ${Math.min(G.idx,G.total)}/${G.total}</span>`;
   if(G.mode==='survie') mid=`<span class="pill"><span class="hearts" aria-label="${G.lives} vies">${'♥'.repeat(G.lives)}${'♡'.repeat(Math.max(0,MODES.survie.lives-G.lives))}</span></span><span class="pill">${G.correct} réussies</span>`;
   if(G.mode==='chrono') mid=`<span class="pill" id="chronoLeft">${Math.ceil(G.timeLeft)} s</span>`;
-  return `<button class="quit" id="quit">✕ ${G.mode==='libre'&&G.answered?'Terminer':'Quitter'}</button>
+  return `<button class="quit" id="quit">✕ ${untimed(G.mode)&&G.answered?'Terminer':'Quitter'}</button>
     <div class="hud__mid">${mid}<span class="pill" id="score">${G.score} pts</span></div>
     <span class="pill pill--streak ${G.streak?'':'cold'}" id="streak" title="Série de bonnes réponses">● ${G.streak} · ×${mult()}</span>`;
 }
@@ -699,32 +815,58 @@ function updateHud(){
 }
 function quitGame(){
   cancelAnimationFrame(timerRaf);
-  if(G && G.mode==='libre' && G.answered) return endGame();
+  if(G && untimed(G.mode) && G.answered) return endGame();
   view='home'; G=null; render();
 }
 function renderGame(){
   const c=G.cur, q=c.src;
   const keys='ABCDEF';
-  const prog = G.mode==='classique' ? `<div class="progress" aria-hidden="true">${Array.from({length:G.total},(_,i)=>`<i class="${i<G.log.length?(G.log[i].ok?'ok':'ko'):(i===G.log.length?'cur':'')}"></i>`).join('')}</div>` : '';
+  const prog = (G.mode==='classique'||G.mode==='ecrit') ? `<div class="progress" aria-hidden="true">${Array.from({length:G.total},(_,i)=>`<i class="${i<G.log.length?(G.log[i].ok?'ok':'ko'):(i===G.log.length?'cur':'')}"></i>`).join('')}</div>` : '';
   app.innerHTML = `
   <section class="game">
     <div class="hud">${hudHtml()}</div>
     ${prog}
-    <div class="timer" aria-hidden="true"${G.mode==='libre'?' hidden':''}><i style="width:${G.mode==='chrono'?Math.min(100,G.timeLeft/MODES.chrono.total*100):100}%"></i></div>
+    <div class="timer" aria-hidden="true"${untimed(G.mode)?' hidden':''}><i style="width:${G.mode==='chrono'?Math.min(100,G.timeLeft/MODES.chrono.total*100):100}%"></i></div>
     <article class="card" id="qcard">
-      <div class="q__head"><span class="eyebrow">${esc(q.theme)} · ${'★'.repeat(q.lvl)}${'☆'.repeat(3-q.lvl)}</span>${G.cfg.qTime?'<span class="eyebrow" id="qsec" style="color:var(--muted)">'+G.cfg.qTime+' s</span>':''}</div>
+      <div class="q__head"><span class="eyebrow">${esc(q.theme)} · ${'★'.repeat(q.lvl)}${'☆'.repeat(3-q.lvl)}</span>${G.cfg.qTime?'<span class="eyebrow" id="qsec" style="color:var(--muted)">'+qTimeOf(q)+' s</span>':''}</div>
       <h2 class="q__text" id="qtext">${fmt(q.q)}</h2>
+      ${q.code?codeBlock(q.code):''}
+      ${c.written ? `
+      <div class="write">
+        <label class="eyebrow" for="ans">Ta réponse</label>
+        <textarea class="write__ta" id="ans" rows="${Math.min(16,Math.max(2,q.ecrit[0].split('\n').length+1))}" wrap="off" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" aria-describedby="anshelp" placeholder="Écris ton code ici…"></textarea>
+        <div class="tools">
+          <span id="anshelp">Tab = indentation (Échap pour sortir du champ) · espaces, retours à la ligne et indentation libres · casse et ponctuation comptent</span>
+          <button class="next" id="submit">Valider <kbd>Ctrl+Entrée</kbd></button>
+        </div>
+      </div>` : `
       <div class="choices" role="group" aria-labelledby="qtext">
         ${c.order.map((oi,i)=>`<button class="ch" data-i="${i}"><span class="ch__k">${keys[i]}</span><span class="ch__t">${fmt(q.choix[oi])}</span><span class="ch__m" aria-hidden="true"></span></button>`).join('')}
       </div>
       <div class="tools">
         <button class="joker" id="joker" ${G.joker?'':'disabled'}>50/50 ${G.joker?'(1 joker)':'utilisé'}</button>
         <span>${G.mode==='libre'?'Pas de chrono : prends ton temps · série de 3 = ×1,5':'Bonne réponse rapide = bonus · série de 3 = ×1,5'}</span>
-      </div>
+      </div>`}
     </article>
     <div id="fb"></div>
   </section>`;
   $('#quit').onclick=quitGame;
+  if(c.written){
+    const ta=$('#ans'), send=()=>{ if(!ta.value.trim()){ toast('Écris une réponse avant de valider.'); ta.focus(); return; } answer(-1, ta.value); };
+    $('#submit').onclick=send;
+    ta.addEventListener('keydown',e=>{
+      if(e.key==='Enter' && (e.ctrlKey||e.metaKey)){ e.preventDefault(); send(); }
+      else if(e.key==='Tab' && !e.ctrlKey && !e.metaKey && !e.altKey){
+        e.preventDefault();
+        const a=ta.selectionStart, b=ta.selectionEnd, v=ta.value, ls=v.lastIndexOf('\n',a-1)+1;
+        if(e.shiftKey){ const k=Math.min(4,(v.slice(ls).match(/^ */)||[''])[0].length); if(k){ ta.value=v.slice(0,ls)+v.slice(ls+k); ta.setSelectionRange(Math.max(ls,a-k),Math.max(ls,b-k)); } }
+        else { ta.setRangeText('    ',a,b,'end'); }
+      }
+      else if(e.key==='Escape'){ ta.blur(); }
+    });
+    ta.focus({preventScroll:true});
+    return;
+  }
   $('#joker').onclick=useJoker;
   app.querySelectorAll('.ch').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
   const first=app.querySelector('.ch'); if(first && window.matchMedia('(pointer:fine)').matches) first.focus({preventScroll:true});
@@ -743,17 +885,25 @@ function renderFeedback(pos, ok, gained, secs){
   const card=$('#qcard');
   if(ok){ const p=document.createElement('span'); p.className='pop'; p.textContent='+'+gained+(mult()>1?'  ×'+mult():''); card.appendChild(p); }
   else card.classList.add('shake');
+  if(ok) card.classList.remove('shake');
   updateHud();
-  const timeout = pos<0;
+  const w=!!c.written, l=G.log[G.log.length-1]||{};
+  const timeout = pos<0 && !w;
   const last = isOver();
+  if(w){ const ta=$('#ans'), sb=$('#submit'); if(ta) ta.disabled=true; if(sb) sb.hidden=true; }
   $('#fb').innerHTML = `
     <div class="card fb" aria-live="polite">
-      <div class="verdict ${ok?'ok':'ko'}">${ok?'✓ Bonne réponse':'✗ '+(timeout?'Temps écoulé':'Raté')} <small>${ok?'+'+gained+' pts · '+secs.toFixed(1)+' s':'La bonne réponse : '+esc(q.choix[q.ans])}</small></div>
+      <div class="verdict ${ok?'ok':'ko'}">${ok?'✓ Bonne réponse':'✗ '+(timeout?'Temps écoulé':(w?'Pas tout à fait':'Raté'))} <small>${ok?'+'+gained+' pts · '+secs.toFixed(1)+' s'+(l.self?' · validé par toi':''):(w?esc(l.hint||'Compare ta réponse avec le corrigé.'):'La bonne réponse : '+fmt(q.choix[q.ans]))}</small></div>
+      ${w&&!ok?`<div class="box"><span class="box__l">Ta réponse</span>${codeBlock(l.typed,'Ta réponse')}</div>`:''}
+      ${w?`<div class="box box--def"><span class="box__l">Réponse attendue${q.ecrit.length>1?' · '+(q.ecrit.length-1)+' autre'+(q.ecrit.length>2?'s':'')+' écriture'+(q.ecrit.length>2?'s':'')+' acceptée'+(q.ecrit.length>2?'s':''):''}</span>${codeBlock(q.ecrit[0],'Corrigé')}</div>`:''}
+      ${w&&!ok?`<button class="self" id="self">Ma réponse est équivalente : compter juste</button>`:''}
+      ${q.fix?`<div class="box box--def"><span class="box__l">Code corrigé</span>${codeBlock(q.fix)}</div>`:''}
       ${q.expl?`<div class="box box--def"><span class="box__l">Explication</span>${fmt(q.expl)}</div>`:''}
       ${q.trap?`<div class="box box--trap"><span class="box__l">Piège d'examen</span>${fmt(q.trap)}</div>`:''}
       <button class="next" id="next">${last?'Voir le résultat':'Question suivante'} <kbd>Entrée</kbd></button>
     </div>`;
   $('#next').onclick=()=>nextQuestion();
+  if($('#self')) $('#self').onclick=selfValidate;
   $('#next').focus({preventScroll:true});
   $('#fb').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth', block:'nearest'});
 }
@@ -765,7 +915,7 @@ function renderEnd(){
   const L=lvlOf(P.xp), lo=lvlFloor(L), hi=lvlFloor(L+1), pct=Math.round(100*(P.xp-lo)/(hi-lo));
   const wrong=G.log.filter(l=>!l.ok);
   let rank='';
-  if(db && board.length && G.mode!=='libre'){ const others=board.filter(b=>b.id!==me).map(b=>b[G.mode]||0); const pos=1+others.filter(s=>s>P.best[G.mode]).length; rank=`Ton record te place <b>${pos}<sup>${pos===1?'er':'e'}</sup></b> sur ${others.length+1} au classement ${esc(MODES[G.mode].name)}.`; }
+  if(db && board.length && !untimed(G.mode)){ const others=board.filter(b=>b.id!==me).map(b=>b[G.mode]||0); const pos=1+others.filter(s=>s>P.best[G.mode]).length; rank=`Ton record te place <b>${pos}<sup>${pos===1?'er':'e'}</sup></b> sur ${others.length+1} au classement ${esc(MODES[G.mode].name)}.`; }
   app.innerHTML = `
   <section class="end">
     <div class="card end__score">
@@ -792,14 +942,17 @@ function renderEnd(){
     </div>
     ${wrong.length?`<div class="review"><div class="sec" style="margin:4px 0 0"><h2 class="sec__title">À revoir</h2></div>
       ${wrong.map(l=>`<details><summary>${fmt(l.src.q)}</summary>
-        <p class="ans">Bonne réponse : <b>${fmt(l.src.choix[l.src.ans])}</b>${l.picked>=0?' · ta réponse : '+fmt(l.src.choix[l.picked]):' · pas de réponse'}</p>
+        ${l.src.code?codeBlock(l.src.code):''}
+        ${l.written ? `<div class="ans">Ta réponse :${codeBlock(l.typed,'Ta réponse')}</div><div class="ans"><b>Réponse attendue :</b>${codeBlock(l.src.ecrit[0],'Corrigé')}</div>`
+          : `<p class="ans">Bonne réponse : <b>${fmt(l.src.choix[l.src.ans])}</b>${l.picked>=0?' · ta réponse : '+fmt(l.src.choix[l.picked]):' · pas de réponse'}</p>`}
+        ${l.src.fix?`<div class="box box--def" style="margin-bottom:8px"><span class="box__l">Code corrigé</span>${codeBlock(l.src.fix)}</div>`:''}
         ${l.src.expl?`<div class="box box--def"><span class="box__l">Explication</span>${fmt(l.src.expl)}</div>`:''}
         ${l.src.trap?`<div class="box box--trap" style="margin-top:8px"><span class="box__l">Piège d'examen</span>${fmt(l.src.trap)}</div>`:''}
       </details>`).join('')}</div>`:''}
   </section>`;
   const ids=wrong.map(l=>l.src.id), mode=G.mode, only=G.onlyIds;
   $('#again').onclick=()=>newGame(mode, only);
-  if($('#redo')) $('#redo').onclick=()=>newGame('classique', ids);
+  if($('#redo')) $('#redo').onclick=()=>newGame(mode==='ecrit'?'ecrit':'classique', ids);
   $('#home').onclick=()=>{ view='home'; G=null; render(); };
   $('#again').focus({preventScroll:true});
   updateHeader();
@@ -821,6 +974,7 @@ document.addEventListener('keydown',e=>{
   if(view!=='game'||!G) return;
   if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
   if(!G.locked){
+    if(G.cur && G.cur.written) return;
     const k=e.key.toUpperCase(); let i='1234'.indexOf(k); if(i<0) i='ABCD'.indexOf(k);
     if(i>=0 && i<G.cur.order.length && !G.cur.removed.includes(i)){ e.preventDefault(); answer(i); }
   } else if(e.key==='Enter'){ e.preventDefault(); nextQuestion(); }
