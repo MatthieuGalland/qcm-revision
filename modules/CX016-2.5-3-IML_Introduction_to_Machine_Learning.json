@@ -1,0 +1,3505 @@
+{
+  "titre": "CX016-2.5-3 · Introduction to Machine Learning",
+  "matiere": "Intro to ML · Python for Data Science · Supervised Learning · Training Process · Metrics · Cross-validation · KNN · Regression",
+  "questions": [
+    {
+      "id": "iml-ch1-001",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "Which statement matches the course definition of data science?",
+      "choix": [
+        "Drawing charts of a dataset for managers without any processing",
+        "Using automated techniques to analyse vast data and extract knowledge",
+        "Writing explicit rules by hand so a computer can process a dataset",
+        "Storing very large datasets across many computers in a cluster"
+      ],
+      "reponse": 1,
+      "explication": "Data science involves utilizing automated techniques to analyze vast amounts of data and extract valuable knowledge from it."
+    },
+    {
+      "id": "iml-ch1-002",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "What is the key difference between data analysis and data analytics?",
+      "choix": [
+        "Analysis is a human activity; analytics automates the insights",
+        "Analysis needs big data; analytics works only on small datasets",
+        "Analysis uses machine learning; analytics only uses spreadsheets",
+        "Analysis is always automated; analytics is done by a human expert"
+      ],
+      "reponse": 0,
+      "explication": "Data analysis stands for human activities aimed at gaining insight; data analytics automates insights with queries, aggregation and data mining."
+    },
+    {
+      "id": "iml-ch1-003",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "A Forex trader relies on experience to open or close a position. In the course this is an example of:",
+      "choix": [
+        "Data mining",
+        "Data analytics",
+        "Reinforcement learning",
+        "Data analysis"
+      ],
+      "reponse": 3,
+      "explication": "The course uses the Forex trader as an example of data analysis: a human activity that can be done without special data processing."
+    },
+    {
+      "id": "iml-ch1-004",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 2,
+      "question": "Automatically discovering non-obvious associations between user purchases is an example of:",
+      "choix": [
+        "Supervised regression",
+        "Data visualisation",
+        "Data analytics",
+        "Data analysis"
+      ],
+      "reponse": 2,
+      "explication": "Data analytics automates insights and can use data-mining techniques to discover hidden patterns, such as purchase associations."
+    },
+    {
+      "id": "iml-ch1-005",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "How does the course define Big Data?",
+      "choix": [
+        "Data volumes that traditional applications cannot handle efficiently",
+        "Data that has already been cleaned and aggregated for reporting",
+        "Data stored in a relational database with a fixed table schema",
+        "Any dataset that contains more than one million numeric records"
+      ],
+      "reponse": 0,
+      "explication": "Big Data refers to massive volumes of data that traditional applications cannot efficiently handle; it often cannot fit in the memory of one computer."
+    },
+    {
+      "id": "iml-ch1-006",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "How many bytes are in one petabyte, in the decimal units used by the course?",
+      "choix": [
+        "10^12 bytes",
+        "10^9 bytes",
+        "10^18 bytes",
+        "10^15 bytes"
+      ],
+      "reponse": 3,
+      "explication": "Kilo 10^3, mega 10^6, giga 10^9, tera 10^12, peta 10^15, exa 10^18, zetta 10^21, yotta 10^24."
+    },
+    {
+      "id": "iml-ch1-007",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 2,
+      "question": "Which unit comes directly after the exabyte?",
+      "choix": [
+        "Petabyte",
+        "Yottabyte",
+        "Zettabyte",
+        "Terabyte"
+      ],
+      "reponse": 2,
+      "explication": "The order is ... petabyte, exabyte, zettabyte, yottabyte."
+    },
+    {
+      "id": "iml-ch1-008",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "Which of the 5 Vs of Big Data refers to inconsistencies and uncertainty in data?",
+      "choix": [
+        "Velocity",
+        "Value",
+        "Veracity",
+        "Variety"
+      ],
+      "reponse": 2,
+      "explication": "Veracity = inconsistencies and uncertainty. Variety = formats, velocity = speed, value = extracting useful data."
+    },
+    {
+      "id": "iml-ch1-009",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 1,
+      "question": "Which V of Big Data describes the high speed of accumulation of data?",
+      "choix": [
+        "Veracity",
+        "Variety",
+        "Volume",
+        "Velocity"
+      ],
+      "reponse": 3,
+      "explication": "Velocity is the speed at which data accumulates; volume is the huge amount."
+    },
+    {
+      "id": "iml-ch1-010",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 2,
+      "question": "Which V of Big Data means different formats of data from various sources?",
+      "choix": [
+        "Volume",
+        "Variety",
+        "Value",
+        "Veracity"
+      ],
+      "reponse": 1,
+      "explication": "Variety covers the different formats of data coming from various sources."
+    },
+    {
+      "id": "iml-ch1-011",
+      "theme": "Ch1 · Data science and big data",
+      "niveau": 2,
+      "question": "In the data-science Venn diagram, which field lies at the crossing of computer science and maths/statistics?",
+      "choix": [
+        "Business intelligence",
+        "Traditional research",
+        "Machine learning",
+        "Software development"
+      ],
+      "reponse": 2,
+      "explication": "Machine learning = computer science + maths/statistics; traditional research = maths + domain; software development = computer science + domain."
+    },
+    {
+      "id": "iml-ch1-012",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 1,
+      "question": "According to the course, machine learning lets computers perform tasks:",
+      "choix": [
+        "Only by following rules written in advance by a programmer",
+        "Without explicit instructions, relying on patterns in data",
+        "Without any data, using only mathematical equations",
+        "Only after a human has labelled every possible input"
+      ],
+      "reponse": 1,
+      "explication": "ML is a subset of AI that enables computers to perform tasks without explicit instructions, relying on patterns and inference from data."
+    },
+    {
+      "id": "iml-ch1-013",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "In machine learning, what are the inputs given to the computer during learning?",
+      "choix": [
+        "Data and output, producing a program or model",
+        "A program only, producing the data",
+        "The output only, producing the data",
+        "Data and a program, producing the output"
+      ],
+      "reponse": 0,
+      "explication": "Traditional programming: data + program -> output. Machine learning: data + output -> program/model."
+    },
+    {
+      "id": "iml-ch1-014",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 1,
+      "question": "Learning to recognise cars from images of cars and non-cars is:",
+      "choix": [
+        "Association rule discovery",
+        "Reinforcement learning",
+        "Unsupervised learning",
+        "Supervised learning"
+      ],
+      "reponse": 3,
+      "explication": "The images come with correct answers (car / non-car): labelled data, so supervised learning."
+    },
+    {
+      "id": "iml-ch1-015",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 1,
+      "question": "Grouping stars or genomic data when no labels are given is:",
+      "choix": [
+        "Reinforcement learning",
+        "Unsupervised learning",
+        "Supervised anomaly detection",
+        "Supervised learning"
+      ],
+      "reponse": 1,
+      "explication": "Discovering hidden patterns in unlabelled data (clustering, grouping) is unsupervised learning."
+    },
+    {
+      "id": "iml-ch1-016",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 1,
+      "question": "Learning to play table tennis from occasional rewards after a series of decisions is:",
+      "choix": [
+        "Unsupervised learning",
+        "Supervised learning",
+        "Reinforcement learning",
+        "Statistical modelling"
+      ],
+      "reponse": 2,
+      "explication": "Reinforcement learning: occasional rewards or punishments after a series of decisions."
+    },
+    {
+      "id": "iml-ch1-017",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 1,
+      "question": "Supervised methods are also called:",
+      "choix": [
+        "Generative methods",
+        "Exploratory methods",
+        "Descriptive methods",
+        "Predictive methods"
+      ],
+      "reponse": 3,
+      "explication": "Supervised = predictive (predict an unknown value). Unsupervised = descriptive (find meaningful patterns)."
+    },
+    {
+      "id": "iml-ch1-018",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "Predicting a patient's blood pressure is which supervised task?",
+      "choix": [
+        "Regression",
+        "Anomaly detection",
+        "Clustering",
+        "Classification"
+      ],
+      "reponse": 0,
+      "explication": "Blood pressure is a numerical value, so the task is regression."
+    },
+    {
+      "id": "iml-ch1-019",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "What does supervised anomaly detection require?",
+      "choix": [
+        "Clusters found beforehand by k-means",
+        "A reward signal sent after each action",
+        "Unlabelled data where most instances are normal",
+        "Training data labelled as normal and abnormal"
+      ],
+      "reponse": 3,
+      "explication": "Supervised anomaly detection uses data labelled 'normal' and 'abnormal' and involves training a classifier."
+    },
+    {
+      "id": "iml-ch1-020",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "Unsupervised anomaly detection relies on which assumption?",
+      "choix": [
+        "The majority of the instances are normal",
+        "The data follows a perfectly linear relationship",
+        "Anomalies form the largest cluster in the data",
+        "Every instance carries a normal or abnormal label"
+      ],
+      "reponse": 0,
+      "explication": "It detects anomalies in unlabelled data under the assumption that the majority of the instances are normal."
+    },
+    {
+      "id": "iml-ch1-021",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "Product recommendations and store shelf management are typical applications of:",
+      "choix": [
+        "Sequential pattern discovery",
+        "Reinforcement learning",
+        "Regression",
+        "Association rule discovery"
+      ],
+      "reponse": 3,
+      "explication": "Association rule discovery finds human-interpretable associations, e.g. product recommendations."
+    },
+    {
+      "id": "iml-ch1-022",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "Which unsupervised method describes the sequential dependencies among different events?",
+      "choix": [
+        "Sequential pattern discovery",
+        "Classification",
+        "Clustering",
+        "Association rule discovery"
+      ],
+      "reponse": 0,
+      "explication": "Sequential pattern discovery (buying patterns, gene sequencing) describes sequential dependencies among events."
+    },
+    {
+      "id": "iml-ch1-023",
+      "theme": "Ch1 · Machine learning and its types",
+      "niveau": 2,
+      "question": "Combining clustering and classification is called a:",
+      "choix": [
+        "Hybrid method",
+        "Holdout method",
+        "Lazy method",
+        "Stratified method"
+      ],
+      "reponse": 0,
+      "explication": "The course notes that it is common to combine methods such as clustering and classification: hybrid methods."
+    },
+    {
+      "id": "iml-ch1-024",
+      "theme": "Ch1 · Reinforcement learning",
+      "niveau": 1,
+      "question": "In reinforcement learning, what does the agent try to maximise?",
+      "choix": [
+        "The accuracy on a labelled test set",
+        "Some notion of cumulative reward",
+        "The size of the environment",
+        "The number of clusters found"
+      ],
+      "reponse": 1,
+      "explication": "RL is concerned with how agents take actions in an environment to maximize some notion of cumulative reward."
+    },
+    {
+      "id": "iml-ch1-025",
+      "theme": "Ch1 · Reinforcement learning",
+      "niveau": 1,
+      "question": "In reinforcement learning, what is the 'state'?",
+      "choix": [
+        "The set of all possible moves the agent can make",
+        "A representation of the agent's current situation",
+        "The external system the agent interacts with",
+        "The feedback received after each action taken"
+      ],
+      "reponse": 1,
+      "explication": "State = current situation of the agent. Actions = possible moves. Reward = feedback. Environment = external system."
+    },
+    {
+      "id": "iml-ch1-026",
+      "theme": "Ch1 · Reinforcement learning",
+      "niveau": 2,
+      "question": "Which statement about the reward in reinforcement learning is correct?",
+      "choix": [
+        "It is the label of each example",
+        "It is given before each action",
+        "It can be positive or negative",
+        "It is always positive"
+      ],
+      "reponse": 2,
+      "explication": "The reward is feedback from the environment based on the action; it can be positive or negative."
+    },
+    {
+      "id": "iml-ch1-027",
+      "theme": "Ch1 · Reinforcement learning",
+      "niveau": 2,
+      "question": "How does a reinforcement learning agent improve over time?",
+      "choix": [
+        "By clustering past states without any feedback at all",
+        "By trial and error, using feedback from its own actions",
+        "By solving the problem analytically in a single step",
+        "By copying labels supplied for every training example"
+      ],
+      "reponse": 1,
+      "explication": "The agent interacts with the environment in a trial-and-error manner, using feedback from its own actions and experiences."
+    },
+    {
+      "id": "iml-ch1-028",
+      "theme": "Ch1 · Statistical modelling vs ML",
+      "niveau": 2,
+      "question": "Which statement matches the course about statistical models versus ML?",
+      "choix": [
+        "Machine learning requires the modeller to fix every relation first",
+        "Statistical models need no understanding of the variables involved",
+        "More assumptions in a predictive model give higher predictive power",
+        "Fewer assumptions in a predictive model give higher predictive power"
+      ],
+      "reponse": 3,
+      "explication": "The course states: the lesser the assumptions in a predictive model, the higher the predictive power."
+    },
+    {
+      "id": "iml-ch1-029",
+      "theme": "Ch1 · Statistical modelling vs ML",
+      "niveau": 2,
+      "question": "Statistical models are described in the course as:",
+      "choix": [
+        "Based on storing training instances and comparing distances",
+        "Free of assumptions and based on iterative pattern search",
+        "Mathematics intensive and based on coefficient estimation",
+        "Requiring minimal human effort and no prior understanding"
+      ],
+      "reponse": 2,
+      "explication": "Statistical models are mathematics intensive, based on coefficient estimation, and require understanding the relations between variables first."
+    },
+    {
+      "id": "iml-ch1-030",
+      "theme": "Ch1 · Statistical modelling vs ML",
+      "niveau": 3,
+      "question": "Which is NOT one of the linear regression assumptions listed in the statistical modelling slide?",
+      "choix": [
+        "Independence of observations",
+        "Homoscedasticity of the error term across values",
+        "Normally distributed error for each value",
+        "Independent variables must all be categorical"
+      ],
+      "reponse": 3,
+      "explication": "The listed assumptions are linearity, homoscedasticity, mean error of zero, independence of observations and normally distributed error."
+    },
+    {
+      "id": "iml-ch2-001",
+      "theme": "Ch2 · Python basics",
+      "niveau": 1,
+      "question": "What does Python use to indicate a block of code?",
+      "choix": [
+        "Indentation",
+        "Curly braces",
+        "BEGIN and END keywords",
+        "Semicolons"
+      ],
+      "reponse": 0,
+      "explication": "Indentation (spaces at the start of a line) is very important in Python: it indicates a block of code.",
+      "piege": "A missing indentation is not a style issue: it raises an IndentationError."
+    },
+    {
+      "id": "iml-ch2-002",
+      "theme": "Ch2 · Python basics",
+      "niveau": 1,
+      "question": "What does 'dynamically typed' mean for Python?",
+      "choix": [
+        "Types are checked only by an external compiler",
+        "The type of a variable is inferred at runtime",
+        "Variables can never change their value once set",
+        "Every variable type must be declared in advance"
+      ],
+      "reponse": 1,
+      "explication": "You don't need to declare the type of a variable; it is inferred at runtime."
+    },
+    {
+      "id": "iml-ch2-003",
+      "theme": "Ch2 · Python basics",
+      "niveau": 1,
+      "question": "Which variable name is valid in Python?",
+      "choix": [
+        "_total2",
+        "total value",
+        "2total",
+        "my-var"
+      ],
+      "reponse": 0,
+      "explication": "A name must start with a letter or underscore, cannot start with a digit, and only contains letters, digits and underscores."
+    },
+    {
+      "id": "iml-ch2-004",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "Are `name`, `Name` and `NAME` the same variable in Python?",
+      "choix": [
+        "Only name and Name are the same",
+        "Yes, Python ignores the case of names",
+        "No, they are three different variables",
+        "Only Name and NAME are the same"
+      ],
+      "reponse": 2,
+      "explication": "Variable names are case-sensitive: name, Name and NAME are three different variables."
+    },
+    {
+      "id": "iml-ch2-005",
+      "theme": "Ch2 · Python basics",
+      "niveau": 1,
+      "question": "Which symbol starts a single-line comment in Python?",
+      "choix": [
+        "#",
+        "%",
+        "//",
+        "--"
+      ],
+      "reponse": 0,
+      "explication": "A single-line comment starts with #. Multi-line comments/docstrings use triple quotes."
+    },
+    {
+      "id": "iml-ch2-006",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "What is printed by `print(x + y + z)` with x = \"Python \", y = \"is \", z = \"awesome\"?",
+      "choix": [
+        "An error: + cannot join strings",
+        "Python is awesome",
+        "Pythonisawesome",
+        "Python  is  awesome"
+      ],
+      "reponse": 1,
+      "explication": "The + operator concatenates strings without adding spaces; the spaces come from the strings themselves."
+    },
+    {
+      "id": "iml-ch2-007",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "What type of value does `input()` return?",
+      "choix": [
+        "A string",
+        "A boolean",
+        "An integer",
+        "A float"
+      ],
+      "reponse": 0,
+      "explication": "input() always returns a string; convert it with int() or float() if you need a number."
+    },
+    {
+      "id": "iml-ch2-008",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "What is the value of `2 + 3 * 2 ** 2`?",
+      "choix": [
+        "20",
+        "22",
+        "14",
+        "100"
+      ],
+      "reponse": 2,
+      "explication": "Exponent first (2**2 = 4), then multiplication (3*4 = 12), then addition: 14."
+    },
+    {
+      "id": "iml-ch2-009",
+      "theme": "Ch2 · Python basics",
+      "niveau": 3,
+      "question": "What is the value of `-2 ** 2` in Python?",
+      "choix": [
+        "4",
+        "An error is raised",
+        "0",
+        "-4"
+      ],
+      "reponse": 3,
+      "explication": "** has higher precedence than the unary minus, so it is -(2**2) = -4.",
+      "piege": "Many students answer 4: the exponent is applied before the unary minus."
+    },
+    {
+      "id": "iml-ch2-010",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "Which operator has the LOWEST precedence among these?",
+      "choix": [
+        "or",
+        "not",
+        "and",
+        "=="
+      ],
+      "reponse": 0,
+      "explication": "From high to low: comparisons, not, and, or."
+    },
+    {
+      "id": "iml-ch2-011",
+      "theme": "Ch2 · Python basics",
+      "niveau": 2,
+      "question": "What does `7 // 2` return?",
+      "choix": [
+        "1",
+        "3",
+        "4",
+        "3.5"
+      ],
+      "reponse": 1,
+      "explication": "// is floor division: 7 // 2 = 3. The remainder 7 % 2 = 1."
+    },
+    {
+      "id": "iml-ch2-012",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 1,
+      "question": "Which collection is ordered and unchangeable?",
+      "choix": [
+        "Set",
+        "Dictionary",
+        "List",
+        "Tuple"
+      ],
+      "reponse": 3,
+      "explication": "Tuple: ordered, unchangeable, allows duplicates. List: ordered and changeable."
+    },
+    {
+      "id": "iml-ch2-013",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 1,
+      "question": "Which collection does not allow duplicates and is unindexed?",
+      "choix": [
+        "List",
+        "Tuple",
+        "Set",
+        "String"
+      ],
+      "reponse": 2,
+      "explication": "A set is unordered, unindexed and has no duplicates: {1, 2, 2, 3} gives {1, 2, 3}."
+    },
+    {
+      "id": "iml-ch2-014",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 2,
+      "question": "With `marks = {\"maths\": 86, \"science\": 82}`, what does `marks[\"maths\"]` return?",
+      "choix": [
+        "\"maths\"",
+        "0",
+        "86",
+        "82"
+      ],
+      "reponse": 2,
+      "explication": "A dictionary is accessed by key: marks['maths'] returns the value 86."
+    },
+    {
+      "id": "iml-ch2-015",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 1,
+      "question": "How many numbers does `for i in range(1, 11): print(i)` print?",
+      "choix": [
+        "10",
+        "9",
+        "12",
+        "11"
+      ],
+      "reponse": 0,
+      "explication": "range(1, 11) gives 1 to 10: the end value 11 is excluded.",
+      "piege": "range stops before its end value: range(1, 10) only goes up to 9."
+    },
+    {
+      "id": "iml-ch2-016",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 2,
+      "question": "Which are the three types of flow control in Python listed in the course?",
+      "choix": [
+        "Iterative, functional and object statements",
+        "Transfer, declarative and parallel statements",
+        "Conditional, iterative and transfer statements",
+        "Conditional, recursive and exception statements"
+      ],
+      "reponse": 2,
+      "explication": "Conditional (if, if-else, if-elif-else, nested), iterative (for, while), transfer (break, continue, pass)."
+    },
+    {
+      "id": "iml-ch2-017",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 2,
+      "question": "Which of these is a transfer statement?",
+      "choix": [
+        "pass",
+        "for",
+        "elif",
+        "while"
+      ],
+      "reponse": 0,
+      "explication": "Transfer statements are break, continue and pass."
+    },
+    {
+      "id": "iml-ch2-018",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 2,
+      "question": "What does the course's while loop summing i from 1 to 10 print?",
+      "choix": [
+        "Sum of first 10 number is: 10",
+        "Sum of first 10 number is: 45",
+        "Sum of first 10 number is: 100",
+        "Sum of first 10 number is: 55"
+      ],
+      "reponse": 3,
+      "explication": "1 + 2 + ... + 10 = 55."
+    },
+    {
+      "id": "iml-ch2-019",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 2,
+      "question": "With `def my_function(name = \"Mafas\")`, what does `my_function()` print?",
+      "choix": [
+        "My name is",
+        "An error: missing argument",
+        "My name is None",
+        "My name is Mafas"
+      ],
+      "reponse": 3,
+      "explication": "\"Mafas\" is a default parameter value, used when no argument is passed."
+    },
+    {
+      "id": "iml-ch2-020",
+      "theme": "Ch2 · Collections and control flow",
+      "niveau": 1,
+      "question": "Which keyword defines a function in Python?",
+      "choix": [
+        "lambda only",
+        "def",
+        "function",
+        "func"
+      ],
+      "reponse": 1,
+      "explication": "In Python a function is defined using the def keyword."
+    },
+    {
+      "id": "iml-ch2-021",
+      "theme": "Ch2 · Pandas",
+      "niveau": 1,
+      "question": "Which pandas function reads a CSV file?",
+      "choix": [
+        "pd.load_csv()",
+        "pd.open_csv()",
+        "pd.import_csv()",
+        "pd.read_csv()"
+      ],
+      "reponse": 3,
+      "explication": "Readers follow the pattern read_xxx: read_csv, read_excel, read_json..."
+    },
+    {
+      "id": "iml-ch2-022",
+      "theme": "Ch2 · Pandas",
+      "niveau": 1,
+      "question": "What does `data.head()` display by default?",
+      "choix": [
+        "The first 5 rows",
+        "The last 5 rows",
+        "The number of rows",
+        "The column types"
+      ],
+      "reponse": 0,
+      "explication": "head() shows the first 5 rows, tail() the last 5."
+    },
+    {
+      "id": "iml-ch2-023",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "Which attribute gives the dimension (rows, columns) of a DataFrame?",
+      "choix": [
+        "data.dtypes",
+        "data.columns",
+        "data.size()",
+        "data.shape"
+      ],
+      "reponse": 3,
+      "explication": "shape gives the dimension; len(data) the number of records; columns the column list; dtypes the types."
+    },
+    {
+      "id": "iml-ch2-024",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "Which statistic is NOT part of the output of `describe()` on a numeric column?",
+      "choix": [
+        "std",
+        "count",
+        "75%",
+        "mode"
+      ],
+      "reponse": 3,
+      "explication": "describe() gives count, mean, std, min, 25%, 50%, 75%, max. The mode comes from .mode()."
+    },
+    {
+      "id": "iml-ch2-025",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "Which call summarises a categorical column by counting each category?",
+      "choix": [
+        "data['Gender'].value_counts()",
+        "data['Gender'].groupcount()",
+        "data['Gender'].describe_all()",
+        "data['Gender'].unique_count()"
+      ],
+      "reponse": 0,
+      "explication": "value_counts() gives the number of records per category."
+    },
+    {
+      "id": "iml-ch2-026",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "Which line counts the missing values in each column?",
+      "choix": [
+        "data.isnull().sum()",
+        "data.dropna().sum()",
+        "data.missing().count()",
+        "data.count().isnull()"
+      ],
+      "reponse": 0,
+      "explication": "isnull() marks missing values as True; sum() counts them per column."
+    },
+    {
+      "id": "iml-ch2-027",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "In `data.drop('RowNumber', axis=1)`, what does `axis=1` mean?",
+      "choix": [
+        "Drop a row",
+        "Drop duplicates",
+        "Drop a column",
+        "Drop missing values"
+      ],
+      "reponse": 2,
+      "explication": "axis=1 refers to columns, axis=0 to rows.",
+      "piege": "Without axis=1, pandas looks for a row label called 'RowNumber' and fails."
+    },
+    {
+      "id": "iml-ch2-028",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "What does `random_state=1` in `data.sample(frac=0.5, random_state=1)` ensure?",
+      "choix": [
+        "Exactly one row is returned from the dataset",
+        "The same random sample is drawn on every run",
+        "The sample keeps the class proportions",
+        "Half of the columns are randomly selected"
+      ],
+      "reponse": 1,
+      "explication": "random_state fixes the random generator so the sampling is reproducible."
+    },
+    {
+      "id": "iml-ch2-029",
+      "theme": "Ch2 · Pandas",
+      "niveau": 1,
+      "question": "Which merge type does pandas use by default?",
+      "choix": [
+        "Inner",
+        "Outer",
+        "Right",
+        "Left"
+      ],
+      "reponse": 0,
+      "explication": "Pandas uses an inner merge by default: only keys present in both dataframes are kept."
+    },
+    {
+      "id": "iml-ch2-030",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "Which merge keeps every row of the left dataframe and adds NaN where there is no match?",
+      "choix": [
+        "Left merge",
+        "Inner merge",
+        "Cross merge",
+        "Right merge"
+      ],
+      "reponse": 0,
+      "explication": "A left merge keeps every row of the left dataframe, with NaN where the key is missing on the right."
+    },
+    {
+      "id": "iml-ch2-031",
+      "theme": "Ch2 · Pandas",
+      "niveau": 3,
+      "question": "data_1 has X1 = A, B, C and data_2 has X1 = A, B, D. How many rows does an outer merge on X1 give?",
+      "choix": [
+        "4",
+        "2",
+        "3",
+        "6"
+      ],
+      "reponse": 0,
+      "explication": "Outer keeps all keys from both sides: A, B, C, D, with NaN where there is no match."
+    },
+    {
+      "id": "iml-ch2-032",
+      "theme": "Ch2 · Pandas",
+      "niveau": 3,
+      "question": "Same data (X1 = A, B, C and A, B, D). How many rows does the default merge give?",
+      "choix": [
+        "4",
+        "6",
+        "3",
+        "2"
+      ],
+      "reponse": 3,
+      "explication": "Default = inner: only the common keys A and B."
+    },
+    {
+      "id": "iml-ch2-033",
+      "theme": "Ch2 · Pandas",
+      "niveau": 2,
+      "question": "What is the main difference between `pd.concat` and `pd.merge`?",
+      "choix": [
+        "concat removes duplicates; merge always keeps every duplicate",
+        "concat works on Series only; merge works on DataFrames only",
+        "concat joins on shared columns; merge only stacks frames by rows",
+        "concat stacks frames; merge joins them on shared column values"
+      ],
+      "reponse": 3,
+      "explication": "Concat stacks data frames along rows or columns; merge combines them based on values in shared columns."
+    },
+    {
+      "id": "iml-ch2-034",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 1,
+      "question": "Which library does the course describe as a 2D plotting library producing publication-quality figures?",
+      "choix": [
+        "Seaborn",
+        "Matplotlib",
+        "Scikit-learn",
+        "Pandas"
+      ],
+      "reponse": 1,
+      "explication": "Matplotlib is a Python 2D plotting library producing publication-quality figures."
+    },
+    {
+      "id": "iml-ch2-035",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "Which is the correct order of the Matplotlib workflow?",
+      "choix": [
+        "Prepare, create, plot, customize, save, show",
+        "Create, prepare, plot, show, customize, save",
+        "Prepare, plot, create, show, save, customize",
+        "Plot, prepare, create, save, customize, show"
+      ],
+      "reponse": 0,
+      "explication": "The six basic steps: 1 prepare data, 2 create plot, 3 plot, 4 customize, 5 save, 6 show."
+    },
+    {
+      "id": "iml-ch2-036",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "What is Seaborn?",
+      "choix": [
+        "A preprocessing module inside scikit-learn",
+        "A data loading library that replaces pandas",
+        "A library built on Matplotlib for statistical graphics",
+        "A deep learning API running on top of TensorFlow"
+      ],
+      "reponse": 2,
+      "explication": "Seaborn is based on Matplotlib and provides a high-level interface for attractive statistical graphics."
+    },
+    {
+      "id": "iml-ch2-037",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "Which pandas call draws a univariate histogram of Age?",
+      "choix": [
+        "data.histogram('Age')",
+        "data['Age'].plot.hist()",
+        "data['Age'].hist_plot()",
+        "data.plot.scatter(x='Age')"
+      ],
+      "reponse": 1,
+      "explication": "data['Age'].plot.hist() is univariate; data.plot.scatter(x=..., y=...) is bivariate."
+    },
+    {
+      "id": "iml-ch2-038",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 1,
+      "question": "Which library does the course list for pre-processing, data split, modelling and evaluation of classical ML models?",
+      "choix": [
+        "Seaborn",
+        "Matplotlib",
+        "Statsmodels",
+        "Scikit-learn"
+      ],
+      "reponse": 3,
+      "explication": "Scikit-learn covers pre-processing, data split, modelling and evaluation (TensorFlow/Keras too, for deep learning)."
+    },
+    {
+      "id": "iml-ch2-039",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "Which scikit-learn function splits data into training and test sets?",
+      "choix": [
+        "GridSearchCV",
+        "cross_val_score",
+        "StandardScaler",
+        "train_test_split"
+      ],
+      "reponse": 3,
+      "explication": "train_test_split(X, y, test_size=..., random_state=...) is in sklearn.model_selection."
+    },
+    {
+      "id": "iml-ch2-040",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 3,
+      "question": "In the scikit-learn basic example, on which data is the StandardScaler fitted?",
+      "choix": [
+        "Both X_train and X_test together",
+        "The full dataset X",
+        "X_test only",
+        "X_train only"
+      ],
+      "reponse": 3,
+      "explication": "scaler = StandardScaler().fit(X_train), then transform both X_train and X_test."
+    },
+    {
+      "id": "iml-ch2-041",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "Which scikit-learn tool searches every combination of a hyperparameter grid?",
+      "choix": [
+        "cross_val_score",
+        "GridSearchCV",
+        "train_test_split",
+        "RandomizedSearchCV"
+      ],
+      "reponse": 1,
+      "explication": "GridSearchCV tries every combination in param_grid; RandomizedSearchCV samples n_iter combinations."
+    },
+    {
+      "id": "iml-ch2-042",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 3,
+      "question": "In Keras, which last layer and loss suit a binary classification MLP?",
+      "choix": [
+        "Softmax output with mse",
+        "ReLU output with mae",
+        "Linear output with categorical_crossentropy",
+        "Sigmoid output with binary_crossentropy"
+      ],
+      "reponse": 3,
+      "explication": "Binary: sigmoid + binary_crossentropy. Multi-class: softmax + categorical_crossentropy. Regression: linear output + mse."
+    },
+    {
+      "id": "iml-ch2-043",
+      "theme": "Ch2 · Visualisation and libraries",
+      "niveau": 2,
+      "question": "In the Keras cheat sheet, which compile setting is used for an MLP regression?",
+      "choix": [
+        "loss='categorical_crossentropy'",
+        "loss='mse', metrics=['mae']",
+        "loss='binary_crossentropy'",
+        "metrics=['accuracy'] only"
+      ],
+      "reponse": 1,
+      "explication": "For regression: model.compile(optimizer='rmsprop', loss='mse', metrics=['mae'])."
+    },
+    {
+      "id": "iml-ch3-001",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 1,
+      "question": "Supervised learning is a type of machine learning where the model is trained on:",
+      "choix": [
+        "Unlabelled data",
+        "Labelled data",
+        "Rewards only",
+        "Random noise"
+      ],
+      "reponse": 1,
+      "explication": "Supervised learning trains the model on labelled data: inputs paired with the correct output."
+    },
+    {
+      "id": "iml-ch3-002",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 1,
+      "question": "In supervised learning, the features are:",
+      "choix": [
+        "The internal parameters learned by the model",
+        "The metrics used to evaluate the predictions",
+        "The input variables used to make predictions",
+        "The desired outcomes the model must predict"
+      ],
+      "reponse": 2,
+      "explication": "Features = inputs. Labels/targets = outputs, the desired prediction outcomes."
+    },
+    {
+      "id": "iml-ch3-003",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 1,
+      "question": "Predicting house prices from size and location is:",
+      "choix": [
+        "Reinforcement learning",
+        "Regression",
+        "Clustering",
+        "Classification"
+      ],
+      "reponse": 1,
+      "explication": "The price is a continuous value, so it is regression."
+    },
+    {
+      "id": "iml-ch3-004",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 1,
+      "question": "Classifying fruit as apples or strawberries is:",
+      "choix": [
+        "Regression",
+        "Dimensionality reduction",
+        "Clustering",
+        "Classification"
+      ],
+      "reponse": 3,
+      "explication": "The label is discrete (apple / strawberry), so it is classification."
+    },
+    {
+      "id": "iml-ch3-005",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 2,
+      "question": "The Iris data set has three labels (Setosa, Versicolour, Virginica). This target is:",
+      "choix": [
+        "Unlabelled",
+        "Binary",
+        "Continuous",
+        "Multilevel"
+      ],
+      "reponse": 3,
+      "explication": "Three possible classes: a multilevel (multi-class) target."
+    },
+    {
+      "id": "iml-ch3-006",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 2,
+      "question": "Which of these is NOT an attribute of the Iris data set?",
+      "choix": [
+        "Petal width",
+        "Petal length",
+        "Flower colour",
+        "Sepal length"
+      ],
+      "reponse": 2,
+      "explication": "The four Iris attributes are sepal length, sepal width, petal length and petal width (cm)."
+    },
+    {
+      "id": "iml-ch3-007",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 3,
+      "question": "The Forest Fires data set was originally a regression task. What turns it into binary classification?",
+      "choix": [
+        "Keeping only the spatial coordinates X and Y",
+        "Removing the meteorological attributes from the data",
+        "Grouping the months into four seasons",
+        "Predicting 'burned area or not' instead of the area"
+      ],
+      "reponse": 3,
+      "explication": "The original target is the burned area (regression). Using 'burned or not' (0/1) makes the target binary."
+    },
+    {
+      "id": "iml-ch3-008",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 2,
+      "question": "In the supervised learning diagram, what makes up the 'generalization' phase?",
+      "choix": [
+        "Clustering the test data before any prediction is made",
+        "Feeding training data and training labels into the model",
+        "Predicting the test data and evaluating against test labels",
+        "Collecting more labels for the training set"
+      ],
+      "reponse": 2,
+      "explication": "Training/building = training data + labels -> model. Generalization = test data -> prediction -> evaluation with test labels."
+    },
+    {
+      "id": "iml-ch3-009",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 2,
+      "question": "Why is the model evaluated on test data rather than training data?",
+      "choix": [
+        "To make the training of the model run faster",
+        "Because the test set is always larger than the training set",
+        "Because training data cannot be used to make predictions",
+        "To measure how it performs on new, unseen data"
+      ],
+      "reponse": 3,
+      "explication": "The goal is to predict new cases; scoring on training data measures memorisation, not generalization."
+    },
+    {
+      "id": "iml-ch3-010",
+      "theme": "Ch3 · Supervised learning",
+      "niveau": 2,
+      "question": "What are the steps of the cat versus dog learning pipeline?",
+      "choix": [
+        "Design features, define task, test, collect data, train",
+        "Collect data, train, define task, test, design features",
+        "Define task, collect data, design features, train, test",
+        "Train, test, define task, design features, collect data"
+      ],
+      "reponse": 2,
+      "explication": "0 define task, 1 collect data, 2 design features, 3 train model, 4 test model."
+    },
+    {
+      "id": "iml-ch3-011",
+      "theme": "Ch3 · Key terms",
+      "niveau": 1,
+      "question": "How does the course define overfitting?",
+      "choix": [
+        "The model is trained on too few features to make predictions",
+        "The model learns noise and details that hurt performance on new data",
+        "The model is too simple to capture the patterns in the data",
+        "The model is evaluated on the training set instead of test data"
+      ],
+      "reponse": 1,
+      "explication": "Overfitting: the model learns noise and details in the training data, which negatively impacts performance on new data."
+    },
+    {
+      "id": "iml-ch3-012",
+      "theme": "Ch3 · Key terms",
+      "niveau": 1,
+      "question": "How does the course define underfitting?",
+      "choix": [
+        "The model memorises the noise contained in the training set",
+        "The model performs well on training data but badly on test data",
+        "The model is too simple to capture the underlying patterns",
+        "The model uses too many hidden layers and features"
+      ],
+      "reponse": 2,
+      "explication": "Underfitting: the model is too simple to capture the underlying patterns in the data."
+    },
+    {
+      "id": "iml-ch3-013",
+      "theme": "Ch3 · Key terms",
+      "niveau": 1,
+      "question": "What is the 'model' in the course's key terminology?",
+      "choix": [
+        "The mathematical representation of learning",
+        "The output or target variable to be predicted",
+        "The set of input variables fed to the system",
+        "The dataset used to evaluate the predictions"
+      ],
+      "reponse": 0,
+      "explication": "Model: the mathematical representation of the learning process."
+    },
+    {
+      "id": "iml-ch3-014",
+      "theme": "Ch3 · Key terms",
+      "niveau": 2,
+      "question": "Which is listed as a challenge of supervised learning?",
+      "choix": [
+        "Inability to ever predict numbers",
+        "Interpretability of complex models",
+        "Too few algorithms to choose from",
+        "Total absence of any labelled data"
+      ],
+      "reponse": 1,
+      "explication": "Challenges: data quality, bias and variance, computational cost, interpretability, ethical concerns."
+    },
+    {
+      "id": "iml-ch3-015",
+      "theme": "Ch3 · Key terms",
+      "niveau": 2,
+      "question": "Sentiment analysis of customer reviews is listed as an application of:",
+      "choix": [
+        "Reinforcement learning",
+        "Supervised learning",
+        "Sequential pattern discovery",
+        "Association rule discovery"
+      ],
+      "reponse": 1,
+      "explication": "Applications of supervised learning: spam detection, medical diagnosis, sentiment analysis, fraud detection, image classification."
+    },
+    {
+      "id": "iml-ch4-001",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 1,
+      "question": "In the pipeline, what comes right after 'Problem + Dataset'?",
+      "choix": [
+        "Model building",
+        "Data understanding",
+        "Hyperparameter tuning",
+        "Data split"
+      ],
+      "reponse": 1,
+      "explication": "Order: problem + dataset, data understanding, data cleaning, data split, preprocessing, model building, tuning, evaluation."
+    },
+    {
+      "id": "iml-ch4-002",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "What is the purpose of the data understanding step?",
+      "choix": [
+        "To deploy the model on new streaming data",
+        "To choose the final hyperparameters of the model",
+        "To detect noise such as missing values and outliers",
+        "To split the data into train and test subsets"
+      ],
+      "reponse": 2,
+      "explication": "Data understanding detects noise: missing values, outliers, non-normal distributions, duplicates, inconsistent data."
+    },
+    {
+      "id": "iml-ch4-003",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "According to the course, roughly how much of a data science project's time does preprocessing consume?",
+      "choix": [
+        "20%",
+        "50%",
+        "80%",
+        "5%"
+      ],
+      "reponse": 2,
+      "explication": "Data preprocessing is a crucial task that can consume 80% of the total project time."
+    },
+    {
+      "id": "iml-ch4-004",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "How must categorical data be handled in preprocessing?",
+      "choix": [
+        "It must be oversampled",
+        "It must be normalized",
+        "It must be encoded",
+        "It must be removed"
+      ],
+      "reponse": 2,
+      "explication": "Categorical data must be encoded. Class balancing uses under- or oversampling."
+    },
+    {
+      "id": "iml-ch4-005",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "Which treatment does the course list for class balancing?",
+      "choix": [
+        "Correlation or Chi2 test",
+        "Normalization or transformation",
+        "Removal or imputation",
+        "Undersampling or oversampling"
+      ],
+      "reponse": 3,
+      "explication": "Class balancing -> undersampling or oversampling. Feature selection -> correlation, Chi2, R square test."
+    },
+    {
+      "id": "iml-ch4-006",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "Which techniques are listed for feature selection?",
+      "choix": [
+        "Grid search and randomized search",
+        "Correlation, Chi2 test, R square test",
+        "Undersampling and oversampling",
+        "Removal or imputation of values"
+      ],
+      "reponse": 1,
+      "explication": "Feature selection: correlation, Chi2 test, R square test."
+    },
+    {
+      "id": "iml-ch4-007",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "Which tools does the pipeline name for hyperparameter tuning?",
+      "choix": [
+        "train_test_split or pd.concat",
+        "StandardScaler or MinMaxScaler",
+        "Chi2 test or correlation analysis",
+        "Grid SearchCV or Randomized SearchCV"
+      ],
+      "reponse": 3,
+      "explication": "Hyperparameter tuning uses Grid SearchCV or Randomized SearchCV, giving the tuned model."
+    },
+    {
+      "id": "iml-ch4-008",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 2,
+      "question": "How is the ML algorithm chosen in the model building step?",
+      "choix": [
+        "From the size of the test set only",
+        "Always by picking the most complex model available",
+        "By using the first algorithm listed in scikit-learn",
+        "From literature review and past work experience"
+      ],
+      "reponse": 3,
+      "explication": "Algorithm selection is based on literature review and past work experience; usually several models are built and compared."
+    },
+    {
+      "id": "iml-ch4-009",
+      "theme": "Ch4 · Model building pipeline",
+      "niveau": 3,
+      "question": "In the pipeline, what is the 'base model'?",
+      "choix": [
+        "A model trained on the test data for comparison",
+        "The first model built with default hyperparameters",
+        "The model retrained on all the data at the end",
+        "The model obtained after hyperparameter tuning"
+      ],
+      "reponse": 1,
+      "explication": "The ML model building step produces a base model with default HPs; tuning then produces the tuned model."
+    },
+    {
+      "id": "iml-ch4-010",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 2,
+      "question": "Which operation is safe to perform BEFORE the train-test split?",
+      "choix": [
+        "One-hot encoding",
+        "Standard scaling",
+        "Mean imputation of missing values",
+        "Removing duplicate rows"
+      ],
+      "reponse": 3,
+      "explication": "Before the split: only operations based on domain knowledge or predefined rules (remove irrelevant features, duplicates, fix corrupted data, type conversion)."
+    },
+    {
+      "id": "iml-ch4-011",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 2,
+      "question": "Which operation must be done AFTER the split, fitted on training data only?",
+      "choix": [
+        "Removing irrelevant features",
+        "Fixing corrupted data entries",
+        "Scaling with StandardScaler",
+        "Parsing dates from strings"
+      ],
+      "reponse": 2,
+      "explication": "Scaling uses mean and std learned from data, so it must be fitted on training data only."
+    },
+    {
+      "id": "iml-ch4-012",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 3,
+      "question": "Why must SMOTE / class weights be applied after the split?",
+      "choix": [
+        "They must not expose the test distribution",
+        "They remove duplicates from both datasets",
+        "They are based on predefined domain rules",
+        "They only work on numeric categorical data"
+      ],
+      "reponse": 0,
+      "explication": "Class imbalance handling must not expose the test distribution: train data only."
+    },
+    {
+      "id": "iml-ch4-013",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 2,
+      "question": "What is data leakage?",
+      "choix": [
+        "Missing values appearing after merging two dataframes",
+        "Test-set information used during training or preprocessing",
+        "Overfitting caused by having far too many training rows",
+        "Rows lost when the dataset is split into separate subsets"
+      ],
+      "reponse": 1,
+      "explication": "Data leakage = test information influences training, which makes the test score too optimistic."
+    },
+    {
+      "id": "iml-ch4-014",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 3,
+      "question": "What is the correct way to scale train and test data?",
+      "choix": [
+        "Fit on all data before splitting, then transform",
+        "Fit and transform train and test separately",
+        "Fit on train, then transform both train and test",
+        "Fit on test, then transform both train and test"
+      ],
+      "reponse": 2,
+      "explication": "Fit on training data only, save the parameters, transform both sets. Never recalculate statistics on the test set.",
+      "piege": "fit_transform on the full dataset before the split is data leakage."
+    },
+    {
+      "id": "iml-ch4-015",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 3,
+      "question": "Train ages are 20, 30, 40 (mean 30, std about 8.16). What is the correct z-score of a test age of 50?",
+      "choix": [
+        "About 6.12",
+        "About 1.00",
+        "0",
+        "About 2.45"
+      ],
+      "reponse": 3,
+      "explication": "z = (50 - 30) / 8.16 = 2.45, using the training mean and std. Recomputing the mean on the test point would wrongly give 0."
+    },
+    {
+      "id": "iml-ch4-016",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 2,
+      "question": "What is the course's ground rule for the train-test split?",
+      "choix": [
+        "Test data > train data",
+        "Train data > test data",
+        "Test data must be 80%",
+        "Always exactly 50/50"
+      ],
+      "reponse": 1,
+      "explication": "Ground rule: train > test (50/50, 60/40, 70/30, 80/20), but an equal split is possible if the dataset size is OK."
+    },
+    {
+      "id": "iml-ch4-017",
+      "theme": "Ch4 · Preprocessing and data leakage",
+      "niveau": 1,
+      "question": "With 1,000 rows and an 80/20 split, how many test rows are there?",
+      "choix": [
+        "200",
+        "800",
+        "20",
+        "80"
+      ],
+      "reponse": 0,
+      "explication": "80% train = 800 rows, 20% test = 200 rows."
+    },
+    {
+      "id": "iml-ch4-018",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 1,
+      "question": "How does the course define bias?",
+      "choix": [
+        "The number of parameters inside a model",
+        "The variation among fits of different samples",
+        "The proportion of variance explained by a model",
+        "The error in fitting a model"
+      ],
+      "reponse": 3,
+      "explication": "Bias is the error in fitting a model. Variance is the variation among fits of different training samples."
+    },
+    {
+      "id": "iml-ch4-019",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "How does the course define variance?",
+      "choix": [
+        "Variation among fits of different samples of one population",
+        "The gap between the training error and the test error",
+        "The error between the fitted model and the training points",
+        "The spread of the target variable around its mean value"
+      ],
+      "reponse": 0,
+      "explication": "Variance is the measure of variation among the fits of different sample training sets on the same population."
+    },
+    {
+      "id": "iml-ch4-020",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "What happens when model complexity increases?",
+      "choix": [
+        "Bias decreases but variance increases",
+        "Bias and variance both increase",
+        "Bias and variance both decrease",
+        "Bias increases but variance decreases"
+      ],
+      "reponse": 0,
+      "explication": "Increasing complexity decreases bias but increases variance: the bias-variance trade-off."
+    },
+    {
+      "id": "iml-ch4-021",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "Which pattern indicates a high bias problem?",
+      "choix": [
+        "Low training error, low test error",
+        "Low training error, very high test error",
+        "High training error, test error similar to it",
+        "High training error, much lower test error"
+      ],
+      "reponse": 2,
+      "explication": "High bias: high training error and a validation/test error of similar magnitude."
+    },
+    {
+      "id": "iml-ch4-022",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "A model has 2% training error and 20% validation error. What is the diagnosis?",
+      "choix": [
+        "Data leakage in training",
+        "High bias (underfitting)",
+        "High variance (overfitting)",
+        "A well-balanced model"
+      ],
+      "reponse": 2,
+      "explication": "Low training error and very high validation error = high variance."
+    },
+    {
+      "id": "iml-ch4-023",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 3,
+      "question": "Which action is listed in the course to decrease bias?",
+      "choix": [
+        "Reduce the number of features in the model",
+        "Stop the training process much earlier",
+        "Increase model complexity, e.g. more features",
+        "Switch to a simpler linear model instead"
+      ],
+      "reponse": 2,
+      "explication": "To decrease bias: more training data may help; increase complexity (more features, nonlinear models, more hidden layers).",
+      "piege": "More data mainly helps high variance; against high bias the main lever is more complexity."
+    },
+    {
+      "id": "iml-ch4-024",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "On the error vs model complexity curve, where is the best model?",
+      "choix": [
+        "At the minimum of the training error",
+        "At the highest model complexity",
+        "At the minimum of the validation error",
+        "At the lowest model complexity"
+      ],
+      "reponse": 2,
+      "explication": "Training error keeps falling; validation error falls then rises. The best model is at the minimum of validation error."
+    },
+    {
+      "id": "iml-ch4-025",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "What is regularization in the course?",
+      "choix": [
+        "Splitting the data into k folds of exactly equal size",
+        "Scaling every feature to the same numeric range first",
+        "Removing duplicate rows before the train-test split",
+        "Relaxing an overfit model so it represents the population"
+      ],
+      "reponse": 3,
+      "explication": "If the model is overfit to the sample it may not represent the population; relaxing it is called regularization."
+    },
+    {
+      "id": "iml-ch4-026",
+      "theme": "Ch4 · Bias and variance",
+      "niveau": 2,
+      "question": "Which optimisation techniques does the training summary mention?",
+      "choix": [
+        "PCA or SMOTE",
+        "Grid search or random search",
+        "KNN or k-means",
+        "SGD or Adam"
+      ],
+      "reponse": 3,
+      "explication": "Training and optimization: the model adjusts its parameters with techniques like SGD or Adam to minimize a loss."
+    },
+    {
+      "id": "iml-ch5-001",
+      "theme": "Ch5 · Confusion matrix",
+      "niveau": 1,
+      "question": "A false positive is:",
+      "choix": [
+        "An actual positive predicted as positive",
+        "An actual negative predicted as positive",
+        "An actual positive predicted as negative",
+        "An actual negative predicted as negative"
+      ],
+      "reponse": 1,
+      "explication": "FP = false alarm: actually negative, predicted positive. FN = miss: actually positive, predicted negative."
+    },
+    {
+      "id": "iml-ch5-002",
+      "theme": "Ch5 · Confusion matrix",
+      "niveau": 1,
+      "question": "A false negative is:",
+      "choix": [
+        "An actual negative predicted as negative",
+        "An actual positive predicted as negative",
+        "An actual negative predicted as positive",
+        "An actual positive predicted as positive"
+      ],
+      "reponse": 1,
+      "explication": "FN = miss: the model says negative but the case was positive."
+    },
+    {
+      "id": "iml-ch5-003",
+      "theme": "Ch5 · Confusion matrix",
+      "niveau": 3,
+      "question": "In scikit-learn, `confusion_matrix(y_test, y_pred)` puts what in the rows?",
+      "choix": [
+        "The probabilities",
+        "The thresholds",
+        "The predicted labels",
+        "The actual labels"
+      ],
+      "reponse": 3,
+      "explication": "scikit-learn: rows = actual (true) labels, columns = predicted labels.",
+      "piege": "The course shows two layouts; always read the axis titles. The heatmap slide swaps the axis labels."
+    },
+    {
+      "id": "iml-ch5-004",
+      "theme": "Ch5 · Confusion matrix",
+      "niveau": 3,
+      "question": "A heatmap shows row 0 = [58, 0] and row 1 = [22, 0], rows being actual labels. What is the model doing?",
+      "choix": [
+        "Classifying every case correctly",
+        "Predicting class 0 for every case",
+        "Predicting each class half the time",
+        "Predicting class 1 for every case"
+      ],
+      "reponse": 1,
+      "explication": "Column 1 is empty: no case was ever predicted as 1. The model predicts 0 for everyone."
+    },
+    {
+      "id": "iml-ch5-005",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 1,
+      "question": "Which formula gives accuracy?",
+      "choix": [
+        "(FP + FN) / (TP + TN + FP + FN)",
+        "(TP + TN) / (TP + TN + FP + FN)",
+        "TP / (TP + FP)",
+        "TP / (TP + FN)"
+      ],
+      "reponse": 1,
+      "explication": "Accuracy = correct predictions / all predictions."
+    },
+    {
+      "id": "iml-ch5-006",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 1,
+      "question": "When is accuracy the best metric, according to the course?",
+      "choix": [
+        "When false positives are costly",
+        "When the target is numeric",
+        "When false negatives are costly",
+        "When the classes are balanced"
+      ],
+      "reponse": 3,
+      "explication": "Accuracy is best when the classes are balanced."
+    },
+    {
+      "id": "iml-ch5-007",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "If accuracy is 0.85, what is the error rate?",
+      "choix": [
+        "0.50",
+        "1.85",
+        "0.85",
+        "0.15"
+      ],
+      "reponse": 3,
+      "explication": "ERR = 1 - ACC = 0.15."
+    },
+    {
+      "id": "iml-ch5-008",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 1,
+      "question": "Which formula gives precision?",
+      "choix": [
+        "TP / (TP + FP)",
+        "TN / (TN + FP)",
+        "(TP + TN) / total",
+        "TP / (TP + FN)"
+      ],
+      "reponse": 0,
+      "explication": "Precision = true positives / all positive predictions.",
+      "piege": "Precision divides by predicted positives (TP+FP); recall divides by actual positives (TP+FN)."
+    },
+    {
+      "id": "iml-ch5-009",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 1,
+      "question": "Which formula gives recall?",
+      "choix": [
+        "TP / (TP + FN)",
+        "TP / (TP + FP)",
+        "TN / (TN + FN)",
+        "FP / (FP + TN)"
+      ],
+      "reponse": 0,
+      "explication": "Recall = true positives / all actual positives. It is also the true positive rate."
+    },
+    {
+      "id": "iml-ch5-010",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "Precision is especially important when:",
+      "choix": [
+        "The cost of false negatives is high",
+        "The cost of false positives is high",
+        "The target variable is continuous",
+        "The classes are perfectly balanced"
+      ],
+      "reponse": 1,
+      "explication": "Precision matters when false positives are costly; recall when false negatives are costly."
+    },
+    {
+      "id": "iml-ch5-011",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "For cancer screening, where missing a sick patient is very costly, which metric should be favoured?",
+      "choix": [
+        "Precision",
+        "Accuracy",
+        "Recall",
+        "Error rate"
+      ],
+      "reponse": 2,
+      "explication": "A missed patient is a false negative: favour recall."
+    },
+    {
+      "id": "iml-ch5-012",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "For a spam filter, where sending a good e-mail to spam is costly, which metric should be favoured?",
+      "choix": [
+        "MAE",
+        "Precision",
+        "Error rate",
+        "Recall"
+      ],
+      "reponse": 1,
+      "explication": "A good mail flagged as spam is a false positive: favour precision."
+    },
+    {
+      "id": "iml-ch5-013",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "How is the F1 score defined?",
+      "choix": [
+        "The difference between recall and precision",
+        "The arithmetic mean of accuracy and recall",
+        "The harmonic mean of precision and recall",
+        "The product of precision and recall"
+      ],
+      "reponse": 2,
+      "explication": "F1 = 2 x (P x R) / (P + R), the harmonic mean of precision and recall."
+    },
+    {
+      "id": "iml-ch5-014",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 3,
+      "question": "TP = 40, FP = 10, FN = 20, TN = 130. What is the precision?",
+      "choix": [
+        "0.73",
+        "0.67",
+        "0.80",
+        "0.85"
+      ],
+      "reponse": 2,
+      "explication": "Precision = 40 / (40 + 10) = 0.80."
+    },
+    {
+      "id": "iml-ch5-015",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 3,
+      "question": "TP = 40, FP = 10, FN = 20, TN = 130. What is the recall?",
+      "choix": [
+        "About 0.92",
+        "0.85",
+        "0.80",
+        "About 0.67"
+      ],
+      "reponse": 3,
+      "explication": "Recall = 40 / (40 + 20) = 0.667."
+    },
+    {
+      "id": "iml-ch5-016",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 3,
+      "question": "TP = 40, FP = 10, FN = 20, TN = 130. What is the accuracy?",
+      "choix": [
+        "0.67",
+        "0.80",
+        "0.85",
+        "0.65"
+      ],
+      "reponse": 2,
+      "explication": "Accuracy = (40 + 130) / 200 = 0.85."
+    },
+    {
+      "id": "iml-ch5-017",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 3,
+      "question": "Precision = 0.80 and recall = 0.667. What is the F1 score (approximately)?",
+      "choix": [
+        "0.727",
+        "0.533",
+        "0.800",
+        "0.733"
+      ],
+      "reponse": 0,
+      "explication": "F1 = 2 x 0.80 x 0.667 / (0.80 + 0.667) = 1.067 / 1.467 = 0.727. The arithmetic mean would be 0.733."
+    },
+    {
+      "id": "iml-ch5-018",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 3,
+      "question": "In a classification report, how is the 'macro avg' computed?",
+      "choix": [
+        "Score of the majority class only",
+        "Plain mean of the per-class scores",
+        "Mean weighted by the class support",
+        "Product of the per-class scores"
+      ],
+      "reponse": 1,
+      "explication": "Macro average = simple mean over classes; weighted average weights each class by its support."
+    },
+    {
+      "id": "iml-ch5-019",
+      "theme": "Ch5 · Classification metrics",
+      "niveau": 2,
+      "question": "A model has 73% accuracy but precision and recall of 0 for class 1. What does this show?",
+      "choix": [
+        "Class 1 has more support than class 0",
+        "Accuracy hides that the model never finds class 1",
+        "The report contains a calculation error",
+        "The model is reliable for both of the classes"
+      ],
+      "reponse": 1,
+      "explication": "On unbalanced data, a model predicting only the majority class can have good accuracy and be useless for the minority class."
+    },
+    {
+      "id": "iml-ch5-020",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 2,
+      "question": "What does the ROC curve plot?",
+      "choix": [
+        "Accuracy against the decision threshold",
+        "True positive rate vs false positive rate",
+        "Precision against recall at each threshold",
+        "Training error against model complexity"
+      ],
+      "reponse": 1,
+      "explication": "ROC: TP rate (recall) on the y-axis against FP rate (1 - specificity) on the x-axis, at various thresholds."
+    },
+    {
+      "id": "iml-ch5-021",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 2,
+      "question": "On a ROC curve, the diagonal line corresponds to:",
+      "choix": [
+        "Predicting all negatives",
+        "Random guessing",
+        "A perfect classifier",
+        "Predicting all positives"
+      ],
+      "reponse": 1,
+      "explication": "Diagonal = random guessing; below it, predictions are opposite of the true class."
+    },
+    {
+      "id": "iml-ch5-022",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 2,
+      "question": "Which (TP rate, FP rate) point is ideal?",
+      "choix": [
+        "(0, 0)",
+        "(0, 1)",
+        "(1, 1)",
+        "(1, 0)"
+      ],
+      "reponse": 3,
+      "explication": "(1,0): all positives found, no false alarm. (0,0): everything negative. (1,1): everything positive."
+    },
+    {
+      "id": "iml-ch5-023",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 2,
+      "question": "What does the point (TP rate, FP rate) = (1, 1) mean?",
+      "choix": [
+        "Declaring everything to be the positive class",
+        "Random guessing at threshold 0.5",
+        "The ideal classifier",
+        "Declaring everything to be the negative class"
+      ],
+      "reponse": 0,
+      "explication": "At (1,1) every case is predicted positive: all positives are found but every negative is a false alarm."
+    },
+    {
+      "id": "iml-ch5-024",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 2,
+      "question": "What AUC value corresponds to random guessing?",
+      "choix": [
+        "0.5",
+        "0.25",
+        "1",
+        "0"
+      ],
+      "reponse": 0,
+      "explication": "AUC = 1 is perfect, 0.5 is random guessing."
+    },
+    {
+      "id": "iml-ch5-025",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 3,
+      "question": "At threshold t, TPR = 0.5 and FPR = 0.12. What is the true negative rate?",
+      "choix": [
+        "0.50",
+        "0.88",
+        "0.12",
+        "0.62"
+      ],
+      "reponse": 1,
+      "explication": "TNR = 1 - FPR = 0.88 (the slide mislabels it as FN)."
+    },
+    {
+      "id": "iml-ch5-026",
+      "theme": "Ch5 · ROC and AUC",
+      "niveau": 3,
+      "question": "What changes the location of a classifier's point on the ROC curve?",
+      "choix": [
+        "Only the number of features that are used",
+        "Only the choice of the evaluation metric",
+        "Only the size of the training set provided",
+        "Threshold, sample distribution or cost matrix"
+      ],
+      "reponse": 3,
+      "explication": "Changing the threshold of the algorithm, the sample distribution or the cost matrix changes the location of the point."
+    },
+    {
+      "id": "iml-ch5-027",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 1,
+      "question": "Which formula gives the MAE?",
+      "choix": [
+        "(1/N) Σ |y_i - ŷ_i|",
+        "√((1/N) Σ (y_i - ŷ_i)²)",
+        "1 - RSS / TSS",
+        "(1/N) Σ (y_i - ŷ_i)²"
+      ],
+      "reponse": 0,
+      "explication": "MAE = mean of absolute differences between predicted and actual values."
+    },
+    {
+      "id": "iml-ch5-028",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 2,
+      "question": "Which regression metric penalises larger errors more heavily?",
+      "choix": [
+        "MSE",
+        "Adjusted R²",
+        "R²",
+        "MAE"
+      ],
+      "reponse": 0,
+      "explication": "MSE squares the errors, so big errors weigh much more."
+    },
+    {
+      "id": "iml-ch5-029",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 2,
+      "question": "Why is RMSE often easier to interpret than MSE?",
+      "choix": [
+        "It always lies between 0 and 1",
+        "It ignores the very largest errors",
+        "It has the same units as the target",
+        "It is always smaller than the MAE value"
+      ],
+      "reponse": 2,
+      "explication": "RMSE = √MSE keeps the units of the target variable."
+    },
+    {
+      "id": "iml-ch5-030",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 3,
+      "question": "y = (3, 5, 2, 7) and ŷ = (2.5, 5, 4, 8). What is the MAE?",
+      "choix": [
+        "1.3125",
+        "3.5",
+        "0.875",
+        "1.146"
+      ],
+      "reponse": 2,
+      "explication": "|errors| = 0.5, 0, 2, 1 -> sum 3.5 -> 3.5 / 4 = 0.875."
+    },
+    {
+      "id": "iml-ch5-031",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 3,
+      "question": "y = (3, 5, 2, 7) and ŷ = (2.5, 5, 4, 8). What is the MSE?",
+      "choix": [
+        "5.25",
+        "1.146",
+        "1.3125",
+        "0.875"
+      ],
+      "reponse": 2,
+      "explication": "Squared errors 0.25, 0, 4, 1 -> sum 5.25 -> 5.25 / 4 = 1.3125."
+    },
+    {
+      "id": "iml-ch5-032",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 2,
+      "question": "Which scikit-learn call computes the RMSE?",
+      "choix": [
+        "mean_squared_error(y_test, y_pred) / 2",
+        "r2_score(y_test, y_pred) ** 2",
+        "mean_absolute_error(y_test, y_pred)",
+        "np.sqrt(mean_squared_error(y_test, y_pred))"
+      ],
+      "reponse": 3,
+      "explication": "RMSE = square root of the MSE."
+    },
+    {
+      "id": "iml-ch5-033",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 3,
+      "question": "Why does the argument order matter in `r2_score`?",
+      "choix": [
+        "It does not matter for any sklearn metric",
+        "R² is not symmetric: true values come first",
+        "scikit-learn sorts both arrays beforehand",
+        "It also changes the sign of the MAE value"
+      ],
+      "reponse": 1,
+      "explication": "The signature is (y_true, y_pred). For MAE/MSE the order does not change the value, for R² it does."
+    },
+    {
+      "id": "iml-ch5-034",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 2,
+      "question": "What is adjusted R² useful for?",
+      "choix": [
+        "Comparing models with different predictor counts",
+        "Evaluating binary classifiers on unbalanced data",
+        "Measuring errors in the target variable's units",
+        "Choosing the best classification threshold value"
+      ],
+      "reponse": 0,
+      "explication": "Adjusted R² adjusts R² for the number of predictors."
+    },
+    {
+      "id": "iml-ch5-035",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 3,
+      "question": "In adjusted R² = 1 - (1 - R²)(N - 1)/(N - k - 1), what is k?",
+      "choix": [
+        "The number of folds",
+        "The number of classes",
+        "The number of neighbours",
+        "The number of predictors"
+      ],
+      "reponse": 3,
+      "explication": "N is the sample size and k the number of predictors (written n and p in the regression chapter)."
+    },
+    {
+      "id": "iml-ch5-036",
+      "theme": "Ch5 · Regression metrics",
+      "niveau": 2,
+      "question": "Which principle of metric choice means using several metrics to see performance from different angles?",
+      "choix": [
+        "Contextualization",
+        "Relevance",
+        "Diversity",
+        "Generalization"
+      ],
+      "reponse": 2,
+      "explication": "Relevance: align with objectives. Diversity: variety of metrics. Contextualization: consider data and domain."
+    },
+    {
+      "id": "iml-ch6-001",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 1,
+      "question": "How does the course define cross-validation?",
+      "choix": [
+        "A preprocessing step that scales features to a common range",
+        "An optimisation algorithm that minimises the cost function",
+        "A resampling procedure to evaluate models on a limited data sample",
+        "A method that removes duplicates before the data split"
+      ],
+      "reponse": 2,
+      "explication": "Cross-validation is a resampling procedure used to evaluate ML models on a limited data sample."
+    },
+    {
+      "id": "iml-ch6-002",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "Why are cross-validation methods needed?",
+      "choix": [
+        "They replace the need for a separate evaluation metric",
+        "Models cannot be trained without first using k-fold splits",
+        "We rarely have enough samples to represent the whole population",
+        "They remove the need to preprocess categorical data"
+      ],
+      "reponse": 2,
+      "explication": "In most cases we lack a large number of samples; CV makes the best use of them so the model represents the population."
+    },
+    {
+      "id": "iml-ch6-003",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 1,
+      "question": "Which three cross-validation techniques does the course list?",
+      "choix": [
+        "Holdout, bootstrap, leave-one-out",
+        "Holdout, k-fold, nested/repeated",
+        "Stratified, SMOTE, k-means",
+        "K-fold, grid search, random search"
+      ],
+      "reponse": 1,
+      "explication": "Holdout cross validation, K-fold cross validation, Nested/Repeated cross validation."
+    },
+    {
+      "id": "iml-ch6-004",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "In k-fold cross-validation, how many folds are used for training in each iteration?",
+      "choix": [
+        "1",
+        "k / 2",
+        "k - 1",
+        "k"
+      ],
+      "reponse": 2,
+      "explication": "The model is trained on k-1 folds and tested on the remaining one, k times."
+    },
+    {
+      "id": "iml-ch6-005",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "How is the final k-fold performance obtained?",
+      "choix": [
+        "By averaging the k fold performances",
+        "By summing the k fold scores",
+        "By keeping the best fold's score",
+        "By keeping the last fold's score"
+      ],
+      "reponse": 0,
+      "explication": "Performance = (1/k) Σ Performance_i."
+    },
+    {
+      "id": "iml-ch6-006",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 3,
+      "question": "In 5-fold CV on 1,000 rows, how many rows train each model?",
+      "choix": [
+        "200",
+        "1,000",
+        "800",
+        "500"
+      ],
+      "reponse": 2,
+      "explication": "Each fold has 200 rows; each model trains on 4 folds = 800 rows."
+    },
+    {
+      "id": "iml-ch6-007",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 3,
+      "question": "5-fold accuracies are 0.82, 0.85, 0.80, 0.84, 0.83. What is the CV accuracy?",
+      "choix": [
+        "0.828",
+        "0.85",
+        "0.83",
+        "0.80"
+      ],
+      "reponse": 0,
+      "explication": "Sum 4.14 / 5 = 0.828."
+    },
+    {
+      "id": "iml-ch6-008",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "What does '5-fold cross-validation' mean?",
+      "choix": [
+        "The model is trained 5 times on all data",
+        "5 neighbours are used for prediction",
+        "k = 5: the data is split into 5 groups",
+        "5% of the data is used for testing"
+      ],
+      "reponse": 2,
+      "explication": "The parameter k is the number of groups; k = 5 becomes 5-fold cross-validation."
+    },
+    {
+      "id": "iml-ch6-009",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "Stratified cross-validation is used for:",
+      "choix": [
+        "Clustering problems",
+        "Reinforcement learning",
+        "Regression problems only",
+        "Classification problems"
+      ],
+      "reponse": 3,
+      "explication": "Stratified CV is used for classification problems."
+    },
+    {
+      "id": "iml-ch6-010",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "What does stratified k-fold guarantee?",
+      "choix": [
+        "Each fold is used twice as the validation fold",
+        "Each fold is sorted by the value of the target",
+        "Each fold contains exactly the same number of features",
+        "Each fold keeps roughly the same class proportions"
+      ],
+      "reponse": 3,
+      "explication": "Stratified k-fold selects folds so that each contains roughly the same proportions of class labels."
+    },
+    {
+      "id": "iml-ch6-011",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 3,
+      "question": "1,000 rows with 30% positives, stratified 5-fold. About how many positives per fold?",
+      "choix": [
+        "200",
+        "30",
+        "60",
+        "300"
+      ],
+      "reponse": 2,
+      "explication": "Each fold has 200 rows; 30% of 200 = 60 positives."
+    },
+    {
+      "id": "iml-ch6-012",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "In holdout cross-validation, what is the validation set used for?",
+      "choix": [
+        "Removing outliers from the data",
+        "Choosing the best hyperparameter values",
+        "Training the final model only",
+        "Computing the final unbiased score"
+      ],
+      "reponse": 1,
+      "explication": "Models with different hyperparameters are compared on the validation set; the test set gives the final estimate."
+    },
+    {
+      "id": "iml-ch6-013",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 3,
+      "question": "In holdout CV, why is the validation score slightly optimistic?",
+      "choix": [
+        "The validation set is used to train the final model",
+        "The validation set is always larger than the test set",
+        "The validation set has no labels to compare with",
+        "The hyperparameters were chosen to fit the validation set"
+      ],
+      "reponse": 3,
+      "explication": "Choosing hyperparameters on the validation set tunes the model to it, so the untouched test set gives the honest score."
+    },
+    {
+      "id": "iml-ch6-014",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "In the last step of holdout and k-fold CV, the final model is trained on:",
+      "choix": [
+        "All data, with the best hyperparameters",
+        "The test set only, with the best values",
+        "A single random fold, with the defaults",
+        "The validation set only, with defaults"
+      ],
+      "reponse": 0,
+      "explication": "Final step: retrain the learning algorithm with the best hyperparameters on all data and labels."
+    },
+    {
+      "id": "iml-ch6-015",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 3,
+      "question": "What does nested cross-validation do?",
+      "choix": [
+        "Tunes in an inner CV loop and estimates performance in an outer loop",
+        "Uses the test set to tune hyperparameters inside every fold",
+        "Splits the data into nested clusters before classification",
+        "Repeats one train-test split with the same random seed many times"
+      ],
+      "reponse": 0,
+      "explication": "Nested CV places a tuning CV loop inside an evaluation CV loop, so tuning never sees the data used for the score."
+    },
+    {
+      "id": "iml-ch6-016",
+      "theme": "Ch6 · Cross-validation",
+      "niveau": 2,
+      "question": "Besides validation, what does cross-validation help with according to the course?",
+      "choix": [
+        "Collecting more labelled data",
+        "Encoding categorical data",
+        "Speeding up prediction",
+        "Balancing bias and variance"
+      ],
+      "reponse": 3,
+      "explication": "It helps balance bias and variance, reducing overfitting or underfitting."
+    },
+    {
+      "id": "iml-ch7-001",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 1,
+      "question": "KNN can be used for:",
+      "choix": [
+        "Regression problems only",
+        "Clustering of unlabelled data only",
+        "Classification problems only",
+        "Both classification and regression"
+      ],
+      "reponse": 3,
+      "explication": "KNN is used for classification (vote) and regression (average)."
+    },
+    {
+      "id": "iml-ch7-002",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "Why is KNN called a lazy learning algorithm?",
+      "choix": [
+        "It trains slowly over many epochs with a small learning rate",
+        "It memorises the training data instead of learning a function",
+        "It postpones data preprocessing until after prediction",
+        "It only uses a small random part of the training data"
+      ],
+      "reponse": 1,
+      "explication": "KNN doesn't learn a discriminative function; it memorizes the training dataset."
+    },
+    {
+      "id": "iml-ch7-003",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "What does 'non-parametric' mean for KNN?",
+      "choix": [
+        "It cannot use numeric features as its input",
+        "It requires the data to be normally distributed",
+        "It has no hyperparameter at all to be tuned",
+        "It assumes nothing about the data distribution"
+      ],
+      "reponse": 3,
+      "explication": "Non-parametric: KNN makes no assumptions about the underlying data distribution."
+    },
+    {
+      "id": "iml-ch7-004",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 1,
+      "question": "In KNN classification, how is the class of the query point decided?",
+      "choix": [
+        "Label of one randomly chosen training point",
+        "Majority vote among the k nearest neighbours",
+        "Label of the farthest of the k neighbours",
+        "Average of the labels of all training points"
+      ],
+      "reponse": 1,
+      "explication": "Classification: majority vote. Regression: average of the neighbours' target values."
+    },
+    {
+      "id": "iml-ch7-005",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 1,
+      "question": "In KNN regression, what is the predicted value?",
+      "choix": [
+        "Target value of the single farthest neighbour",
+        "Mean target value of the k nearest neighbours",
+        "Most frequent target value in the whole dataset",
+        "Median target value of all the training points"
+      ],
+      "reponse": 1,
+      "explication": "Regression follows the same steps but averages the target values of the k nearest neighbours."
+    },
+    {
+      "id": "iml-ch7-006",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "What happens in KNN's training phase?",
+      "choix": [
+        "It builds a decision tree",
+        "It runs gradient descent",
+        "It computes the weights of a line",
+        "It just stores the training data"
+      ],
+      "reponse": 3,
+      "explication": "The algorithm doesn't explicitly train a model; it stores the training data."
+    },
+    {
+      "id": "iml-ch7-007",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "Which is listed as a con of KNN?",
+      "choix": [
+        "It cannot be used for any regression",
+        "A very long and costly training phase",
+        "Expensive computation at prediction time",
+        "It is too hard to understand or code"
+      ],
+      "reponse": 2,
+      "explication": "Cons: expensive prediction, depends on k and distance, sensitive to irrelevant features, curse of dimensionality."
+    },
+    {
+      "id": "iml-ch7-008",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "Why is KNN prediction expensive on large datasets?",
+      "choix": [
+        "Each query runs a full cross-validation of the model",
+        "Each query must first normalise the whole test set",
+        "Each query needs its distance to every training point",
+        "Each query retrains the model from scratch on all data"
+      ],
+      "reponse": 2,
+      "explication": "Lazy learning moves the work to prediction: one distance per training point for every query."
+    },
+    {
+      "id": "iml-ch7-009",
+      "theme": "Ch7 · KNN algorithm",
+      "niveau": 2,
+      "question": "Which of these is NOT listed as a pro of KNN?",
+      "choix": [
+        "Insensitive to irrelevant features",
+        "No training phase besides storing data",
+        "Simple to understand and implement",
+        "Works for classification and regression"
+      ],
+      "reponse": 0,
+      "explication": "KNN is sensitive to irrelevant or redundant features: that is a con."
+    },
+    {
+      "id": "iml-ch7-010",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 1,
+      "question": "Which formula is the Euclidean distance?",
+      "choix": [
+        "max |x_i - y_i|",
+        "√Σ (x_i - y_i)²",
+        "Σ (x_i - y_i)",
+        "Σ |x_i - y_i|"
+      ],
+      "reponse": 1,
+      "explication": "Euclidean = square root of the sum of squared differences. Manhattan = sum of absolute differences."
+    },
+    {
+      "id": "iml-ch7-011",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "Minkowski distance with p = 1 is equal to:",
+      "choix": [
+        "Zero",
+        "The Manhattan distance",
+        "The Chebyshev distance",
+        "The Euclidean distance"
+      ],
+      "reponse": 1,
+      "explication": "Minkowski (Σ|x_i - y_i|^p)^(1/p): p = 1 gives Manhattan, p = 2 gives Euclidean."
+    },
+    {
+      "id": "iml-ch7-012",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "Minkowski distance with p = 2 is equal to:",
+      "choix": [
+        "The Manhattan distance",
+        "The Euclidean distance",
+        "The cosine distance",
+        "The squared distance"
+      ],
+      "reponse": 1,
+      "explication": "p = 2 gives the Euclidean distance."
+    },
+    {
+      "id": "iml-ch7-013",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "What is the Manhattan distance between (1, 2) and (4, 6)?",
+      "choix": [
+        "12",
+        "5",
+        "7",
+        "25"
+      ],
+      "reponse": 2,
+      "explication": "|4 - 1| + |6 - 2| = 3 + 4 = 7. The Euclidean distance is 5."
+    },
+    {
+      "id": "iml-ch7-014",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "What is the Euclidean distance between (1, 2) and (4, 6)?",
+      "choix": [
+        "25",
+        "5",
+        "7",
+        "3.5"
+      ],
+      "reponse": 1,
+      "explication": "√(3² + 4²) = √25 = 5."
+    },
+    {
+      "id": "iml-ch7-015",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 3,
+      "question": "What is the Euclidean distance between (5, 4) and (6, 5)?",
+      "choix": [
+        "About 1.41",
+        "1",
+        "About 2.24",
+        "2"
+      ],
+      "reponse": 0,
+      "explication": "√((5-6)² + (4-5)²) = √2 ≈ 1.41."
+    },
+    {
+      "id": "iml-ch7-016",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 3,
+      "question": "Training points: (2,3) A, (1,1) B, (4,2) A, (6,5) B, (7,8) B. With k = 3 and Euclidean distance, how is (5, 4) classified?",
+      "choix": [
+        "B",
+        "A",
+        "A tie between A and B",
+        "It cannot be classified"
+      ],
+      "reponse": 1,
+      "explication": "Nearest: (6,5) B at 1.41, (4,2) A at 2.24, (2,3) A at 3.16. Vote B, A, A -> A.",
+      "piege": "The single nearest point is B, but with k = 3 the majority vote gives A."
+    },
+    {
+      "id": "iml-ch7-017",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 3,
+      "question": "Same training points, query (5, 4). How is it classified with k = 1?",
+      "choix": [
+        "A",
+        "A tie",
+        "It depends on the metric only",
+        "B"
+      ],
+      "reponse": 3,
+      "explication": "With k = 1 only the nearest point (6,5), label B, votes."
+    },
+    {
+      "id": "iml-ch7-018",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 3,
+      "question": "Same training points, query (5, 4). How is it classified with k = 5?",
+      "choix": [
+        "A",
+        "A tie",
+        "It cannot be classified",
+        "B"
+      ],
+      "reponse": 3,
+      "explication": "All 5 points vote: A, A, B, B, B -> B. The prediction depends on k."
+    },
+    {
+      "id": "iml-ch7-019",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "What does a small k tend to cause in KNN?",
+      "choix": [
+        "Low bias and low variance",
+        "High variance and low bias (overfitting)",
+        "High bias and low variance (underfitting)",
+        "High bias and high variance"
+      ],
+      "reponse": 1,
+      "explication": "Small k: complex boundary, overfitting. Large k: smoother boundary, underfitting."
+    },
+    {
+      "id": "iml-ch7-020",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "A larger value of k gives:",
+      "choix": [
+        "More complex models that overfit the data",
+        "Smoother boundaries and less complex models",
+        "Exactly the same boundary as with k = 1",
+        "Faster predictions on very large datasets"
+      ],
+      "reponse": 1,
+      "explication": "Larger k means smoother curves of separation, resulting in less complex models."
+    },
+    {
+      "id": "iml-ch7-021",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 2,
+      "question": "How does the course recommend choosing k?",
+      "choix": [
+        "From the number of features",
+        "With methods like cross-validation",
+        "Always k = 1 for best accuracy",
+        "Always k equal to the dataset size"
+      ],
+      "reponse": 1,
+      "explication": "k is a crucial hyperparameter that can be chosen using cross-validation."
+    },
+    {
+      "id": "iml-ch7-022",
+      "theme": "Ch7 · Distances and k",
+      "niveau": 3,
+      "question": "Why choose an odd k for binary classification?",
+      "choix": [
+        "Because even k is not allowed",
+        "To avoid ties in the vote",
+        "To make prediction faster",
+        "To reduce the feature count"
+      ],
+      "reponse": 1,
+      "explication": "With two classes, an odd k prevents a 2-2 style tie in the majority vote."
+    },
+    {
+      "id": "iml-ch7-023",
+      "theme": "Ch7 · Normalization and code",
+      "niveau": 2,
+      "question": "Why is normalization strongly recommended for KNN?",
+      "choix": [
+        "KNN cannot read non-normalized values at all",
+        "Normalization turns regression into classification",
+        "Normalization removes the need to choose k",
+        "Features with larger ranges dominate the distances"
+      ],
+      "reponse": 3,
+      "explication": "KNN relies on distances; features on large scales (e.g. income) dominate smaller ones (e.g. age)."
+    },
+    {
+      "id": "iml-ch7-024",
+      "theme": "Ch7 · Normalization and code",
+      "niveau": 3,
+      "question": "According to the course, is normalization mathematically mandatory for KNN?",
+      "choix": [
+        "No, but it is strongly recommended",
+        "Yes, KNN cannot run without it",
+        "Only for KNN classification tasks",
+        "Only for KNN regression problems"
+      ],
+      "reponse": 0,
+      "explication": "Normalization is not mathematically mandatory, but it is strongly recommended for both KNN classifier and regressor."
+    },
+    {
+      "id": "iml-ch7-025",
+      "theme": "Ch7 · Normalization and code",
+      "niveau": 3,
+      "question": "Age ranges 18-60 and income 20,000-200,000. Without scaling, which feature dominates the Euclidean distance?",
+      "choix": [
+        "Neither: distance ignores scale",
+        "Income",
+        "Both contribute equally",
+        "Age"
+      ],
+      "reponse": 1,
+      "explication": "Income differences are in thousands, age differences in tens: income dominates."
+    },
+    {
+      "id": "iml-ch7-026",
+      "theme": "Ch7 · Normalization and code",
+      "niveau": 1,
+      "question": "Which class implements KNN classification in scikit-learn?",
+      "choix": [
+        "KNeighborsClassifier",
+        "NearestCentroid",
+        "KMeans",
+        "KNeighborsRegressor"
+      ],
+      "reponse": 0,
+      "explication": "from sklearn.neighbors import KNeighborsClassifier; KNeighborsRegressor is for regression."
+    },
+    {
+      "id": "iml-ch7-027",
+      "theme": "Ch7 · Normalization and code",
+      "niveau": 2,
+      "question": "What is the default number of neighbours of `KNeighborsClassifier()`?",
+      "choix": [
+        "5",
+        "1",
+        "3",
+        "10"
+      ],
+      "reponse": 0,
+      "explication": "scikit-learn's default n_neighbors is 5."
+    },
+    {
+      "id": "iml-ch8-001",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 1,
+      "question": "A numeric continuous target calls for:",
+      "choix": [
+        "Linear regression",
+        "KNN classification",
+        "Logistic regression",
+        "Clustering"
+      ],
+      "reponse": 0,
+      "explication": "Numeric continuous target -> estimation -> linear regression. Binary target -> logistic regression."
+    },
+    {
+      "id": "iml-ch8-002",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 1,
+      "question": "A binary target calls for:",
+      "choix": [
+        "Logistic regression",
+        "Multivariate regression",
+        "Polynomial regression",
+        "Linear regression"
+      ],
+      "reponse": 0,
+      "explication": "Binary/discrete valued target -> classification/decision -> logistic regression."
+    },
+    {
+      "id": "iml-ch8-003",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "Simple linear regression uses:",
+      "choix": [
+        "1 independent variable and 1 target variable",
+        "Several independent and several targets",
+        "Several independent variables and 1 target",
+        "No independent variable"
+      ],
+      "reponse": 0,
+      "explication": "Simple: 1 IV and 1 TV. Multiple: >1 IV, 1 TV. Multivariate: >1 IV, >1 TV."
+    },
+    {
+      "id": "iml-ch8-004",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "Multivariate linear regression assumes:",
+      "choix": [
+        "An input vector with exactly one target",
+        "A single input with a single output",
+        "An output vector: several target variables",
+        "A polynomial relation of degree n"
+      ],
+      "reponse": 2,
+      "explication": "Multivariate = output vector y = (y1, ..., yn): more than one target.",
+      "piege": "Multiple = several inputs; multivariate = several outputs."
+    },
+    {
+      "id": "iml-ch8-005",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "In y = w0 + w1x, what is w1?",
+      "choix": [
+        "The intercept",
+        "The slope",
+        "The residual",
+        "The learning rate"
+      ],
+      "reponse": 1,
+      "explication": "w0 is the intercept (y when x = 0), w1 is the slope."
+    },
+    {
+      "id": "iml-ch8-006",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "What does RSS stand for?",
+      "choix": [
+        "Root standard score",
+        "Random sample size",
+        "Residual sum of squares",
+        "Regression slope sum"
+      ],
+      "reponse": 2,
+      "explication": "RSS = Σ (y_actual - y_predicted)², a measure of the discrepancy between data and model."
+    },
+    {
+      "id": "iml-ch8-007",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "What does least squares minimise?",
+      "choix": [
+        "The R² of the model",
+        "The number of predictors",
+        "The intercept value",
+        "The residual sum of squares"
+      ],
+      "reponse": 3,
+      "explication": "Least squares picks the line with the smallest RSS."
+    },
+    {
+      "id": "iml-ch8-008",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 3,
+      "question": "x = (1, 2, 3, 4), y = (2, 4, 5, 8). What is the least-squares slope?",
+      "choix": [
+        "1.9",
+        "2.0",
+        "2.5",
+        "1.5"
+      ],
+      "reponse": 0,
+      "explication": "Σ(x-x̄)(y-ȳ) = 9.5 and Σ(x-x̄)² = 5, so w1 = 1.9 (and w0 = 0)."
+    },
+    {
+      "id": "iml-ch8-009",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "How are the weights of multiple linear regression found mathematically, according to the course?",
+      "choix": [
+        "They require matrix inversion, etc.",
+        "They are read off a scatter plot",
+        "They are set by k-fold CV",
+        "They are always equal to 1"
+      ],
+      "reponse": 0,
+      "explication": "Mathematical solution to find multiple linear regression parameters requires matrix inversion, etc."
+    },
+    {
+      "id": "iml-ch8-010",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "Polynomial regression models the relation between x and y as:",
+      "choix": [
+        "A sigmoid S-shaped curve",
+        "A set of separate clusters",
+        "A straight line only",
+        "An nth degree polynomial"
+      ],
+      "reponse": 3,
+      "explication": "Polynomial regression fits a curve: y modelled as an nth degree polynomial of x."
+    },
+    {
+      "id": "iml-ch8-011",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 3,
+      "question": "Why is polynomial regression still a form of linear regression?",
+      "choix": [
+        "It is linear in the weights; x² acts as a new feature",
+        "It uses the sigmoid function on the output",
+        "It always fits a straight line through the data",
+        "It only works with a single binary feature"
+      ],
+      "reponse": 0,
+      "explication": "y = b0 + b1x + b2x² is a curve in x but linear in the weights."
+    },
+    {
+      "id": "iml-ch8-012",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "Which assumption of linear regression means the residuals have constant variance?",
+      "choix": [
+        "Linearity of the relation",
+        "Homoscedasticity",
+        "Independence",
+        "Normality of residuals"
+      ],
+      "reponse": 1,
+      "explication": "Homoscedasticity: constant variance of residuals."
+    },
+    {
+      "id": "iml-ch8-013",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 2,
+      "question": "Which is NOT an assumption of linear regression in the course?",
+      "choix": [
+        "Linearity of the relationship",
+        "Normality of the residuals",
+        "Independence of the residuals",
+        "Features uncorrelated with the target"
+      ],
+      "reponse": 3,
+      "explication": "The four assumptions: linearity, independence, homoscedasticity, normality."
+    },
+    {
+      "id": "iml-ch8-014",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 3,
+      "question": "Why must a linear model be assessed after fitting?",
+      "choix": [
+        "Least squares gives a line even with no linear relation",
+        "The fitted line always passes through every data point",
+        "Least squares refuses to fit data that is not linear",
+        "The slope is always zero for real-world data"
+      ],
+      "reponse": 0,
+      "explication": "The least squares method produces a regression line whether or not there is a linear relationship."
+    },
+    {
+      "id": "iml-ch8-015",
+      "theme": "Ch8 · Linear regression",
+      "niveau": 3,
+      "question": "Four datasets (Anscombe's quartet) share almost the same regression line. What is the lesson?",
+      "choix": [
+        "Always plot the data and residuals, not just statistics",
+        "Outliers never affect a least-squares regression line",
+        "R² alone proves that a linear model is appropriate",
+        "Linear regression suits any data with the same mean"
+      ],
+      "reponse": 0,
+      "explication": "Similar statistics can hide curves, outliers or leverage points; plotting reveals where linear regression is not suitable."
+    },
+    {
+      "id": "iml-ch8-016",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 1,
+      "question": "How is R² interpreted?",
+      "choix": [
+        "Number of predictors in the model",
+        "Proportion of variance in y predictable from x",
+        "Probability that a coefficient is zero",
+        "Average absolute error of the predictions"
+      ],
+      "reponse": 1,
+      "explication": "R² is the proportion of the variance in the dependent variable predictable from the independent variable(s)."
+    },
+    {
+      "id": "iml-ch8-017",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "Which formula is correct?",
+      "choix": [
+        "R² = ESS / TSS = 1 - RSS / TSS",
+        "R² = 1 - ESS / RSS = RSS / TSS",
+        "R² = RSS / TSS = 1 - ESS / TSS",
+        "R² = TSS / ESS = 1 - TSS / RSS"
+      ],
+      "reponse": 0,
+      "explication": "R² = ESS/TSS = 1 - RSS/TSS, with TSS = ESS + RSS."
+    },
+    {
+      "id": "iml-ch8-018",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "TSS is defined as:",
+      "choix": [
+        "Σ (y_i - ŷ_i)²",
+        "Σ (ŷ_i - ȳ)²",
+        "Σ (y_i - ȳ)²",
+        "Σ |y_i - ŷ_i|"
+      ],
+      "reponse": 2,
+      "explication": "TSS = total sum of squares around the mean. RSS = Σ(y-ŷ)². ESS = Σ(ŷ-ȳ)²."
+    },
+    {
+      "id": "iml-ch8-019",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "ESS (explained sum of squares) is:",
+      "choix": [
+        "Σ (y_i - ŷ_i)",
+        "Σ (y_i - ŷ_i)²",
+        "Σ (y_i - ȳ)²",
+        "Σ (ŷ_i - ȳ)²"
+      ],
+      "reponse": 3,
+      "explication": "ESS measures the variation explained by the model: predictions around the mean."
+    },
+    {
+      "id": "iml-ch8-020",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "An R² of 0.20 means:",
+      "choix": [
+        "The slope of the fitted line is equal to 0.20",
+        "20% of the variance in Y is predictable from X",
+        "The model is 20% accurate on the test data",
+        "20% of all the predictions made are wrong"
+      ],
+      "reponse": 1,
+      "explication": "R² = 0.20 means 20 percent of the variance in Y is predictable from X."
+    },
+    {
+      "id": "iml-ch8-021",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 3,
+      "question": "When can R² be negative?",
+      "choix": [
+        "Never: R² always lies between 0 and 1",
+        "Only when the fitted slope is negative",
+        "When there are far too many observations",
+        "No intercept, or a fit worse than the mean"
+      ],
+      "reponse": 3,
+      "explication": "R² can be negative if the model has no intercept or fits worse than using the mean.",
+      "piege": "'0 < R² < 1' only holds on training data for a model with an intercept."
+    },
+    {
+      "id": "iml-ch8-022",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "What does R² = 0 mean for a model with an intercept?",
+      "choix": [
+        "It explains all of the variance of y",
+        "The slope of the line is exactly 1",
+        "Every prediction is exactly right",
+        "It explains none of the variance (ŷ = ȳ)"
+      ],
+      "reponse": 3,
+      "explication": "R² = 0: the model does no better than always predicting the mean."
+    },
+    {
+      "id": "iml-ch8-023",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "Does a high R² prove causation?",
+      "choix": [
+        "Yes, an R² above 0.9 proves causation",
+        "Yes, provided the p-value is also high",
+        "No, a better fit does not prove causation",
+        "Only in the case of multiple regression"
+      ],
+      "reponse": 2,
+      "explication": "A higher R² indicates a better fit, but it does not guarantee causation."
+    },
+    {
+      "id": "iml-ch8-024",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 3,
+      "question": "Adding a useless variable to a regression model usually:",
+      "choix": [
+        "Raises adjusted R² but lowers R²",
+        "Lowers both R² and adjusted R²",
+        "Leaves R² exactly as it was before",
+        "Raises R² but can lower adjusted R²"
+      ],
+      "reponse": 3,
+      "explication": "R² never decreases when adding a variable; adjusted R² penalises each extra predictor."
+    },
+    {
+      "id": "iml-ch8-025",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 3,
+      "question": "n = 50, p = 2, R² = 0.80. What is the adjusted R² (approximately)?",
+      "choix": [
+        "0.820",
+        "0.761",
+        "0.791",
+        "0.800"
+      ],
+      "reponse": 2,
+      "explication": "1 - 0.20 x 49/47 = 1 - 0.2085 = 0.791."
+    },
+    {
+      "id": "iml-ch8-026",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "What does the F-statistic test in linear regression?",
+      "choix": [
+        "The overall significance of the model",
+        "The normality of the residuals",
+        "The significance of one coefficient",
+        "The size of the test set"
+      ],
+      "reponse": 0,
+      "explication": "F-statistic: overall significance (relationship between y and the set of IVs). t-tests: individual coefficients."
+    },
+    {
+      "id": "iml-ch8-027",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "What are t-tests used for in linear regression?",
+      "choix": [
+        "Testing each coefficient's significance",
+        "Splitting the data into several folds",
+        "Choosing the gradient learning rate",
+        "Testing the overall model significance"
+      ],
+      "reponse": 0,
+      "explication": "t-tests determine the significance of individual regression coefficients."
+    },
+    {
+      "id": "iml-ch8-028",
+      "theme": "Ch8 · R² and statistical tests",
+      "niveau": 2,
+      "question": "Which scikit-learn class fits a linear regression?",
+      "choix": [
+        "LogisticRegression",
+        "LinearRegression",
+        "KNeighborsRegressor",
+        "PolynomialFeatures"
+      ],
+      "reponse": 1,
+      "explication": "from sklearn.linear_model import LinearRegression."
+    },
+    {
+      "id": "iml-ch8-029",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 1,
+      "question": "What is gradient descent?",
+      "choix": [
+        "A metric to evaluate regression models",
+        "A distance metric used by the KNN model",
+        "An algorithm that minimises a function",
+        "A method that splits data into k folds"
+      ],
+      "reponse": 2,
+      "explication": "Gradient descent is an optimization algorithm used to minimize a function, such as a cost function."
+    },
+    {
+      "id": "iml-ch8-030",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "Which cost function is usually used for linear regression in the course?",
+      "choix": [
+        "Manhattan distance",
+        "Mean squared error",
+        "F1 score",
+        "Cross entropy"
+      ],
+      "reponse": 1,
+      "explication": "The difference between predicted and actual y is measured with a cost function, usually the MSE."
+    },
+    {
+      "id": "iml-ch8-031",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "Where are the best parameters located on the cost surface?",
+      "choix": [
+        "At the origin of the axes",
+        "At the maximum of the cost function",
+        "On the edge of the surface",
+        "At the minimum of the cost function"
+      ],
+      "reponse": 3,
+      "explication": "The set of parameters giving the best performance is at the minimum of the cost surface."
+    },
+    {
+      "id": "iml-ch8-032",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "On the left of the minimum, the gradient is negative. What should gradient descent do to w?",
+      "choix": [
+        "Decrease w",
+        "Reset w to zero",
+        "Increase w",
+        "Keep w unchanged"
+      ],
+      "reponse": 2,
+      "explication": "Move in the negative of the gradient direction: negative gradient -> increase w; positive gradient -> decrease w."
+    },
+    {
+      "id": "iml-ch8-033",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "Which is the gradient descent update rule?",
+      "choix": [
+        "w_k = w_(k-1) + α ∇g(w_(k-1))",
+        "w_k = α w_(k-1) ∇g(w_(k-1))",
+        "w_k = w_(k-1) - α ∇g(w_(k-1))",
+        "w_k = w_(k-1) / α ∇g(w_(k-1))"
+      ],
+      "reponse": 2,
+      "explication": "Subtract the gradient times the step length α.",
+      "piege": "Adding the gradient climbs towards a maximum."
+    },
+    {
+      "id": "iml-ch8-034",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "In gradient descent, what does the learning rate α control?",
+      "choix": [
+        "The size of each step",
+        "The number of folds",
+        "The initial point",
+        "The number of features"
+      ],
+      "reponse": 0,
+      "explication": "α is the fixed step length: big α makes large jumps, small α small steps."
+    },
+    {
+      "id": "iml-ch8-035",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "What can happen with a learning rate that is too big?",
+      "choix": [
+        "The gradient becomes exactly zero",
+        "Convergence becomes very slow",
+        "The steps overshoot and may diverge",
+        "The cost function changes shape"
+      ],
+      "reponse": 2,
+      "explication": "A big learning rate overshoots the minimum and can bounce or diverge; a small one is slow but reliable."
+    },
+    {
+      "id": "iml-ch8-036",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 3,
+      "question": "Minimise g(w) = (w - 3)² with w0 = 0 and α = 0.1. What is w after one step?",
+      "choix": [
+        "0.3",
+        "0.6",
+        "3.0",
+        "6.0"
+      ],
+      "reponse": 1,
+      "explication": "g'(0) = 2(0 - 3) = -6, so w1 = 0 - 0.1 x (-6) = 0.6."
+    },
+    {
+      "id": "iml-ch8-037",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 3,
+      "question": "Same function g(w) = (w - 3)², w0 = 0 but α = 1.1. What happens?",
+      "choix": [
+        "It overshoots further each step and diverges",
+        "w stays at 0 because the gradient is zero",
+        "It reaches the minimum w = 3 in a single step",
+        "It converges slowly but surely towards w = 3"
+      ],
+      "reponse": 0,
+      "explication": "w1 = 6.6, w2 = -1.32, w3 = 8.18: each step overshoots more, the algorithm diverges."
+    },
+    {
+      "id": "iml-ch8-038",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 1,
+      "question": "What is an epoch?",
+      "choix": [
+        "One neighbour considered by KNN",
+        "One pass over all training samples",
+        "One fold of a cross-validation run",
+        "One update of a single model weight"
+      ],
+      "reponse": 1,
+      "explication": "Epoch: one set of presentation of all training samples to the model."
+    },
+    {
+      "id": "iml-ch8-039",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "In minibatch mode, what is presented before deciding on a weight update?",
+      "choix": [
+        "All training samples at once",
+        "Only the validation set",
+        "A single test sample",
+        "A small set of training samples"
+      ],
+      "reponse": 3,
+      "explication": "Batch mode: all samples per update. Minibatch: a small set. Stochastic: one sample."
+    },
+    {
+      "id": "iml-ch8-040",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 3,
+      "question": "With 1,000 samples and a batch size of 100, how many weight updates happen per epoch in mini-batch mode?",
+      "choix": [
+        "1,000",
+        "100",
+        "10",
+        "1"
+      ],
+      "reponse": 2,
+      "explication": "1,000 / 100 = 10 updates per epoch. Batch GD gives 1, SGD gives 1,000."
+    },
+    {
+      "id": "iml-ch8-041",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "When can an optimum solution be found deterministically?",
+      "choix": [
+        "If it can be modelled mathematically",
+        "When the cost has several local minima",
+        "When no cost function can be defined",
+        "When all the data in use is unlabelled"
+      ],
+      "reponse": 0,
+      "explication": "Deterministic: if the problem can be modelled mathematically. Otherwise, nondeterministic iterative search."
+    },
+    {
+      "id": "iml-ch8-042",
+      "theme": "Ch8 · Gradient descent",
+      "niveau": 2,
+      "question": "Why can gradient descent be difficult on real-world cost functions?",
+      "choix": [
+        "The gradient is always zero",
+        "Cost functions have no minimum",
+        "There may be several minima",
+        "Real data is always linear"
+      ],
+      "reponse": 2,
+      "explication": "Real-world problems are complex and may have several minima."
+    },
+    {
+      "id": "iml-ch8-043",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 1,
+      "question": "Logistic regression is used for:",
+      "choix": [
+        "Classification",
+        "Clustering",
+        "Predicting continuous values",
+        "Dimensionality reduction"
+      ],
+      "reponse": 0,
+      "explication": "Despite its name, logistic regression is used for classification.",
+      "piege": "It is evaluated with accuracy, precision, recall, F1, ROC/AUC, not with MSE or R²."
+    },
+    {
+      "id": "iml-ch8-044",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "To decide the class of an instance, what matters about the score w0 + w1x1 + w2x2?",
+      "choix": [
+        "Only its magnitude",
+        "Only its decimal part",
+        "Only its sign",
+        "Only its square"
+      ],
+      "reponse": 2,
+      "explication": "In deciding the class we are only interested in the sign of the score."
+    },
+    {
+      "id": "iml-ch8-045",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "What does the magnitude of the score tell us?",
+      "choix": [
+        "Which learning rate to use",
+        "Which class should be chosen",
+        "How sure we are of the class",
+        "How many features are used"
+      ],
+      "reponse": 2,
+      "explication": "The larger the distance from the decision boundary, the surer the class."
+    },
+    {
+      "id": "iml-ch8-046",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "What does the sigmoid function do in logistic regression?",
+      "choix": [
+        "Maps scores to probabilities between 0 and 1",
+        "Maps probabilities to counts for each class",
+        "Splits the dataset into two equal halves",
+        "Squares the score to get rid of its sign"
+      ],
+      "reponse": 0,
+      "explication": "P(y = +1 | x, w) = 1 / (1 + e^(-wᵀh(x))): the sigmoid maps the score to a probability."
+    },
+    {
+      "id": "iml-ch8-047",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "A score of 0 gives which probability P(y = +1)?",
+      "choix": [
+        "0",
+        "0.88",
+        "0.5",
+        "1"
+      ],
+      "reponse": 2,
+      "explication": "1 / (1 + e^0) = 0.5: the point lies on the decision boundary."
+    },
+    {
+      "id": "iml-ch8-048",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 3,
+      "question": "A score of 2 gives which probability P(y = +1), approximately?",
+      "choix": [
+        "0.88",
+        "0.50",
+        "0.98",
+        "0.73"
+      ],
+      "reponse": 0,
+      "explication": "1 / (1 + e^-2) ≈ 0.881."
+    },
+    {
+      "id": "iml-ch8-049",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 3,
+      "question": "A score of -1 gives which probability P(y = +1), approximately?",
+      "choix": [
+        "0.50",
+        "0.27",
+        "0.12",
+        "0.73"
+      ],
+      "reponse": 1,
+      "explication": "1 / (1 + e^1) ≈ 0.269, so class -1 is predicted."
+    },
+    {
+      "id": "iml-ch8-050",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "As the score tends to +∞, the probability P(y = +1 | x) tends to:",
+      "choix": [
+        "0",
+        "-1",
+        "1",
+        "0.5"
+      ],
+      "reponse": 2,
+      "explication": "Score -> +∞: very sure ŷ = +1, probability -> 1. Score -> -∞: probability -> 0."
+    },
+    {
+      "id": "iml-ch8-051",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "Where is the decision boundary of logistic regression?",
+      "choix": [
+        "Where the score is maximal",
+        "Where P(y = +1) = 1",
+        "Where wᵀh(x) = 0",
+        "Where wᵀh(x) = 1"
+      ],
+      "reponse": 2,
+      "explication": "Fit a linear boundary with wᵀh(x) = 0, where the probability is 0.5."
+    },
+    {
+      "id": "iml-ch8-052",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "In n dimensions, what does a linear classifier's boundary represent?",
+      "choix": [
+        "One cluster centre for each of the classes",
+        "A curve that passes through every point",
+        "A hyperplane splitting space into two halves",
+        "A circle drawn around each separate class"
+      ],
+      "reponse": 2,
+      "explication": "In n dimensions, a linear classifier represents a hyperplane separating the space into two half-spaces."
+    },
+    {
+      "id": "iml-ch8-053",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "How is the ambiguity of points near the boundary expressed in logistic regression?",
+      "choix": [
+        "Through probabilities",
+        "Through clusters",
+        "Through distances to k neighbours",
+        "Through a larger learning rate"
+      ],
+      "reponse": 0,
+      "explication": "When classes overlap, the ambiguity of class assignment is expressed through probabilities."
+    },
+    {
+      "id": "iml-ch8-054",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 3,
+      "question": "Which objective functions does the course mention for logistic regression?",
+      "choix": [
+        "Euclidean, Manhattan and Minkowski distances",
+        "Mean squared, root mean squared, absolute error",
+        "Accuracy, precision, recall and the F1 score",
+        "Max likelihood, log likelihood, cross entropy"
+      ],
+      "reponse": 3,
+      "explication": "Maximum likelihood, log likelihood and cross entropy: effectively, all these functions mean the same."
+    },
+    {
+      "id": "iml-ch8-055",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "What is 'parameter tuning' in the course's central idea of ML?",
+      "choix": [
+        "Finding parameters that optimise the objective",
+        "Renaming the features before training a model",
+        "Removing all outliers from the training data",
+        "Choosing which rows will go into the test set"
+      ],
+      "reponse": 0,
+      "explication": "An objective function reflecting performance is defined; parameters that optimize it are determined: parameter tuning."
+    },
+    {
+      "id": "iml-ch8-056",
+      "theme": "Ch8 · Logistic regression",
+      "niveau": 2,
+      "question": "Which line is missing between `fit` and the metrics in the course's LinearRegression and LogisticRegression code?",
+      "choix": [
+        "y_pred = model.predict(x_test)",
+        "model.compile(loss='mse')",
+        "model.score(y_test, x_test)",
+        "scaler.fit(x_test, y_test)"
+      ],
+      "reponse": 0,
+      "explication": "The slides compute metrics on y_pred without creating it; y_pred = model.predict(x_test) is needed."
+    }
+  ]
+}
